@@ -6,7 +6,7 @@ These tests are already included in `tests/test_cdelta.py`.
 
 1. Divergence vectors have the expected length and nonnegative entries.
 2. Raw `c_delta` is invariant to location shifts and nonzero scale changes.
-3. Zero-divergence inputs are treated as a data limitation and raise an error.
+3. Zero-divergence inputs are reported as undetermined due to data limitations.
 4. Pairing-normalized `c_delta` stays within the sample-dependent pairing range.
 5. A clearly aligned sample gives a small permutation p-value.
 
@@ -29,6 +29,8 @@ Record:
 - permutation p-value;
 - bootstrap CI width and empirical coverage when ground truth is simulated;
 - sensitivity to single and multiple extreme observations.
+- whether extreme observations are matched across groups or appear in only one
+  group.
 
 ## Phase 3: h-star Integration
 
@@ -37,10 +39,15 @@ Before removing or down-weighting outliers:
 1. identify candidate global outliers;
 2. apply h-star to assess whether the candidate value is stably exceptional;
 3. compare `c_delta` results with the value included and excluded;
-4. report whether the outlier changes the divergence-structure conclusion.
+4. report whether the paired group contains a corresponding divergent value;
+5. report whether the outlier changes the divergence-structure conclusion.
 
 This follows Professor Hoorn's point that outliers may contain information and
 should not automatically be removed.
+
+The retained-outlier analysis is the primary analysis. Exclusion is only a
+sensitivity comparison, because a single extreme value may define the structure
+of the whole group.
 
 ## Phase 4: Robust and Weighted Variants
 

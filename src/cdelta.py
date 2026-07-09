@@ -8,8 +8,6 @@ serve as a discussion artifact with a supervisor.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable
-
 import numpy as np
 
 
@@ -23,6 +21,7 @@ class CDeltaResult:
     direction_correlation: float
     dx: Array
     dy: Array
+    status: str = "ok"
 
 
 def _as_1d(values: Array | list[float], name: str) -> Array:
@@ -57,7 +56,7 @@ def c_delta(
     y: Array | list[float],
     *,
     kind: str = "l2",
-    zero_policy: str = "raise",
+    zero_policy: str = "undetermined",
 ) -> CDeltaResult:
     """Compute raw c_delta and a sample-dependent pairing normalization.
 
@@ -77,9 +76,10 @@ def c_delta(
     mean_dy = float(dy.mean())
 
     if mean_dx == 0.0 or mean_dy == 0.0:
-        if zero_policy == "nan":
-            return CDeltaResult(np.nan, np.nan, np.nan, dx, dy)
-        raise ValueError("c_delta is undefined when a divergence mean is zero")
+        message = "undetermined due to data limitations"
+        if zero_policy in {"undetermined", "nan"}:
+            return CDeltaResult(np.nan, np.nan, np.nan, dx, dy, message)
+        raise ValueError(message)
 
     raw = float(np.dot(dx, dy) / (mean_dx * mean_dy))
     max_pairing = float(
@@ -186,8 +186,59 @@ def make_scenario(
         x[idx] += rng.normal(loc=8.0, scale=1.0, size=k)
         y[idx] += rng.normal(loc=8.0, scale=1.0, size=k)
         return x, y
+    if name == "matched_extreme":
+        x = rng.normal(size=n)
+        y = rng.normal(size=n)
+        x[-1] = 8.0
+        y[-1] = 8.0
+        return x, y
+    if name == "x_only_extreme":
+        x = rng.normal(size=n)
+        y = rng.normal(size=n)
+        x[-1] = 8.0
+        return x, y
+    if name == "y_only_extreme":
+        x = rng.normal(size=n)
+        y = rng.normal(size=n)
+        y[-1] = 8.0
+        return x, y
 
     raise ValueError(f"unknown scenario: {name}")
+
+
+def outlier_influence_summary(
+    *,
+    n: int = 40,
+    seed: int = 123,
+    n_perm: int = 499,
+) -> list[dict[str, float | str]]:
+    """Compare retained and sensitivity-excluded extreme observations.
+
+    The main analysis keeps the extreme value. Exclusion is reported only as a
+    sensitivity comparison because the extreme value may define the group's
+    divergence structure.
+    """
+    rows = []
+    scenarios = ["null_normal", "matched_extreme", "x_only_extreme", "y_only_extreme"]
+    for offset, scenario in enumerate(scenarios):
+        x, y = make_scenario(scenario, n, seed=seed + offset)
+        kept = c_delta(x, y)
+        kept_perm = permutation_test(
+            x, y, n_perm=n_perm, seed=seed + 1000 + offset
+        )
+        excluded = c_delta(x[:-1], y[:-1])
+        rows.append(
+            {
+                "scenario": scenario,
+                "main_raw": round(kept.raw, 4),
+                "main_norm": round(kept.normalized_pairing, 4),
+                "main_corr": round(kept.direction_correlation, 4),
+                "main_perm_p": round(kept_perm["p_value"], 4),
+                "sensitivity_raw_without_last": round(excluded.raw, 4),
+                "raw_change": round(kept.raw - excluded.raw, 4),
+            }
+        )
+    return rows
 
 
 def summarize_scenarios(
