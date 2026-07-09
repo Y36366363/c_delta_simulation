@@ -24,6 +24,7 @@ variants, weighting schemes, and machine-learning examples.
 - `src/cdelta.py`: statistic, permutation test, bootstrap CI, and data generators.
 - `scripts/run_pilot.py`: example simulation run.
 - `scripts/run_outlier_influence.py`: matched/unmatched extreme-value pilot.
+- `scripts/run_outlier_repeated.py`: repeated extreme-value alignment study.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
 ## Quick Start
@@ -34,6 +35,7 @@ From this folder:
 python3 -m unittest discover -s tests
 python3 scripts/run_pilot.py
 python3 scripts/run_outlier_influence.py
+python3 scripts/run_outlier_repeated.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -42,6 +44,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -m unittest discover -s tests
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_pilot.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_outlier_influence.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_outlier_repeated.py
 ```
 
 ## First Simulation Questions
@@ -60,6 +63,8 @@ If using the Codex bundled runtime on this machine:
 - Add h-star based outlier assessment before robustifying `c_delta`.
 - Treat zero-divergence cases as "undetermined due to data limitations" in
   reports rather than as computational errors.
+- Compare matched, mismatched, and one-sided extreme observations to study when
+  a single observation defines shared divergence structure.
 - Add L1/Gini and rank-based variants.
 - Add weighted pairwise distances after defining a principled weight function.
 - Add comparisons with energy distance and MMD.

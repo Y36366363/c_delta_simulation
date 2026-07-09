@@ -15,7 +15,7 @@ def main() -> None:
         "main_norm",
         "main_corr",
         "main_perm_p",
-        "sensitivity_raw_without_last",
+        "sensitivity_raw_without_extreme_indices",
         "raw_change",
     ]
     print("\t".join(headers))

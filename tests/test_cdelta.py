@@ -13,6 +13,7 @@ from cdelta import (
     make_scenario,
     outlier_influence_summary,
     permutation_test,
+    repeated_outlier_simulation,
 )
 
 
@@ -51,6 +52,20 @@ class CDeltaTests(unittest.TestCase):
         self.assertGreater(
             by_name["matched_extreme"]["main_corr"],
             by_name["x_only_extreme"]["main_corr"],
+        )
+
+    def test_repeated_matched_extreme_has_stronger_mean_alignment(self):
+        rows = repeated_outlier_simulation(
+            n=35,
+            repetitions=20,
+            n_perm=19,
+            seed=55,
+            magnitude=8.0,
+        )
+        by_name = {row["scenario"]: row for row in rows}
+        self.assertGreater(
+            by_name["matched_extreme"]["mean_corr"],
+            by_name["x_only_extreme"]["mean_corr"],
         )
 
 

@@ -187,23 +187,62 @@ def make_scenario(
         y[idx] += rng.normal(loc=8.0, scale=1.0, size=k)
         return x, y
     if name == "matched_extreme":
-        x = rng.normal(size=n)
-        y = rng.normal(size=n)
-        x[-1] = 8.0
-        y[-1] = 8.0
-        return x, y
+        return make_extreme_scenario(name, n, seed=seed)[:2]
+    if name == "mismatched_extreme":
+        return make_extreme_scenario(name, n, seed=seed)[:2]
     if name == "x_only_extreme":
-        x = rng.normal(size=n)
-        y = rng.normal(size=n)
-        x[-1] = 8.0
-        return x, y
+        return make_extreme_scenario(name, n, seed=seed)[:2]
     if name == "y_only_extreme":
-        x = rng.normal(size=n)
-        y = rng.normal(size=n)
-        y[-1] = 8.0
-        return x, y
+        return make_extreme_scenario(name, n, seed=seed)[:2]
 
     raise ValueError(f"unknown scenario: {name}")
+
+
+def make_extreme_scenario(
+    name: str,
+    n: int,
+    *,
+    seed: int | None = None,
+    magnitude: float = 8.0,
+) -> tuple[Array, Array, list[int]]:
+    """Generate scenarios with retained extreme observations.
+
+    The returned index list identifies observations used for sensitivity
+    exclusion. The main statistical analysis should keep these observations.
+    """
+    if n < 4:
+        raise ValueError("n must be at least four for extreme-value scenarios")
+
+    rng = np.random.default_rng(seed)
+    x = rng.normal(size=n)
+    y = rng.normal(size=n)
+
+    if name == "null_normal":
+        return x, y, []
+    if name == "matched_extreme":
+        x[-1] = magnitude
+        y[-1] = magnitude
+        return x, y, [n - 1]
+    if name == "mismatched_extreme":
+        x[-1] = magnitude
+        y[0] = magnitude
+        return x, y, [0, n - 1]
+    if name == "x_only_extreme":
+        x[-1] = magnitude
+        return x, y, [n - 1]
+    if name == "y_only_extreme":
+        y[-1] = magnitude
+        return x, y, [n - 1]
+
+    raise ValueError(f"unknown extreme scenario: {name}")
+
+
+def _drop_indices(x: Array, y: Array, indices: list[int]) -> tuple[Array, Array]:
+    if not indices:
+        return x, y
+    mask = np.ones(x.size, dtype=bool)
+    mask[indices] = False
+    return x[mask], y[mask]
 
 
 def outlier_influence_summary(
@@ -219,14 +258,21 @@ def outlier_influence_summary(
     divergence structure.
     """
     rows = []
-    scenarios = ["null_normal", "matched_extreme", "x_only_extreme", "y_only_extreme"]
+    scenarios = [
+        "null_normal",
+        "matched_extreme",
+        "mismatched_extreme",
+        "x_only_extreme",
+        "y_only_extreme",
+    ]
     for offset, scenario in enumerate(scenarios):
-        x, y = make_scenario(scenario, n, seed=seed + offset)
+        x, y, extreme_indices = make_extreme_scenario(scenario, n, seed=seed + offset)
         kept = c_delta(x, y)
         kept_perm = permutation_test(
             x, y, n_perm=n_perm, seed=seed + 1000 + offset
         )
-        excluded = c_delta(x[:-1], y[:-1])
+        sensitivity_x, sensitivity_y = _drop_indices(x, y, extreme_indices)
+        excluded = c_delta(sensitivity_x, sensitivity_y)
         rows.append(
             {
                 "scenario": scenario,
@@ -234,8 +280,132 @@ def outlier_influence_summary(
                 "main_norm": round(kept.normalized_pairing, 4),
                 "main_corr": round(kept.direction_correlation, 4),
                 "main_perm_p": round(kept_perm["p_value"], 4),
-                "sensitivity_raw_without_last": round(excluded.raw, 4),
+                "sensitivity_raw_without_extreme_indices": round(excluded.raw, 4),
                 "raw_change": round(kept.raw - excluded.raw, 4),
+            }
+        )
+    return rows
+
+
+def repeated_outlier_simulation(
+    *,
+    n: int = 40,
+    repetitions: int = 300,
+    n_perm: int = 99,
+    seed: int = 123,
+    magnitude: float = 8.0,
+) -> list[dict[str, float | str]]:
+    """Repeated simulation for matched and unmatched extreme observations."""
+    scenarios = [
+        "null_normal",
+        "matched_extreme",
+        "mismatched_extreme",
+        "x_only_extreme",
+        "y_only_extreme",
+    ]
+    accum: dict[str, list[dict[str, float]]] = {scenario: [] for scenario in scenarios}
+
+    for rep in range(repetitions):
+        for scenario_offset, scenario in enumerate(scenarios):
+            scenario_seed = seed + rep * 100 + scenario_offset
+            x, y, extreme_indices = make_extreme_scenario(
+                scenario, n, seed=scenario_seed, magnitude=magnitude
+            )
+            kept = c_delta(x, y)
+            perm = permutation_test(
+                x,
+                y,
+                n_perm=n_perm,
+                seed=seed + 1_000_000 + rep * 100 + scenario_offset,
+            )
+            sensitivity_x, sensitivity_y = _drop_indices(x, y, extreme_indices)
+            excluded = c_delta(sensitivity_x, sensitivity_y)
+            accum[scenario].append(
+                {
+                    "raw": kept.raw,
+                    "norm": kept.normalized_pairing,
+                    "corr": kept.direction_correlation,
+                    "p": perm["p_value"],
+                    "reject": float(perm["p_value"] < 0.05),
+                    "raw_change": kept.raw - excluded.raw,
+                }
+            )
+
+    rows = []
+    for scenario in scenarios:
+        values = accum[scenario]
+        rows.append(
+            {
+                "scenario": scenario,
+                "repetitions": repetitions,
+                "magnitude": magnitude,
+                "mean_raw": round(float(np.mean([v["raw"] for v in values])), 4),
+                "sd_raw": round(float(np.std([v["raw"] for v in values], ddof=1)), 4),
+                "mean_norm": round(float(np.mean([v["norm"] for v in values])), 4),
+                "mean_corr": round(float(np.mean([v["corr"] for v in values])), 4),
+                "rejection_rate": round(
+                    float(np.mean([v["reject"] for v in values])), 4
+                ),
+                "mean_raw_change": round(
+                    float(np.mean([v["raw_change"] for v in values])), 4
+                ),
+            }
+        )
+    return rows
+
+
+def magnitude_grid_simulation(
+    *,
+    n: int = 40,
+    repetitions: int = 200,
+    n_perm: int = 99,
+    seed: int = 123,
+    magnitudes: list[float] | None = None,
+) -> list[dict[str, float | str]]:
+    """Track when a matched extreme value begins to define structure."""
+    if magnitudes is None:
+        magnitudes = [0.0, 2.0, 4.0, 6.0, 8.0, 10.0]
+
+    rows = []
+    for mag_offset, magnitude in enumerate(magnitudes):
+        values = []
+        for rep in range(repetitions):
+            x, y, extreme_indices = make_extreme_scenario(
+                "matched_extreme",
+                n,
+                seed=seed + mag_offset * 10_000 + rep,
+                magnitude=magnitude,
+            )
+            kept = c_delta(x, y)
+            perm = permutation_test(
+                x,
+                y,
+                n_perm=n_perm,
+                seed=seed + 2_000_000 + mag_offset * 10_000 + rep,
+            )
+            sensitivity_x, sensitivity_y = _drop_indices(x, y, extreme_indices)
+            excluded = c_delta(sensitivity_x, sensitivity_y)
+            values.append(
+                {
+                    "raw": kept.raw,
+                    "corr": kept.direction_correlation,
+                    "reject": float(perm["p_value"] < 0.05),
+                    "raw_change": kept.raw - excluded.raw,
+                }
+            )
+        rows.append(
+            {
+                "scenario": "matched_extreme",
+                "magnitude": magnitude,
+                "repetitions": repetitions,
+                "mean_raw": round(float(np.mean([v["raw"] for v in values])), 4),
+                "mean_corr": round(float(np.mean([v["corr"] for v in values])), 4),
+                "rejection_rate": round(
+                    float(np.mean([v["reject"] for v in values])), 4
+                ),
+                "mean_raw_change": round(
+                    float(np.mean([v["raw_change"] for v in values])), 4
+                ),
             }
         )
     return rows

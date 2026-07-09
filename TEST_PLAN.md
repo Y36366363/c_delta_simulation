@@ -16,7 +16,8 @@ Run repeated simulations across:
 
 - sample sizes: `n = 10, 20, 50, 100, 250`;
 - settings: null normal, aligned normal, nonlinear alignment, inverted divergence,
-  heavy-tailed, skewed, contaminated aligned, contaminated unaligned;
+  heavy-tailed, skewed, contaminated aligned, contaminated unaligned, matched
+  extreme, mismatched extreme, X-only extreme, Y-only extreme;
 - repetitions: at least 1,000 per setting for a draft table;
 - permutation counts: 999 for exploratory runs, 4,999 or 9,999 for final tables;
 - bootstrap counts: 2,000 minimum, 10,000 preferred for final intervals.
@@ -31,6 +32,8 @@ Record:
 - sensitivity to single and multiple extreme observations.
 - whether extreme observations are matched across groups or appear in only one
   group.
+- how the shared divergence signal changes as the magnitude of a matched
+  extreme observation increases.
 
 ## Phase 3: h-star Integration
 
