@@ -3,6 +3,18 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 10/07/2026
+
+- **Follow-up power and size simulations** — Added `scripts/run_followup_simulations.py`
+  to map matched-extreme power curves across smaller sample sizes, test normal,
+  heavy-tailed, and log-normal backgrounds, and check nominal size at alpha
+  `.05` and `.01`.
+- **Simulation results** — Added
+  `results/followup_power_background_size_20260710.tsv` with the first follow-up
+  tables for Professor Hoorn's suggested next steps.
+- **Testing coverage** — Added a power-curve sanity test; the current test suite
+  runs 8 unit tests.
+
 ## Goal
 
 The first deliverable is a reproducible simulation baseline:
