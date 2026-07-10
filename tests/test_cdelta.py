@@ -13,6 +13,7 @@ from cdelta import (
     make_scenario,
     outlier_influence_summary,
     permutation_test,
+    power_curve_simulation,
     repeated_outlier_simulation,
 )
 
@@ -66,6 +67,20 @@ class CDeltaTests(unittest.TestCase):
         self.assertGreater(
             by_name["matched_extreme"]["mean_corr"],
             by_name["x_only_extreme"]["mean_corr"],
+        )
+
+    def test_power_curve_strengthens_with_magnitude(self):
+        rows = power_curve_simulation(
+            sample_sizes=[20],
+            magnitudes=[2.0, 8.0],
+            repetitions=10,
+            n_perm=19,
+            seed=66,
+        )
+        by_magnitude = {row["magnitude"]: row for row in rows}
+        self.assertGreater(
+            by_magnitude[8.0]["mean_corr"],
+            by_magnitude[2.0]["mean_corr"],
         )
 
 

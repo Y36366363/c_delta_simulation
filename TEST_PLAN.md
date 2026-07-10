@@ -34,6 +34,10 @@ Record:
   group.
 - how the shared divergence signal changes as the magnitude of a matched
   extreme observation increases.
+- whether smaller samples require larger extreme values to reach the same
+  rejection rate.
+- whether null and mismatched controls maintain nominal size at alpha `.05` and
+  `.01`.
 
 ## Phase 3: h-star Integration
 

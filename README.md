@@ -25,6 +25,8 @@ variants, weighting schemes, and machine-learning examples.
 - `scripts/run_pilot.py`: example simulation run.
 - `scripts/run_outlier_influence.py`: matched/unmatched extreme-value pilot.
 - `scripts/run_outlier_repeated.py`: repeated extreme-value alignment study.
+- `scripts/run_followup_simulations.py`: power curves, non-normal backgrounds,
+  and nominal size checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
 ## Quick Start
@@ -36,6 +38,7 @@ python3 -m unittest discover -s tests
 python3 scripts/run_pilot.py
 python3 scripts/run_outlier_influence.py
 python3 scripts/run_outlier_repeated.py
+python3 scripts/run_followup_simulations.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -45,6 +48,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_pilot.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_outlier_influence.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_outlier_repeated.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_followup_simulations.py
 ```
 
 ## First Simulation Questions
@@ -65,6 +69,8 @@ If using the Codex bundled runtime on this machine:
   reports rather than as computational errors.
 - Compare matched, mismatched, and one-sided extreme observations to study when
   a single observation defines shared divergence structure.
+- Map power curves across smaller sample sizes and test heavy-tailed or skewed
+  background distributions.
 - Add L1/Gini and rank-based variants.
 - Add weighted pairwise distances after defining a principled weight function.
 - Add comparisons with energy distance and MMD.

@@ -1,0 +1,56 @@
+Power curve: matched extreme under normal background
+n	magnitude	background	alpha	repetitions	mean_raw	mean_corr	rejection_rate	mean_raw_change
+15	0.0	normal	0.05	120	15.0851	0.068	0.0583	1.0593
+15	2.0	normal	0.05	120	15.3061	0.253	0.1333	1.308
+15	4.0	normal	0.05	120	16.5772	0.7787	0.675	2.5359
+15	6.0	normal	0.05	120	17.6212	0.9045	0.6	3.6808
+15	8.0	normal	0.05	120	18.4874	0.9617	0.75	4.4991
+15	10.0	normal	0.05	120	18.8573	0.9758	0.725	4.863
+15	12.0	normal	0.05	120	19.173	0.9835	0.5833	5.1651
+20	0.0	normal	0.05	120	20.1105	0.0672	0.0917	1.0641
+20	2.0	normal	0.05	120	20.3516	0.2224	0.175	1.3577
+20	4.0	normal	0.05	120	21.9167	0.7022	0.7583	2.9024
+20	6.0	normal	0.05	120	23.6348	0.8932	0.8	4.5768
+20	8.0	normal	0.05	120	24.8547	0.9478	0.8417	5.9012
+20	10.0	normal	0.05	120	25.5933	0.9708	0.7833	6.6362
+20	12.0	normal	0.05	120	26.1755	0.9817	0.7083	7.2485
+40	0.0	normal	0.05	120	40.1165	0.0343	0.0583	1.0681
+40	2.0	normal	0.05	120	40.4177	0.1204	0.1083	1.3873
+40	4.0	normal	0.05	120	42.7824	0.5592	0.975	3.7046
+40	6.0	normal	0.05	120	45.9892	0.7878	0.9833	7.0413
+40	8.0	normal	0.05	120	49.1122	0.9018	0.9833	10.0928
+40	10.0	normal	0.05	120	51.814	0.9465	1.0	12.7907
+40	12.0	normal	0.05	120	53.5289	0.967	0.9917	14.5334
+
+Background check: extreme-value alignment under non-normal data
+background	scenario	n	magnitude	alpha	repetitions	mean_raw	mean_corr	rejection_rate	mean_raw_change
+normal	null_normal	40	8.0	0.05	120	39.9866	-0.0054	0.025	0.0
+normal	matched_extreme	40	8.0	0.05	120	49.2389	0.9041	0.975	10.2295
+normal	mismatched_extreme	40	8.0	0.05	120	39.718	-0.0275	0.0167	1.6852
+normal	x_only_extreme	40	8.0	0.05	120	39.986	-0.0015	0.0333	0.9889
+normal	y_only_extreme	40	8.0	0.05	120	40.0412	0.0044	0.0417	1.0513
+t3	null_normal	40	8.0	0.05	120	39.9745	-0.002	0.0583	0.0
+t3	matched_extreme	40	8.0	0.05	120	44.9394	0.5888	0.825	5.9634
+t3	mismatched_extreme	40	8.0	0.05	120	39.8015	-0.0228	0.025	1.7946
+t3	x_only_extreme	40	8.0	0.05	120	39.9468	-0.0081	0.0417	1.0374
+t3	y_only_extreme	40	8.0	0.05	120	40.1689	0.0238	0.0417	1.0486
+lognormal	null_normal	40	8.0	0.05	120	40.1168	0.0221	0.0833	0.0
+lognormal	matched_extreme	40	8.0	0.05	120	49.0736	0.8488	0.9833	10.1909
+lognormal	mismatched_extreme	40	8.0	0.05	120	39.8805	-0.0106	0.0167	1.5604
+lognormal	x_only_extreme	40	8.0	0.05	120	39.9771	-0.004	0.0417	0.8445
+lognormal	y_only_extreme	40	8.0	0.05	120	40.1499	0.0198	0.0667	1.1819
+
+Nominal size check: null and mismatched controls
+background	scenario	n	magnitude	alpha	repetitions	n_perm	empirical_size	mean_p
+normal	null_normal	40	8.0	0.05	200	499	0.055	0.5067
+normal	null_normal	40	8.0	0.01	200	499	0.005	0.5067
+normal	mismatched_extreme	40	8.0	0.05	200	499	0.015	0.5234
+normal	mismatched_extreme	40	8.0	0.01	200	499	0.0	0.5234
+t3	null_normal	40	8.0	0.05	200	499	0.055	0.5114
+t3	null_normal	40	8.0	0.01	200	499	0.005	0.5114
+t3	mismatched_extreme	40	8.0	0.05	200	499	0.025	0.5116
+t3	mismatched_extreme	40	8.0	0.01	200	499	0.0	0.5116
+lognormal	null_normal	40	8.0	0.05	200	499	0.07	0.478
+lognormal	null_normal	40	8.0	0.01	200	499	0.01	0.478
+lognormal	mismatched_extreme	40	8.0	0.05	200	499	0.025	0.5275
+lognormal	mismatched_extreme	40	8.0	0.01	200	499	0.0	0.5275
