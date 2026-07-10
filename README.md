@@ -3,7 +3,7 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
-## Updates 10/07/2026
+## Updates 07/10/2026
 
 - **Follow-up power and size simulations** — Added `scripts/run_followup_simulations.py`
   to map matched-extreme power curves across smaller sample sizes, test normal,
