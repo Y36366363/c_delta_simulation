@@ -8,6 +8,7 @@ serve as a discussion artifact with a supervisor.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from math import comb
 import numpy as np
 
 
@@ -254,6 +255,42 @@ def make_extreme_scenario(
         return x, y, [n - 1]
 
     raise ValueError(f"unknown extreme scenario: {name}")
+
+
+def make_multi_extreme_scenario(
+    *,
+    n: int,
+    k: int,
+    seed: int | None = None,
+    magnitude: float = 8.0,
+    background: str = "normal",
+    matched: bool = True,
+) -> tuple[Array, Array, list[int]]:
+    """Generate k retained extreme observations.
+
+    With ``matched=True``, the same k paired indices are extreme in x and y. With
+    ``matched=False``, y's extreme indices are shifted away from x's indices,
+    creating an all-star group in both samples but not at the same paired
+    observations.
+    """
+    if k < 1:
+        raise ValueError("k must be at least one")
+    if n < 2 * k + 2:
+        raise ValueError("n must be at least 2 * k + 2 for multi-extreme scenarios")
+
+    rng = np.random.default_rng(seed)
+    x = _background_sample(rng, n, background)
+    y = _background_sample(rng, n, background)
+    x_idx = np.arange(n - k, n)
+
+    if matched:
+        y_idx = x_idx
+    else:
+        y_idx = np.arange(0, k)
+
+    x[x_idx] = magnitude
+    y[y_idx] = magnitude
+    return x, y, sorted(set(x_idx.tolist() + y_idx.tolist()))
 
 
 def _drop_indices(x: Array, y: Array, indices: list[int]) -> tuple[Array, Array]:
@@ -641,6 +678,98 @@ def nominal_size_simulation(
                         "mean_p": round(float(np.mean(p_values)), 4),
                     }
                 )
+    return rows
+
+
+def multi_extreme_power_simulation(
+    *,
+    sample_sizes: list[int] | None = None,
+    extreme_counts: list[int] | None = None,
+    magnitudes: list[float] | None = None,
+    repetitions: int = 100,
+    n_perm: int = 199,
+    seed: int = 123,
+    background: str = "normal",
+    alpha: float = 0.05,
+) -> list[dict[str, float | str]]:
+    """Estimate power when a small subgroup defines shared structure."""
+    if sample_sizes is None:
+        sample_sizes = [15, 20, 40, 100]
+    if extreme_counts is None:
+        extreme_counts = [1, 2, 3]
+    if magnitudes is None:
+        magnitudes = [4.0, 6.0, 8.0, 10.0]
+
+    rows = []
+    for n_offset, n in enumerate(sample_sizes):
+        for k_offset, k in enumerate(extreme_counts):
+            if n < 2 * k + 2:
+                continue
+            resolution_floor = 1.0 / comb(n, k)
+            for mag_offset, magnitude in enumerate(magnitudes):
+                for matched in [True, False]:
+                    values = []
+                    for rep in range(repetitions):
+                        row_seed = (
+                            seed
+                            + n_offset * 1_000_000
+                            + k_offset * 100_000
+                            + mag_offset * 10_000
+                            + int(matched) * 1_000
+                            + rep
+                        )
+                        x, y, extreme_indices = make_multi_extreme_scenario(
+                            n=n,
+                            k=k,
+                            seed=row_seed,
+                            magnitude=magnitude,
+                            background=background,
+                            matched=matched,
+                        )
+                        kept = c_delta(x, y)
+                        perm = permutation_test(
+                            x,
+                            y,
+                            n_perm=n_perm,
+                            seed=seed + 6_000_000 + row_seed,
+                        )
+                        sensitivity_x, sensitivity_y = _drop_indices(
+                            x, y, extreme_indices
+                        )
+                        excluded = c_delta(sensitivity_x, sensitivity_y)
+                        values.append(
+                            {
+                                "raw": kept.raw,
+                                "corr": kept.direction_correlation,
+                                "reject": float(perm["p_value"] < alpha),
+                                "raw_change": kept.raw - excluded.raw,
+                            }
+                        )
+                    rows.append(
+                        {
+                            "n": n,
+                            "k_extremes": k,
+                            "alignment": "matched" if matched else "mismatched",
+                            "magnitude": magnitude,
+                            "background": background,
+                            "alpha": alpha,
+                            "repetitions": repetitions,
+                            "n_perm": n_perm,
+                            "resolution_floor_approx": round(resolution_floor, 6),
+                            "mean_raw": round(
+                                float(np.mean([v["raw"] for v in values])), 4
+                            ),
+                            "mean_corr": round(
+                                float(np.mean([v["corr"] for v in values])), 4
+                            ),
+                            "rejection_rate": round(
+                                float(np.mean([v["reject"] for v in values])), 4
+                            ),
+                            "mean_raw_change": round(
+                                float(np.mean([v["raw_change"] for v in values])), 4
+                            ),
+                        }
+                    )
     return rows
 
 

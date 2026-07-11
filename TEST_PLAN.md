@@ -38,6 +38,9 @@ Record:
   rejection rate.
 - whether null and mismatched controls maintain nominal size at alpha `.05` and
   `.01`.
+- whether two or three co-occurring extreme pairs improve small-sample power by
+  reducing the chance that a random permutation accidentally reconstructs the
+  dominant structure.
 
 ## Phase 3: h-star Integration
 

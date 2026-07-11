@@ -11,6 +11,7 @@ from cdelta import (
     c_delta,
     divergence_vector,
     make_scenario,
+    multi_extreme_power_simulation,
     outlier_influence_summary,
     permutation_test,
     power_curve_simulation,
@@ -81,6 +82,21 @@ class CDeltaTests(unittest.TestCase):
         self.assertGreater(
             by_magnitude[8.0]["mean_corr"],
             by_magnitude[2.0]["mean_corr"],
+        )
+
+    def test_multi_extreme_matched_exceeds_mismatched_alignment(self):
+        rows = multi_extreme_power_simulation(
+            sample_sizes=[20],
+            extreme_counts=[2],
+            magnitudes=[8.0],
+            repetitions=10,
+            n_perm=19,
+            seed=77,
+        )
+        by_alignment = {row["alignment"]: row for row in rows}
+        self.assertGreater(
+            by_alignment["matched"]["mean_corr"],
+            by_alignment["mismatched"]["mean_corr"],
         )
 
 

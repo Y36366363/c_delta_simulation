@@ -15,6 +15,16 @@ correlation-of-divergency coefficient, `c_delta`.
 - **Testing coverage** — Added a power-curve sanity test; the current test suite
   runs 8 unit tests.
 
+## Updates 07/11/2026
+
+- **Multi-extreme all-star subgroup simulations** — Added
+  `scripts/run_multi_extreme_simulations.py` to compare one, two, and three
+  co-occurring extreme pairs across small and larger sample sizes.
+- **Finite-sample permutation resolution note** — Added
+  `docs/finite_sample_permutation_resolution.md` to summarize why a single
+  dominant extreme pair can be limited by the permutation test's finite-sample
+  resolution, especially when `n` is small.
+
 ## Goal
 
 The first deliverable is a reproducible simulation baseline:
@@ -39,6 +49,10 @@ variants, weighting schemes, and machine-learning examples.
 - `scripts/run_outlier_repeated.py`: repeated extreme-value alignment study.
 - `scripts/run_followup_simulations.py`: power curves, non-normal backgrounds,
   and nominal size checks.
+- `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
+  simulations for finite-sample permutation resolution.
+- `docs/finite_sample_permutation_resolution.md`: summary note on the
+  small-sample permutation issue.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
 ## Quick Start
@@ -51,6 +65,7 @@ python3 scripts/run_pilot.py
 python3 scripts/run_outlier_influence.py
 python3 scripts/run_outlier_repeated.py
 python3 scripts/run_followup_simulations.py
+python3 scripts/run_multi_extreme_simulations.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -61,6 +76,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_outlier_influence.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_outlier_repeated.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_followup_simulations.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_multi_extreme_simulations.py
 ```
 
 ## First Simulation Questions
@@ -83,6 +99,9 @@ If using the Codex bundled runtime on this machine:
   a single observation defines shared divergence structure.
 - Map power curves across smaller sample sizes and test heavy-tailed or skewed
   background distributions.
+- Study whether multiple co-occurring extreme observations reduce the
+  small-sample permutation resolution problem observed for a single dominant
+  matched pair.
 - Add L1/Gini and rank-based variants.
 - Add weighted pairwise distances after defining a principled weight function.
 - Add comparisons with energy distance and MMD.
