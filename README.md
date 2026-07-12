@@ -3,6 +3,28 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/12/2026
+
+- **Near-zero divergence boundary notation** — Added
+  `docs/near_zero_divergence_notation.md` to document the preferred notation
+  `\bar D_x \bar D_y \to 0^+` and the report wording "undetermined due to data
+  limitations."
+- **Boundary behavior simulation** — Added `scripts/run_near_zero_boundary.py`
+  and `near_zero_divergence_simulation()` to show that `c_delta` remains stable
+  for positive shrinking divergence scales and becomes undetermined only at the
+  empirical zero-divergence boundary.
+- **Update log order** — README updates are now listed newest first.
+
+## Updates 07/11/2026
+
+- **Multi-extreme all-star subgroup simulations** — Added
+  `scripts/run_multi_extreme_simulations.py` to compare one, two, and three
+  co-occurring extreme pairs across small and larger sample sizes.
+- **Finite-sample permutation resolution note** — Added
+  `docs/finite_sample_permutation_resolution.md` to summarize why a single
+  dominant extreme pair can be limited by the permutation test's finite-sample
+  resolution, especially when `n` is small.
+
 ## Updates 07/10/2026
 
 - **Follow-up power and size simulations** — Added `scripts/run_followup_simulations.py`
@@ -14,16 +36,6 @@ correlation-of-divergency coefficient, `c_delta`.
   tables for Professor Hoorn's suggested next steps.
 - **Testing coverage** — Added a power-curve sanity test; the current test suite
   runs 8 unit tests.
-
-## Updates 07/11/2026
-
-- **Multi-extreme all-star subgroup simulations** — Added
-  `scripts/run_multi_extreme_simulations.py` to compare one, two, and three
-  co-occurring extreme pairs across small and larger sample sizes.
-- **Finite-sample permutation resolution note** — Added
-  `docs/finite_sample_permutation_resolution.md` to summarize why a single
-  dominant extreme pair can be limited by the permutation test's finite-sample
-  resolution, especially when `n` is small.
 
 ## Goal
 
@@ -51,8 +63,11 @@ variants, weighting schemes, and machine-learning examples.
   and nominal size checks.
 - `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
   simulations for finite-sample permutation resolution.
+- `scripts/run_near_zero_boundary.py`: near-zero divergence boundary behavior.
 - `docs/finite_sample_permutation_resolution.md`: summary note on the
   small-sample permutation issue.
+- `docs/near_zero_divergence_notation.md`: notation and reporting note for
+  vanishing empirical divergence.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
 ## Quick Start
@@ -66,6 +81,7 @@ python3 scripts/run_outlier_influence.py
 python3 scripts/run_outlier_repeated.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
+python3 scripts/run_near_zero_boundary.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -77,6 +93,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_outlier_repeated.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_followup_simulations.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_multi_extreme_simulations.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_near_zero_boundary.py
 ```
 
 ## First Simulation Questions

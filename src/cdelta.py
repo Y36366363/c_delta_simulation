@@ -773,6 +773,52 @@ def multi_extreme_power_simulation(
     return rows
 
 
+def near_zero_divergence_simulation(
+    *,
+    epsilons: list[float] | None = None,
+    n: int = 40,
+    seed: int = 123,
+) -> list[dict[str, float | str]]:
+    """Track behavior as empirical divergence scale approaches zero.
+
+    For positive epsilon, c_delta is scale invariant. At exactly zero empirical
+    divergence, the statistic should be reported as undetermined due to data
+    limitations rather than as a numerical error.
+    """
+    if epsilons is None:
+        epsilons = [1.0, 1e-2, 1e-4, 1e-6, 1e-8, 0.0]
+
+    rng = np.random.default_rng(seed)
+    base_x = rng.normal(size=n)
+    base_y = 0.7 * base_x + rng.normal(scale=0.4, size=n)
+    rows = []
+
+    for eps in epsilons:
+        x = eps * base_x
+        y = eps * base_y
+        result = c_delta(x, y)
+        divergence_scale = float(result.dx.mean() * result.dy.mean())
+        rows.append(
+            {
+                "epsilon": eps,
+                "divergence_scale": f"{divergence_scale:.12g}",
+                "raw": "nan" if np.isnan(result.raw) else round(result.raw, 6),
+                "normalized_pairing": (
+                    "nan"
+                    if np.isnan(result.normalized_pairing)
+                    else round(result.normalized_pairing, 6)
+                ),
+                "direction_correlation": (
+                    "nan"
+                    if np.isnan(result.direction_correlation)
+                    else round(result.direction_correlation, 6)
+                ),
+                "status": result.status,
+            }
+        )
+    return rows
+
+
 def summarize_scenarios(
     scenarios: list[str],
     *,

@@ -12,6 +12,7 @@ from cdelta import (
     divergence_vector,
     make_scenario,
     multi_extreme_power_simulation,
+    near_zero_divergence_simulation,
     outlier_influence_summary,
     permutation_test,
     power_curve_simulation,
@@ -98,6 +99,15 @@ class CDeltaTests(unittest.TestCase):
             by_alignment["matched"]["mean_corr"],
             by_alignment["mismatched"]["mean_corr"],
         )
+
+    def test_near_zero_positive_scales_remain_stable(self):
+        rows = near_zero_divergence_simulation(
+            epsilons=[1.0, 1e-4, 0.0],
+            n=20,
+            seed=88,
+        )
+        self.assertEqual(rows[-1]["status"], "undetermined due to data limitations")
+        self.assertAlmostEqual(rows[0]["raw"], rows[1]["raw"], places=6)
 
 
 if __name__ == "__main__":
