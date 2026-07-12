@@ -10,6 +10,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from cdelta import (
     c_delta,
     divergence_vector,
+    large_scale_simulation,
     make_scenario,
     multi_extreme_power_simulation,
     near_zero_divergence_simulation,
@@ -108,6 +109,24 @@ class CDeltaTests(unittest.TestCase):
         )
         self.assertEqual(rows[-1]["status"], "undetermined due to data limitations")
         self.assertAlmostEqual(rows[0]["raw"], rows[1]["raw"], places=6)
+
+    def test_fast_permutation_matches_valid_output(self):
+        x, y = make_scenario("aligned_normal", 30, seed=99)
+        result = permutation_test(x, y, n_perm=19, seed=100)
+        self.assertEqual(result["status"], "ok")
+        self.assertGreaterEqual(result["p_value"], 0.0)
+        self.assertLessEqual(result["p_value"], 1.0)
+
+    def test_large_scale_simulation_smoke(self):
+        rows = large_scale_simulation(
+            sample_sizes=[50],
+            extreme_counts=[1],
+            backgrounds=["normal"],
+            repetitions=3,
+            n_perm=9,
+            seed=101,
+        )
+        self.assertEqual(len(rows), 2)
 
 
 if __name__ == "__main__":

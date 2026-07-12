@@ -114,6 +114,14 @@ def c_delta(
     return CDeltaResult(raw, float(normalized), direction, dx, dy)
 
 
+def _raw_from_divergences(dx: Array, dy: Array) -> float:
+    mean_dx = float(dx.mean())
+    mean_dy = float(dy.mean())
+    if mean_dx == 0.0 or mean_dy == 0.0:
+        return np.nan
+    return float(np.dot(dx, dy) / (mean_dx * mean_dy))
+
+
 def permutation_test(
     x: Array | list[float],
     y: Array | list[float],
@@ -124,17 +132,29 @@ def permutation_test(
 ) -> dict[str, float]:
     """Permutation test for paired divergence-structure signal."""
     rng = np.random.default_rng(seed)
+    x_arr = _as_1d(x, "x")
     y_arr = _as_1d(y, "y")
-    observed = c_delta(x, y_arr, kind=kind).raw
+    if x_arr.size != y_arr.size:
+        raise ValueError("x and y must have the same length")
+
+    dx = divergence_vector(x_arr, kind=kind)
+    dy = divergence_vector(y_arr, kind=kind)
+    observed = _raw_from_divergences(dx, dy)
+    if np.isnan(observed):
+        return {
+            "observed": np.nan,
+            "p_value": np.nan,
+            "status": "undetermined due to data limitations",
+        }
+
     exceed = 0
 
     for _ in range(n_perm):
-        permuted = rng.permutation(y_arr)
-        stat = c_delta(x, permuted, kind=kind).raw
+        stat = _raw_from_divergences(dx, rng.permutation(dy))
         exceed += stat >= observed
 
     p_value = (exceed + 1) / (n_perm + 1)
-    return {"observed": observed, "p_value": float(p_value)}
+    return {"observed": observed, "p_value": float(p_value), "status": "ok"}
 
 
 def bootstrap_ci(
@@ -816,6 +836,94 @@ def near_zero_divergence_simulation(
                 "status": result.status,
             }
         )
+    return rows
+
+
+def large_scale_simulation(
+    *,
+    sample_sizes: list[int] | None = None,
+    extreme_counts: list[int] | None = None,
+    scenarios: list[str] | None = None,
+    backgrounds: list[str] | None = None,
+    repetitions: int = 80,
+    n_perm: int = 499,
+    seed: int = 123,
+    magnitude: float = 8.0,
+    alpha: float = 0.05,
+) -> list[dict[str, float | str]]:
+    """Run larger-n checks using the optimized permutation test."""
+    if sample_sizes is None:
+        sample_sizes = [100, 250, 500]
+    if extreme_counts is None:
+        extreme_counts = [1, 2, 3]
+    if scenarios is None:
+        scenarios = ["matched", "mismatched"]
+    if backgrounds is None:
+        backgrounds = ["normal", "t3", "lognormal"]
+
+    rows = []
+    for bg_offset, background in enumerate(backgrounds):
+        for n_offset, n in enumerate(sample_sizes):
+            for k_offset, k in enumerate(extreme_counts):
+                if n < 2 * k + 2:
+                    continue
+                resolution_floor = 1.0 / comb(n, k)
+                for scenario_offset, scenario in enumerate(scenarios):
+                    matched = scenario == "matched"
+                    values = []
+                    for rep in range(repetitions):
+                        row_seed = (
+                            seed
+                            + bg_offset * 10_000_000
+                            + n_offset * 1_000_000
+                            + k_offset * 100_000
+                            + scenario_offset * 10_000
+                            + rep
+                        )
+                        x, y, _ = make_multi_extreme_scenario(
+                            n=n,
+                            k=k,
+                            seed=row_seed,
+                            magnitude=magnitude,
+                            background=background,
+                            matched=matched,
+                        )
+                        kept = c_delta(x, y)
+                        perm = permutation_test(
+                            x,
+                            y,
+                            n_perm=n_perm,
+                            seed=seed + 7_000_000 + row_seed,
+                        )
+                        values.append(
+                            {
+                                "raw": kept.raw,
+                                "corr": kept.direction_correlation,
+                                "reject": float(perm["p_value"] < alpha),
+                            }
+                        )
+                    rows.append(
+                        {
+                            "background": background,
+                            "n": n,
+                            "k_extremes": k,
+                            "alignment": scenario,
+                            "magnitude": magnitude,
+                            "alpha": alpha,
+                            "repetitions": repetitions,
+                            "n_perm": n_perm,
+                            "resolution_floor_approx": round(resolution_floor, 8),
+                            "mean_raw": round(
+                                float(np.mean([v["raw"] for v in values])), 4
+                            ),
+                            "mean_corr": round(
+                                float(np.mean([v["corr"] for v in values])), 4
+                            ),
+                            "rejection_rate": round(
+                                float(np.mean([v["reject"] for v in values])), 4
+                            ),
+                        }
+                    )
     return rows
 
 

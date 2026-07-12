@@ -5,6 +5,16 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 07/12/2026
 
+- **Large-scale simulation architecture** — Optimized `permutation_test()` by
+  computing divergence vectors once and permuting `D_y` directly, making larger
+  sample-size simulations feasible.
+- **Large-scale simulation script** — Added `scripts/run_large_scale_simulations.py`
+  to test `n = 100, 250, 500` under normal, heavy-tailed, and log-normal
+  backgrounds.
+- **Large-scale result summary** — Added `docs/large_scale_simulation_summary.md`
+  and `results/large_scale_simulation_20260712.tsv`; fixed-magnitude matched
+  extremes remain detectable at large `n`, but heavy-tailed backgrounds require
+  stronger subgroup structure.
 - **Near-zero divergence boundary notation** — Added
   `docs/near_zero_divergence_notation.md` to document the preferred notation
   `\bar D_x \bar D_y \to 0^+` and the report wording "undetermined due to data
@@ -64,10 +74,13 @@ variants, weighting schemes, and machine-learning examples.
 - `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
   simulations for finite-sample permutation resolution.
 - `scripts/run_near_zero_boundary.py`: near-zero divergence boundary behavior.
+- `scripts/run_large_scale_simulations.py`: larger-n multi-extreme simulations
+  using the optimized permutation test.
 - `docs/finite_sample_permutation_resolution.md`: summary note on the
   small-sample permutation issue.
 - `docs/near_zero_divergence_notation.md`: notation and reporting note for
   vanishing empirical divergence.
+- `docs/large_scale_simulation_summary.md`: larger-n result interpretation.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
 ## Quick Start
@@ -82,6 +95,7 @@ python3 scripts/run_outlier_repeated.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py
+python3 scripts/run_large_scale_simulations.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -94,6 +108,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_followup_simulations.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_multi_extreme_simulations.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_near_zero_boundary.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_large_scale_simulations.py
 ```
 
 ## First Simulation Questions
