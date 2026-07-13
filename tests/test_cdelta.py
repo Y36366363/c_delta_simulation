@@ -150,6 +150,8 @@ class CDeltaTests(unittest.TestCase):
             alphas=[0.05],
         )
         self.assertEqual(len(rows), 1)
+        self.assertIn("wilson_low", rows[0])
+        self.assertIn("p50", rows[0])
 
 
 if __name__ == "__main__":

@@ -411,6 +411,17 @@ def _drop_indices(x: Array, y: Array, indices: list[int]) -> tuple[Array, Array]
     return x[mask], y[mask]
 
 
+def _wilson_interval(successes: int, n: int, z: float = 1.96) -> tuple[float, float]:
+    """Approximate 95% Wilson interval for a binomial proportion."""
+    if n == 0:
+        return np.nan, np.nan
+    phat = successes / n
+    denom = 1 + z**2 / n
+    center = (phat + z**2 / (2 * n)) / denom
+    half_width = z * np.sqrt((phat * (1 - phat) + z**2 / (4 * n)) / n) / denom
+    return center - half_width, center + half_width
+
+
 def outlier_influence_summary(
     *,
     n: int = 40,
@@ -1105,20 +1116,56 @@ def independent_null_size_simulation(
         overlaps.append(len(set(x_idx).intersection(y_idx)))
 
     return [
-        {
-            "background": background,
-            "n": n,
-            "k_extremes": k,
-            "magnitude": magnitude,
-            "alpha": alpha,
-            "repetitions": repetitions,
-            "n_perm": n_perm,
-            "empirical_size": round(float(np.mean([p < alpha for p in p_values])), 4),
-            "mean_p": round(float(np.mean(p_values)), 4),
-            "mean_index_overlap": round(float(np.mean(overlaps)), 4),
-        }
+        _independent_null_row(
+            background=background,
+            n=n,
+            k=k,
+            magnitude=magnitude,
+            alpha=alpha,
+            repetitions=repetitions,
+            n_perm=n_perm,
+            p_values=p_values,
+            overlaps=overlaps,
+        )
         for alpha in alphas
     ]
+
+
+def _independent_null_row(
+    *,
+    background: str,
+    n: int,
+    k: int,
+    magnitude: float,
+    alpha: float,
+    repetitions: int,
+    n_perm: int,
+    p_values: list[float],
+    overlaps: list[int],
+) -> dict[str, float | str]:
+    reject_count = int(sum(p < alpha for p in p_values))
+    ci_low, ci_high = _wilson_interval(reject_count, repetitions)
+    quantiles = np.quantile(p_values, [0.05, 0.25, 0.5, 0.75, 0.95])
+    return {
+        "background": background,
+        "n": n,
+        "k_extremes": k,
+        "magnitude": magnitude,
+        "alpha": alpha,
+        "repetitions": repetitions,
+        "n_perm": n_perm,
+        "reject_count": reject_count,
+        "empirical_size": round(float(reject_count / repetitions), 4),
+        "wilson_low": round(float(ci_low), 4),
+        "wilson_high": round(float(ci_high), 4),
+        "mean_p": round(float(np.mean(p_values)), 4),
+        "p05": round(float(quantiles[0]), 4),
+        "p25": round(float(quantiles[1]), 4),
+        "p50": round(float(quantiles[2]), 4),
+        "p75": round(float(quantiles[3]), 4),
+        "p95": round(float(quantiles[4]), 4),
+        "mean_index_overlap": round(float(np.mean(overlaps)), 4),
+    }
 
 
 def summarize_scenarios(

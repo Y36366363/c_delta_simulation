@@ -5,6 +5,14 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 07/13/2026
 
+- **High-replication validation** — Added
+  `scripts/run_high_replication_checks.py` for 1,000-replication independent-null
+  size checks and 100,000-permutation overlap-layer diagnostics.
+- **Monte Carlo uncertainty reporting** — Independent-null summaries now include
+  rejection counts, Wilson intervals, and p-value quantiles.
+- **High-replication result summary** — Added
+  `docs/high_replication_checks_summary.md` and
+  `results/high_replication_checks_20260713.tsv`.
 - **Feedback response checks** — Added `scripts/run_feedback_checks.py` to test
   Professor Hoorn's latest points: permutation mean equals `n`, permutation
   statistics by extreme-index overlap layer, and independent-null calibration
@@ -91,6 +99,8 @@ variants, weighting schemes, and machine-learning examples.
   using the optimized permutation test.
 - `scripts/run_feedback_checks.py`: algebraic and null-calibration checks from
   Professor Hoorn's feedback.
+- `scripts/run_high_replication_checks.py`: higher-replication validation with
+  Wilson intervals and p-value quantiles.
 - `docs/finite_sample_permutation_resolution.md`: summary note on the
   small-sample permutation issue.
 - `docs/near_zero_divergence_notation.md`: notation and reporting note for
@@ -98,6 +108,8 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/large_scale_simulation_summary.md`: larger-n result interpretation.
 - `docs/feedback_response_plan.md`: checklist for the July 13 feedback.
 - `docs/feedback_checks_summary.md`: results of the July 13 feedback checks.
+- `docs/high_replication_checks_summary.md`: higher-replication validation
+  summary with Wilson intervals.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
 ## Quick Start
@@ -114,6 +126,7 @@ python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py
 python3 scripts/run_large_scale_simulations.py
 python3 scripts/run_feedback_checks.py
+python3 scripts/run_high_replication_checks.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -128,6 +141,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_near_zero_boundary.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_large_scale_simulations.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_feedback_checks.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_high_replication_checks.py
 ```
 
 ## First Simulation Questions
