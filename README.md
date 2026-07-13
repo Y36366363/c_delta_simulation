@@ -3,6 +3,22 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/14/2026
+
+- **L1/L2 variant comparison** — Added `variant_comparison_simulation()` and
+  `scripts/run_variant_comparison.py` to compare squared-divergence (`l2`) and
+  absolute-divergence (`l1`) versions under matched, negative-control, and
+  independent-null settings.
+- **Variant comparison results** — Added
+  `results/variant_comparison_20260714.tsv` and
+  `docs/variant_comparison_summary.md`; the matched sparse co-divergence signal
+  remains strong under both `l2` and `l1`, while independent-null behavior stays
+  close to alpha `.05`.
+- **Research question tracker** — Added `docs/research_questions.md` to track
+  Professor Hoorn's feedback items, including calibrated alternatives,
+  overlap-layer interpretation, independent-null calibration, rank-based
+  variants, and background-scale interpretation.
+
 ## Updates 07/13/2026
 
 - **High-replication validation** — Added
@@ -101,6 +117,7 @@ variants, weighting schemes, and machine-learning examples.
   Professor Hoorn's feedback.
 - `scripts/run_high_replication_checks.py`: higher-replication validation with
   Wilson intervals and p-value quantiles.
+- `scripts/run_variant_comparison.py`: L1/L2 divergence variant comparison.
 - `docs/finite_sample_permutation_resolution.md`: summary note on the
   small-sample permutation issue.
 - `docs/near_zero_divergence_notation.md`: notation and reporting note for
@@ -110,6 +127,8 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/feedback_checks_summary.md`: results of the July 13 feedback checks.
 - `docs/high_replication_checks_summary.md`: higher-replication validation
   summary with Wilson intervals.
+- `docs/variant_comparison_summary.md`: L1/L2 variant comparison summary.
+- `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
 ## Quick Start
@@ -127,6 +146,7 @@ python3 scripts/run_near_zero_boundary.py
 python3 scripts/run_large_scale_simulations.py
 python3 scripts/run_feedback_checks.py
 python3 scripts/run_high_replication_checks.py
+python3 scripts/run_variant_comparison.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -142,6 +162,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_large_scale_simulations.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_feedback_checks.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_high_replication_checks.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_variant_comparison.py
 ```
 
 ## First Simulation Questions

@@ -21,6 +21,7 @@ from cdelta import (
     permutation_mean_check,
     power_curve_simulation,
     repeated_outlier_simulation,
+    variant_comparison_simulation,
 )
 
 
@@ -152,6 +153,20 @@ class CDeltaTests(unittest.TestCase):
         self.assertEqual(len(rows), 1)
         self.assertIn("wilson_low", rows[0])
         self.assertIn("p50", rows[0])
+
+    def test_variant_comparison_smoke(self):
+        rows = variant_comparison_simulation(
+            n=20,
+            k=1,
+            backgrounds=["normal"],
+            kinds=["l2", "l1"],
+            scenarios=["matched", "independent_null"],
+            repetitions=3,
+            n_perm=9,
+            seed=114,
+        )
+        self.assertEqual(len(rows), 4)
+        self.assertEqual({row["kind"] for row in rows}, {"l2", "l1"})
 
 
 if __name__ == "__main__":

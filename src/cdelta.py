@@ -1131,6 +1131,123 @@ def independent_null_size_simulation(
     ]
 
 
+def variant_comparison_simulation(
+    *,
+    n: int = 40,
+    k: int = 2,
+    magnitude: float = 8.0,
+    repetitions: int = 200,
+    n_perm: int = 499,
+    seed: int = 123,
+    backgrounds: list[str] | None = None,
+    kinds: list[str] | None = None,
+    scenarios: list[str] | None = None,
+    alpha: float = 0.05,
+) -> list[dict[str, float | str]]:
+    """Compare L2 and L1 divergence definitions under the same scenarios."""
+    if backgrounds is None:
+        backgrounds = ["normal", "t3", "lognormal"]
+    if kinds is None:
+        kinds = ["l2", "l1"]
+    if scenarios is None:
+        scenarios = ["matched", "negative_control", "independent_null"]
+
+    rows = []
+    for kind_offset, kind in enumerate(kinds):
+        for bg_offset, background in enumerate(backgrounds):
+            for scenario_offset, scenario in enumerate(scenarios):
+                values = []
+                overlaps = []
+                for rep in range(repetitions):
+                    row_seed = (
+                        seed
+                        + kind_offset * 10_000_000
+                        + bg_offset * 1_000_000
+                        + scenario_offset * 100_000
+                        + rep
+                    )
+                    if scenario == "matched":
+                        x, y, _ = make_multi_extreme_scenario(
+                            n=n,
+                            k=k,
+                            seed=row_seed,
+                            magnitude=magnitude,
+                            background=background,
+                            matched=True,
+                        )
+                        overlaps.append(k)
+                    elif scenario == "negative_control":
+                        x, y, _ = make_multi_extreme_scenario(
+                            n=n,
+                            k=k,
+                            seed=row_seed,
+                            magnitude=magnitude,
+                            background=background,
+                            matched=False,
+                        )
+                        overlaps.append(0)
+                    elif scenario == "independent_null":
+                        x, y, x_idx, y_idx = make_independent_extreme_scenario(
+                            n=n,
+                            k=k,
+                            seed=row_seed,
+                            magnitude=magnitude,
+                            background=background,
+                        )
+                        overlaps.append(len(set(x_idx).intersection(y_idx)))
+                    else:
+                        raise ValueError(f"unknown scenario: {scenario}")
+
+                    kept = c_delta(x, y, kind=kind)
+                    perm = permutation_test(
+                        x,
+                        y,
+                        n_perm=n_perm,
+                        seed=seed + 8_000_000 + row_seed,
+                        kind=kind,
+                    )
+                    values.append(
+                        {
+                            "raw": kept.raw,
+                            "norm": kept.normalized_pairing,
+                            "corr": kept.direction_correlation,
+                            "p": perm["p_value"],
+                            "reject": float(perm["p_value"] < alpha),
+                        }
+                    )
+
+                reject_count = int(sum(v["reject"] for v in values))
+                ci_low, ci_high = _wilson_interval(reject_count, repetitions)
+                p_values = [v["p"] for v in values]
+                quantiles = np.quantile(p_values, [0.05, 0.5, 0.95])
+                rows.append(
+                    {
+                        "kind": kind,
+                        "background": background,
+                        "scenario": scenario,
+                        "n": n,
+                        "k_extremes": k,
+                        "magnitude": magnitude,
+                        "alpha": alpha,
+                        "repetitions": repetitions,
+                        "n_perm": n_perm,
+                        "reject_count": reject_count,
+                        "rejection_rate": round(float(reject_count / repetitions), 4),
+                        "wilson_low": round(float(ci_low), 4),
+                        "wilson_high": round(float(ci_high), 4),
+                        "mean_raw": round(float(np.mean([v["raw"] for v in values])), 4),
+                        "mean_norm": round(float(np.mean([v["norm"] for v in values])), 4),
+                        "mean_corr": round(float(np.mean([v["corr"] for v in values])), 4),
+                        "mean_p": round(float(np.mean(p_values)), 4),
+                        "p05": round(float(quantiles[0]), 4),
+                        "p50": round(float(quantiles[1]), 4),
+                        "p95": round(float(quantiles[2]), 4),
+                        "mean_index_overlap": round(float(np.mean(overlaps)), 4),
+                    }
+                )
+    return rows
+
+
 def _independent_null_row(
     *,
     background: str,
