@@ -10,12 +10,15 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from cdelta import (
     c_delta,
     divergence_vector,
+    independent_null_size_simulation,
     large_scale_simulation,
     make_scenario,
     multi_extreme_power_simulation,
     near_zero_divergence_simulation,
+    overlap_layer_diagnostic,
     outlier_influence_summary,
     permutation_test,
+    permutation_mean_check,
     power_curve_simulation,
     repeated_outlier_simulation,
 )
@@ -127,6 +130,26 @@ class CDeltaTests(unittest.TestCase):
             seed=101,
         )
         self.assertEqual(len(rows), 2)
+
+    def test_exact_permutation_mean_equals_n(self):
+        x, y = make_scenario("aligned_normal", 6, seed=111)
+        check = permutation_mean_check(x, y, exact=True)
+        self.assertAlmostEqual(check["mean_permuted_raw"], 6.0, places=6)
+
+    def test_overlap_layer_diagnostic_counts_layers(self):
+        rows = overlap_layer_diagnostic(n=12, k=2, n_perm=100, seed=112)
+        self.assertEqual({row["overlap_count"] for row in rows}, {0, 1, 2})
+
+    def test_independent_null_size_smoke(self):
+        rows = independent_null_size_simulation(
+            n=20,
+            k=2,
+            repetitions=5,
+            n_perm=19,
+            seed=113,
+            alphas=[0.05],
+        )
+        self.assertEqual(len(rows), 1)
 
 
 if __name__ == "__main__":

@@ -3,6 +3,19 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/13/2026
+
+- **Feedback response checks** — Added `scripts/run_feedback_checks.py` to test
+  Professor Hoorn's latest points: permutation mean equals `n`, permutation
+  statistics by extreme-index overlap layer, and independent-null calibration
+  with chance overlap.
+- **Response plan** — Added `docs/feedback_response_plan.md` to track which
+  simulation claims need correction before the next report.
+- **Feedback check results** — Added `docs/feedback_checks_summary.md` and
+  `results/feedback_checks_20260713.tsv`; exact enumeration confirms the
+  permutation mean raw `c_delta` equals `n`, and overlap-layer diagnostics
+  support treating `1 / choose(n, k)` as a layer size rather than a p-value.
+
 ## Updates 07/12/2026
 
 - **Large-scale simulation architecture** — Optimized `permutation_test()` by
@@ -76,11 +89,15 @@ variants, weighting schemes, and machine-learning examples.
 - `scripts/run_near_zero_boundary.py`: near-zero divergence boundary behavior.
 - `scripts/run_large_scale_simulations.py`: larger-n multi-extreme simulations
   using the optimized permutation test.
+- `scripts/run_feedback_checks.py`: algebraic and null-calibration checks from
+  Professor Hoorn's feedback.
 - `docs/finite_sample_permutation_resolution.md`: summary note on the
   small-sample permutation issue.
 - `docs/near_zero_divergence_notation.md`: notation and reporting note for
   vanishing empirical divergence.
 - `docs/large_scale_simulation_summary.md`: larger-n result interpretation.
+- `docs/feedback_response_plan.md`: checklist for the July 13 feedback.
+- `docs/feedback_checks_summary.md`: results of the July 13 feedback checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
 ## Quick Start
@@ -96,6 +113,7 @@ python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py
 python3 scripts/run_large_scale_simulations.py
+python3 scripts/run_feedback_checks.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -109,6 +127,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_multi_extreme_simulations.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_near_zero_boundary.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_large_scale_simulations.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_feedback_checks.py
 ```
 
 ## First Simulation Questions

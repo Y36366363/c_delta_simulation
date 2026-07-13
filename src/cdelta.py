@@ -8,6 +8,7 @@ serve as a discussion artifact with a supervisor.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from itertools import permutations
 from math import comb
 import numpy as np
 
@@ -122,6 +123,31 @@ def _raw_from_divergences(dx: Array, dy: Array) -> float:
     return float(np.dot(dx, dy) / (mean_dx * mean_dy))
 
 
+def permutation_statistics_from_divergences(
+    dx: Array,
+    dy: Array,
+    *,
+    n_perm: int = 999,
+    seed: int | None = None,
+) -> Array:
+    """Sample raw c_delta values by permuting an existing divergence vector."""
+    rng = np.random.default_rng(seed)
+    return np.asarray(
+        [_raw_from_divergences(dx, rng.permutation(dy)) for _ in range(n_perm)],
+        dtype=float,
+    )
+
+
+def exact_permutation_statistics_from_divergences(dx: Array, dy: Array) -> Array:
+    """Enumerate all raw c_delta values for small n."""
+    if dx.size > 9:
+        raise ValueError("exact enumeration is intended only for small n")
+    return np.asarray(
+        [_raw_from_divergences(dx, dy[list(order)]) for order in permutations(range(dx.size))],
+        dtype=float,
+    )
+
+
 def permutation_test(
     x: Array | list[float],
     y: Array | list[float],
@@ -155,6 +181,42 @@ def permutation_test(
 
     p_value = (exceed + 1) / (n_perm + 1)
     return {"observed": observed, "p_value": float(p_value), "status": "ok"}
+
+
+def permutation_mean_check(
+    x: Array | list[float],
+    y: Array | list[float],
+    *,
+    n_perm: int = 5000,
+    seed: int | None = None,
+    kind: str = "l2",
+    exact: bool = False,
+) -> dict[str, float | str]:
+    """Check that the mean raw c_delta over permutations is approximately n."""
+    x_arr = _as_1d(x, "x")
+    y_arr = _as_1d(y, "y")
+    if x_arr.size != y_arr.size:
+        raise ValueError("x and y must have the same length")
+
+    dx = divergence_vector(x_arr, kind=kind)
+    dy = divergence_vector(y_arr, kind=kind)
+    if exact:
+        stats = exact_permutation_statistics_from_divergences(dx, dy)
+        method = "exact"
+    else:
+        stats = permutation_statistics_from_divergences(
+            dx, dy, n_perm=n_perm, seed=seed
+        )
+        method = "monte_carlo"
+
+    return {
+        "n": x_arr.size,
+        "method": method,
+        "n_statistics": stats.size,
+        "mean_permuted_raw": round(float(np.mean(stats)), 6),
+        "expected_mean": float(x_arr.size),
+        "absolute_error": round(abs(float(np.mean(stats)) - x_arr.size), 6),
+    }
 
 
 def bootstrap_ci(
@@ -311,6 +373,34 @@ def make_multi_extreme_scenario(
     x[x_idx] = magnitude
     y[y_idx] = magnitude
     return x, y, sorted(set(x_idx.tolist() + y_idx.tolist()))
+
+
+def make_independent_extreme_scenario(
+    *,
+    n: int,
+    k: int,
+    seed: int | None = None,
+    magnitude: float = 8.0,
+    background: str = "normal",
+) -> tuple[Array, Array, list[int], list[int]]:
+    """Generate independent extreme index sets for Type-I calibration."""
+    if k < 1:
+        raise ValueError("k must be at least one")
+    if n < k + 2:
+        raise ValueError("n must be at least k + 2")
+
+    rng = np.random.default_rng(seed)
+    x = _background_sample(rng, n, background)
+    y = _background_sample(rng, n, background)
+    x_idx = np.sort(rng.choice(n, size=k, replace=False))
+    y_idx = np.sort(rng.choice(n, size=k, replace=False))
+    x[x_idx] = magnitude
+    y[y_idx] = magnitude
+    return x, y, x_idx.tolist(), y_idx.tolist()
+
+
+def _overlap_count(permuted_y_extreme_indices: Array, x_extreme_indices: set[int]) -> int:
+    return sum(int(idx in x_extreme_indices) for idx in permuted_y_extreme_indices)
 
 
 def _drop_indices(x: Array, y: Array, indices: list[int]) -> tuple[Array, Array]:
@@ -925,6 +1015,110 @@ def large_scale_simulation(
                         }
                     )
     return rows
+
+
+def overlap_layer_diagnostic(
+    *,
+    n: int = 15,
+    k: int = 3,
+    magnitude: float = 8.0,
+    n_perm: int = 5000,
+    seed: int = 123,
+    background: str = "normal",
+) -> list[dict[str, float | str]]:
+    """Classify permutation statistics by extreme-index overlap count."""
+    x, y, x_extreme_indices = make_multi_extreme_scenario(
+        n=n,
+        k=k,
+        seed=seed,
+        magnitude=magnitude,
+        background=background,
+        matched=True,
+    )
+    y_extreme_original = np.asarray(x_extreme_indices, dtype=int)
+    x_extreme_set = set(x_extreme_indices)
+    dx = divergence_vector(x)
+    dy = divergence_vector(y)
+    observed = _raw_from_divergences(dx, dy)
+    rng = np.random.default_rng(seed + 1_000_000)
+
+    by_overlap: dict[int, list[float]] = {j: [] for j in range(k + 1)}
+    for _ in range(n_perm):
+        order = rng.permutation(n)
+        stat = _raw_from_divergences(dx, dy[order])
+        # dy[order][i] means original y index order[i] is assigned to x index i.
+        assigned_positions = np.where(np.isin(order, y_extreme_original))[0]
+        overlap = _overlap_count(assigned_positions, x_extreme_set)
+        by_overlap[overlap].append(stat)
+
+    rows = []
+    for overlap in range(k + 1):
+        stats = np.asarray(by_overlap[overlap], dtype=float)
+        rows.append(
+            {
+                "n": n,
+                "k_extremes": k,
+                "magnitude": magnitude,
+                "overlap_count": overlap,
+                "n_permutations": int(stats.size),
+                "layer_probability": round(float(stats.size / n_perm), 6),
+                "mean_stat": "nan" if stats.size == 0 else round(float(stats.mean()), 6),
+                "p95_stat": "nan" if stats.size == 0 else round(float(np.quantile(stats, 0.95)), 6),
+                "max_stat": "nan" if stats.size == 0 else round(float(stats.max()), 6),
+                "observed_stat": round(float(observed), 6),
+                "share_ge_observed": (
+                    "nan"
+                    if stats.size == 0
+                    else round(float(np.mean(stats >= observed)), 6)
+                ),
+            }
+        )
+    return rows
+
+
+def independent_null_size_simulation(
+    *,
+    n: int = 40,
+    k: int = 2,
+    magnitude: float = 8.0,
+    repetitions: int = 200,
+    n_perm: int = 499,
+    seed: int = 123,
+    background: str = "normal",
+    alphas: list[float] | None = None,
+) -> list[dict[str, float | str]]:
+    """Type-I calibration with independently generated extreme index sets."""
+    if alphas is None:
+        alphas = [0.05, 0.01]
+    p_values = []
+    overlaps = []
+    for rep in range(repetitions):
+        x, y, x_idx, y_idx = make_independent_extreme_scenario(
+            n=n,
+            k=k,
+            seed=seed + rep,
+            magnitude=magnitude,
+            background=background,
+        )
+        perm = permutation_test(x, y, n_perm=n_perm, seed=seed + 1_000_000 + rep)
+        p_values.append(perm["p_value"])
+        overlaps.append(len(set(x_idx).intersection(y_idx)))
+
+    return [
+        {
+            "background": background,
+            "n": n,
+            "k_extremes": k,
+            "magnitude": magnitude,
+            "alpha": alpha,
+            "repetitions": repetitions,
+            "n_perm": n_perm,
+            "empirical_size": round(float(np.mean([p < alpha for p in p_values])), 4),
+            "mean_p": round(float(np.mean(p_values)), 4),
+            "mean_index_overlap": round(float(np.mean(overlaps)), 4),
+        }
+        for alpha in alphas
+    ]
 
 
 def summarize_scenarios(
