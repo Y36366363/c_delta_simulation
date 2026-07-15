@@ -9,6 +9,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from cdelta import (
     c_delta,
+    calibrated_subgroup_simulation,
     divergence_vector,
     independent_null_size_simulation,
     large_scale_simulation,
@@ -167,6 +168,37 @@ class CDeltaTests(unittest.TestCase):
         )
         self.assertEqual(len(rows), 4)
         self.assertEqual({row["kind"] for row in rows}, {"l2", "l1"})
+
+    def test_calibrated_subgroup_simulation_smoke(self):
+        rows = calibrated_subgroup_simulation(
+            n=20,
+            k_values=[1, 2],
+            magnitude_grid=[4.0, 8.0],
+            reference_k=1,
+            reference_magnitude=8.0,
+            calibration_repetitions=3,
+            evaluation_repetitions=3,
+            n_perm=9,
+            seed=115,
+            scenarios=["matched", "independent_null"],
+        )
+        self.assertEqual(len(rows), 4)
+        self.assertEqual({row["k_extremes"] for row in rows}, {1, 2})
+
+    def test_explicit_target_calibration_smoke(self):
+        rows = calibrated_subgroup_simulation(
+            n=20,
+            k_values=[1, 2],
+            magnitude_grid=[2.0, 4.0, 8.0],
+            target_corr=0.55,
+            calibration_repetitions=3,
+            evaluation_repetitions=3,
+            n_perm=9,
+            seed=116,
+            scenarios=["matched"],
+        )
+        self.assertEqual(len(rows), 2)
+        self.assertEqual({row["target_corr"] for row in rows}, {0.55})
 
 
 if __name__ == "__main__":

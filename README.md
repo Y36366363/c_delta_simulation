@@ -3,6 +3,26 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/15/2026
+
+- **Calibrated subgroup simulation** — Added
+  `calibrated_subgroup_simulation()` and
+  `scripts/run_calibrated_subgroup_simulations.py` to compare `k = 1, 2, 3`
+  after first matching approximate divergence-vector correlation.
+- **Calibrated subgroup results** — Added
+  `results/calibrated_subgroup_simulation_20260715.tsv` and
+  `docs/calibrated_subgroup_summary.md`; normal backgrounds show a ceiling
+  effect, while heavy-tailed backgrounds show that subgroup-size effects cannot
+  be explained by permutation resolution alone.
+- **Research tracker update** — Updated `docs/research_questions.md` to mark
+  calibrated alternatives as started and to identify lower-target calibration as
+  the next refinement.
+- **Lower-target calibration** — Added
+  `scripts/run_lower_target_calibration.py`,
+  `results/lower_target_calibration_20260715.tsv`, and
+  `docs/lower_target_calibration_summary.md`; target correlation `0.35` avoids
+  the normal-background ceiling effect better than `0.55` or `0.65`.
+
 ## Updates 07/14/2026
 
 - **L1/L2 variant comparison** — Added `variant_comparison_simulation()` and
@@ -118,6 +138,10 @@ variants, weighting schemes, and machine-learning examples.
 - `scripts/run_high_replication_checks.py`: higher-replication validation with
   Wilson intervals and p-value quantiles.
 - `scripts/run_variant_comparison.py`: L1/L2 divergence variant comparison.
+- `scripts/run_calibrated_subgroup_simulations.py`: calibrated subgroup-size
+  comparison.
+- `scripts/run_lower_target_calibration.py`: lower-target calibrated subgroup
+  comparison.
 - `docs/finite_sample_permutation_resolution.md`: summary note on the
   small-sample permutation issue.
 - `docs/near_zero_divergence_notation.md`: notation and reporting note for
@@ -128,6 +152,10 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/high_replication_checks_summary.md`: higher-replication validation
   summary with Wilson intervals.
 - `docs/variant_comparison_summary.md`: L1/L2 variant comparison summary.
+- `docs/calibrated_subgroup_summary.md`: calibrated subgroup-size simulation
+  summary.
+- `docs/lower_target_calibration_summary.md`: lower-target calibrated subgroup
+  summary.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -147,6 +175,8 @@ python3 scripts/run_large_scale_simulations.py
 python3 scripts/run_feedback_checks.py
 python3 scripts/run_high_replication_checks.py
 python3 scripts/run_variant_comparison.py
+python3 scripts/run_calibrated_subgroup_simulations.py
+python3 scripts/run_lower_target_calibration.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -163,6 +193,8 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_feedback_checks.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_high_replication_checks.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_variant_comparison.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_calibrated_subgroup_simulations.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_lower_target_calibration.py
 ```
 
 ## First Simulation Questions

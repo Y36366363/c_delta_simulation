@@ -1248,6 +1248,220 @@ def variant_comparison_simulation(
     return rows
 
 
+def _multi_extreme_samples_for_scenario(
+    *,
+    scenario: str,
+    n: int,
+    k: int,
+    magnitude: float,
+    background: str,
+    seed: int,
+) -> tuple[Array, Array, int]:
+    if scenario == "matched":
+        x, y, _ = make_multi_extreme_scenario(
+            n=n,
+            k=k,
+            seed=seed,
+            magnitude=magnitude,
+            background=background,
+            matched=True,
+        )
+        return x, y, k
+    if scenario == "negative_control":
+        x, y, _ = make_multi_extreme_scenario(
+            n=n,
+            k=k,
+            seed=seed,
+            magnitude=magnitude,
+            background=background,
+            matched=False,
+        )
+        return x, y, 0
+    if scenario == "independent_null":
+        x, y, x_idx, y_idx = make_independent_extreme_scenario(
+            n=n,
+            k=k,
+            seed=seed,
+            magnitude=magnitude,
+            background=background,
+        )
+        return x, y, len(set(x_idx).intersection(y_idx))
+    raise ValueError(f"unknown scenario: {scenario}")
+
+
+def calibrated_subgroup_simulation(
+    *,
+    n: int = 40,
+    k_values: list[int] | None = None,
+    magnitude_grid: list[float] | None = None,
+    target_corr: float | None = None,
+    reference_k: int = 1,
+    reference_magnitude: float = 8.0,
+    calibration_repetitions: int = 120,
+    evaluation_repetitions: int = 250,
+    n_perm: int = 499,
+    seed: int = 123,
+    background: str = "normal",
+    kind: str = "l2",
+    scenarios: list[str] | None = None,
+    alpha: float = 0.05,
+) -> list[dict[str, float | str]]:
+    """Compare subgroup sizes after matching approximate signal strength.
+
+    The calibration step chooses one magnitude per ``k`` whose matched-condition
+    mean divergence-vector correlation is closest to either an explicit target
+    or the reference condition. This separates the effect of subgroup size from
+    the simpler fact that more extreme observations can also create a stronger
+    alternative.
+    """
+    if k_values is None:
+        k_values = [1, 2, 3]
+    if magnitude_grid is None:
+        magnitude_grid = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 10.0, 12.0]
+    if scenarios is None:
+        scenarios = ["matched", "negative_control", "independent_null"]
+    if target_corr is not None and not -1.0 <= target_corr <= 1.0:
+        raise ValueError("target_corr must be between -1 and 1")
+    if reference_k not in k_values:
+        raise ValueError("reference_k must be included in k_values")
+    if reference_magnitude not in magnitude_grid:
+        raise ValueError("reference_magnitude must be included in magnitude_grid")
+
+    calibration: dict[int, list[dict[str, float]]] = {k: [] for k in k_values}
+    for k_offset, k in enumerate(k_values):
+        for mag_offset, magnitude in enumerate(magnitude_grid):
+            values = []
+            for rep in range(calibration_repetitions):
+                row_seed = (
+                    seed
+                    + k_offset * 1_000_000
+                    + mag_offset * 10_000
+                    + rep
+                )
+                x, y, _ = make_multi_extreme_scenario(
+                    n=n,
+                    k=k,
+                    seed=row_seed,
+                    magnitude=magnitude,
+                    background=background,
+                    matched=True,
+                )
+                result = c_delta(x, y, kind=kind)
+                values.append(
+                    {
+                        "corr": result.direction_correlation,
+                        "norm": result.normalized_pairing,
+                    }
+                )
+            calibration[k].append(
+                {
+                    "magnitude": magnitude,
+                    "mean_corr": float(np.mean([v["corr"] for v in values])),
+                    "mean_norm": float(np.mean([v["norm"] for v in values])),
+                }
+            )
+
+    if target_corr is None:
+        reference_rows = [
+            row
+            for row in calibration[reference_k]
+            if row["magnitude"] == reference_magnitude
+        ]
+        target_value = reference_rows[0]["mean_corr"]
+        target_reference = f"k={reference_k}, magnitude={reference_magnitude}"
+    else:
+        target_value = target_corr
+        target_reference = f"explicit target_corr={target_corr}"
+
+    selected = {
+        k: min(calibration[k], key=lambda row: abs(row["mean_corr"] - target_value))
+        for k in k_values
+    }
+
+    rows = []
+    for k_offset, k in enumerate(k_values):
+        selected_magnitude = selected[k]["magnitude"]
+        for scenario_offset, scenario in enumerate(scenarios):
+            values = []
+            overlaps = []
+            for rep in range(evaluation_repetitions):
+                row_seed = (
+                    seed
+                    + 5_000_000
+                    + k_offset * 1_000_000
+                    + scenario_offset * 100_000
+                    + rep
+                )
+                x, y, overlap = _multi_extreme_samples_for_scenario(
+                    scenario=scenario,
+                    n=n,
+                    k=k,
+                    magnitude=selected_magnitude,
+                    background=background,
+                    seed=row_seed,
+                )
+                kept = c_delta(x, y, kind=kind)
+                perm = permutation_test(
+                    x,
+                    y,
+                    n_perm=n_perm,
+                    seed=seed + 9_000_000 + row_seed,
+                    kind=kind,
+                )
+                values.append(
+                    {
+                        "raw": kept.raw,
+                        "norm": kept.normalized_pairing,
+                        "corr": kept.direction_correlation,
+                        "p": perm["p_value"],
+                        "reject": float(perm["p_value"] < alpha),
+                    }
+                )
+                overlaps.append(overlap)
+
+            reject_count = int(sum(v["reject"] for v in values))
+            ci_low, ci_high = _wilson_interval(reject_count, evaluation_repetitions)
+            p_values = [v["p"] for v in values]
+            p_quantiles = np.quantile(p_values, [0.05, 0.5, 0.95])
+            rows.append(
+                {
+                    "background": background,
+                    "kind": kind,
+                    "n": n,
+                    "k_extremes": k,
+                    "scenario": scenario,
+                    "target_reference": target_reference,
+                    "target_corr": round(float(target_value), 4),
+                    "selected_magnitude": selected_magnitude,
+                    "calibrated_mean_corr": round(
+                        float(selected[k]["mean_corr"]), 4
+                    ),
+                    "calibrated_mean_norm": round(
+                        float(selected[k]["mean_norm"]), 4
+                    ),
+                    "alpha": alpha,
+                    "calibration_repetitions": calibration_repetitions,
+                    "evaluation_repetitions": evaluation_repetitions,
+                    "n_perm": n_perm,
+                    "reject_count": reject_count,
+                    "rejection_rate": round(
+                        float(reject_count / evaluation_repetitions), 4
+                    ),
+                    "wilson_low": round(float(ci_low), 4),
+                    "wilson_high": round(float(ci_high), 4),
+                    "mean_raw": round(float(np.mean([v["raw"] for v in values])), 4),
+                    "mean_norm": round(float(np.mean([v["norm"] for v in values])), 4),
+                    "mean_corr": round(float(np.mean([v["corr"] for v in values])), 4),
+                    "mean_p": round(float(np.mean(p_values)), 4),
+                    "p05": round(float(p_quantiles[0]), 4),
+                    "p50": round(float(p_quantiles[1]), 4),
+                    "p95": round(float(p_quantiles[2]), 4),
+                    "mean_index_overlap": round(float(np.mean(overlaps)), 4),
+                }
+            )
+    return rows
+
+
 def _independent_null_row(
     *,
     background: str,
