@@ -3,6 +3,18 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/16/2026
+
+- **Lower-target L1 calibration** — Added
+  `scripts/run_lower_target_l1_calibration.py` to repeat the non-ceiling
+  `target_corr = 0.35` subgroup calibration with the absolute-difference (`l1`)
+  divergence definition.
+- **L1 calibration results** — Added
+  `results/lower_target_l1_calibration_20260716.tsv` and
+  `docs/lower_target_l1_calibration_summary.md`; the subgroup-size pattern
+  broadly persists under `l1`, while heavy-tailed backgrounds remain flatter
+  across `k`.
+
 ## Updates 07/15/2026
 
 - **Calibrated subgroup simulation** — Added
@@ -142,6 +154,8 @@ variants, weighting schemes, and machine-learning examples.
   comparison.
 - `scripts/run_lower_target_calibration.py`: lower-target calibrated subgroup
   comparison.
+- `scripts/run_lower_target_l1_calibration.py`: lower-target L1 calibrated
+  subgroup comparison.
 - `docs/finite_sample_permutation_resolution.md`: summary note on the
   small-sample permutation issue.
 - `docs/near_zero_divergence_notation.md`: notation and reporting note for
@@ -156,6 +170,8 @@ variants, weighting schemes, and machine-learning examples.
   summary.
 - `docs/lower_target_calibration_summary.md`: lower-target calibrated subgroup
   summary.
+- `docs/lower_target_l1_calibration_summary.md`: lower-target L1 calibrated
+  subgroup summary.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -177,6 +193,7 @@ python3 scripts/run_high_replication_checks.py
 python3 scripts/run_variant_comparison.py
 python3 scripts/run_calibrated_subgroup_simulations.py
 python3 scripts/run_lower_target_calibration.py
+python3 scripts/run_lower_target_l1_calibration.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -195,6 +212,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_variant_comparison.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_calibrated_subgroup_simulations.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_lower_target_calibration.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_lower_target_l1_calibration.py
 ```
 
 ## First Simulation Questions
