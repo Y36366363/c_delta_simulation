@@ -5,6 +5,14 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 07/16/2026
 
+- **Sample-size sensitivity** — Added `scripts/run_sample_size_sensitivity.py`
+  to test lower-target calibrated behavior across `n = 20, 40, 80, 160` for
+  both `l2` and `l1`.
+- **Large-n sensitivity results** — Added
+  `results/sample_size_sensitivity_20260716.tsv` and
+  `docs/sample_size_sensitivity_summary.md`; matched power often saturates by
+  `n = 80` or `n = 160`, while independent-null behavior remains mostly close
+  to alpha `.05`.
 - **Lower-target L1 calibration** — Added
   `scripts/run_lower_target_l1_calibration.py` to repeat the non-ceiling
   `target_corr = 0.35` subgroup calibration with the absolute-difference (`l1`)
@@ -156,6 +164,8 @@ variants, weighting schemes, and machine-learning examples.
   comparison.
 - `scripts/run_lower_target_l1_calibration.py`: lower-target L1 calibrated
   subgroup comparison.
+- `scripts/run_sample_size_sensitivity.py`: sample-size sensitivity comparison
+  for lower-target calibrated simulations.
 - `docs/finite_sample_permutation_resolution.md`: summary note on the
   small-sample permutation issue.
 - `docs/near_zero_divergence_notation.md`: notation and reporting note for
@@ -172,6 +182,7 @@ variants, weighting schemes, and machine-learning examples.
   summary.
 - `docs/lower_target_l1_calibration_summary.md`: lower-target L1 calibrated
   subgroup summary.
+- `docs/sample_size_sensitivity_summary.md`: sample-size sensitivity summary.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -194,6 +205,7 @@ python3 scripts/run_variant_comparison.py
 python3 scripts/run_calibrated_subgroup_simulations.py
 python3 scripts/run_lower_target_calibration.py
 python3 scripts/run_lower_target_l1_calibration.py
+python3 scripts/run_sample_size_sensitivity.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -213,6 +225,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_calibrated_subgroup_simulations.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_lower_target_calibration.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_lower_target_l1_calibration.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_sample_size_sensitivity.py
 ```
 
 ## First Simulation Questions

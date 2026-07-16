@@ -200,6 +200,25 @@ class CDeltaTests(unittest.TestCase):
         self.assertEqual(len(rows), 2)
         self.assertEqual({row["target_corr"] for row in rows}, {0.55})
 
+    def test_calibrated_sample_size_smoke(self):
+        rows = []
+        for n in [15, 20]:
+            rows.extend(
+                calibrated_subgroup_simulation(
+                    n=n,
+                    k_values=[1],
+                    magnitude_grid=[2.0, 4.0, 8.0],
+                    target_corr=0.35,
+                    calibration_repetitions=2,
+                    evaluation_repetitions=2,
+                    n_perm=9,
+                    seed=117 + n,
+                    scenarios=["matched", "independent_null"],
+                )
+            )
+        self.assertEqual(len(rows), 4)
+        self.assertEqual({row["n"] for row in rows}, {15, 20})
+
 
 if __name__ == "__main__":
     unittest.main()
