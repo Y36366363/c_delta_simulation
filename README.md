@@ -5,6 +5,17 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 07/17/2026
 
+- **Extended stable simulations** — Added
+  `scripts/run_extended_stable_simulations.py` to test calibrated matched and
+  independent-null behavior across target correlations `.25` and `.35`, `l2`
+  and `l1`, normal, `t3`, `t2`, and lognormal backgrounds, and
+  `n = 40, 80, 160`.
+- **Extended simulation results** — Added
+  `results/extended_stable_simulations_20260717.tsv` and
+  `docs/extended_stable_simulation_summary.md`; normal and lognormal
+  backgrounds often saturate at larger `n`, while Student `t2` remains the
+  hardest background and several independent-null rows are marked for
+  higher-replication follow-up.
 - **Stable reporting table** — Added
   `scripts/build_stable_reporting_tables.py` to generate a report-friendly table
   that excludes old raw-scale columns and keeps permutation p-values, rejection
