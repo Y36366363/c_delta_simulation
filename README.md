@@ -3,6 +3,20 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/17/2026
+
+- **Stable reporting table** — Added
+  `scripts/build_stable_reporting_tables.py` to generate a report-friendly table
+  that excludes old raw-scale columns and keeps permutation p-values, rejection
+  rates, Wilson intervals, divergence-vector correlations, pairing-normalized
+  values, and independent-null calibration summaries.
+- **Report-ready metrics** — Added
+  `results/stable_reporting_metrics_20260717.tsv` with 198 stable-metric rows
+  combining lower-target calibration and sample-size sensitivity summaries.
+- **Reporting guidelines** — Added `docs/stable_reporting_guidelines.md` to
+  document which quantities should be emphasized after the `1 / n`
+  normalization correction and which older raw-scale columns should be avoided.
+
 ## Updates 07/16/2026
 
 - **Numerator normalization correction** — Updated the raw `c_delta`
@@ -185,6 +199,8 @@ variants, weighting schemes, and machine-learning examples.
   for lower-target calibrated simulations.
 - `scripts/run_normalization_followup_checks.py`: corrected-scale verification
   and flagged large-n null recheck.
+- `scripts/build_stable_reporting_tables.py`: generate report-friendly stable
+  metrics without raw-scale columns.
 - `docs/finite_sample_permutation_resolution.md`: summary note on the
   small-sample permutation issue.
 - `docs/near_zero_divergence_notation.md`: notation and reporting note for
@@ -205,6 +221,8 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/normalization_revision_note.md`: formula correction note for the
   missing `1 / n` numerator factor.
 - `docs/normalization_followup_summary.md`: corrected-scale follow-up summary.
+- `docs/stable_reporting_guidelines.md`: guidance for report-stable quantities
+  after the normalization correction.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -228,6 +246,7 @@ python3 scripts/run_calibrated_subgroup_simulations.py
 python3 scripts/run_lower_target_calibration.py
 python3 scripts/run_lower_target_l1_calibration.py
 python3 scripts/run_sample_size_sensitivity.py
+python3 scripts/build_stable_reporting_tables.py
 ```
 
 If using the Codex bundled runtime on this machine:
@@ -248,6 +267,7 @@ If using the Codex bundled runtime on this machine:
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_lower_target_calibration.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_lower_target_l1_calibration.py
 /Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/run_sample_size_sensitivity.py
+/Users/jialiangyao/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/build_stable_reporting_tables.py
 ```
 
 ## First Simulation Questions
