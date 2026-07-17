@@ -1,0 +1,20 @@
+Permutation mean check
+n	method	n_statistics	mean_permuted_raw	expected_mean	absolute_error
+8	exact	40320	1.0	1.0	0.0
+8	monte_carlo	5000	1.000252	1.0	0.000252
+
+Overlap-layer diagnostic
+n	k_extremes	magnitude	overlap_count	n_permutations	layer_probability	mean_stat	p95_stat	max_stat	observed_stat	share_ge_observed
+15	3	8.0	0	4854	0.4854	0.976871	0.994698	1.01385	1.092376	0.0
+15	3	8.0	1	4336	0.4336	1.015771	1.031285	1.045014	1.092376	0.0
+15	3	8.0	2	789	0.0789	1.05434	1.067693	1.073446	1.092376	0.0
+15	3	8.0	3	21	0.0021	1.092614	1.095441	1.095606	1.092376	0.52381
+
+Independent-null size check
+background	n	k_extremes	magnitude	alpha	repetitions	n_perm	empirical_size	mean_p	mean_index_overlap
+normal	40	2	8.0	0.05	200	499	0.035	0.4988	0.09
+normal	40	2	8.0	0.01	200	499	0.005	0.4988	0.09
+t3	40	2	8.0	0.05	200	499	0.055	0.5112	0.09
+t3	40	2	8.0	0.01	200	499	0.01	0.5112	0.09
+lognormal	40	2	8.0	0.05	200	499	0.045	0.5226	0.09
+lognormal	40	2	8.0	0.01	200	499	0.02	0.5226	0.09

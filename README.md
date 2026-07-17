@@ -5,6 +5,23 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 07/16/2026
 
+- **Numerator normalization correction** — Updated the raw `c_delta`
+  implementation to include the missing `1 / n` factor in the numerator, so
+  raw values are now on the corrected scale and the permutation mean is `1`
+  rather than `n`.
+- **Revision note** — Added `docs/normalization_revision_note.md` to document
+  the formula correction, expected effects on previous outputs, and the
+  original-paper revision item.
+- **Corrected-scale verification** — Added
+  `results/normalization_feedback_checks_20260716.tsv`; exact enumeration now
+  confirms the corrected permutation mean is `1.0`, while p-values and
+  rejection-rate conclusions are unchanged by the constant scale correction.
+- **Normalization follow-up checks** — Added
+  `scripts/run_normalization_followup_checks.py`,
+  `results/normalization_followup_checks_20260716.tsv`, and
+  `docs/normalization_followup_summary.md`; the previously flagged
+  `l1/lognormal/n=160/k=1` null setting returns to empirical size `0.053` with
+  1,000 replications.
 - **Sample-size sensitivity** — Added `scripts/run_sample_size_sensitivity.py`
   to test lower-target calibrated behavior across `n = 20, 40, 80, 160` for
   both `l2` and `l1`.
@@ -70,15 +87,15 @@ correlation-of-divergency coefficient, `c_delta`.
   `docs/high_replication_checks_summary.md` and
   `results/high_replication_checks_20260713.tsv`.
 - **Feedback response checks** — Added `scripts/run_feedback_checks.py` to test
-  Professor Hoorn's latest points: permutation mean equals `n`, permutation
-  statistics by extreme-index overlap layer, and independent-null calibration
-  with chance overlap.
+  Professor Hoorn's latest points: the old unnormalized permutation mean issue,
+  permutation statistics by extreme-index overlap layer, and independent-null
+  calibration with chance overlap.
 - **Response plan** — Added `docs/feedback_response_plan.md` to track which
   simulation claims need correction before the next report.
 - **Feedback check results** — Added `docs/feedback_checks_summary.md` and
-  `results/feedback_checks_20260713.tsv`; exact enumeration confirms the
-  permutation mean raw `c_delta` equals `n`, and overlap-layer diagnostics
-  support treating `1 / choose(n, k)` as a layer size rather than a p-value.
+  `results/feedback_checks_20260713.tsv`; the historical check exposed the
+  missing `1 / n` normalization, and overlap-layer diagnostics support treating
+  `1 / choose(n, k)` as a layer size rather than a p-value.
 
 ## Updates 07/12/2026
 
@@ -166,6 +183,8 @@ variants, weighting schemes, and machine-learning examples.
   subgroup comparison.
 - `scripts/run_sample_size_sensitivity.py`: sample-size sensitivity comparison
   for lower-target calibrated simulations.
+- `scripts/run_normalization_followup_checks.py`: corrected-scale verification
+  and flagged large-n null recheck.
 - `docs/finite_sample_permutation_resolution.md`: summary note on the
   small-sample permutation issue.
 - `docs/near_zero_divergence_notation.md`: notation and reporting note for
@@ -183,6 +202,9 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/lower_target_l1_calibration_summary.md`: lower-target L1 calibrated
   subgroup summary.
 - `docs/sample_size_sensitivity_summary.md`: sample-size sensitivity summary.
+- `docs/normalization_revision_note.md`: formula correction note for the
+  missing `1 / n` numerator factor.
+- `docs/normalization_followup_summary.md`: corrected-scale follow-up summary.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 

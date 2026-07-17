@@ -78,7 +78,11 @@ def c_delta(
     kind: str = "l2",
     zero_policy: str = "undetermined",
 ) -> CDeltaResult:
-    """Compute raw c_delta and a sample-dependent pairing normalization.
+    """Compute corrected raw c_delta and a sample-dependent pairing normalization.
+
+    The raw numerator is the empirical mean of paired divergence products,
+    `(1 / n) * sum_i D_xi D_yi`, divided by the product of the two mean
+    divergences.
 
     The normalized value uses the maximum dot product obtainable by re-pairing
     the two divergence vectors, which is a finite-sample upper anchor for the
@@ -101,9 +105,9 @@ def c_delta(
             return CDeltaResult(np.nan, np.nan, np.nan, dx, dy, message)
         raise ValueError(message)
 
-    raw = float(np.dot(dx, dy) / (mean_dx * mean_dy))
+    raw = float(np.mean(dx * dy) / (mean_dx * mean_dy))
     max_pairing = float(
-        np.dot(np.sort(dx), np.sort(dy)) / (mean_dx * mean_dy)
+        np.mean(np.sort(dx) * np.sort(dy)) / (mean_dx * mean_dy)
     )
     normalized = raw / max_pairing if max_pairing > 0.0 else np.nan
 
@@ -120,7 +124,7 @@ def _raw_from_divergences(dx: Array, dy: Array) -> float:
     mean_dy = float(dy.mean())
     if mean_dx == 0.0 or mean_dy == 0.0:
         return np.nan
-    return float(np.dot(dx, dy) / (mean_dx * mean_dy))
+    return float(np.mean(dx * dy) / (mean_dx * mean_dy))
 
 
 def permutation_statistics_from_divergences(
@@ -192,7 +196,7 @@ def permutation_mean_check(
     kind: str = "l2",
     exact: bool = False,
 ) -> dict[str, float | str]:
-    """Check that the mean raw c_delta over permutations is approximately n."""
+    """Check that the mean raw c_delta over permutations is approximately 1."""
     x_arr = _as_1d(x, "x")
     y_arr = _as_1d(y, "y")
     if x_arr.size != y_arr.size:
@@ -214,8 +218,8 @@ def permutation_mean_check(
         "method": method,
         "n_statistics": stats.size,
         "mean_permuted_raw": round(float(np.mean(stats)), 6),
-        "expected_mean": float(x_arr.size),
-        "absolute_error": round(abs(float(np.mean(stats)) - x_arr.size), 6),
+        "expected_mean": 1.0,
+        "absolute_error": round(abs(float(np.mean(stats)) - 1.0), 6),
     }
 
 
@@ -1096,6 +1100,7 @@ def independent_null_size_simulation(
     n_perm: int = 499,
     seed: int = 123,
     background: str = "normal",
+    kind: str = "l2",
     alphas: list[float] | None = None,
 ) -> list[dict[str, float | str]]:
     """Type-I calibration with independently generated extreme index sets."""
@@ -1111,13 +1116,20 @@ def independent_null_size_simulation(
             magnitude=magnitude,
             background=background,
         )
-        perm = permutation_test(x, y, n_perm=n_perm, seed=seed + 1_000_000 + rep)
+        perm = permutation_test(
+            x,
+            y,
+            n_perm=n_perm,
+            seed=seed + 1_000_000 + rep,
+            kind=kind,
+        )
         p_values.append(perm["p_value"])
         overlaps.append(len(set(x_idx).intersection(y_idx)))
 
     return [
         _independent_null_row(
             background=background,
+            kind=kind,
             n=n,
             k=k,
             magnitude=magnitude,
@@ -1465,6 +1477,7 @@ def calibrated_subgroup_simulation(
 def _independent_null_row(
     *,
     background: str,
+    kind: str,
     n: int,
     k: int,
     magnitude: float,
@@ -1479,6 +1492,7 @@ def _independent_null_row(
     quantiles = np.quantile(p_values, [0.05, 0.25, 0.5, 0.75, 0.95])
     return {
         "background": background,
+        "kind": kind,
         "n": n,
         "k_extremes": k,
         "magnitude": magnitude,

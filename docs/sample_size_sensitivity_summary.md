@@ -64,6 +64,11 @@ above `.05` and the Wilson interval barely excludes `.05`. This should be
 treated as a possible over-sensitivity point under the `l1` lognormal large-n
 setting, not as a final conclusion.
 
+Follow-up note: after the normalization correction, this flagged condition was
+re-run with 1,000 replications and 999 permutations. The empirical size at
+alpha `.05` was `0.053`, with Wilson interval `[0.0407, 0.0687]`, so the
+earlier warning is less concerning.
+
 ## Interpretation
 
 - Larger sample sizes strongly increase matched power even after calibrating
@@ -75,9 +80,9 @@ setting, not as a final conclusion.
   blur sparse co-divergence signals.
 - Most independent-null checks remain near nominal size, so the main large-n
   pattern looks more like increased statistical power than generic overfitting.
-- The main potential over-sensitivity region is large-n lognormal data under
-  `l1`, especially `n = 160, k = 1`, where independent-null rejection reached
-  `.0767`.
+- The earlier potential over-sensitivity region was large-n lognormal data
+  under `l1`, especially `n = 160, k = 1`, where independent-null rejection
+  reached `.0767`. A higher-replication follow-up reduced this to `.053`.
 
 ## Practical Boundary
 
@@ -93,7 +98,5 @@ checked with more replications and possibly more permutations.
 
 ## Next Check
 
-Repeat the flagged `l1/lognormal/n = 160/k = 1` independent-null condition with
-more replications and more permutations. If the rejection rate remains above
-nominal size, it may indicate a real large-sample calibration issue under
-skewed backgrounds.
+The next check can shift from this flagged case to regenerating selected raw
+tables under the corrected scale, or to adding a rank-based variant.

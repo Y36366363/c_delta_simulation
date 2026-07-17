@@ -19,8 +19,9 @@ tightened before the simulation results can be treated as report-ready.
    chance overlap.
 
 3. Check the algebraic permutation mean.
-   Conditional on `D_x` and `D_y`, the mean raw `c_delta` over all permutations
-   should be `n`. This is now implemented as a code check.
+   The historical implementation had mean raw `c_delta` equal to `n`, which
+   exposed the missing `1 / n` factor in the numerator. With the corrected
+   normalization, the mean raw `c_delta` over all permutations should be `1`.
 
 4. Classify permutations by extreme-index overlap.
    The p-value is not equal to `1 / choose(n, k)`. That quantity is the size of
@@ -29,6 +30,11 @@ tightened before the simulation results can be treated as report-ready.
 
 5. Keep raw `c_delta`, normalized `c_delta`, divergence-vector correlation, and
    permutation p-value conceptually separate.
+
+6. Add a revision note for the original paper.
+   The numerator should be normalized as
+   `(1 / n) * sum_i D_xi D_yi`; otherwise the raw statistic is inflated by a
+   factor of `n`.
 
 ## Next Simulation Tasks
 

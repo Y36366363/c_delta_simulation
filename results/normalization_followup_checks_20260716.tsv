@@ -1,0 +1,24 @@
+Corrected permutation mean checks
+n	method	n_statistics	mean_permuted_raw	expected_mean	absolute_error
+8	exact	40320	1.0	1.0	0.0
+8	monte_carlo	5000	1.000402	1.0	0.000402
+
+Compact lower-target corrected-scale check
+background	kind	n	k_extremes	scenario	target_corr	selected_magnitude	rejection_rate	mean_raw	mean_norm	mean_corr	mean_p
+normal	l2	40	1	matched	0.35	3.0	0.54	1.0335	0.9426	0.3329	0.0675
+normal	l2	40	1	independent_null	0.35	3.0	0.0267	0.9994	0.9115	-0.0065	0.5045
+normal	l2	40	2	matched	0.35	2.5	0.64	1.032	0.947	0.3462	0.0621
+normal	l2	40	2	independent_null	0.35	2.5	0.0667	1.0005	0.9197	0.0069	0.4911
+normal	l2	40	3	matched	0.35	2.5	0.8133	1.0373	0.9535	0.4105	0.0287
+normal	l2	40	3	independent_null	0.35	2.5	0.0467	1.001	0.9201	0.0083	0.4899
+normal	l1	40	1	matched	0.35	3.0	0.5867	1.0539	0.9183	0.3506	0.0603
+normal	l1	40	1	independent_null	0.35	3.0	0.02	0.9994	0.8708	-0.0053	0.5015
+normal	l1	40	2	matched	0.35	2.5	0.6467	1.0492	0.9264	0.3611	0.0561
+normal	l1	40	2	independent_null	0.35	2.5	0.0533	1.0007	0.8865	0.0069	0.4907
+normal	l1	40	3	matched	0.35	2.5	0.8467	1.0561	0.9365	0.4235	0.027
+normal	l1	40	3	independent_null	0.35	2.5	0.06	1.0019	0.8882	0.0103	0.4874
+
+Flagged large-n independent-null recheck
+background	kind	n	k_extremes	magnitude	alpha	repetitions	n_perm	reject_count	empirical_size	wilson_low	wilson_high	mean_p	p05	p50	p95	mean_index_overlap
+lognormal	l1	160	1	7.0	0.05	1000	999	53	0.053	0.0407	0.0687	0.5069	0.0439	0.515	0.952	0.003
+lognormal	l1	160	1	7.0	0.01	1000	999	11	0.011	0.0062	0.0196	0.5069	0.0439	0.515	0.952	0.003

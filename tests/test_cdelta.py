@@ -20,6 +20,7 @@ from cdelta import (
     outlier_influence_summary,
     permutation_test,
     permutation_mean_check,
+    permutation_statistics_from_divergences,
     power_curve_simulation,
     repeated_outlier_simulation,
     variant_comparison_simulation,
@@ -133,10 +134,36 @@ class CDeltaTests(unittest.TestCase):
         )
         self.assertEqual(len(rows), 2)
 
-    def test_exact_permutation_mean_equals_n(self):
+    def test_exact_permutation_mean_equals_one(self):
         x, y = make_scenario("aligned_normal", 6, seed=111)
         check = permutation_mean_check(x, y, exact=True)
-        self.assertAlmostEqual(check["mean_permuted_raw"], 6.0, places=6)
+        self.assertAlmostEqual(check["mean_permuted_raw"], 1.0, places=6)
+
+    def test_corrected_raw_is_old_raw_divided_by_n(self):
+        x, y = make_scenario("aligned_normal", 20, seed=118)
+        result = c_delta(x, y)
+        old_raw = float(np.dot(result.dx, result.dy) / (result.dx.mean() * result.dy.mean()))
+        self.assertAlmostEqual(result.raw, old_raw / result.dx.size, places=12)
+
+    def test_permutation_order_is_unchanged_by_n_factor(self):
+        x, y = make_scenario("aligned_normal", 18, seed=119)
+        result = c_delta(x, y)
+        corrected_stats = permutation_statistics_from_divergences(
+            result.dx, result.dy, n_perm=49, seed=120
+        )
+        rng = np.random.default_rng(120)
+        old_observed = float(np.dot(result.dx, result.dy) / (result.dx.mean() * result.dy.mean()))
+        old_stats = np.asarray(
+            [
+                np.dot(result.dx, rng.permutation(result.dy))
+                / (result.dx.mean() * result.dy.mean())
+                for _ in range(49)
+            ],
+            dtype=float,
+        )
+        old_p = (float(np.sum(old_stats >= old_observed)) + 1) / 50
+        corrected_p = (float(np.sum(corrected_stats >= result.raw)) + 1) / 50
+        self.assertAlmostEqual(corrected_p, old_p, places=12)
 
     def test_overlap_layer_diagnostic_counts_layers(self):
         rows = overlap_layer_diagnostic(n=12, k=2, n_perm=100, seed=112)

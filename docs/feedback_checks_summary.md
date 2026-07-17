@@ -5,22 +5,30 @@ This update responds to Professor Hoorn's July 13 feedback.
 ## 1. Permutation Mean Check
 
 Conditional on `D_x` and `D_y`, the mean raw `c_delta` over permutations should
-be `n`. The exact enumeration check for `n = 8` confirms this:
+be `1` after including the missing `1 / n` numerator factor. The earlier
+historical check gave mean `n`, which is now understood as evidence of the
+unnormalized numerator.
+
+The corrected exact enumeration check for `n = 8` gives:
 
 ```text
-exact mean = 8.0
-expected mean = 8.0
+exact mean = 1.0
+expected mean = 1.0
 ```
 
-The Monte Carlo version with 5,000 sampled permutations gives:
+The corrected Monte Carlo version with 5,000 sampled permutations gives a value
+close to `1`:
 
 ```text
-Monte Carlo mean = 8.002016
+Monte Carlo mean = 1.000252
 ```
 
 This confirms that raw `c_delta` should not be interpreted relative to zero.
 The permutation test is about upper-tail extremity relative to the permutation
 distribution, not a zero-centered statistic.
+
+It also adds a revision item for the original paper: the numerator should be
+normalized by `1 / n`.
 
 ## 2. Overlap-Layer Diagnostic
 
@@ -30,16 +38,17 @@ indices.
 
 ```text
 overlap  layer probability  mean statistic  share >= observed
-0        0.4854             14.653067       0.000000
-1        0.4336             15.236571       0.000000
-2        0.0789             15.815094       0.000000
-3        0.0021             16.389214       0.523810
+0        0.4854             0.976871       0.000000
+1        0.4336             1.015771       0.000000
+2        0.0789             1.054340       0.000000
+3        0.0021             1.092614       0.523810
 ```
 
 The complete-overlap layer probability is approximately 0.0021, consistent with
 `1 / choose(15, 3) = 0.002198`. This supports Professor Hoorn's correction: the
 combinatorial quantity describes the size of a permutation layer, not the
-p-value itself.
+p-value itself. The `1 / n` normalization changes the scale of the statistic
+but not the permutation ordering.
 
 ## 3. Independent-Null Calibration
 
