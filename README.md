@@ -3,6 +3,26 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/18/2026
+
+- **Follow-up stable diagnostics** — Added
+  `scripts/run_followup_stable_diagnostics.py` to combine high-replication
+  independent-null checks, normal-background power curves, and a heavy-tail
+  gradient study under the corrected reporting scale.
+- **High-replication null checks** — Added
+  `results/flagged_null_high_replication_20260718.tsv`; previously flagged
+  independent-null rows mostly return to the nominal `.05` level with 1,200
+  repetitions, suggesting the earlier `.08-.09` values were likely Monte Carlo
+  fluctuations.
+- **Power and tail-gradient outputs** — Added
+  `results/power_curve_stable_20260718.tsv`,
+  `results/heavy_tail_gradient_20260718.tsv`, and summary plots in
+  `figures/`; power increases with subgroup size, while Student `t2` remains
+  the clearest hard background.
+- **Follow-up summary** — Added
+  `docs/followup_stable_diagnostics_summary.md` to summarize the null
+  calibration, power-curve thresholds, and heavy-tail interpretation.
+
 ## Updates 07/17/2026
 
 - **Extended stable simulations** — Added

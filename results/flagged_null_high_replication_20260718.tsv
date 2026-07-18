@@ -1,0 +1,9 @@
+target_source	kind	background	n	k	magnitude	scenario	alpha	repetitions	n_perm	reject_count	rejection_rate	wilson_low	wilson_high	mean_norm	mean_corr	mean_index_overlap	mean_p	p05	p50	p95
+extended_0.25	l2	normal	160	1	2.5	independent_null	0.05	1200	799	65	0.0542	0.0427	0.0685	0.9175	-0.0033	0.0025	0.5164	0.0462	0.5356	0.95
+extended_0.35	l2	normal	160	2	4.0	independent_null	0.05	1200	799	63	0.0525	0.0412	0.0666	0.8999	0.0009	0.0367	0.5006	0.0475	0.5081	0.9437
+extended_0.35	l2	normal	160	3	3.5	independent_null	0.05	1200	799	65	0.0542	0.0427	0.0685	0.9031	0.0003	0.055	0.5022	0.0462	0.51	0.9513
+extended_0.35	l1	normal	160	2	3.5	independent_null	0.05	1200	799	57	0.0475	0.0368	0.061	0.8651	0.0002	0.03	0.5002	0.0512	0.4975	0.9513
+extended_0.35	l1	normal	160	3	3.5	independent_null	0.05	1200	799	56	0.0467	0.0361	0.0601	0.8566	-0.0005	0.0558	0.5016	0.0524	0.4994	0.94
+extended_0.35	l2	t2	40	1	10.0	independent_null	0.05	1200	799	59	0.0492	0.0383	0.0629	0.8166	0.003	0.0275	0.4986	0.0512	0.5038	0.9513
+extended_0.35	l1	t2	40	1	10.0	independent_null	0.05	1200	799	74	0.0617	0.0494	0.0767	0.6412	0.0011	0.0242	0.5143	0.0375	0.53	0.9525
+extended_0.35	l1	lognormal	40	3	4.5	independent_null	0.05	1200	799	44	0.0367	0.0274	0.0489	0.7268	-0.0018	0.2258	0.5027	0.0587	0.4925	0.9563
