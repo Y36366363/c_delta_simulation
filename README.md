@@ -3,6 +3,25 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/19/2026
+
+- **Tail-factor comparison** — Added
+  `scripts/run_tail_factor_comparison.py` to test a finer Student-t tail
+  gradient across `l1/l2`, `n = 40, 80, 160`, `k = 1, 2, 3`, magnitudes
+  `4, 6, 8`, and matched versus independent-null settings.
+- **Tail-gradient results** — Added
+  `results/tail_df_factor_grid_20260719.tsv`,
+  `results/tail_df_background_noise_20260719.tsv`, and
+  `results/tail_df_null_validation_20260719.tsv`; matched power decreases
+  gradually as tails become heavier, while higher-replication null validation
+  remains close to alpha `.05`.
+- **Visual summaries** — Added tail-gradient power, null-validation, and
+  background-divergence-noise plots in `figures/`.
+- **Interpretation summary** — Added
+  `docs/tail_factor_comparison_summary.md`; the main interpretation is that
+  heavy-tailed backgrounds reduce power by increasing background divergence
+  noise, not by clearly inflating type-I error.
+
 ## Updates 07/18/2026
 
 - **Follow-up stable diagnostics** — Added
