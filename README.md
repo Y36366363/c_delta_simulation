@@ -5,6 +5,18 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 07/19/2026
 
+- **Tail cross-validation** — Added
+  `scripts/run_tail_cross_validation.py` with higher-replication checks for the
+  central tail-power slice, independent-null tail-size validation, and a
+  fixed-`k` versus fixed-proportion sample-size comparison.
+- **Confidence summary** — Added
+  `docs/tail_cross_validation_confidence_summary.md`; the heavy-tail power
+  decline is now stable under independent seeds, while null rejection rates
+  remain close to alpha `.05`.
+- **Cross-validation results** — Added
+  `results/tail_power_cross_validation_20260719.tsv`,
+  `results/tail_null_cross_validation_20260719.tsv`, and
+  `results/fixed_k_vs_fixed_proportion_20260719.tsv`.
 - **Tail-factor comparison** — Added
   `scripts/run_tail_factor_comparison.py` to test a finer Student-t tail
   gradient across `l1/l2`, `n = 40, 80, 160`, `k = 1, 2, 3`, magnitudes
