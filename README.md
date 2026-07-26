@@ -3,6 +3,22 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/26/2026
+
+- **Signal-to-noise diagnostics** — Added
+  `scripts/run_signal_noise_diagnostics.py` to quantify the proposed mechanism
+  behind heavy-tail power loss using matched subgroup prominence and
+  background-only divergence noise.
+- **Signal/noise results** — Added
+  `results/signal_noise_diagnostics_20260726.tsv` and
+  `results/signal_noise_metric_correlations_20260726.tsv`; signal-over-noise
+  metrics correlate strongly with matched rejection rates, while background
+  max-to-mean divergence is negatively associated with power.
+- **Mechanism summary** — Added
+  `docs/signal_noise_diagnostics_summary.md`; the current interpretation is
+  that heavy-tailed backgrounds reduce power by lowering the matched
+  subgroup's signal-to-background-divergence-noise contrast.
+
 ## Updates 07/19/2026
 
 - **Tail cross-validation** — Added
