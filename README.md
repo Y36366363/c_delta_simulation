@@ -5,6 +5,20 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 07/26/2026
 
+- **Broad signal/noise validation** — Added
+  `scripts/run_signal_noise_broad_validation.py` to test whether signal/noise
+  diagnostics explain power across 486 matched settings covering `l1/l2`,
+  tail settings, `n = 40, 80, 160`, `k = 1, 2, 3`, and magnitudes `4, 6, 8`.
+- **Broad validation results** — Added
+  `results/signal_noise_broad_validation_20260726.tsv` and
+  `results/signal_noise_broad_correlations_20260726.tsv`; the strongest metric,
+  `signal_over_topk_noise`, has overall Spearman correlation `0.9399` with
+  rejection rate and remains strongly positive across kinds, sample sizes,
+  subgroup sizes, and magnitudes.
+- **Broad validation summary** — Added
+  `docs/signal_noise_broad_validation_summary.md`; background divergence noise
+  is consistently negatively associated with power, supporting the mechanism
+  that heavy tails reduce signal-to-background-divergence-noise contrast.
 - **Signal-to-noise diagnostics** — Added
   `scripts/run_signal_noise_diagnostics.py` to quantify the proposed mechanism
   behind heavy-tail power loss using matched subgroup prominence and
