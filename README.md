@@ -3,6 +3,23 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/29/2026
+
+- **Fixed-k versus fixed-proportion tail validation** — Added
+  `scripts/run_fixed_fraction_tail_validation.py` to compare fixed `k = 2`
+  with fixed `k / n = .05` across `l1/l2`, seven tail settings, and
+  `n = 40, 80, 160`.
+- **Sample-size design results** — Added
+  `results/fixed_fraction_tail_validation_20260729.tsv` and
+  `results/fixed_fraction_tail_contrasts_20260729.tsv`; fixed-`k` power
+  declines as the subgroup becomes sparser under heavy tails, while
+  fixed-proportion power is generally preserved or increases.
+- **Interpretation update** — Added
+  `docs/fixed_fraction_tail_validation_summary.md` and updated the research
+  tracker; larger `n` is not inherently harmful, and future sample-size
+  studies should distinguish fixed subgroup size from fixed subgroup
+  proportion.
+
 ## Updates 07/26/2026
 
 - **Broad signal/noise validation** — Added
