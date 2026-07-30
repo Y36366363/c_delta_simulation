@@ -127,6 +127,49 @@ def _raw_from_divergences(dx: Array, dy: Array) -> float:
     return float(np.mean(dx * dy) / (mean_dx * mean_dy))
 
 
+def c_delta_identity_from_divergences(dx: Array, dy: Array) -> dict[str, float]:
+    """Return the algebraic decomposition of corrected c_delta.
+
+    With population-standard-deviation conventions,
+
+        c_delta = 1 + corr(D_x, D_y) * CV(D_x) * CV(D_y).
+
+    The same positive CV product is fixed across permutations of ``dy``.
+    """
+    dx_arr = _as_1d(dx, "dx")
+    dy_arr = _as_1d(dy, "dy")
+    if dx_arr.size != dy_arr.size:
+        raise ValueError("dx and dy must have the same length")
+
+    mean_dx = float(dx_arr.mean())
+    mean_dy = float(dy_arr.mean())
+    sd_dx = float(dx_arr.std(ddof=0))
+    sd_dy = float(dy_arr.std(ddof=0))
+    if mean_dx == 0.0 or mean_dy == 0.0 or sd_dx == 0.0 or sd_dy == 0.0:
+        message = "undetermined due to data limitations"
+        return {
+            "c_delta": np.nan,
+            "correlation": np.nan,
+            "cv_product": np.nan,
+            "identity_value": np.nan,
+            "absolute_error": np.nan,
+            "status": message,
+        }
+
+    raw = _raw_from_divergences(dx_arr, dy_arr)
+    correlation = float(np.corrcoef(dx_arr, dy_arr)[0, 1])
+    cv_product = (sd_dx / mean_dx) * (sd_dy / mean_dy)
+    identity_value = 1.0 + correlation * cv_product
+    return {
+        "c_delta": raw,
+        "correlation": correlation,
+        "cv_product": cv_product,
+        "identity_value": identity_value,
+        "absolute_error": abs(raw - identity_value),
+        "status": "ok",
+    }
+
+
 def permutation_statistics_from_divergences(
     dx: Array,
     dy: Array,

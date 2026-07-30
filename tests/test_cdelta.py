@@ -9,6 +9,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from cdelta import (
     c_delta,
+    c_delta_identity_from_divergences,
     calibrated_subgroup_simulation,
     divergence_vector,
     independent_null_size_simulation,
@@ -138,6 +139,30 @@ class CDeltaTests(unittest.TestCase):
         x, y = make_scenario("aligned_normal", 6, seed=111)
         check = permutation_mean_check(x, y, exact=True)
         self.assertAlmostEqual(check["mean_permuted_raw"], 1.0, places=6)
+
+    def test_c_delta_correlation_identity(self):
+        x, y = make_scenario("aligned_normal", 30, seed=121)
+        result = c_delta(x, y)
+        identity = c_delta_identity_from_divergences(result.dx, result.dy)
+        self.assertEqual(identity["status"], "ok")
+        self.assertAlmostEqual(
+            identity["c_delta"], identity["identity_value"], places=12
+        )
+
+    def test_c_delta_and_divergence_correlation_rank_permutations_identically(self):
+        x, y = make_scenario("aligned_normal", 18, seed=122)
+        result = c_delta(x, y)
+        rng = np.random.default_rng(123)
+        c_values = []
+        r_values = []
+        for _ in range(99):
+            permuted_dy = rng.permutation(result.dy)
+            identity = c_delta_identity_from_divergences(result.dx, permuted_dy)
+            c_values.append(identity["c_delta"])
+            r_values.append(identity["correlation"])
+        self.assertTrue(
+            np.array_equal(np.argsort(c_values), np.argsort(r_values))
+        )
 
     def test_corrected_raw_is_old_raw_divided_by_n(self):
         x, y = make_scenario("aligned_normal", 20, seed=118)

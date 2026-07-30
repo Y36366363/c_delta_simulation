@@ -64,6 +64,18 @@ The corrected statement is:
 Conditional on D_x and D_y, the mean raw c_delta over all permutations is 1.
 ```
 
+The corrected statistic also has the exact decomposition
+
+```text
+c_delta = 1 + corr(D_x, D_y) CV(D_x) CV(D_y),
+```
+
+where the covariance, standard deviations, and coefficients of variation use
+consistent population conventions. During permutation of `D_y`, the CV
+product remains fixed and positive. Therefore corrected `c_delta` and the
+Pearson correlation of the divergence vectors rank all permutations
+identically and give the same one-sided permutation p-value.
+
 Older result files generated before this revision should be read as using the
 old raw scale. Their raw values should be divided by `n` for the corrected raw
 scale.

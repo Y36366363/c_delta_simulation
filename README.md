@@ -3,6 +3,23 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/30/2026
+
+- **Algebraic identity validation** — Added the exact decomposition
+  `c_delta = 1 + corr(D_x, D_y) CV(D_x) CV(D_y)` and tests confirming that
+  corrected `c_delta` and divergence-vector Pearson correlation rank
+  permutations identically.
+- **Teacher-feedback scale checks** — Added
+  `scripts/run_teacher_feedback_validation.py` to compare the earlier common
+  scale-parameter tail design with common-MAD and common-variance designs.
+- **Distribution-level results** — Retained 12,000 matched and
+  independent-null statistic pairs and added separation, power, and identity
+  summaries in `results/teacher_feedback_*_20260730.tsv`.
+- **Interpretation summary** — Added
+  `docs/teacher_feedback_validation_summary.md`; common-MAD scaling attenuates
+  but does not remove heavy-tail power loss, while matched-null separation
+  narrows as tails become heavier.
+
 ## Updates 07/29/2026
 
 - **Fixed-k versus fixed-proportion tail validation** — Added
