@@ -3,8 +3,18 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Key Findings Index
+
+The cumulative record of mathematical identities, stable simulation findings,
+representative numerical results, reporting cautions, and open questions is
+maintained in `docs/key_findings.md`. Update this file after each material
+simulation or theoretical revision.
+
 ## Updates 07/30/2026
 
+- **Cumulative findings record** — Added `docs/key_findings.md` as the central
+  retrieval document for stable conclusions, representative values, reporting
+  rules, open questions, and the reverse-chronological research log.
 - **Direct background-masking diagnostics** — Added
   `scripts/run_background_masking_diagnostics.py` to locate large background
   divergence scores, measure their cross-vector index overlap, and compare
