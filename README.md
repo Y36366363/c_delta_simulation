@@ -5,6 +5,20 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 07/30/2026
 
+- **Direct background-masking diagnostics** — Added
+  `scripts/run_background_masking_diagnostics.py` to locate large background
+  divergence scores, measure their cross-vector index overlap, and compare
+  planted paired products with background and random-pairing products.
+- **Masking results** — Added
+  `results/background_masking_diagnostics_20260730.tsv` and
+  `results/background_masking_summary_20260730.tsv`; heavy-tail background
+  extremes usually occur at unmatched indices, and a background-product
+  masking event is substantially more common when the permutation test does
+  not reject.
+- **Mechanism summary** — Added
+  `docs/background_masking_diagnostics_summary.md`; common-MAD scaling restores
+  part of the planted product advantage, but unmatched background leverage
+  remains under the heaviest tails.
 - **Algebraic identity validation** — Added the exact decomposition
   `c_delta = 1 + corr(D_x, D_y) CV(D_x) CV(D_y)` and tests confirming that
   corrected `c_delta` and divergence-vector Pearson correlation rank

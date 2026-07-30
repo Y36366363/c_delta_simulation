@@ -26,9 +26,20 @@ from cdelta import (
     repeated_outlier_simulation,
     variant_comparison_simulation,
 )
+from scripts.run_background_masking_diagnostics import masking_metrics
 
 
 class CDeltaTests(unittest.TestCase):
+    def test_background_masking_metrics_detect_unmatched_maximum(self):
+        dx = np.array([10.0, 1.0, 1.0, 4.0, 4.0])
+        dy = np.array([1.0, 9.0, 1.0, 4.0, 4.0])
+        metrics = masking_metrics(dx, dy, k=2)
+        self.assertEqual(metrics["both_max_are_background"], 1.0)
+        self.assertEqual(metrics["background_topk_index_overlap"], 0.5)
+        self.assertEqual(
+            metrics["background_max_product_exceeds_planted_mean_product"], 0.0
+        )
+
     def test_divergence_vector_length(self):
         dx = divergence_vector([1.0, 2.0, 4.0, 8.0])
         self.assertEqual(dx.shape, (4,))
