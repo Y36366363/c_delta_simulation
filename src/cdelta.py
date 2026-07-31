@@ -220,8 +220,16 @@ def permutation_test(
     n_perm: int = 999,
     seed: int | None = None,
     kind: str = "l2",
-) -> dict[str, float]:
-    """Permutation test for paired divergence-structure signal."""
+    alternative: str = "greater",
+) -> dict[str, float | str]:
+    """Permutation test for paired divergence-salience alignment.
+
+    ``greater`` tests positive salience alignment, ``less`` tests negative
+    alignment, and ``two-sided`` tests either direction around the exact
+    permutation anchor of 1. The default preserves the original behavior.
+    """
+    if alternative not in {"greater", "less", "two-sided"}:
+        raise ValueError("alternative must be 'greater', 'less', or 'two-sided'")
     rng = np.random.default_rng(seed)
     x_arr = _as_1d(x, "x")
     y_arr = _as_1d(y, "y")
@@ -235,6 +243,7 @@ def permutation_test(
         return {
             "observed": np.nan,
             "p_value": np.nan,
+            "alternative": alternative,
             "status": "undetermined due to data limitations",
         }
 
@@ -242,10 +251,20 @@ def permutation_test(
 
     for _ in range(n_perm):
         stat = _raw_from_divergences(dx, rng.permutation(dy))
-        exceed += stat >= observed
+        if alternative == "greater":
+            exceed += stat >= observed
+        elif alternative == "less":
+            exceed += stat <= observed
+        else:
+            exceed += abs(stat - 1.0) >= abs(observed - 1.0)
 
     p_value = (exceed + 1) / (n_perm + 1)
-    return {"observed": observed, "p_value": float(p_value), "status": "ok"}
+    return {
+        "observed": observed,
+        "p_value": float(p_value),
+        "alternative": alternative,
+        "status": "ok",
+    }
 
 
 def permutation_mean_check(

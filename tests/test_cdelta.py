@@ -28,6 +28,7 @@ from cdelta import (
     variant_comparison_simulation,
 )
 from scripts.run_background_masking_diagnostics import masking_metrics
+from scripts.run_paired_salience_validation import make_salience_scenario
 
 
 class CDeltaTests(unittest.TestCase):
@@ -80,6 +81,38 @@ class CDeltaTests(unittest.TestCase):
         x, y = make_scenario("aligned_normal", 45, seed=22)
         result = permutation_test(x, y, n_perm=99, seed=33)
         self.assertLess(result["p_value"], 0.10)
+
+    def test_permutation_alternatives_detect_expected_salience_direction(self):
+        x, y = make_salience_scenario("diffuse_reverse", n=80, seed=20260731)
+        greater = permutation_test(
+            x, y, n_perm=199, seed=41, alternative="greater"
+        )
+        less = permutation_test(x, y, n_perm=199, seed=41, alternative="less")
+        two_sided = permutation_test(
+            x, y, n_perm=199, seed=41, alternative="two-sided"
+        )
+        self.assertGreater(greater["p_value"], 0.50)
+        self.assertLess(less["p_value"], 0.05)
+        self.assertLess(two_sided["p_value"], 0.05)
+
+    def test_permutation_test_rejects_unknown_alternative(self):
+        x, y = make_scenario("aligned_normal", 20, seed=42)
+        with self.assertRaises(ValueError):
+            permutation_test(x, y, alternative="unknown")
+
+    def test_row_aggregation_can_lose_pairwise_geometry(self):
+        magnitudes = np.array([1.0, 2.0, 3.0, 4.0, 5.0, 5.0])
+        x = magnitudes * np.array([-1.0, -1.0, -1.0, -1.0, 1.0, 1.0])
+        y = magnitudes * np.array([1.0, -1.0, -1.0, 1.0, 1.0, -1.0])
+        np.testing.assert_allclose(
+            divergence_vector(x, kind="l2"),
+            divergence_vector(y, kind="l2"),
+            atol=1e-12,
+        )
+        upper = np.triu_indices(x.size, k=1)
+        x_distances = np.abs(x[:, None] - x[None, :])[upper]
+        y_distances = np.abs(y[:, None] - y[None, :])[upper]
+        self.assertLess(abs(np.corrcoef(x_distances, y_distances)[0, 1]), 0.10)
 
     def test_matched_extreme_has_stronger_divergence_alignment(self):
         rows = outlier_influence_summary(n=40, seed=44, n_perm=49)

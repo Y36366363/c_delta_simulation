@@ -20,6 +20,15 @@ correlation-of-divergency coefficient, `c_delta`.
 - **Literature positioning** — Distinguished the current row-summary target
   from distance correlation, HSIC, energy distance, MMD, and Mantel-type
   full-distance-matrix correlation.
+- **Exact information-loss example** — Added a construction with identical L2
+  divergence vectors (`r = 1`) but almost unrelated full distance matrices
+  (`r = -0.0402`), proving that row aggregation is many-to-one.
+- **Directional alternatives** — Extended `permutation_test()` with
+  `greater`, `less`, and `two-sided` alternatives and retained `greater` as the
+  default. Focused null rejection rates remained between `0.0325` and `0.0475`.
+- **Alternative validation** — Added
+  `scripts/run_row_aggregation_and_alternatives.py`, two result tables, and
+  `docs/row_aggregation_and_alternatives_summary.md`.
 
 ## Key Findings Index
 

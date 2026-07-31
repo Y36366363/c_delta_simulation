@@ -355,6 +355,38 @@ salience profile.
 
 Source: `docs/paired_salience_reframing.md`.
 
+### 14. Row Aggregation Does Not Identify Full Internal Geometry
+
+**Evidence: Exact mathematical counterexample**
+
+Two zero-mean vectors were constructed with identical corresponding absolute
+deviations but different signs. Their L2 divergence vectors are exactly equal:
+
+- maximum divergence difference: `0`;
+- divergence correlation: `1.0000`;
+- full distance-matrix correlation: `-0.04018`.
+
+Thus, perfect paired salience alignment does not imply aligned full pairwise
+geometry. Row aggregation retains how peripheral each observation is but loses
+which observations it is specifically near to or far from.
+
+Source: `docs/row_aggregation_and_alternatives_summary.md`.
+
+### 15. Directional and Two-Sided Alternatives Are Calibrated
+
+**Evidence: Focused simulation evidence**
+
+Across L1/L2 and 400 null repetitions, greater-, less-, and two-sided rejection
+rates ranged from `0.0325` to `0.0475`. Under positive L2 diffuse alignment,
+greater and two-sided power were `0.9725` and `0.9550`; under negative L2
+alignment, less and two-sided power were `0.9800` and `0.9650`.
+
+The greater alternative remains the natural primary analysis for common
+standouts. Less and two-sided alternatives are coherent extensions when
+negative salience alignment has a scientific interpretation.
+
+Source: `docs/row_aggregation_and_alternatives_summary.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -406,6 +438,8 @@ Source: `docs/paired_salience_reframing.md`.
   correlation.
 - Positioned the method relative to distance correlation, HSIC, energy
   distance, MMD, and Mantel-type matrix correlation.
+- Constructed an exact same-salience, different-geometry counterexample.
+- Added and calibrated greater, less, and two-sided permutation alternatives.
 
 ### 2026-07-30
 
