@@ -71,6 +71,24 @@ def divergence_vector(values: Array | list[float], *, kind: str = "l2") -> Array
     raise ValueError("kind must be 'l2' or 'l1'")
 
 
+def l2_divergence_closed_form(values: Array | list[float]) -> Array:
+    """Return the exact one-dimensional L2 divergence in centered form.
+
+    If ``s2`` is the population variance, then
+
+        D_i^2 = n / (n - 1) * ((x_i - x_bar)^2 + s2).
+
+    Hence the L2 divergence ranking is exactly the ranking of absolute
+    deviations from the sample mean.
+    """
+    x = _as_1d(values, "values")
+    centered = x - float(x.mean())
+    population_variance = float(np.mean(centered**2))
+    return np.sqrt(
+        x.size / (x.size - 1) * (centered**2 + population_variance)
+    )
+
+
 def c_delta(
     x: Array | list[float],
     y: Array | list[float],

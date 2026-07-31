@@ -14,6 +14,7 @@ from cdelta import (
     divergence_vector,
     independent_null_size_simulation,
     large_scale_simulation,
+    l2_divergence_closed_form,
     make_scenario,
     multi_extreme_power_simulation,
     near_zero_divergence_simulation,
@@ -30,6 +31,18 @@ from scripts.run_background_masking_diagnostics import masking_metrics
 
 
 class CDeltaTests(unittest.TestCase):
+    def test_l2_divergence_closed_form(self):
+        x = np.array([-3.0, -1.0, 0.5, 2.0, 7.0])
+        direct = divergence_vector(x, kind="l2")
+        closed = l2_divergence_closed_form(x)
+        np.testing.assert_allclose(direct, closed, rtol=0.0, atol=1e-12)
+
+    def test_l2_divergence_ranks_absolute_centered_values(self):
+        x = np.array([-4.0, -1.0, 0.0, 2.0, 6.0, 8.0])
+        divergence_order = np.argsort(divergence_vector(x, kind="l2"))
+        centered_order = np.argsort(np.abs(x - x.mean()))
+        np.testing.assert_array_equal(divergence_order, centered_order)
+
     def test_background_masking_metrics_detect_unmatched_maximum(self):
         dx = np.array([10.0, 1.0, 1.0, 4.0, 4.0])
         dy = np.array([1.0, 9.0, 1.0, 4.0, 4.0])

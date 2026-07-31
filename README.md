@@ -3,6 +3,24 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 07/31/2026
+
+- **Paired-salience reframing** — Added the exact one-dimensional L2 identity
+  showing that divergence ranks observations by absolute deviation from their
+  sample mean, so the current statistic aligns observation-level salience
+  profiles rather than general full internal structures.
+- **Salience validation** — Added
+  `scripts/run_paired_salience_validation.py` and
+  `results/paired_salience_*_20260731.tsv` to compare diffuse alignment,
+  sparse alignment, partial alignment, reverse alignment, and calibrated null
+  scenarios under L1 and L2.
+- **Reframing summary** — Added `docs/paired_salience_reframing.md`; diffuse
+  salience alignment is detectable even without strong outliers, while full
+  pairwise-distance correlation can remain near zero.
+- **Literature positioning** — Distinguished the current row-summary target
+  from distance correlation, HSIC, energy distance, MMD, and Mantel-type
+  full-distance-matrix correlation.
+
 ## Key Findings Index
 
 The cumulative record of mathematical identities, stable simulation findings,

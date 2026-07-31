@@ -1,6 +1,6 @@
 # c_delta Project: Key Findings
 
-Last updated: 2026-07-30
+Last updated: 2026-07-31
 
 This is the central, cumulative record of the project's most important
 findings. It is intended for quick retrieval when preparing emails, follow-up
@@ -28,13 +28,13 @@ notes, presentations, and the final report.
 
 ## Executive Summary
 
-> `c_delta` measures the alignment of two internal divergence structures. After
-> the numerator correction, it is an affine rescaling of the Pearson
-> correlation between the divergence vectors for a fixed sample. Matched
-> subgroups create detectable co-divergence, while heavy-tailed backgrounds
-> weaken detection by generating large, usually unmatched background
-> divergence scores. Part of the heavy-tail power loss is caused by unequal
-> effective scale, but a residual loss remains after common-MAD scaling.
+> In its current one-dimensional form, `c_delta` measures positive alignment
+> between paired observation-level divergence salience profiles, not general
+> correlation of full internal structures. After the numerator correction, it
+> is an affine rescaling of the Pearson correlation between the divergence
+> vectors for a fixed sample. Alignment may be sparse or distributed.
+> Heavy-tailed backgrounds weaken detection by generating large, usually
+> unmatched background divergence scores.
 
 ## Main Findings
 
@@ -89,8 +89,9 @@ Source: `docs/teacher_feedback_validation_summary.md`.
 
 **Evidence: Strong simulation evidence**
 
-`c_delta` detects co-occurring internal divergence structure rather than
-ordinary raw paired association.
+`c_delta` detects positive alignment of paired observation-level divergence
+salience rather than ordinary raw association or general full-matrix internal
+structure.
 
 - A matched extreme or subgroup increases divergence alignment and rejection.
 - A deliberately mismatched subgroup does not produce the same behavior.
@@ -100,8 +101,21 @@ ordinary raw paired association.
 
 Recommended wording:
 
-> The statistic detects whether large and small internal divergence scores tend
-> to occur at corresponding observation indices across the two samples.
+> The statistic tests whether observations that are relatively peripheral or
+> central in one dataset tend to be similarly peripheral or central in the
+> other.
+
+For one-dimensional L2 divergence,
+
+```text
+D_i^2 = n / (n - 1) * ((x_i - x_bar)^2 + s_x^2).
+```
+
+The divergence ranking is therefore exactly the absolute-deviation-from-mean
+ranking. The full distance matrix has been compressed to an observation-level
+salience vector.
+
+Source: `docs/paired_salience_reframing.md`.
 
 ### 4. Single Extreme and Finite-Sample Resolution
 
@@ -315,6 +329,32 @@ Recommended wording:
 
 Source: `docs/fixed_fraction_tail_validation_summary.md`.
 
+### 13. Salience Alignment Can Be Distributed, Not Only Sparse
+
+**Evidence: Mathematical identity and strong focused simulation evidence**
+
+In a diffuse-aligned design with no strong outliers:
+
+- maximum/median absolute deviation: about `1.30`;
+- mean raw Pearson: approximately `0`;
+- mean full distance-matrix correlation: approximately `0.01`;
+- L2 divergence correlation: `0.6158`;
+- L2 rejection rate: `0.976`;
+- L1 divergence correlation: `0.4042`;
+- L1 rejection rate: `0.800`.
+
+Thus, "the same observations stand out" should be understood as continuous
+paired salience, not only a shared extreme subgroup.
+
+When only two moderately high observations are aligned and the remainder of
+the profile is shuffled, power is only `0.186` for L2 and `0.220` for L1.
+When two much stronger magnitude-4 observations are aligned, power is `1.000`.
+
+The test responds to the strength and distribution of alignment across the
+salience profile.
+
+Source: `docs/paired_salience_reframing.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -356,6 +396,16 @@ Source: `docs/fixed_fraction_tail_validation_summary.md`.
    while preserving the structural interpretation.
 
 ## Dated Update Log
+
+### 2026-07-31
+
+- Derived the exact one-dimensional L2 salience formula.
+- Reframed the estimand as paired observation-level divergence salience.
+- Validated distributed, sparse, null, and reverse salience alternatives.
+- Compared the compressed salience target with full distance-matrix
+  correlation.
+- Positioned the method relative to distance correlation, HSIC, energy
+  distance, MMD, and Mantel-type matrix correlation.
 
 ### 2026-07-30
 

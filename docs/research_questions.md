@@ -17,11 +17,14 @@ feedback and separates mathematical claims from empirical checks.
 | Do unmatched background extremes mask the planted subgroup? | The maximum-to-mean ratio does not show where extremes occur or whether they interfere with detection. | Direct diagnostics show that heavy-tail background extremes usually occur at different indices in `D_x` and `D_y`; paired-product masking is substantially more common among non-rejected runs. | Compare the global statistic with a pre-specified top-k or scan-style sparse-signal comparator. |
 | Does larger sample size create over-sensitivity? | Large samples may make weak structural signals detectable, but true over-sensitivity would show up as inflated independent-null rejection. | Higher-replication null checks returned close to `.05`. The fixed-`k` versus fixed-proportion tail validation shows that declining power with larger `n` is mainly sparse-signal dilution when `k / n` decreases, not an inherent large-sample problem. | Keep fixed `k` and fixed `k / n` separate in future sample-size reporting. |
 | What does magnitude `8` mean relative to background scale? | Magnitude should be interpreted relative to the background distribution, not as a free-standing number. | Current simulations use standardized or unit-scale backgrounds. | Add a table showing where magnitude `8` falls in each background's empirical quantiles. |
+| Is `c_delta` a general correlation of internal structures? | Row aggregation may discard most pairwise geometric information. | In one-dimensional L2, divergence ranking is exactly absolute-deviation ranking. Diffuse-salience simulations reject even when raw Pearson and full distance-matrix correlation are near zero. | Reframe the method as paired observation-level divergence salience and test information loss more directly. |
 
 ## Suggested Priority
 
-1. Calibrate alternatives across `k = 1, 2, 3` so that subgroup-size comparisons
-   are not confounded by signal strength.
-2. Add rank-based checks after the L1/L2 comparison.
-3. Extend overlap-layer diagnostics across magnitude and background.
-4. Add a short table translating fixed magnitudes into background quantiles.
+1. Reframe the estimand and manuscript around paired divergence salience.
+2. Compare upper-tail, lower-tail, and two-sided salience alternatives.
+3. Construct examples with similar row summaries but different full distance
+   matrices to quantify information loss.
+4. Compare with a full distance-matrix statistic under geometry-aligned and
+   salience-aligned alternatives.
+5. Add robust or rank-based sensitivity checks only after the estimand is fixed.
