@@ -20,13 +20,14 @@ feedback and separates mathematical claims from empirical checks.
 | Is `c_delta` a general correlation of internal structures? | Row aggregation may discard most pairwise geometric information. | In one-dimensional L2, divergence ranking is exactly absolute-deviation ranking. An exact construction has identical divergence vectors but full distance-matrix correlation `-0.04018`. | Reframe the method as paired observation-level divergence salience; compare against full-matrix methods under deliberately different alternatives. |
 | Should the test be upper-tail, lower-tail, or two-sided? | The original implementation only tested positive alignment. | All three alternatives are null-calibrated in the focused simulation. Directional tests have higher power when direction is pre-specified. | Retain greater as the primary default; treat less/two-sided as scientifically motivated extensions. |
 | Can the paired-standout interpretation be expressed theoretically? | A verbal description alone does not identify how overlap enters the signal. | For equal-size binary standout sets, `r = (n m - k^2) / (k (n-k))`; continuous simulations follow this ordering but are attenuated by background salience. | Decide whether to present the binary model as an explanatory limiting case in the revision. |
+| Does chance overlap inflate rejection when both datasets contain strong standouts? | Deliberately disjoint sets are not a proper random-set null. | With independently selected size-4 standout sets, overlap follows the exact hypergeometric law and rejection remains `.0377-.0493` across L1/L2 and normal/`t3`/`t2`. | Explain conditional overlap signal separately from unconditional null calibration. |
 
 ## Suggested Priority
 
-1. Reframe the estimand and manuscript around paired divergence salience.
-2. Compare upper-tail, lower-tail, and two-sided salience alternatives.
-3. Construct examples with similar row summaries but different full distance
-   matrices to quantify information loss.
-4. Compare with a full distance-matrix statistic under geometry-aligned and
-   salience-aligned alternatives.
+1. Use the meeting to confirm the paired divergence-salience estimand and the
+   scientific meaning of observation pairing.
+2. Decide whether the binary-overlap model belongs in the revised manuscript.
+3. Decide whether negative salience alignment is scientifically meaningful.
+4. If general internal structure remains an intended claim, compare with a
+   full-distance-matrix statistic under deliberately separated alternatives.
 5. Add robust or rank-based sensitivity checks only after the estimand is fixed.

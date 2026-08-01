@@ -18,6 +18,15 @@ correlation-of-divergency coefficient, `c_delta`.
   compared it with continuous divergence across 24,000 additional datasets.
 - **Meeting preparation** — Added `docs/meeting_discussion_20260803.md` with
   concise findings, qualifications, and questions for Professor Hoorn.
+- **High-replication overlap cross-validation** — Repeated the magnitude-8
+  overlap gradient with 1,000 repetitions per condition; all L1/L2 and
+  normal/`t3`/`t2` curves remained monotone.
+- **Random-set null** — Added 18,000 simulations in which both datasets contain
+  four strong standouts with independently selected indices; rejection stayed
+  between `.0377` and `.0493` while observed overlap followed its exact
+  hypergeometric distribution.
+- **Next-step roadmap** — Added `docs/next_steps_before_and_after_meeting.md`
+  and implemented the exact chance-overlap PMF with unit tests.
 
 ## Updates 07/31/2026
 

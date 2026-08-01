@@ -1,0 +1,7 @@
+kind	n	background	k	magnitude_mad	repetitions	n_perm	expected_overlap	mean_observed_overlap	mean_divergence_correlation	rejection_rate	wilson_low	wilson_high
+l2	80	normal	4	8.0	3000	199	0.2	0.2027	-0.0002	0.046	0.0391	0.0541
+l2	80	t3	4	8.0	3000	199	0.2	0.2103	0.0036	0.0453	0.0385	0.0534
+l2	80	t2	4	8.0	3000	199	0.2	0.2063	-0.0016	0.0377	0.0314	0.0451
+l1	80	normal	4	8.0	3000	199	0.2	0.1963	-0.0004	0.0463	0.0394	0.0545
+l1	80	t3	4	8.0	3000	199	0.2	0.208	0.0009	0.0493	0.0421	0.0577
+l1	80	t2	4	8.0	3000	199	0.2	0.203	-0.0003	0.0437	0.0369	0.0516

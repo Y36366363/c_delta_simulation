@@ -426,6 +426,28 @@ tails attenuate it through background salience noise.
 
 Source: `docs/binary_overlap_theory_bridge.md`.
 
+### 18. Random-Set Standout Null Remains Calibrated
+
+**Evidence: Strong simulation evidence and exact finite-set probability**
+
+When both datasets contain four magnitude-8 standouts but their index sets are
+selected independently, overlap follows
+
+```text
+P(M=m) = choose(k,m) choose(n-k,k-m) / choose(n,k),
+E(M) = k^2 / n.
+```
+
+Across 18,000 random-set-null datasets, mean observed overlap was close to the
+theoretical `0.2` and unconditional rejection rates ranged from `.0377` to
+`.0493`. Conditional rejection rises in rare higher-overlap layers, but their
+hypergeometric frequency preserves unconditional calibration.
+
+This distinguishes a proper random-set null from a deliberately disjoint,
+conservative negative control.
+
+Source: `docs/high_rep_overlap_cross_validation_summary.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -477,6 +499,12 @@ Source: `docs/binary_overlap_theory_bridge.md`.
 - Derived the binary-overlap correlation identity and validated its connection
   to continuous L1/L2 divergence in 24,000 datasets.
 - Prepared a meeting-oriented discussion note.
+- Cross-validated the overlap gradient with 30,000 independent high-replication
+  datasets.
+- Added an 18,000-dataset random-set null and verified exact hypergeometric
+  chance-overlap behavior.
+- Implemented and unit-tested the exact binary overlap PMF.
+- Added a prioritized before/after-meeting roadmap.
 
 ### 2026-07-31
 

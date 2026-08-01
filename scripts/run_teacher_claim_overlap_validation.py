@@ -2,13 +2,14 @@ from __future__ import annotations
 
 import csv
 import sys
+from math import comb
 from pathlib import Path
 
 import numpy as np
 
-REPO = Path("/Users/jialiangyao/Documents/Codex/2026-07-06/yi/outputs/c_delta_simulation")
-sys.path.insert(0, str(REPO))
-sys.path.insert(0, str(REPO / "src"))
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from cdelta import c_delta  # noqa: E402
 from scripts.run_paired_salience_validation import distance_matrix_correlation  # noqa: E402
@@ -212,6 +213,15 @@ def run_geometry_loss():
 def binary_overlap_correlation(n, k, overlap):
     """Pearson correlation of two binary salience labels with equal k."""
     return (n * overlap - k * k) / (k * (n - k))
+
+
+def binary_overlap_pmf(n, k, overlap):
+    """Exact chance-overlap probability for two independent size-k sets."""
+    if not 0 <= overlap <= k <= n:
+        raise ValueError("require 0 <= overlap <= k <= n")
+    if k - overlap > n - k:
+        return 0.0
+    return comb(k, overlap) * comb(n - k, k - overlap) / comb(n, k)
 
 
 def run_binary_overlap_bridge():

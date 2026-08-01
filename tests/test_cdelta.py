@@ -29,7 +29,10 @@ from cdelta import (
 )
 from scripts.run_background_masking_diagnostics import masking_metrics
 from scripts.run_paired_salience_validation import make_salience_scenario
-from scripts.run_teacher_claim_overlap_validation import binary_overlap_correlation
+from scripts.run_teacher_claim_overlap_validation import (
+    binary_overlap_correlation,
+    binary_overlap_pmf,
+)
 
 
 class CDeltaTests(unittest.TestCase):
@@ -39,6 +42,18 @@ class CDeltaTests(unittest.TestCase):
 
     def test_binary_overlap_chance_anchor_is_zero(self):
         self.assertAlmostEqual(binary_overlap_correlation(100, 10, 1), 0.0)
+
+    def test_binary_overlap_pmf_is_normalized_and_has_expected_mean(self):
+        probabilities = [binary_overlap_pmf(80, 4, m) for m in range(5)]
+        self.assertAlmostEqual(sum(probabilities), 1.0)
+        self.assertAlmostEqual(
+            sum(m * probability for m, probability in enumerate(probabilities)),
+            4 * 4 / 80,
+        )
+
+    def test_binary_overlap_pmf_rejects_invalid_inputs(self):
+        with self.assertRaises(ValueError):
+            binary_overlap_pmf(10, 4, 5)
 
     def test_l2_divergence_closed_form(self):
         x = np.array([-3.0, -1.0, 0.5, 2.0, 7.0])
