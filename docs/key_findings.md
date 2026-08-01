@@ -1,6 +1,6 @@
 # c_delta Project: Key Findings
 
-Last updated: 2026-07-31
+Last updated: 2026-08-01
 
 This is the central, cumulative record of the project's most important
 findings. It is intended for quick retrieval when preparing emails, follow-up
@@ -387,6 +387,45 @@ negative salience alignment has a scientific interpretation.
 
 Source: `docs/row_aggregation_and_alternatives_summary.md`.
 
+### 16. Paired-Index Overlap Is the Central Sparse-Signal Dimension
+
+**Evidence: Strong simulation evidence**
+
+Across 27,000 datasets, both samples contained the same number and magnitude
+of planted standouts, while only their index overlap changed. Average rejection
+increased with overlap:
+
+```text
+overlap       0      .25     .50     .75     1.00
+L2 power    .021     .166    .518    .784    .814
+L1 power    .016     .154    .528    .801    .841
+```
+
+Having standouts in both datasets is therefore insufficient. Detection is
+driven by whether they occur at corresponding paired indices. Heavy tails
+attenuate the overlap signal but do not change its direction.
+
+Source: `docs/large_scale_teacher_claim_validation_summary.md`.
+
+### 17. Binary Overlap Gives an Interpretable Limiting Model
+
+**Evidence: Mathematical identity and strong simulation evidence**
+
+If each binary salience vector contains `k` standouts among `n` observations
+and their overlap is `m`, then
+
+```text
+r_binary = (n m - k^2) / (k (n - k)).
+```
+
+Full overlap gives one, expected chance overlap gives zero, and disjoint sets
+give `-k / (n-k)`. Across 24,000 continuous-divergence simulations, the
+binary-theory/observed correlation was `.7065` for L2 and `.7213` for L1.
+Magnitude moves the continuous statistic toward the binary ideal, while heavy
+tails attenuate it through background salience noise.
+
+Source: `docs/binary_overlap_theory_bridge.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -428,6 +467,16 @@ Source: `docs/row_aggregation_and_alternatives_summary.md`.
    while preserving the structural interpretation.
 
 ## Dated Update Log
+
+### 2026-08-01
+
+- Completed a 27,000-dataset paired-overlap factorial validation.
+- Confirmed that disjoint standouts rarely reject even when both datasets
+  contain equally strong planted extremes.
+- Cleared a preliminary L1-normal calibration flag with 5,000 repetitions.
+- Derived the binary-overlap correlation identity and validated its connection
+  to continuous L1/L2 divergence in 24,000 datasets.
+- Prepared a meeting-oriented discussion note.
 
 ### 2026-07-31
 

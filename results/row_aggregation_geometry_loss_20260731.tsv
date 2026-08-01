@@ -1,0 +1,4 @@
+n	repetitions	divergence_correlation	mean_distance_matrix_correlation	q025_distance_matrix_correlation	q50_distance_matrix_correlation	q975_distance_matrix_correlation
+40	1000	1.0	0.1983	0.057	0.183	0.4281
+80	1000	1.0	0.1795	0.0862	0.171	0.3237
+160	1000	1.0	0.1721	0.1053	0.1681	0.2618

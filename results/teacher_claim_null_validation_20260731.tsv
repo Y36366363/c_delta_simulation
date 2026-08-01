@@ -1,0 +1,7 @@
+kind	n	background	repetitions	n_perm	rejection_rate	wilson_low	wilson_high	mean_divergence_correlation
+l2	80	normal	1000	499	0.061	0.0478	0.0776	0.0024
+l2	80	t3	1000	499	0.049	0.0373	0.0642	-0.0005
+l2	80	t2	1000	499	0.05	0.0381	0.0653	-0.0031
+l1	80	normal	1000	499	0.071	0.0567	0.0886	0.0061
+l1	80	t3	1000	499	0.048	0.0364	0.0631	-0.0003
+l1	80	t2	1000	499	0.044	0.0329	0.0586	-0.0022

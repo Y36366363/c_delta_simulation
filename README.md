@@ -3,6 +3,22 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/01/2026
+
+- **Teacher-claim overlap validation** — Added a 27,000-dataset factorial
+  simulation holding standout number and magnitude fixed while varying only
+  paired-index overlap across L1/L2, three sample sizes, and three backgrounds.
+- **Overlap gradient** — Average rejection rose from about `.02` at disjoint
+  standouts to `.81-.84` at full overlap, directly supporting the paired-
+  standout interpretation.
+- **High-replication null follow-up** — A preliminary L1-normal flag disappeared
+  at 5,000 repetitions (`.0466`, Wilson interval `[.0411, .0528]`).
+- **Binary-overlap theory bridge** — Derived
+  `r = (n m - k^2) / (k (n - k))` for equal-size binary standout sets and
+  compared it with continuous divergence across 24,000 additional datasets.
+- **Meeting preparation** — Added `docs/meeting_discussion_20260803.md` with
+  concise findings, qualifications, and questions for Professor Hoorn.
+
 ## Updates 07/31/2026
 
 - **Paired-salience reframing** — Added the exact one-dimensional L2 identity
