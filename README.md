@@ -27,6 +27,12 @@ correlation-of-divergency coefficient, `c_delta`.
   hypergeometric distribution.
 - **Next-step roadmap** — Added `docs/next_steps_before_and_after_meeting.md`
   and implemented the exact chance-overlap PMF with unit tests.
+- **Independent accuracy audit** — Recomputed all meeting-result tables,
+  matched the fast and core permutation implementations in 120 checks, and
+  clarified that strict `p < .05` gives effective levels `.045`, `.0475`, and
+  `.048` for 199, 399, and 499 permutations.
+- **Audited meeting figures** — Added a reproducible figure builder using the
+  1,000-repetition overlap results and the exact random-set overlap reference.
 
 ## Updates 07/31/2026
 

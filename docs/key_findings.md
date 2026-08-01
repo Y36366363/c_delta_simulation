@@ -440,8 +440,10 @@ E(M) = k^2 / n.
 
 Across 18,000 random-set-null datasets, mean observed overlap was close to the
 theoretical `0.2` and unconditional rejection rates ranged from `.0377` to
-`.0493`. Conditional rejection rises in rare higher-overlap layers, but their
-hypergeometric frequency preserves unconditional calibration.
+`.0493`, consistent with the effective `.045` Monte Carlo level for 199
+permutations and strict `p < .05`. Conditional rejection rises in rare
+higher-overlap layers, but their hypergeometric frequency preserves
+unconditional calibration.
 
 This distinguishes a proper random-set null from a deliberately disjoint,
 conservative negative control.
@@ -505,6 +507,8 @@ Source: `docs/high_rep_overlap_cross_validation_summary.md`.
   chance-overlap behavior.
 - Implemented and unit-tested the exact binary overlap PMF.
 - Added a prioritized before/after-meeting roadmap.
+- Independently reproduced all meeting tables, verified fast/core permutation
+  equivalence, and documented finite Monte Carlo effective alpha levels.
 
 ### 2026-07-31
 

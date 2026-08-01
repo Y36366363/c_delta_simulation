@@ -87,8 +87,10 @@ Overall random-set-null rejection rates:
 | L2 | 0.0460 | 0.0453 | 0.0377 |
 | L1 | 0.0463 | 0.0493 | 0.0437 |
 
-All are close to the nominal level. Mean divergence correlations range only
-from `-0.0016` to `0.0036`.
+All are consistent with calibration. With 199 permutations, plus-one p-values,
+and strict `p < .05`, the finite Monte Carlo grid has an effective attainable
+level of `.045`; mean divergence correlations range only from `-0.0016` to
+`0.0036`.
 
 Conditional rejection rises with realized chance overlap. For example, under
 L2-normal it is `0.0004` when `M=0`, `0.1776` when `M=1`, and `1.000` among the

@@ -1,0 +1,22 @@
+{
+  "binary_and_hypergeometric": {
+    "formula_checks": 24,
+    "pmf_settings": 4
+  },
+  "intervals_and_reference": {
+    "effective_alpha_199": 0.045,
+    "effective_alpha_399": 0.0475,
+    "effective_alpha_499": 0.048,
+    "wilson_rows_checked": 6
+  },
+  "permutation_equivalence": {
+    "comparisons": 120,
+    "mismatches": 0
+  },
+  "reproducibility": {
+    "binary_rows": 120,
+    "forced_rows": 30,
+    "layer_rows": 18,
+    "random_null_rows": 6
+  }
+}

@@ -6,7 +6,9 @@ I reran the paired-overlap experiment with 1,000 repetitions per condition and
 independent seeds. The overlap-power gradient was monotone under L1 and L2 and
 under normal, t3, and t2 backgrounds. I also added a proper random-set null in
 which both datasets contain four strong standouts but their indices are chosen
-independently. Its rejection rates remained between `.0377` and `.0493`.
+independently. Its rejection rates remained between `.0377` and `.0493`,
+consistent with the effective `.045` level produced by 199 permutations and
+strict `p < .05`.
 
 ## Why this matters
 
