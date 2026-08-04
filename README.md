@@ -30,10 +30,26 @@ correlation-of-divergency coefficient, `c_delta`.
   `n=60`; Huber robust-reference preserved aligned and contaminated-aligned
   power (`1.000`), gave zero upper-tail rejection for inverted salience, and
   kept heavy-tail/skew null rejection near `.05`.
+- **Stage-2 structural theory** - Derived the population target, affine
+  invariance, exact permutation reference, and the distinction between robust
+  centre fitting and bounded final influence. Tested robust L2-like radial
+  floors to separate centre robustness from the old variance-floor geometry.
+- **High-replication validation** - Completed 864,000 datasets across four
+  sample sizes and nine scenarios with 999 permutations per method. Huber
+  radius null rejection stayed in `.0462-.0509`, preserved sparse matched
+  power, and improved t2 and bimodal power for moderate-to-large `n`.
+- **Independent-seed audit** - The 3,000- and 24,000-repetition runs differed
+  by only `.00323` on average across 180 matched rows and reproduced the same
+  main directional conclusions.
+- **Definition refinement** - L2-like radial floors added no consistent value;
+  retain the pure Huber radius as the primary candidate and cap `6` as a
+  separate masking-resistance sensitivity estimand.
 - **Documentation** - See `docs/robust_cdelta_redefinition_20260804.md` and
+  `docs/robust_definition_stage2_summary_20260804.md`,
   `results/robust_cdelta_grid_20260804.tsv`,
   `results/robust_cdelta_null_high_rep_20260804.tsv`, and
-  `results/robust_parameter_sensitivity_20260804.tsv`.
+  `results/robust_parameter_sensitivity_20260804.tsv`, plus
+  `results/robust_definition_highrep_validation_20260804.tsv`.
 
 ## Updates 08/01/2026
 

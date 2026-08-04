@@ -525,6 +525,35 @@ prospectively.
 
 Source: `docs/robust_cdelta_redefinition_20260804.md`.
 
+### 21. Stage-2 High-Replication Validation Supports the Pure Huber Radius
+
+**Evidence: 864,000 datasets and 4.32 billion permuted statistic evaluations**
+
+The stage-2 study compared original L2, pure Huber radius, two robust L2-like
+radial floors, and a Huber cap-6 sensitivity version across `n = 20, 40, 80,
+160`. Each of 36 conditions used 24,000 generated datasets and 999 common
+permutations per method.
+
+Across 12 clean or independently contaminated null conditions, Huber-radius
+rejection ranged from `.0462` to `.0509` with mean `.0485`. Sparse matched
+magnitude-8 power was essentially unchanged. At `n = 80`, Huber versus old L2
+rejection was `.7841` versus `.7003` under t2 matched signal and `.9071` versus
+`.6881` under shared bimodality. Old L2 remained stronger for the constructed
+small-sample diffuse alternative (`.7448` versus `.5992` at `n = 20`), but the
+difference was negligible by `n = 80`.
+
+The L2-like floors did not improve performance consistently, so the pure
+dimensionless radius `|z_i - T_z| / s_z` remains the simplest supported primary
+candidate. Cap 6 greatly improved unmatched-masking power but remains a
+separate bounded-influence sensitivity estimand.
+
+An independent 3,000-repetition seed check differed from the 24,000-repetition
+run by `.00323` on average across 180 matched rows (`.00299` across null rows)
+and reproduced the bimodal, moderate-to-large-sample t2, and cap-6 masking
+directions.
+
+Source: `docs/robust_definition_stage2_summary_20260804.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -585,6 +614,18 @@ Source: `docs/robust_cdelta_redefinition_20260804.md`.
 - Completed Huber, trimming, hard-cap, and soft-cap parameter sensitivity.
 - Promoted Huber robust-reference/all-score to the leading candidate, retaining
   a prospectively frozen or null-calibrated `6 x MAD` cap as sensitivity.
+
+### 2026-08-04 (stage-2 high-replication validation)
+
+- Formalised the population robust-salience functional and its invariance and
+  conditional-permutation properties.
+- Added a dedicated dimensionless Huber-reference profile implementation and
+  focused unit tests.
+- Tested whether retaining the old L2 variance-floor geometry improves the new
+  definition; it did not do so consistently.
+- Completed 24,000 repetitions in each of 36 scenario/sample-size conditions.
+- Retained pure Huber radius as the primary candidate and cap 6 as a separate
+  robustness sensitivity analysis.
 
 ### 2026-08-01
 

@@ -159,6 +159,63 @@ def center_salience_vector(
     return np.minimum(scores, threshold)
 
 
+def huber_reference_profile(
+    values: Array | list[float],
+    *,
+    huber_c: float = 1.345,
+    radial_floor: float = 0.0,
+    cap: float | None = None,
+    soft_cap: bool = False,
+) -> Array:
+    """Return a dimensionless Huber robust-reference salience profile.
+
+    The marginal reference location is fitted with a fixed MAD scale.  Every
+    observation is then scored, including observations that had little
+    influence on the fitted location.  ``radial_floor=0`` gives the primary
+    absolute-radius proposal.  Positive values give the regularised profile
+
+        sqrt(((x_i - T) / s)^2 + radial_floor^2),
+
+    which preserves the variance-floor geometry of the original one-
+    dimensional L2 divergence while replacing its non-robust mean and scale.
+    This is an exploratory structural comparator, not a new default.
+    """
+    x = _as_1d(values, "values")
+    if huber_c <= 0.0:
+        raise ValueError("huber_c must be positive")
+    if radial_floor < 0.0:
+        raise ValueError("radial_floor must be nonnegative")
+    if cap is not None and cap <= 0.0:
+        raise ValueError("cap must be positive")
+
+    median = float(np.median(x))
+    scale = 1.4826 * float(np.median(np.abs(x - median)))
+    if scale == 0.0:
+        scale = float(np.mean(np.abs(x - median)))
+    if scale == 0.0:
+        scale = float(np.std(x))
+    if scale == 0.0:
+        return np.zeros_like(x)
+
+    location = median
+    for _ in range(100):
+        residual = (x - location) / scale
+        weights = np.minimum(1.0, huber_c / np.maximum(np.abs(residual), 1e-15))
+        updated = float(np.sum(weights * x) / np.sum(weights))
+        if abs(updated - location) < 1e-10 * max(1.0, scale):
+            location = updated
+            break
+        location = updated
+
+    standardized_radius = np.abs(x - location) / scale
+    scores = np.sqrt(standardized_radius**2 + radial_floor**2)
+    if cap is None:
+        return scores
+    if soft_cap:
+        return cap * np.tanh(scores / cap)
+    return np.minimum(scores, cap)
+
+
 def h_star_profile(
     values: Array | list[float],
     *,

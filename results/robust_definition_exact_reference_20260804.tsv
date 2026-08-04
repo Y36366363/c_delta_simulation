@@ -1,0 +1,6 @@
+method	n	permutations	permutation_mean	absolute_error_from_one
+original_l2	6	720	0.9999999999999999	1.1102230246251565e-16
+huber_radius	6	720	0.9999999999999999	1.1102230246251565e-16
+huber_l2_floor0.5	6	720	1.0	0.0
+huber_l2_floor1	6	720	1.0	0.0
+huber_radius_cap6	6	720	0.9999999999999999	1.1102230246251565e-16
