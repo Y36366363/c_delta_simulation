@@ -554,6 +554,35 @@ directions.
 
 Source: `docs/robust_definition_stage2_summary_20260804.md`.
 
+### 22. Routine Extension Pilots Favour One Primary Plus a Calibrated Sensitivity
+
+**Evidence: prospective cap split, multivariate pilot, diffuse map, and joint-rule pilot**
+
+A training-only rule over caps `3, 4, 5, 6, 8` selected cap 5, not cap 6.
+Independent evaluation kept null rejection near `.05` and greatly improved
+unmatched-masking power, but reduced `n = 20` sparse power from `.9356` to
+`.8928`. The supported object is a prospective cap-calibration protocol, not a
+universal cap value.
+
+For vector observations, spatial-median radius was rotation invariant and
+showed promising null and power behavior across dimensions `1, 2, 5, 10`.
+Coordinatewise Huber scores changed under rotation and are not a suitable
+general default. Multivariate work should remain a separate extension unless
+the application requires vector observations.
+
+The pure Huber radius had a real diffuse-power cost for small samples: at noise
+`.15`, power was `.603` versus old L2 `.764` for `n = 20`, narrowing to `.997`
+versus `1.000` for `n = 80`. This remains a scientific tradeoff rather than a
+purely technical tuning issue.
+
+Finally, the unadjusted union of primary and cap-6 tests reached `.0595` in a
+contaminated null row; Bonferroni union was conservative and intersection lost
+the masking gain. The working structure is one primary uncapped-Huber
+inferential rule plus a separately reported, prospectively calibrated bounded
+sensitivity result.
+
+Source: `docs/robust_routine_extensions_summary_20260804.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -626,6 +655,19 @@ Source: `docs/robust_definition_stage2_summary_20260804.md`.
 - Completed 24,000 repetitions in each of 36 scenario/sample-size conditions.
 - Retained pure Huber radius as the primary candidate and cap 6 as a separate
   robustness sensitivity analysis.
+
+### 2026-08-04 (routine extension pilots)
+
+- Implemented a training/evaluation split for prospective cap calibration;
+  the stated rule selected cap 5 and exposed the dependence on the loss
+  criterion.
+- Compared multivariate pairwise L2, coordinatewise Huber, and spatial-median
+  radius across four dimensions and added a rotation diagnostic.
+- Mapped diffuse power over six sample sizes and three noise levels.
+- Compared primary, bounded, union, multiplicity-adjusted union, and
+  intersection decision rules.
+- Recommended one primary inferential rule plus a separately reported bounded
+  sensitivity profile pending substantive decisions.
 
 ### 2026-08-01
 

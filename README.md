@@ -44,12 +44,26 @@ correlation-of-divergency coefficient, `c_delta`.
 - **Definition refinement** - L2-like radial floors added no consistent value;
   retain the pure Huber radius as the primary candidate and cap `6` as a
   separate masking-resistance sensitivity estimand.
+- **Cap pre-calibration pilot** - A prospective training rule selected cap `5`
+  rather than cap `6`; independent evaluation preserved calibration and
+  improved masking power but exposed a small-sample power cost. Treat the
+  calibration protocol, not a universal cap constant, as the supported result.
+- **Multivariate feasibility** - Spatial-median radius was rotation invariant
+  and promising across dimensions `1, 2, 5, 10`; coordinatewise Huber was not
+  rotation invariant and should not be the general multivariate default.
+- **Diffuse tradeoff map** - The robust-radius power loss was material in the
+  constructed diffuse family for roughly `n <= 40` and small by `n = 60-80`.
+- **Dual-reporting pilot** - An unadjusted union of primary and bounded p-values
+  lacked level-.05 protection, while Bonferroni was conservative. Retain one
+  primary inferential rule and report the bounded profile as sensitivity.
 - **Documentation** - See `docs/robust_cdelta_redefinition_20260804.md` and
   `docs/robust_definition_stage2_summary_20260804.md`,
   `results/robust_cdelta_grid_20260804.tsv`,
   `results/robust_cdelta_null_high_rep_20260804.tsv`, and
   `results/robust_parameter_sensitivity_20260804.tsv`, plus
-  `results/robust_definition_highrep_validation_20260804.tsv`.
+  `results/robust_definition_highrep_validation_20260804.tsv`. Routine
+  extension results are summarised in
+  `docs/robust_routine_extensions_summary_20260804.md`.
 
 ## Updates 08/01/2026
 

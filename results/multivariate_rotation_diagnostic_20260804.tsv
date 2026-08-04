@@ -1,0 +1,4 @@
+method	maximum_absolute_rotation_error	profile_correlation_after_rotation
+original_multivariate_l2	1.7763568394002505e-15	0.9999999999999998
+coordinate_huber	0.8480762486292504	0.9884297207015647
+spatial_median_radius	7.349676423018536e-12	1.0
