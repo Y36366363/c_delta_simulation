@@ -3,6 +3,33 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/05/2026
+
+- **Cap loss formalisation** - Defined a constrained loss that maximises
+  unmatched-masking gain subject to null calibration and at most `.03`
+  worst-case absolute power loss over matched, t2, diffuse, and bimodal core
+  alternatives.
+- **Cap-6 selection** - A fine `4.5-8` grid across three training seeds selected
+  cap `6`; independent 5,000-repetition evaluation kept the largest core loss
+  at `.0224` and greatly improved masking power.
+- **Tolerance map** - Cap `6` corresponds to accepting roughly `.02-.03`
+  worst-core-power loss; stricter tolerances select `6.5-7`, while looser ones
+  select `4.5-5.5`. It is a declared robustness policy, not a universal constant.
+- **Diffuse mechanism** - Increasing the Huber centre constant recovers
+  small-sample diffuse power but transfers substantial loss to bimodal
+  salience. An exploratory tail-triggered rule did not resolve this conflict.
+- **Definition recommendation** - Retain Huber centre constant `1.345` for the
+  primary score-all profile, accept and disclose the small-sample diffuse
+  limitation, and use cap `6` only as a pre-specified bounded sensitivity
+  profile.
+- **Literature cross-validation** - Connected the decision to Huber
+  contamination/efficiency theory, adaptive robustification, robust distance
+  covariance influence analysis, h-star, and the archived c_delta target.
+- **Documentation** - See
+  `docs/cap_loss_and_diffuse_decision_20260805.md` and the corresponding
+  `results/cap_loss_*`, `results/center_*`, and
+  `results/joint_candidate_validation_20260805.tsv` files.
+
 ## Updates 08/04/2026
 
 - **Robust-definition study** - Formalised centre-radius, fit-without/score-all,

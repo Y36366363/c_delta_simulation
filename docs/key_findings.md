@@ -583,6 +583,42 @@ sensitivity result.
 
 Source: `docs/robust_routine_extensions_summary_20260804.md`.
 
+### 23. A Core-Power-Constrained Loss Selects Cap 6
+
+**Evidence: three-seed fine-grid training and independent evaluation**
+
+The refined cap loss maximises mean unmatched-masking gain subject to maximum
+training null rejection `.065` and worst absolute power loss `.03` over matched
+sparse, t2, diffuse, and bimodal core alternatives. Across caps `4.5-8`, cap 6
+was the first comfortably feasible value: worst training core loss `.0158`,
+mean masking gain `.3519`, and maximum null rejection `.0503`.
+
+Independent evaluation with 5,000 repetitions and 999 permutations kept the
+largest core loss at `.0224` (`n = 20`, t2 matched), while cap-6 masking power
+was `.4412`, `.5952`, and `.5800` at `n = 40, 80, 160`, versus uncapped `.0308`,
+`.0716`, and `.1390`. The selected cap varies with the declared loss tolerance:
+`.005 -> 7`, `.01 -> 6.5`, `.02-.03 -> 6`, `.04-.05 -> 5.5`, and `.06 -> 5`.
+Cap 6 is therefore a transparent project-specific robustness policy.
+
+### 24. The Diffuse Tradeoff Should Be Accepted but Explicitly Scoped
+
+**Evidence: centre-constant scan and independent joint validation**
+
+Increasing the Huber location constant from `1.345` to `2` raised independent
+`n = 20`, diffuse-noise-`.15` power from `.596` to `.723`, but reduced bimodal
+power from `.912` to `.792` at `n = 80` and by `.138` at `n = 160`. Constants
+`3-4` and a simple tail-triggered adaptive rule lost still more of the bimodal
+advantage. Null, sparse-matched, and t2 results changed little; cap choice, not
+centre constant, controlled unmatched masking.
+
+The primary definition should retain Huber constant `1.345`. Its small-sample
+diffuse loss is a real limitation, but changing the centre merely transfers the
+loss to another scientifically meaningful salience structure. For small-sample
+studies where diffuse alignment is central, old L2 should remain an explicit
+comparator rather than changing the robust primary post hoc.
+
+Source: `docs/cap_loss_and_diffuse_decision_20260805.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -624,6 +660,21 @@ Source: `docs/robust_routine_extensions_summary_20260804.md`.
    while preserving the structural interpretation.
 
 ## Dated Update Log
+
+### 2026-08-05
+
+- Derived a direct-score influence expression showing why a finite cap bounds
+  direct leverage under positive profile means.
+- Replaced the earlier sparse-only cap screen with a four-alternative
+  worst-core-power constrained loss.
+- Completed a three-seed fine-grid cap study and independent evaluation;
+  selected cap 6 under a `.03` loss tolerance.
+- Quantified how the selected cap changes with the declared tolerance.
+- Scanned Huber centre constants and an exploratory adaptive trigger to locate
+  the diffuse-power loss mechanism.
+- Independently validated `c=1.345` versus `c=2` with and without cap 6.
+- Retained `c=1.345`, accepted the scoped diffuse limitation, and recommended
+  cap 6 as a bounded sensitivity profile rather than a second primary test.
 
 ### 2026-08-04
 

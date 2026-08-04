@@ -12,6 +12,7 @@ from scripts.run_multivariate_robust_pilot import (
     coordinate_huber_profile,
     spatial_median_profile,
 )
+from scripts.run_cap_loss_refinement import tolerance_map
 
 
 class RobustExtensionTests(unittest.TestCase):
@@ -36,6 +37,35 @@ class RobustExtensionTests(unittest.TestCase):
             np.abs(coordinate_huber_profile(z) - coordinate_huber_profile(z @ q))
         )
         self.assertGreater(error, 1e-3)
+
+    def test_cap_tolerance_map_selects_highest_masking_gain_feasible_cap(self):
+        losses = [
+            {
+                "cap": 5.0,
+                "maximum_null_rejection": 0.05,
+                "worst_absolute_core_power_loss": 0.04,
+                "mean_masking_gain": 0.50,
+            },
+            {
+                "cap": 6.0,
+                "maximum_null_rejection": 0.05,
+                "worst_absolute_core_power_loss": 0.02,
+                "mean_masking_gain": 0.40,
+            },
+            {
+                "cap": 7.0,
+                "maximum_null_rejection": 0.05,
+                "worst_absolute_core_power_loss": 0.005,
+                "mean_masking_gain": 0.30,
+            },
+        ]
+        by_tolerance = {
+            row["allowed_worst_core_power_loss"]: row["selected_cap"]
+            for row in tolerance_map(losses)
+        }
+        self.assertEqual(by_tolerance[0.01], 7.0)
+        self.assertEqual(by_tolerance[0.03], 6.0)
+        self.assertEqual(by_tolerance[0.05], 5.0)
 
 
 if __name__ == "__main__":
