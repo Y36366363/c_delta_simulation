@@ -9,9 +9,12 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from cdelta import (
     c_delta,
+    c_delta_from_profiles,
     c_delta_identity_from_divergences,
     calibrated_subgroup_simulation,
+    center_salience_vector,
     divergence_vector,
+    h_star_profile,
     independent_null_size_simulation,
     large_scale_simulation,
     l2_divergence_closed_form,
@@ -21,11 +24,13 @@ from cdelta import (
     overlap_layer_diagnostic,
     outlier_influence_summary,
     permutation_test,
+    permutation_test_profiles,
     permutation_mean_check,
     permutation_statistics_from_divergences,
     power_curve_simulation,
     repeated_outlier_simulation,
     variant_comparison_simulation,
+    robust_profile_bootstrap_ci,
 )
 from scripts.run_background_masking_diagnostics import masking_metrics
 from scripts.run_paired_salience_validation import make_salience_scenario
@@ -36,6 +41,88 @@ from scripts.run_teacher_claim_overlap_validation import (
 
 
 class CDeltaTests(unittest.TestCase):
+    def test_one_cluster_kmeans_score_is_mean_radius(self):
+        x = np.array([-3.0, -1.0, 2.0, 8.0])
+        np.testing.assert_allclose(
+            center_salience_vector(x, center="mean"),
+            np.abs(x - x.mean()),
+        )
+
+    def test_robust_centres_protect_ordinary_scores_from_remote_outlier(self):
+        ordinary = np.linspace(-2.0, 2.0, 21)
+        x_100 = np.append(ordinary, 100.0)
+        x_1000 = np.append(ordinary, 1000.0)
+        mean_change = np.max(
+            np.abs(
+                center_salience_vector(x_100, center="mean")[:-1]
+                - center_salience_vector(x_1000, center="mean")[:-1]
+            )
+        )
+        median_change = np.max(
+            np.abs(
+                center_salience_vector(x_100, center="median")[:-1]
+                - center_salience_vector(x_1000, center="median")[:-1]
+            )
+        )
+        iqr_change = np.max(
+            np.abs(
+                center_salience_vector(x_100, center="iqr_inlier_mean")[:-1]
+                - center_salience_vector(x_1000, center="iqr_inlier_mean")[:-1]
+            )
+        )
+        self.assertGreater(mean_change, 10.0)
+        self.assertAlmostEqual(median_change, 0.0)
+        self.assertAlmostEqual(iqr_change, 0.0)
+
+    def test_capped_robust_profile_bounds_remote_outlier_score(self):
+        ordinary = np.linspace(-2.0, 2.0, 21)
+        scores = center_salience_vector(
+            np.append(ordinary, 1e9), center="iqr_inlier_mean", cap=3.0
+        )
+        self.assertLess(scores[-1], 10.0)
+
+    def test_h_star_profile_matches_direct_definition(self):
+        x = np.array([3.0, 4.0, 5.0, 8.0])
+        scores = h_star_profile(x)
+        expected_for_eight = np.sqrt((25.0 + 16.0 + 9.0) / 3.0) / np.sqrt(
+            (1.0 + 4.0 + 1.0) / 3.0
+        )
+        self.assertAlmostEqual(scores[-1], expected_for_eight)
+
+    def test_trimmed_and_huber_centres_are_stable_under_remote_contamination(self):
+        ordinary = np.linspace(-2.0, 2.0, 41)
+        x = np.append(ordinary, 1000.0)
+        for method in ("trimmed_mean", "huber"):
+            scores = center_salience_vector(x, center=method)
+            self.assertLess(np.max(scores[:-1]), 3.0)
+
+    def test_profile_permutation_reference_is_one(self):
+        x = np.array([-3.0, -1.0, 0.5, 2.0, 7.0])
+        y = np.array([-2.0, 0.0, 1.0, 3.0, 8.0])
+        sx = center_salience_vector(x, center="iqr_inlier_mean")
+        sy = center_salience_vector(y, center="huber")
+        result = c_delta_from_profiles(sx, sy)
+        self.assertEqual(result["status"], "ok")
+        test = permutation_test_profiles(sx, sy, n_perm=999, seed=123)
+        self.assertEqual(test["status"], "ok")
+        self.assertGreaterEqual(test["p_value"], 0.0)
+        self.assertLessEqual(test["p_value"], 1.0)
+
+    def test_robust_profile_is_affine_equivariant(self):
+        x = np.array([-4.0, -1.0, 0.5, 2.0, 8.0, 12.0])
+        base = center_salience_vector(x, center="huber", cap=6.0)
+        transformed = center_salience_vector(7.0 * x + 11.0, center="huber", cap=6.0)
+        np.testing.assert_allclose(transformed, 7.0 * base, rtol=1e-9, atol=1e-9)
+
+    def test_robust_bootstrap_refits_profile(self):
+        x = np.array([-3.0, -1.0, 0.0, 1.0, 8.0, 9.0])
+        y = np.array([-2.0, -1.0, 0.0, 2.0, 7.0, 10.0])
+        interval = robust_profile_bootstrap_ci(
+            x, y, center="iqr_inlier_mean", n_boot=100, seed=124
+        )
+        self.assertEqual(interval["n_used"], 100.0)
+        self.assertLessEqual(interval["lower"], interval["upper"])
+
     def test_binary_overlap_correlation_anchors(self):
         self.assertAlmostEqual(binary_overlap_correlation(80, 4, 4), 1.0)
         self.assertAlmostEqual(binary_overlap_correlation(80, 4, 0), -4 / 76)

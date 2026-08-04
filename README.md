@@ -3,6 +3,34 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/04/2026
+
+- **Robust-definition study** - Formalised centre-radius, fit-without/score-all,
+  bounded-influence, and h-star-inspired salience profiles after the 08/03
+  discussion.
+- **First validation** - Across six 500-repetition scenarios, the provisional
+  IQR-fit/all-score profile preserved matched-outlier, diffuse-profile, and
+  heavy-tail paired-signal power, but did not bound final outlier leverage.
+- **Robustness tradeoff** - A three-robust-scale cap improved power under huge
+  unmatched masking (`.272` versus original L2 `.052`) but reduced genuine
+  matched-outlier power (`.314` versus `1.000`).
+- **h-star bridge** - A leave-one-out h-star-style profile was effective for a
+  single matched candidate but suffered multiple-outlier denominator masking.
+- **Recommendation** - Treat robust-reference/all-observation scoring as the
+  main redefinition candidate and bounded scoring as a separate sensitivity
+  estimand; do not use ordinary k-means as a one-centre robustness device.
+- **Expanded robustness grid** - Added trimmed-mean and Huber centres,
+  independent contamination nulls, t2, skewed, bimodal, masking, sample-size,
+  and parameter-sensitivity checks. Huber reference scoring was the strongest
+  uncapped candidate in heavy-tail and bimodal settings.
+- **Bounded sensitivity** - A prospective `6 x MAD` cap preserved nearly all
+  matched-signal power while substantially improving unmatched-masking power;
+  it remains a separate estimand, not a post-hoc universal constant.
+- **Documentation** - See `docs/robust_cdelta_redefinition_20260804.md` and
+  `results/robust_cdelta_grid_20260804.tsv`,
+  `results/robust_cdelta_null_high_rep_20260804.tsv`, and
+  `results/robust_parameter_sensitivity_20260804.tsv`.
+
 ## Updates 08/01/2026
 
 - **Teacher-claim overlap validation** — Added a 27,000-dataset factorial
@@ -385,6 +413,12 @@ variants, weighting schemes, and machine-learning examples.
 - `scripts/run_pilot.py`: example simulation run.
 - `scripts/run_outlier_influence.py`: matched/unmatched extreme-value pilot.
 - `scripts/run_outlier_repeated.py`: repeated extreme-value alignment study.
+- `scripts/run_robust_center_validation.py`: first centre/cap/h-star robust
+  profile comparison.
+- `scripts/run_robust_cdelta_grid.py`: contamination, tail, skew, bimodal, and
+  sample-size validation for robust-reference profiles.
+- `scripts/run_robust_parameter_sensitivity.py`: Huber, trimming, hard-cap,
+  and soft-cap sensitivity grid.
 - `scripts/run_followup_simulations.py`: power curves, non-normal backgrounds,
   and nominal size checks.
 - `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
@@ -443,6 +477,9 @@ python3 -m unittest discover -s tests
 python3 scripts/run_pilot.py
 python3 scripts/run_outlier_influence.py
 python3 scripts/run_outlier_repeated.py
+python3 scripts/run_robust_center_validation.py
+python3 scripts/run_robust_cdelta_grid.py
+python3 scripts/run_robust_parameter_sensitivity.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

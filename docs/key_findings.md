@@ -1,6 +1,6 @@
 # c_delta Project: Key Findings
 
-Last updated: 2026-08-01
+Last updated: 2026-08-04
 
 This is the central, cumulative record of the project's most important
 findings. It is intended for quick retrieval when preparing emails, follow-up
@@ -450,6 +450,59 @@ conservative negative control.
 
 Source: `docs/high_rep_overlap_cross_validation_summary.md`.
 
+### 19. Robust Centre Estimation and Bounded Influence Are Different Targets
+
+**Evidence: Mathematical analysis and focused simulation evidence**
+
+Estimating a centre without flagged extremes and then scoring all observations
+protects the reference centre but deliberately retains unbounded standout
+signal. Capping the final distances protects the statistic itself but reduces
+power for meaningful matched extremes.
+
+Across 500 repetitions with `n = 80` and 199 permutations:
+
+| Scenario | Original L2 | IQR fit/all | Capped IQR |
+|---|---:|---:|---:|
+| Clean null | .050 | .054 | .054 |
+| Matched magnitude-8 outlier | 1.000 | 1.000 | .314 |
+| Diffuse salience | 1.000 | 1.000 | 1.000 |
+| t2 matched pair | .488 | .492 | .200 |
+| Unmatched magnitude-20 masking | .052 | .074 | .272 |
+
+One-cluster k-means is the arithmetic mean and is not robust. Multi-cluster
+k-means changes the estimand and may assign a remote point its own cluster.
+A leave-one-out h-star-style profile performs well for one matched candidate
+but suffers denominator masking with multiple extremes.
+
+Source: `docs/robust_cdelta_redefinition_20260804.md`.
+
+### 20. Huber Robust-Reference Scoring Is the Leading New Candidate
+
+**Evidence: Higher-replication calibration and systematic focused simulation**
+
+The robust-reference profile uses a Huber M-location fitted separately in each
+margin, a MAD scale for optional bounding, and scores every observation. In the
+expanded `n = 40, 80, 160` grid, Huber all-score was at least as powerful as IQR
+and trimmed centres under t2 and shared bimodal structure while keeping null
+rejection close to the nominal level.
+
+At `n = 80`:
+
+| Scenario | Huber all-score | Huber hard cap `3s` | Huber hard cap `6s` |
+|---|---:|---:|---:|
+| 1% matched magnitude-8 | 1.000 | .310 | .997 |
+| t2 matched | .837 | .707 | .997 |
+| Bimodal aligned | .907 | .903 | .910 |
+| Unmatched masking | .073 | .287 | .590 |
+
+With 2,000 repetitions, Huber all-score rejection was `.048` in the clean
+null, `.0445` under 5% independent contamination, and `.0425` at `n=160` in
+the clean null. The hard `6s` cap is promising for masking resistance but is a
+distinct bounded-influence estimand whose constant must be frozen or calibrated
+prospectively.
+
+Source: `docs/robust_cdelta_redefinition_20260804.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -491,6 +544,25 @@ Source: `docs/high_rep_overlap_cross_validation_summary.md`.
    while preserving the structural interpretation.
 
 ## Dated Update Log
+
+### 2026-08-04
+
+- Formalised robust-reference, bounded-distance, and h-star-inspired profiles.
+- Added unit tests for remote-outlier centre protection, capping, and the
+  h-star definition.
+- Completed a six-scenario, seven-method focused validation.
+- Recommended robust-reference/all-observation scoring as the main candidate
+  and bounded scoring as a distinct sensitivity estimand.
+
+### 2026-08-04 (extended validation)
+
+- Added Huber M-location, trimmed-mean, profile-level permutation, and robust
+  bootstrap refitting utilities.
+- Completed systematic contamination/background/sample-size validation and a
+  2,000-repetition null calibration.
+- Completed Huber, trimming, hard-cap, and soft-cap parameter sensitivity.
+- Promoted Huber robust-reference/all-score to the leading candidate, retaining
+  a prospectively frozen or null-calibrated `6 x MAD` cap as sensitivity.
 
 ### 2026-08-01
 

@@ -71,6 +71,124 @@ def divergence_vector(values: Array | list[float], *, kind: str = "l2") -> Array
     raise ValueError("kind must be 'l2' or 'l1'")
 
 
+def center_salience_vector(
+    values: Array | list[float],
+    *,
+    center: str = "mean",
+    cap: float | None = None,
+    trim_fraction: float = 0.10,
+    huber_c: float = 1.345,
+    soft_cap: bool = False,
+) -> Array:
+    """Return distances to a location estimate, optionally robustly capped.
+
+    ``mean`` is the one-cluster k-means/geometric-centroid proposal.
+    ``median`` uses a high-breakdown location estimate. ``trimmed_mean`` and
+    ``huber`` provide smooth alternatives. ``iqr_inlier_mean`` implements the
+    two-stage proposal: identify an ordinary subset with the 1.5-IQR rule, fit
+    the centre without flagged observations, and then score *all* observations
+    relative to that centre.
+
+    If ``cap`` is supplied, distances are truncated at ``cap`` robust scale
+    units.  This changes the goal from robust centre estimation with retained
+    outlier signal to bounded outlier influence on the final profile.
+    """
+    x = _as_1d(values, "values")
+    if center == "mean":
+        location = float(x.mean())
+        fit_values = x
+    elif center == "median":
+        location = float(np.median(x))
+        fit_values = x
+    elif center == "trimmed_mean":
+        if not 0.0 <= trim_fraction < 0.5:
+            raise ValueError("trim_fraction must be in [0, 0.5)")
+        trim = int(np.floor(trim_fraction * x.size))
+        if x.size - 2 * trim < 3:
+            raise ValueError("trim_fraction leaves too few observations")
+        fit_values = np.sort(x)[trim : x.size - trim]
+        location = float(fit_values.mean())
+    elif center == "huber":
+        if huber_c <= 0.0:
+            raise ValueError("huber_c must be positive")
+        location = float(np.median(x))
+        fit_values = x
+        scale = 1.4826 * float(np.median(np.abs(x - location)))
+        if scale == 0.0:
+            scale = float(np.mean(np.abs(x - location)))
+        if scale > 0.0:
+            for _ in range(50):
+                residual = (x - location) / scale
+                weights = np.minimum(1.0, huber_c / np.maximum(np.abs(residual), 1e-15))
+                updated = float(np.sum(weights * x) / np.sum(weights))
+                if abs(updated - location) < 1e-10 * max(1.0, scale):
+                    location = updated
+                    break
+                location = updated
+    elif center == "iqr_inlier_mean":
+        q1, q3 = np.quantile(x, [0.25, 0.75])
+        iqr = float(q3 - q1)
+        if iqr == 0.0:
+            fit_values = x
+        else:
+            fit_values = x[(x >= q1 - 1.5 * iqr) & (x <= q3 + 1.5 * iqr)]
+            if fit_values.size < 3:
+                fit_values = x
+        location = float(fit_values.mean())
+    else:
+        raise ValueError(
+            "center must be 'mean', 'median', 'trimmed_mean', 'huber', or "
+            "'iqr_inlier_mean'"
+        )
+
+    scores = np.abs(x - location)
+    if cap is None:
+        return scores
+    if cap <= 0.0:
+        raise ValueError("cap must be positive")
+
+    fit_deviations = np.abs(fit_values - location)
+    scale = 1.4826 * float(np.median(fit_deviations))
+    if scale == 0.0:
+        scale = float(np.mean(fit_deviations))
+    if scale == 0.0:
+        return scores
+    threshold = cap * scale
+    if soft_cap:
+        return threshold * np.tanh(scores / threshold)
+    return np.minimum(scores, threshold)
+
+
+def h_star_profile(
+    values: Array | list[float],
+    *,
+    eta: float = 2.0,
+) -> Array:
+    """Return a leave-one-out h-star-style score for every observation.
+
+    For candidate ``i``, the numerator is its Holder-mean distance to all
+    other observations and the denominator is the Holder-mean pairwise
+    distance among the remaining observations.  This extends the single
+    pre-selected candidate construction of Hoorn and Ho to an observation
+    profile suitable for paired-salience comparison.  It is an exploratory
+    bridge, not the inferential h-star test from that paper.
+    """
+    x = _as_1d(values, "values")
+    if eta <= 0.0:
+        raise ValueError("eta must be positive")
+
+    distances = np.abs(x[:, None] - x[None, :]) ** eta
+    scores = np.empty(x.size, dtype=float)
+    total_pair_sum = float(np.sum(np.triu(distances, k=1)))
+    ordinary_pair_count = comb(x.size - 1, 2)
+    for i in range(x.size):
+        candidate_pair_sum = float(np.sum(distances[i]))
+        signal = candidate_pair_sum / (x.size - 1)
+        noise = (total_pair_sum - candidate_pair_sum) / ordinary_pair_count
+        scores[i] = (signal / noise) ** (1.0 / eta) if noise > 0.0 else np.nan
+    return scores
+
+
 def l2_divergence_closed_form(values: Array | list[float]) -> Array:
     """Return the exact one-dimensional L2 divergence in centered form.
 
@@ -143,6 +261,112 @@ def _raw_from_divergences(dx: Array, dy: Array) -> float:
     if mean_dx == 0.0 or mean_dy == 0.0:
         return np.nan
     return float(np.mean(dx * dy) / (mean_dx * mean_dy))
+
+
+def c_delta_from_profiles(
+    sx: Array | list[float], sy: Array | list[float]
+) -> dict[str, float | str]:
+    """Compute corrected c_delta from two pre-computed salience profiles.
+
+    The profile construction is deliberately separated from the pairing
+    statistic.  This makes robust-reference and bounded-influence variants
+    explicit while preserving the same permutation calibration machinery.
+    """
+    sx_arr = _as_1d(sx, "sx")
+    sy_arr = _as_1d(sy, "sy")
+    if sx_arr.size != sy_arr.size:
+        raise ValueError("sx and sy must have the same length")
+    mean_x, mean_y = float(sx_arr.mean()), float(sy_arr.mean())
+    if mean_x == 0.0 or mean_y == 0.0:
+        return {
+            "raw": np.nan,
+            "correlation": np.nan,
+            "status": "undetermined due to data limitations",
+        }
+    raw = float(np.mean(sx_arr * sy_arr) / (mean_x * mean_y))
+    if sx_arr.std() == 0.0 or sy_arr.std() == 0.0:
+        correlation = np.nan
+    else:
+        correlation = float(np.corrcoef(sx_arr, sy_arr)[0, 1])
+    return {"raw": raw, "correlation": correlation, "status": "ok"}
+
+
+def permutation_test_profiles(
+    sx: Array | list[float],
+    sy: Array | list[float],
+    *,
+    n_perm: int = 999,
+    seed: int | None = None,
+    alternative: str = "greater",
+) -> dict[str, float | str]:
+    """Permutation test for any fixed pair of separately fitted profiles."""
+    if alternative not in {"greater", "less", "two-sided"}:
+        raise ValueError("alternative must be 'greater', 'less', or 'two-sided'")
+    sx_arr = _as_1d(sx, "sx")
+    sy_arr = _as_1d(sy, "sy")
+    if sx_arr.size != sy_arr.size:
+        raise ValueError("sx and sy must have the same length")
+    observed = c_delta_from_profiles(sx_arr, sy_arr)
+    if observed["status"] != "ok":
+        return {"observed": np.nan, "p_value": np.nan, "alternative": alternative,
+                "status": observed["status"]}
+    rng = np.random.default_rng(seed)
+    mean_x, mean_y = float(sx_arr.mean()), float(sy_arr.mean())
+    observed_raw = float(observed["raw"])
+    exceed = 0
+    for _ in range(n_perm):
+        stat = float(np.mean(sx_arr * rng.permutation(sy_arr)) / (mean_x * mean_y))
+        if alternative == "greater":
+            exceed += stat >= observed_raw
+        elif alternative == "less":
+            exceed += stat <= observed_raw
+        else:
+            exceed += abs(stat - 1.0) >= abs(observed_raw - 1.0)
+    return {
+        "observed": observed_raw,
+        "p_value": float((exceed + 1) / (n_perm + 1)),
+        "alternative": alternative,
+        "status": "ok",
+    }
+
+
+def robust_profile_bootstrap_ci(
+    x: Array | list[float],
+    y: Array | list[float],
+    *,
+    center: str = "iqr_inlier_mean",
+    cap: float | None = None,
+    n_boot: int = 2000,
+    seed: int | None = None,
+    alpha: float = 0.05,
+) -> dict[str, float]:
+    """Bootstrap c_delta CI, refitting each robust centre in every resample."""
+    x_arr = _as_1d(x, "x")
+    y_arr = _as_1d(y, "y")
+    if x_arr.size != y_arr.size:
+        raise ValueError("x and y must have the same length")
+    rng = np.random.default_rng(seed)
+    stats: list[float] = []
+    for _ in range(n_boot):
+        indices = rng.integers(0, x_arr.size, size=x_arr.size)
+        sx = center_salience_vector(x_arr[indices], center=center, cap=cap)
+        sy = center_salience_vector(y_arr[indices], center=center, cap=cap)
+        value = c_delta_from_profiles(sx, sy)["raw"]
+        if np.isfinite(value):
+            stats.append(float(value))
+    if not stats:
+        raise ValueError("all bootstrap samples were undetermined")
+    lower, upper = np.quantile(stats, [alpha / 2, 1 - alpha / 2])
+    estimate = c_delta_from_profiles(
+        center_salience_vector(x_arr, center=center, cap=cap),
+        center_salience_vector(y_arr, center=center, cap=cap),
+    )["raw"]
+    return {
+        "estimate": float(estimate),
+        "lower": float(lower),
+        "upper": float(upper),
+        "n_used": float(len(stats)),
+    }
 
 
 def c_delta_identity_from_divergences(dx: Array, dy: Array) -> dict[str, float]:
