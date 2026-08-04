@@ -26,6 +26,10 @@ correlation-of-divergency coefficient, `c_delta`.
 - **Bounded sensitivity** - A prospective `6 x MAD` cap preserved nearly all
   matched-signal power while substantially improving unmatched-masking power;
   it remains a separate estimand, not a post-hoc universal constant.
+- **Stage-1 initial pilot** - Replayed the original six pilot scenarios at
+  `n=60`; Huber robust-reference preserved aligned and contaminated-aligned
+  power (`1.000`), gave zero upper-tail rejection for inverted salience, and
+  kept heavy-tail/skew null rejection near `.05`.
 - **Documentation** - See `docs/robust_cdelta_redefinition_20260804.md` and
   `results/robust_cdelta_grid_20260804.tsv`,
   `results/robust_cdelta_null_high_rep_20260804.tsv`, and
@@ -419,6 +423,8 @@ variants, weighting schemes, and machine-learning examples.
   sample-size validation for robust-reference profiles.
 - `scripts/run_robust_parameter_sensitivity.py`: Huber, trimming, hard-cap,
   and soft-cap sensitivity grid.
+- `scripts/run_robust_initial_pilot.py`: stage-1 replay of the original pilot
+  scenarios for the new profile definitions.
 - `scripts/run_followup_simulations.py`: power curves, non-normal backgrounds,
   and nominal size checks.
 - `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
@@ -480,6 +486,7 @@ python3 scripts/run_outlier_repeated.py
 python3 scripts/run_robust_center_validation.py
 python3 scripts/run_robust_cdelta_grid.py
 python3 scripts/run_robust_parameter_sensitivity.py
+python3 scripts/run_robust_initial_pilot.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

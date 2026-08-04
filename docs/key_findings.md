@@ -476,6 +476,28 @@ but suffers denominator masking with multiple extremes.
 
 Source: `docs/robust_cdelta_redefinition_20260804.md`.
 
+### 21. Stage-1 Robust Pilot Preserves the Original Directional Behaviour
+
+**Evidence: Focused repeated simulation**
+
+Replaying the original six pilot scenarios with `n=60`, 300 repetitions, and
+199 permutations gave:
+
+| Scenario | Original L2 | Huber reference | Huber cap6 | IQR reference |
+|---|---:|---:|---:|---:|
+| Null normal | .050 | .0367 | .0367 | .040 |
+| Aligned normal | 1.000 | 1.000 | 1.000 | 1.000 |
+| Inverted divergence | .060 | .000 | .000 | .000 |
+| Heavy-tailed null | .0667 | .060 | .0567 | .060 |
+| Skewed null | .0633 | .0567 | .050 | .0533 |
+| Contaminated aligned | 1.000 | 1.000 | 1.000 | 1.000 |
+
+This is an initial pilot, not a final size estimate. The main reporting
+quantities should be profile correlation and permutation p-value because raw
+c_delta changes with the profile CV factor.
+
+Source: `docs/robust_initial_pilot_summary_20260804.md`.
+
 ### 20. Huber Robust-Reference Scoring Is the Leading New Candidate
 
 **Evidence: Higher-replication calibration and systematic focused simulation**
