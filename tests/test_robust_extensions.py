@@ -19,9 +19,27 @@ from scripts.run_cap6_expanded_cross_validation import (
 )
 from scripts.run_comprehensive_scope_benchmark import SCENARIO_ROLES, make_scenario
 from scripts.run_diffuse_boundary_expansion import make_diffuse
+from scripts.robust_extension_utils import within_block_permutation_indices
 
 
 class RobustExtensionTests(unittest.TestCase):
+    def test_within_block_permutations_preserve_labels_and_all_indices(self):
+        blocks = np.repeat(np.arange(4), 5)
+        indices = within_block_permutation_indices(
+            blocks, 50, np.random.default_rng(20260901)
+        )
+        expected = np.arange(blocks.size)
+        for row in indices:
+            np.testing.assert_array_equal(np.sort(row), expected)
+            np.testing.assert_array_equal(blocks[row], blocks)
+
+    def test_within_block_permutations_reject_invalid_arguments(self):
+        rng = np.random.default_rng(20260902)
+        with self.assertRaises(ValueError):
+            within_block_permutation_indices([[0, 0], [1, 1]], 10, rng)
+        with self.assertRaises(ValueError):
+            within_block_permutation_indices([0, 0, 1], 0, rng)
+
     def test_comprehensive_scenarios_return_finite_paired_samples(self):
         rng = np.random.default_rng(20260829)
         for scenario in SCENARIO_ROLES:

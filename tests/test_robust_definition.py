@@ -12,6 +12,7 @@ from cdelta import (
     c_delta_from_profiles,
     huber_reference_profile,
     permutation_test_profiles,
+    profile_permutation_reference,
 )
 
 
@@ -54,6 +55,95 @@ class RobustDefinitionTests(unittest.TestCase):
         first = permutation_test_profiles(sx, sy, n_perm=199, seed=123)
         second = permutation_test_profiles(sx, sy, n_perm=199, seed=123)
         self.assertEqual(first, second)
+
+    def test_blocked_profile_permutation_is_reproducible(self):
+        sx = np.array([0.2, 0.8, 1.1, 1.9, 3.0, 4.0])
+        sy = np.array([0.4, 0.6, 1.2, 1.8, 2.5, 4.5])
+        blocks = np.repeat(np.arange(3), 2)
+        first = permutation_test_profiles(
+            sx, sy, n_perm=199, seed=321, blocks=blocks
+        )
+        second = permutation_test_profiles(
+            sx, sy, n_perm=199, seed=321, blocks=blocks
+        )
+        self.assertEqual(first, second)
+        self.assertNotAlmostEqual(first["permutation_reference_mean"], 1.0)
+        self.assertAlmostEqual(
+            first["permutation_reference_mean"],
+            first["permutation_reference_exact"],
+            delta=0.02,
+        )
+
+    def test_blocked_reference_matches_exact_enumeration(self):
+        from itertools import product, permutations
+
+        sx = np.array([0.2, 0.8, 1.1, 1.9, 3.0, 4.0])
+        sy = np.array([0.4, 0.6, 1.2, 1.8, 2.5, 4.5])
+        blocks = np.repeat(np.arange(3), 2)
+        members = [np.flatnonzero(blocks == label) for label in np.unique(blocks)]
+        statistics = []
+        for choices in product(*(list(permutations(group)) for group in members)):
+            indices = np.arange(sx.size)
+            for group, choice in zip(members, choices):
+                indices[group] = choice
+            statistics.append(
+                np.mean(sx * sy[indices]) / (float(sx.mean()) * float(sy.mean()))
+            )
+        self.assertAlmostEqual(
+            profile_permutation_reference(sx, sy, blocks=blocks),
+            float(np.mean(statistics)),
+            places=12,
+        )
+        self.assertEqual(profile_permutation_reference(sx, sy), 1.0)
+
+    def test_blocked_profile_permutation_rejects_mismatched_blocks(self):
+        sx = np.array([0.2, 0.8, 1.1, 1.9])
+        sy = np.array([0.4, 0.6, 1.2, 1.8])
+        with self.assertRaises(ValueError):
+            permutation_test_profiles(sx, sy, blocks=[0, 0, 1])
+        with self.assertRaises(ValueError):
+            permutation_test_profiles(sx, sy, n_perm=0)
+
+    def test_blocked_two_sided_test_centres_on_restricted_reference(self):
+        sx = np.array([0.2, 0.8, 1.1, 1.9, 3.0, 4.0])
+        sy = np.array([0.4, 0.6, 1.2, 1.8, 2.5, 4.5])
+        blocks = np.repeat(np.arange(3), 2)
+        result = permutation_test_profiles(
+            sx,
+            sy,
+            n_perm=999,
+            seed=654,
+            blocks=blocks,
+            alternative="two-sided",
+        )
+        reference = profile_permutation_reference(sx, sy, blocks=blocks)
+        observed = c_delta_from_profiles(sx, sy)["raw"]
+        rng = np.random.default_rng(654)
+        statistics = []
+        for _ in range(999):
+            permuted = sy.copy()
+            for label in np.unique(blocks):
+                members = np.flatnonzero(blocks == label)
+                permuted[members] = sy[rng.permutation(members)]
+            statistics.append(
+                np.mean(sx * permuted) / (float(sx.mean()) * float(sy.mean()))
+            )
+        expected = (
+            sum(
+                abs(stat - reference) >= abs(observed - reference)
+                for stat in statistics
+            )
+            + 1
+        ) / 1000
+        self.assertNotAlmostEqual(reference, 1.0)
+        self.assertAlmostEqual(result["p_value"], expected, places=12)
+
+    def test_constant_margin_is_reported_as_undetermined(self):
+        sx = huber_reference_profile(np.ones(10))
+        sy = huber_reference_profile(np.arange(10.0))
+        result = permutation_test_profiles(sx, sy, n_perm=19, seed=11)
+        self.assertEqual(result["status"], "undetermined due to data limitations")
+        self.assertTrue(np.isnan(result["p_value"]))
 
 
 if __name__ == "__main__":

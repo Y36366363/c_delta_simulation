@@ -5,6 +5,28 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/05/2026
 
+- **Design-respecting inference** - Added within-block profile permutation and
+  an exact restricted-reference formula. Under a shared-scale conditional
+  null, unrestricted rejection averaged `.44-.52`; within-block permutation
+  restored `.047-.048` calibration while retaining high matched-signal power.
+- **Restricted reference** - The random-pairing reference is exactly `1` only
+  for unrestricted permutations. With blocks, between-block salience is held
+  fixed and the exact conditional reference can differ substantially from `1`.
+- **Discrete and degenerate validation** - Across Bernoulli, ordinal, Poisson,
+  zero-inflated, quantized, and near-constant margins, null rejection was
+  conservative-to-calibrated. An exactly constant margin is reported as
+  undetermined; ties must not be confused with evidence of no raw association.
+- **Local weak-signal map** - In a balanced lognormal diffuse family, Huber
+  primary exceeded old L2 for weak-to-moderate latent salience correlations.
+  This refines the diffuse limitation: performance depends on signal geometry,
+  not merely whether the signal is sparse or distributed.
+- **Severe diffuse masking** - Independent 5% magnitude-20 contamination left
+  every method with low diffuse power even at `n=320`; cap 6 improved detection
+  but did not solve the problem.
+- **Inference-boundary documentation** - See
+  `docs/inference_boundaries_and_local_power_20260805.md` and the corresponding
+  `results/design_respecting_*`, `results/discrete_degeneracy_*`, and
+  `results/local_salience_power_*` files.
 - **Comprehensive old-versus-new benchmark** - Compared original L2/L1,
   Huber primary, and Huber cap 6 across 18 scenarios, four sample sizes,
   108,000 datasets, and common permutations. Exchangeable-null mean rejection

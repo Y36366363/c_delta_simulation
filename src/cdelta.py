@@ -348,6 +348,46 @@ def c_delta_from_profiles(
     return {"raw": raw, "correlation": correlation, "status": "ok"}
 
 
+def profile_permutation_reference(
+    sx: Array | list[float],
+    sy: Array | list[float],
+    *,
+    blocks: Array | list[object] | None = None,
+) -> float:
+    """Return the exact mean c_delta under the allowed permutation group.
+
+    For unrestricted permutations the reference is one.  For within-block
+    permutations it is
+
+        sum_b sum(sx_b) sum(sy_b) / n_b / n
+        --------------------------------------,
+                  mean(sx) mean(sy)
+
+    because between-block profile differences are held fixed.
+    """
+    sx_arr = _as_1d(sx, "sx")
+    sy_arr = _as_1d(sy, "sy")
+    if sx_arr.size != sy_arr.size:
+        raise ValueError("sx and sy must have the same length")
+    denominator = float(sx_arr.mean() * sy_arr.mean())
+    if denominator == 0.0:
+        return np.nan
+    if blocks is None:
+        return 1.0
+    block_labels = np.asarray(blocks)
+    if block_labels.ndim != 1 or block_labels.size != sx_arr.size:
+        raise ValueError("blocks must be one-dimensional and match profile length")
+    expected_product_sum = 0.0
+    for label in np.unique(block_labels):
+        members = np.flatnonzero(block_labels == label)
+        expected_product_sum += (
+            float(np.sum(sx_arr[members]))
+            * float(np.sum(sy_arr[members]))
+            / members.size
+        )
+    return float(expected_product_sum / sx_arr.size / denominator)
+
+
 def permutation_test_profiles(
     sx: Array | list[float],
     sy: Array | list[float],
@@ -355,14 +395,32 @@ def permutation_test_profiles(
     n_perm: int = 999,
     seed: int | None = None,
     alternative: str = "greater",
+    blocks: Array | list[object] | None = None,
 ) -> dict[str, float | str]:
-    """Permutation test for any fixed pair of separately fitted profiles."""
+    """Permutation test for fixed separately fitted profiles.
+
+    When ``blocks`` is supplied, observations are rearranged only within equal
+    block labels.  This supports a conditional exchangeability null for
+    stratified or matched designs.  The resulting permutation reference mean
+    need not equal one because between-block salience is deliberately held
+    fixed, so it is returned explicitly for reporting.
+    """
     if alternative not in {"greater", "less", "two-sided"}:
         raise ValueError("alternative must be 'greater', 'less', or 'two-sided'")
+    if n_perm < 1:
+        raise ValueError("n_perm must be positive")
     sx_arr = _as_1d(sx, "sx")
     sy_arr = _as_1d(sy, "sy")
     if sx_arr.size != sy_arr.size:
         raise ValueError("sx and sy must have the same length")
+    block_members: list[np.ndarray] | None = None
+    if blocks is not None:
+        block_labels = np.asarray(blocks)
+        if block_labels.ndim != 1 or block_labels.size != sx_arr.size:
+            raise ValueError("blocks must be one-dimensional and match profile length")
+        block_members = [
+            np.flatnonzero(block_labels == label) for label in np.unique(block_labels)
+        ]
     observed = c_delta_from_profiles(sx_arr, sy_arr)
     if observed["status"] != "ok":
         return {"observed": np.nan, "p_value": np.nan, "alternative": alternative,
@@ -370,18 +428,31 @@ def permutation_test_profiles(
     rng = np.random.default_rng(seed)
     mean_x, mean_y = float(sx_arr.mean()), float(sy_arr.mean())
     observed_raw = float(observed["raw"])
+    reference_exact = profile_permutation_reference(sx_arr, sy_arr, blocks=blocks)
     exceed = 0
+    statistics: list[float] = []
     for _ in range(n_perm):
-        stat = float(np.mean(sx_arr * rng.permutation(sy_arr)) / (mean_x * mean_y))
+        if block_members is None:
+            permuted_sy = rng.permutation(sy_arr)
+        else:
+            permuted_sy = sy_arr.copy()
+            for members in block_members:
+                permuted_sy[members] = sy_arr[rng.permutation(members)]
+        stat = float(np.mean(sx_arr * permuted_sy) / (mean_x * mean_y))
+        statistics.append(stat)
         if alternative == "greater":
             exceed += stat >= observed_raw
         elif alternative == "less":
             exceed += stat <= observed_raw
         else:
-            exceed += abs(stat - 1.0) >= abs(observed_raw - 1.0)
+            exceed += abs(stat - reference_exact) >= abs(
+                observed_raw - reference_exact
+            )
     return {
         "observed": observed_raw,
         "p_value": float((exceed + 1) / (n_perm + 1)),
+        "permutation_reference_mean": float(np.mean(statistics)),
+        "permutation_reference_exact": reference_exact,
         "alternative": alternative,
         "status": "ok",
     }

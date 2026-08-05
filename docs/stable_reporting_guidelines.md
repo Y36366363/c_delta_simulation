@@ -13,11 +13,17 @@ Future reports should emphasize:
 - divergence-vector correlations;
 - pairing-normalized values;
 - independent-null calibration summaries;
+- the declared permutation group and its exact reference value;
 - overlap-layer probabilities and tail shares.
 
 These quantities are stable under the `1 / n` correction. The correction is a
 positive constant scaling for each fixed sample size, so permutation orderings
 and rejection decisions do not change.
+
+For unrestricted re-pairing, the corrected c_delta reference is exactly `1`.
+For within-block or otherwise restricted permutations, report the
+group-specific reference returned by the profile permutation routine; it need
+not equal `1` because between-block salience is preserved.
 
 ## Quantities to De-emphasize
 

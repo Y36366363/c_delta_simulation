@@ -648,6 +648,61 @@ designs need restricted permutations.
 
 Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
 
+### 27. The Permutation Group and Its Reference Are Part of the Method
+
+**Evidence: exact conditional identity and 54,000-dataset simulation**
+
+For unrestricted permutations, the exact conditional mean of corrected
+c_delta is `1`. For within-block permutations it is instead
+
+```text
+{(1/n) sum_b [sum(A_b) sum(B_b) / n_b]} / {mean(A) mean(B)},
+```
+
+which need not equal `1`. Under a conditional null with shared block-scale
+structure, unrestricted rejection averaged `.4417` for old L2 and `.5158` for
+Huber primary. Within-block permutation restored means `.0481` and `.0474`.
+The corresponding restricted references matched the observed conditional-null
+means: `1.0241` for old L2 and about `1.189` for Huber primary.
+
+The formal interface now accepts block labels and returns Monte Carlo and exact
+restricted references. Reports must define the allowed permutation group;
+`c_delta - 1` is not a universal conditional effect measure.
+
+Source: `docs/inference_boundaries_and_local_power_20260805.md`.
+
+### 28. Ties Are Conservative and Constant Margins Are Undetermined
+
+**Evidence: 54,000-dataset discrete and degeneracy validation**
+
+Across Bernoulli, ordinal, Poisson, zero-inflated, rounded-normal, and
+near-constant nulls, rejection ranges were `.0187-.0600` for old L2 and
+`.0207-.0580` for Huber primary, with means `.0433` and `.0419`. Bernoulli
+profiles were often constant, making strict upper-tail permutation conservative.
+An exactly constant margin had determined rate zero for every method and sample
+size. Near-constant continuous variation of order `1e-12` remained numerically
+calibrated, but scientific degeneracy should be defined from measurement
+resolution rather than floating-point nonzero variation.
+
+Source: `docs/inference_boundaries_and_local_power_20260805.md`.
+
+### 29. Diffuse Power Depends on Geometry, Not Only Sparsity
+
+**Evidence: 72,000-dataset local-power map**
+
+For balanced correlated-lognormal magnitudes, the Huber primary exceeded old
+L2 in many weak-to-moderate local alternatives. At latent correlation `.2`,
+power at `n=80, 160, 320` was `.421, .704, .942` for Huber versus `.363, .618,
+.877` for old L2. At correlation `.5`, Huber crossed `.80` power at `n=40`,
+while old L2 did so at `n=80` in the tested grid.
+
+With independently located 5% magnitude-20 contamination, however, no method
+approached `.80`; at correlation `.7`, `n=320`, rejection was `.058` old L2,
+`.079` Huber primary, and `.152` cap 6. Cap 6 limits leverage but cannot fully
+recover a weak distributed signal from severe unmatched masking.
+
+Source: `docs/inference_boundaries_and_local_power_20260805.md`.
+
 ### 26. Expanded Validation Retains Cap 6 and Strengthens the Diffuse Warning
 
 **Evidence: 180,000 cap-validation and 120,000 diffuse-boundary datasets**
@@ -672,7 +727,8 @@ Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
-2. Mark `1` as the random-pairing reference or report `c_delta - 1`.
+2. Mark `1` as the unrestricted random-pairing reference. For restricted
+   permutations, report the exact group-specific reference instead.
 3. Treat divergence Pearson correlation as mathematically equivalent for
    one-sided permutation ordering.
 4. Describe Wilson intervals as Monte Carlo uncertainty intervals only.
@@ -692,24 +748,25 @@ Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
 
 1. Validate the frozen primary/cap-6 specification on real or realistically
    structured data without retuning on the evaluation examples.
-2. Implement and validate block-, stratum-, or cluster-respecting permutation
-   for non-exchangeable designs.
-3. Regenerate all older raw `c_delta` summaries before the final report.
+2. Define a measurement-resolution rule for practically degenerate margins.
+3. Evaluate effect-size interval coverage relative to unrestricted and
+   restricted permutation references.
+4. Regenerate all older raw `c_delta` summaries before the final report.
 
 ### Later Sensitivity Work
 
-4. Compare the global statistic with a pre-specified top-k or scan-style
+5. Compare the global statistic with a pre-specified top-k or scan-style
    comparator under fixed `k` and fixed `k / n`.
-5. Test a cluster-conditional reference only if within-cluster salience is a
+6. Test a cluster-conditional reference only if within-cluster salience is a
    scientific target; keep it separate from the global definition.
-6. Extend to multivariate data only with a rotation-invariant reference and
+7. Extend to multivariate data only with a rotation-invariant reference and
    radial scale.
 
 ### Theory and Framing
 
-7. Complete the full influence-function derivation including fitted Huber
+8. Complete the full influence-function derivation including fitted Huber
    location and MAD scale, not only the direct fixed-profile component.
-8. Develop connections to energy statistics, distance covariance, HSIC, MMD,
+9. Develop connections to energy statistics, distance covariance, HSIC, MMD,
    and related distance/kernel methods while preserving the distinct
    observation-profile target.
 
@@ -717,6 +774,15 @@ Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
 
 ### 2026-08-05
 
+- Added within-block permutation support and derived its exact conditional
+  c_delta reference, which is generally not `1`.
+- Demonstrated that restricted permutation restores conditional-null
+  calibration under shared block-scale heterogeneity.
+- Validated tied, discrete, near-constant, and exactly degenerate margins.
+- Mapped local weak-salience power through `n=320`, refining the diffuse
+  limitation by signal geometry and contamination.
+- Added `docs/inference_boundaries_and_local_power_20260805.md` and three new
+  complete result tables.
 - Completed a comprehensive original-versus-robust benchmark with 18
   scenarios and four sample sizes.
 - Defined the supported use domain as positive paired salience under

@@ -8,6 +8,35 @@ from pathlib import Path
 import numpy as np
 
 
+def within_block_permutation_indices(
+    blocks: np.ndarray | list[object],
+    n_perm: int,
+    rng: np.random.Generator,
+) -> np.ndarray:
+    """Generate index permutations that only rearrange units within blocks.
+
+    The returned rows can be used anywhere ordinary permutation indices are
+    accepted.  Every row is a full permutation of ``range(n)`` and preserves
+    each observation's block label.
+    """
+    labels = np.asarray(blocks)
+    if labels.ndim != 1:
+        raise ValueError("blocks must be one-dimensional")
+    if labels.size < 3:
+        raise ValueError("blocks must contain at least three observations")
+    if n_perm < 1:
+        raise ValueError("n_perm must be positive")
+
+    indices = np.tile(np.arange(labels.size), (n_perm, 1))
+    for label in np.unique(labels):
+        members = np.flatnonzero(labels == label)
+        if members.size < 2:
+            continue
+        for row in range(n_perm):
+            indices[row, members] = rng.permutation(members)
+    return indices
+
+
 def common_permutation_pvalues(
     profiles_x: dict[str, np.ndarray],
     profiles_y: dict[str, np.ndarray],

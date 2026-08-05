@@ -38,7 +38,9 @@ two nonnegative profiles `A` and `B` is
 C(A, B) = mean(A_i B_i) / (mean(A_i) mean(B_i)).
 ```
 
-The random-pairing reference is exactly `1` conditional on fixed profiles.
+The unrestricted random-pairing reference is exactly `1` conditional on fixed
+profiles. For restricted permutations, use the group-specific reference
+derived in `docs/inference_boundaries_and_local_power_20260805.md`.
 
 ### Original L2 profile
 
@@ -326,8 +328,9 @@ For a first formal report:
 5. include original L2 as a historical comparator and, when diffuse alignment
    is scientifically central, as a pre-specified secondary analysis;
 6. do not combine unadjusted p-values into one reject-if-any rule;
-7. report profile correlation, `c_delta - 1`, and the two marginal profiles so
-   that leverage and disagreement are visible.
+7. report profile correlation, the two marginal profiles, and c_delta relative
+   to the correct permutation-group reference so that leverage and disagreement
+   are visible.
 
 Detailed raw outputs:
 

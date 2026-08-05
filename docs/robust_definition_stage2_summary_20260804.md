@@ -90,8 +90,10 @@ The proposed profile has the following useful properties.
    dimensionless profile is unchanged by `z -> a z + b` for `a != 0`.
 3. **Separate marginal fitting.** The `x` profile is fitted without using `y`
    and vice versa, so no paired signal is introduced during preprocessing.
-4. **Exact conditional permutation reference.** The corrected statistic has
-   reference `1` for fixed profiles.
+4. **Exact unrestricted conditional permutation reference.** The corrected
+   statistic has reference `1` for fixed profiles under unrestricted re-pairing.
+   Within-block permutations have a group-specific reference; see the
+   2026-08-05 inference-boundary follow-up.
 5. **Correlation identity.** As for the previous definition,
 
    ```text
