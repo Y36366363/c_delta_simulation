@@ -5,6 +5,28 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/05/2026
 
+- **Next-phase decision** - Broad calibration grids are no longer the main
+  bottleneck. Prioritise the primary statistic's full influence function,
+  asymptotic variance, studentized interval, and a formal restricted-
+  permutation theorem.
+- **Huber bootstrap implementation** - Added paired profile-refitting
+  percentile, basic, BCa, and bootstrap-SE normal intervals, including
+  leave-one-pair-out BCa acceleration and affine-invariance tests.
+- **Analytic-truth coverage test** - Against
+  `C=exp(.2025*rho)`, ordinary bootstrap intervals overcovered severely at
+  `n=20` but undercovered stronger effects at `n=80-160`; overall averages hid
+  this pattern.
+- **Focused coverage replication** - With 800 independent datasets per row at
+  `rho=.5`, coverage was only `.934-.939` at `n=80` and `.919-.933` at
+  `n=160`. No tested bootstrap interval is ready as a formal 95% interval.
+- **Independent core replication** - A new 3,000-repetition seed reproduced
+  block correction (`.6610` unrestricted versus `.0453` within-block), binary
+  conservatism (`.0240`), clean local power (`.4350`), and contaminated local
+  masking (`.0693`).
+- **Theory roadmap** - See
+  `docs/next_theory_and_interval_validation_20260805.md` and the corresponding
+  `results/huber_bootstrap_*` and
+  `results/inference_independent_replication_20260805.tsv` files.
 - **Design-respecting inference** - Added within-block profile permutation and
   an exact restricted-reference formula. Under a shared-scale conditional
   null, unrestricted rejection averaged `.44-.52`; within-block permutation

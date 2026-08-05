@@ -25,6 +25,12 @@ For within-block or otherwise restricted permutations, report the
 group-specific reference returned by the profile permutation routine; it need
 not equal `1` because between-block salience is preserved.
 
+Current Huber c_delta percentile, basic, BCa, and bootstrap-SE normal intervals
+have not shown uniformly correct 95% finite-sample coverage. Until a
+studentized interval is derived and validated, label these intervals as
+exploratory uncertainty ranges and retain permutation p-values as the formal
+inferential output.
+
 ## Quantities to De-emphasize
 
 Raw `c_delta` should not be central in the next reports unless the table is

@@ -1,0 +1,6 @@
+family	permutation_scheme	method	repetitions	n_perm	determined_rate	rejection_rate_all	wilson_low_all	wilson_high_all
+block_conditional_null	unrestricted	huber_primary	3000	499	1.0	0.661	0.6438646772453582	0.6777235334650868
+block_conditional_null	within_block	huber_primary	3000	499	1.0	0.04533333333333334	0.038452586272197074	0.053376980168699344
+bernoulli50_null	unrestricted	huber_primary	3000	499	1.0	0.024	0.019101799345977936	0.030115664640532384
+local_clean_rho20	unrestricted	huber_primary	3000	499	1.0	0.435	0.41735416706858885	0.45281208326570355
+local_contam_rho70	unrestricted	huber_primary	3000	499	1.0	0.06933333333333333	0.06078339797179763	0.07898478373028311

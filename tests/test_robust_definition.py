@@ -10,6 +10,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from cdelta import (
     c_delta_from_profiles,
+    huber_cdelta_bootstrap_intervals,
     huber_reference_profile,
     permutation_test_profiles,
     profile_permutation_reference,
@@ -17,6 +18,43 @@ from cdelta import (
 
 
 class RobustDefinitionTests(unittest.TestCase):
+    def test_huber_bootstrap_intervals_are_reproducible_and_ordered(self):
+        rng = np.random.default_rng(20260906)
+        x = rng.normal(size=30)
+        y = 0.4 * x + rng.normal(size=30)
+        first = huber_cdelta_bootstrap_intervals(
+            x, y, n_boot=59, seed=20260907
+        )
+        second = huber_cdelta_bootstrap_intervals(
+            x, y, n_boot=59, seed=20260907
+        )
+        self.assertEqual(first, second)
+        for method in ("percentile", "basic", "bca", "normal"):
+            self.assertLess(first[method]["lower"], first[method]["upper"])
+
+    def test_huber_bootstrap_intervals_are_affine_invariant(self):
+        rng = np.random.default_rng(20260908)
+        x = rng.normal(size=25)
+        y = rng.normal(size=25)
+        base = huber_cdelta_bootstrap_intervals(x, y, n_boot=39, seed=12)
+        transformed = huber_cdelta_bootstrap_intervals(
+            -3.0 * x + 7.0, 5.0 * y - 2.0, n_boot=39, seed=12
+        )
+        for key in (
+            "estimate",
+            "bias_correction",
+            "acceleration",
+            "bootstrap_standard_error",
+        ):
+            self.assertAlmostEqual(base[key], transformed[key], places=8)
+        for method in ("percentile", "basic", "bca", "normal"):
+            self.assertAlmostEqual(
+                base[method]["lower"], transformed[method]["lower"], places=8
+            )
+            self.assertAlmostEqual(
+                base[method]["upper"], transformed[method]["upper"], places=8
+            )
+
     def test_profile_is_shift_and_nonzero_scale_invariant(self):
         x = np.array([-4.0, -1.0, 0.5, 2.0, 8.0, 12.0])
         base = huber_reference_profile(x, radial_floor=1.0)

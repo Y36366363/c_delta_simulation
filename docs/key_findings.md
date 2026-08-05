@@ -648,6 +648,27 @@ designs need restricted permutations.
 
 Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
 
+### 26. Expanded Validation Retains Cap 6 and Strengthens the Diffuse Warning
+
+**Evidence: 180,000 cap-validation and 120,000 diffuse-boundary datasets**
+
+Across 180 expanded cap conditions, cap 6 had null rejection range
+`.035-.062`, maximum clean-core loss `.024`, mean clean-core loss `.0025`, and
+mean masking gain `.2319` over the uncapped profile. Cap 5.5 had maximum loss
+`.029` in this seed but `.0319` in earlier three-seed training, so it remains
+too close to the declared `.03` boundary. Cap 6.5 reduced maximum loss to
+`.009` but reduced mean masking gain to `.2114`.
+
+The expanded diffuse study showed that the clean-power tradeoff is not always
+only a small-sample issue. Mean primary-minus-L2 differences were `-.0704`,
+`-.1055`, `-.1037`, `-.0781`, and `-.0447` at `n=12, 20, 40, 80, 160`; gaps
+persisted most strongly under sign imbalance. Independent 5% magnitude-20
+contamination drove old L2 and uncapped Huber close to level-.05 power, while
+cap 6 recovered only limited power. Old L2 should therefore remain a
+pre-specified comparator when clean diffuse alignment is central.
+
+Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
+
 ### 27. The Permutation Group and Its Reference Are Part of the Method
 
 **Evidence: exact conditional identity and 54,000-dataset simulation**
@@ -703,26 +724,35 @@ recover a weak distributed signal from severe unmatched masking.
 
 Source: `docs/inference_boundaries_and_local_power_20260805.md`.
 
-### 26. Expanded Validation Retains Cap 6 and Strengthens the Diffuse Warning
+### 30. Ordinary Bootstrap Intervals Do Not Yet Have Reliable 95% Coverage
 
-**Evidence: 180,000 cap-validation and 120,000 diffuse-boundary datasets**
+**Evidence: analytic population target, four interval methods, and focused replication**
 
-Across 180 expanded cap conditions, cap 6 had null rejection range
-`.035-.062`, maximum clean-core loss `.024`, mean clean-core loss `.0025`, and
-mean masking gain `.2319` over the uncapped profile. Cap 5.5 had maximum loss
-`.029` in this seed but `.0319` in earlier three-seed training, so it remains
-too close to the declared `.03` boundary. Cap 6.5 reduced maximum loss to
-`.009` but reduced mean masking gain to `.2114`.
+For symmetric correlated-lognormal magnitudes, the population target is
+exactly `C=exp(.2025*rho)`. Across `n=20,40,80,160` and `rho=0,.2,.5`, mean
+coverage was `.9719` for percentile/basic, `.9531` for BCa, and `.9750` for a
+bootstrap-SE normal interval. These averages conceal severe small-sample
+overcoverage and moderate-to-large-sample undercoverage for stronger effects.
 
-The expanded diffuse study showed that the clean-power tradeoff is not always
-only a small-sample issue. Mean primary-minus-L2 differences were `-.0704`,
-`-.1055`, `-.1037`, `-.0781`, and `-.0447` at `n=12, 20, 40, 80, 160`; gaps
-persisted most strongly under sign imbalance. Independent 5% magnitude-20
-contamination drove old L2 and uncapped Huber close to level-.05 power, while
-cap 6 recovered only limited power. Old L2 should therefore remain a
-pre-specified comparator when clean diffuse alignment is central.
+An independent 800-dataset replication at `rho=.5` gave coverage
+`.9338-.9388` at `n=80` and `.9188-.9325` at `n=160`. BCa was best at `n=160`
+but its Wilson interval `[.9130,.9479]` remained slightly below `.95`. Ordinary
+bootstrap intervals should remain exploratory until a studentized variance
+formula is derived and validated.
 
-Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
+Source: `docs/next_theory_and_interval_validation_20260805.md`.
+
+### 31. Independent Replication Confirms the Newest Inference Boundaries
+
+**Evidence: independent seed, 3,000 datasets and 499 permutations per condition**
+
+The focused replication produced `.6610` unrestricted versus `.0453`
+within-block rejection under the shared-scale conditional null, `.0240` for a
+Bernoulli `.50` null, `.4350` for clean local `rho=.2,n=80`, and `.0693` for
+5% contaminated local `rho=.7,n=320`. All four directions reproduced the
+earlier results and their interpretation.
+
+Source: `docs/next_theory_and_interval_validation_20260805.md`.
 
 ## Reporting Rules
 
@@ -746,27 +776,26 @@ Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
 
 ### High Priority
 
-1. Validate the frozen primary/cap-6 specification on real or realistically
-   structured data without retuning on the evaluation examples.
-2. Define a measurement-resolution rule for practically degenerate margins.
-3. Evaluate effect-size interval coverage relative to unrestricted and
-   restricted permutation references.
-4. Regenerate all older raw `c_delta` summaries before the final report.
+1. Derive the uncapped primary statistic's full influence function and paired
+   asymptotic variance.
+2. Construct and validate a studentized confidence interval.
+3. Formalise finite-sample within-block permutation validity.
+4. Define a measurement-resolution rule for practically degenerate margins.
+5. Validate the frozen specification on real or realistically structured data.
+6. Regenerate all older raw `c_delta` summaries before the final report.
 
 ### Later Sensitivity Work
 
-5. Compare the global statistic with a pre-specified top-k or scan-style
+7. Compare the global statistic with a pre-specified top-k or scan-style
    comparator under fixed `k` and fixed `k / n`.
-6. Test a cluster-conditional reference only if within-cluster salience is a
+8. Test a cluster-conditional reference only if within-cluster salience is a
    scientific target; keep it separate from the global definition.
-7. Extend to multivariate data only with a rotation-invariant reference and
+9. Extend to multivariate data only with a rotation-invariant reference and
    radial scale.
 
 ### Theory and Framing
 
-8. Complete the full influence-function derivation including fitted Huber
-   location and MAD scale, not only the direct fixed-profile component.
-9. Develop connections to energy statistics, distance covariance, HSIC, MMD,
+10. Develop connections to energy statistics, distance covariance, HSIC, MMD,
    and related distance/kernel methods while preserving the distinct
    observation-profile target.
 
@@ -774,6 +803,15 @@ Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
 
 ### 2026-08-05
 
+- Implemented fully refitted Huber c_delta percentile, basic, BCa, and normal
+  bootstrap intervals.
+- Tested interval coverage against an analytic population target and found
+  small-sample overcoverage plus reproducible stronger-effect undercoverage.
+- Repeated the weakest coverage rows with 800 independent datasets.
+- Independently replicated the newest block, ties, clean-local, and
+  contaminated-local conclusions with 3,000 datasets per condition.
+- Prioritised influence-function, asymptotic-variance, and studentized-interval
+  theory over additional broad marginal grids.
 - Added within-block permutation support and derived its exact conditional
   c_delta reference, which is generally not `1`.
 - Demonstrated that restricted permutation restores conditional-null

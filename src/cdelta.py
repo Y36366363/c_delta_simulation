@@ -10,6 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from itertools import permutations
 from math import comb
+from statistics import NormalDist
 import numpy as np
 
 
@@ -494,6 +495,121 @@ def robust_profile_bootstrap_ci(
         "lower": float(lower),
         "upper": float(upper),
         "n_used": float(len(stats)),
+    }
+
+
+def huber_cdelta_bootstrap_intervals(
+    x: Array | list[float],
+    y: Array | list[float],
+    *,
+    huber_c: float = 1.345,
+    cap: float | None = None,
+    n_boot: int = 999,
+    seed: int | None = None,
+    alpha: float = 0.05,
+) -> dict[str, float | dict[str, float]]:
+    """Return percentile, basic, and BCa intervals for Huber c_delta.
+
+    Paired observations are resampled together and both marginal Huber
+    profiles are refitted in every bootstrap and jackknife sample.  BCa uses
+    the ordinary leave-one-pair-out acceleration estimate.
+    """
+    x_arr = _as_1d(x, "x")
+    y_arr = _as_1d(y, "y")
+    if x_arr.size != y_arr.size:
+        raise ValueError("x and y must have the same length")
+    if x_arr.size < 4:
+        raise ValueError("at least four pairs are required for jackknife BCa")
+    if n_boot < 20:
+        raise ValueError("n_boot must be at least 20")
+    if not 0.0 < alpha < 1.0:
+        raise ValueError("alpha must be between zero and one")
+
+    def estimate(x_values: Array, y_values: Array) -> float:
+        result = c_delta_from_profiles(
+            huber_reference_profile(x_values, huber_c=huber_c, cap=cap),
+            huber_reference_profile(y_values, huber_c=huber_c, cap=cap),
+        )
+        return float(result["raw"])
+
+    observed = estimate(x_arr, y_arr)
+    if not np.isfinite(observed):
+        raise ValueError("observed Huber c_delta is undetermined")
+
+    rng = np.random.default_rng(seed)
+    bootstrap: list[float] = []
+    for _ in range(n_boot):
+        indices = rng.integers(0, x_arr.size, size=x_arr.size)
+        value = estimate(x_arr[indices], y_arr[indices])
+        if np.isfinite(value):
+            bootstrap.append(value)
+    if len(bootstrap) < max(20, n_boot // 2):
+        raise ValueError("too many bootstrap samples were undetermined")
+    bootstrap_arr = np.asarray(bootstrap)
+
+    lower_q, upper_q = np.quantile(
+        bootstrap_arr, [alpha / 2.0, 1.0 - alpha / 2.0]
+    )
+    percentile = {"lower": float(lower_q), "upper": float(upper_q)}
+    basic = {
+        "lower": float(2.0 * observed - upper_q),
+        "upper": float(2.0 * observed - lower_q),
+    }
+    bootstrap_standard_error = float(np.std(bootstrap_arr, ddof=1))
+    normal_quantile = NormalDist().inv_cdf(1.0 - alpha / 2.0)
+    normal_interval = {
+        "lower": float(observed - normal_quantile * bootstrap_standard_error),
+        "upper": float(observed + normal_quantile * bootstrap_standard_error),
+    }
+
+    jackknife = []
+    for omitted in range(x_arr.size):
+        keep = np.arange(x_arr.size) != omitted
+        value = estimate(x_arr[keep], y_arr[keep])
+        if np.isfinite(value):
+            jackknife.append(value)
+    if len(jackknife) != x_arr.size:
+        raise ValueError("a jackknife sample was undetermined")
+    jackknife_arr = np.asarray(jackknife)
+    jackknife_mean = float(np.mean(jackknife_arr))
+    deviations = jackknife_mean - jackknife_arr
+    squared_sum = float(np.sum(deviations**2))
+    acceleration = (
+        float(np.sum(deviations**3)) / (6.0 * squared_sum**1.5)
+        if squared_sum > 0.0
+        else 0.0
+    )
+
+    normal = NormalDist()
+    minimum_probability = 0.5 / len(bootstrap_arr)
+    below = float(np.mean(bootstrap_arr < observed))
+    below = min(max(below, minimum_probability), 1.0 - minimum_probability)
+    bias_correction = normal.inv_cdf(below)
+
+    def adjusted_probability(probability: float) -> float:
+        z_alpha = normal.inv_cdf(probability)
+        numerator = bias_correction + z_alpha
+        denominator = 1.0 - acceleration * numerator
+        adjusted = normal.cdf(bias_correction + numerator / denominator)
+        return min(max(adjusted, 0.0), 1.0)
+
+    bca_probabilities = (
+        adjusted_probability(alpha / 2.0),
+        adjusted_probability(1.0 - alpha / 2.0),
+    )
+    bca_q = np.quantile(bootstrap_arr, bca_probabilities)
+    bca = {"lower": float(bca_q[0]), "upper": float(bca_q[1])}
+
+    return {
+        "estimate": observed,
+        "percentile": percentile,
+        "basic": basic,
+        "bca": bca,
+        "normal": normal_interval,
+        "bootstrap_standard_error": bootstrap_standard_error,
+        "bias_correction": float(bias_correction),
+        "acceleration": acceleration,
+        "n_boot_used": float(len(bootstrap_arr)),
     }
 
 
