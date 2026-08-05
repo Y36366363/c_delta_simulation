@@ -5,6 +5,35 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/05/2026
 
+- **Comprehensive old-versus-new benchmark** - Compared original L2/L1,
+  Huber primary, and Huber cap 6 across 18 scenarios, four sample sizes,
+  108,000 datasets, and common permutations. Exchangeable-null mean rejection
+  remained `.0475-.0485` across methods.
+- **Scope decision** - Continue development as a moderately broad test of
+  positive paired salience under exchangeable or design-respecting pairing;
+  do not market it as a general correlation, independence, causal, or
+  full-distance-geometry statistic.
+- **Comparative performance** - Huber-primary average core power exceeded old
+  L2 from `n=40` onward and was substantially stronger for balanced bimodality
+  and moderate-to-large-sample t2 signals, while preserving sparse matched
+  power. Old L2 retained a genuine clean-diffuse advantage.
+- **Expanded cap-6 cross-validation** - Across 180 additional conditions, cap
+  6 kept worst clean-core loss at `.024` and delivered `.2319` mean masking
+  gain over uncapped Huber. Cap 5.5 remained too close to the declared `.03`
+  loss boundary; cap 6.5 was safer but less resistant to masking.
+- **Expanded diffuse boundary** - Across 80 conditions, clean diffuse power
+  loss sometimes persisted beyond `n=80`, especially with sign imbalance.
+  Independent 5% magnitude-20 contamination erased most diffuse power for all
+  uncapped methods; cap 6 recovered only part of it.
+- **Final reporting structure** - Use uncapped Huber as the formal primary,
+  cap 6 as a pre-specified leverage-limited sensitivity, and old L2 as a
+  pre-specified comparator when diffuse alignment is scientifically central;
+  do not use an unadjusted reject-if-any rule.
+- **Comprehensive documentation** - See
+  `docs/comprehensive_scope_and_cross_validation_20260805.md` and
+  `results/comprehensive_scope_benchmark_20260805.tsv`,
+  `results/cap6_expanded_cross_validation_20260805.tsv`, and
+  `results/diffuse_boundary_expansion_20260805.tsv`.
 - **Cap loss formalisation** - Defined a constrained loss that maximises
   unmatched-masking gain subject to null calibration and at most `.03`
   worst-case absolute power loss over matched, t2, diffuse, and bimodal core

@@ -1,6 +1,6 @@
 # c_delta Project: Key Findings
 
-Last updated: 2026-08-04
+Last updated: 2026-08-05
 
 This is the central, cumulative record of the project's most important
 findings. It is intended for quick retrieval when preparing emails, follow-up
@@ -35,6 +35,12 @@ notes, presentations, and the final report.
 > vectors for a fixed sample. Alignment may be sparse or distributed.
 > Heavy-tailed backgrounds weaken detection by generating large, usually
 > unmatched background divergence scores.
+
+The leading redefinition is now the dimensionless Huber-reference radius with
+an uncapped formal primary and a separately reported cap-6 sensitivity. It has
+stable exchangeable-null calibration and broader heavy-tail/bimodal power than
+the original L2 profile, but it does not uniformly dominate old L2: clean
+diffuse magnitude alignment remains a substantive counterexample.
 
 ## Main Findings
 
@@ -619,6 +625,50 @@ comparator rather than changing the robust primary post hoc.
 
 Source: `docs/cap_loss_and_diffuse_decision_20260805.md`.
 
+### 25. Comprehensive Comparison Supports Moderately Broad, Targeted Use
+
+**Evidence: 108,000-dataset benchmark across 18 scenarios and four sample sizes**
+
+Across normal, t3, t2, lognormal, bimodal, and independently contaminated
+exchangeable nulls, mean rejection was `.0476` for original L2, `.0475` for
+original L1, `.0482` for Huber primary, and `.0485` for Huber cap 6. The Huber
+primary's average core power was slightly below old L2 at `n=20` (`.7609`
+versus `.7709`) and higher at `n=40, 80, 160` by `.0170`, `.0320`, and `.0378`.
+
+Across sample sizes, Huber primary improved balanced-bimodal power by `.1858`
+and t2 matched power by `.0495`, preserved sparse matched power, and lost
+`.0582` for low-noise diffuse alignment. In unmatched masking, cap-6 average
+rejection was `.4308`, versus `.0612` uncapped and `.0410` for old L2.
+
+The method is therefore worth continuing as a moderately broad test of
+positive paired salience relative to robust marginal references. It is not a
+general independence or full-geometry test. Unrestricted permutation requires
+exchangeable pairings; clustered, longitudinal, matched-set, or stratified
+designs need restricted permutations.
+
+Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
+
+### 26. Expanded Validation Retains Cap 6 and Strengthens the Diffuse Warning
+
+**Evidence: 180,000 cap-validation and 120,000 diffuse-boundary datasets**
+
+Across 180 expanded cap conditions, cap 6 had null rejection range
+`.035-.062`, maximum clean-core loss `.024`, mean clean-core loss `.0025`, and
+mean masking gain `.2319` over the uncapped profile. Cap 5.5 had maximum loss
+`.029` in this seed but `.0319` in earlier three-seed training, so it remains
+too close to the declared `.03` boundary. Cap 6.5 reduced maximum loss to
+`.009` but reduced mean masking gain to `.2114`.
+
+The expanded diffuse study showed that the clean-power tradeoff is not always
+only a small-sample issue. Mean primary-minus-L2 differences were `-.0704`,
+`-.1055`, `-.1037`, `-.0781`, and `-.0447` at `n=12, 20, 40, 80, 160`; gaps
+persisted most strongly under sign imbalance. Independent 5% magnitude-20
+contamination drove old L2 and uncapped Huber close to level-.05 power, while
+cap 6 recovered only limited power. Old L2 should therefore remain a
+pre-specified comparator when clean diffuse alignment is central.
+
+Source: `docs/comprehensive_scope_and_cross_validation_20260805.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -640,29 +690,43 @@ Source: `docs/cap_loss_and_diffuse_decision_20260805.md`.
 
 ### High Priority
 
-1. Compare the global statistic with a pre-specified top-k or scan-style
-   comparator under fixed `k` and fixed `k / n`.
-2. Regenerate all older raw `c_delta` summaries before the final report.
-3. Extend direct masking diagnostics beyond `n = 80`, `k = 2`, magnitude `8`.
+1. Validate the frozen primary/cap-6 specification on real or realistically
+   structured data without retuning on the evaluation examples.
+2. Implement and validate block-, stratum-, or cluster-respecting permutation
+   for non-exchangeable designs.
+3. Regenerate all older raw `c_delta` summaries before the final report.
 
 ### Later Sensitivity Work
 
-4. Implement a pre-specified Huberized divergence after robust scaling.
-5. Clarify the intended rank-based question.
-6. Give every variant its own permutation calibration and independent-null
-   validation under normal, heavy-tailed, and contamination-mixture settings.
+4. Compare the global statistic with a pre-specified top-k or scan-style
+   comparator under fixed `k` and fixed `k / n`.
+5. Test a cluster-conditional reference only if within-cluster salience is a
+   scientific target; keep it separate from the global definition.
+6. Extend to multivariate data only with a rotation-invariant reference and
+   radial scale.
 
 ### Theory and Framing
 
-7. Develop connections to energy statistics, distance covariance, HSIC, MMD,
-   and related distance/kernel methods.
-8. Investigate whether a sparse comparator can improve fixed-handful detection
-   while preserving the structural interpretation.
+7. Complete the full influence-function derivation including fitted Huber
+   location and MAD scale, not only the direct fixed-profile component.
+8. Develop connections to energy statistics, distance covariance, HSIC, MMD,
+   and related distance/kernel methods while preserving the distinct
+   observation-profile target.
 
 ## Dated Update Log
 
 ### 2026-08-05
 
+- Completed a comprehensive original-versus-robust benchmark with 18
+  scenarios and four sample sizes.
+- Defined the supported use domain as positive paired salience under
+  exchangeable or design-respecting pairing rather than general dependence.
+- Expanded cap-6 cross-validation to neighbouring caps over 180 conditions;
+  cap 6 remained the stable `.03`-loss compromise.
+- Expanded diffuse testing to 80 conditions and corrected the earlier claim
+  that the loss is necessarily negligible by `n=80`.
+- Added `docs/comprehensive_scope_and_cross_validation_20260805.md` and three
+  complete result tables.
 - Derived a direct-score influence expression showing why a finite cap bounds
   direct leverage under positive profile means.
 - Replaced the earlier sparse-only cap screen with a four-alternative

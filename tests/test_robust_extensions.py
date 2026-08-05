@@ -13,9 +13,56 @@ from scripts.run_multivariate_robust_pilot import (
     spatial_median_profile,
 )
 from scripts.run_cap_loss_refinement import tolerance_map
+from scripts.run_cap6_expanded_cross_validation import (
+    masked_signal,
+    matched_signal,
+)
+from scripts.run_comprehensive_scope_benchmark import SCENARIO_ROLES, make_scenario
+from scripts.run_diffuse_boundary_expansion import make_diffuse
 
 
 class RobustExtensionTests(unittest.TestCase):
+    def test_comprehensive_scenarios_return_finite_paired_samples(self):
+        rng = np.random.default_rng(20260829)
+        for scenario in SCENARIO_ROLES:
+            x, y = make_scenario(scenario, 20, rng)
+            self.assertEqual(x.shape, (20,))
+            self.assertEqual(y.shape, (20,))
+            self.assertTrue(np.all(np.isfinite(x)))
+            self.assertTrue(np.all(np.isfinite(y)))
+
+    def test_diffuse_contamination_adds_declared_number_of_remote_values(self):
+        clean_rng = np.random.default_rng(20260830)
+        dirty_rng = np.random.default_rng(20260830)
+        clean_x, clean_y = make_diffuse(
+            clean_rng, 40, 0.15, 0.50, 0.0, "uniform"
+        )
+        dirty_x, dirty_y = make_diffuse(
+            dirty_rng, 40, 0.15, 0.50, 0.05, "uniform"
+        )
+        self.assertEqual(np.count_nonzero(dirty_x - clean_x), 2)
+        self.assertEqual(np.count_nonzero(dirty_y - clean_y), 2)
+        np.testing.assert_allclose(
+            np.sort((dirty_x - clean_x)[dirty_x != clean_x]), [20.0, 20.0]
+        )
+        np.testing.assert_allclose(
+            np.sort((dirty_y - clean_y)[dirty_y != clean_y]), [20.0, 20.0]
+        )
+
+    def test_masking_generator_adds_one_unmatched_contaminant_per_margin(self):
+        clean_rng = np.random.default_rng(20260831)
+        dirty_rng = np.random.default_rng(20260831)
+        clean_x, clean_y = matched_signal(clean_rng, 40, "fixed1", 6.0, "normal")
+        dirty_x, dirty_y = masked_signal(
+            dirty_rng, 40, "fixed1", 6.0, 20.0, "normal"
+        )
+        self.assertEqual(np.count_nonzero(dirty_x - clean_x), 1)
+        self.assertEqual(np.count_nonzero(dirty_y - clean_y), 1)
+        self.assertNotEqual(
+            int(np.flatnonzero(dirty_x != clean_x)[0]),
+            int(np.flatnonzero(dirty_y != clean_y)[0]),
+        )
+
     def test_spatial_profile_is_rotation_invariant(self):
         rng = np.random.default_rng(20260817)
         z = rng.normal(size=(60, 5))
