@@ -10,14 +10,97 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from cdelta import (
     c_delta_from_profiles,
+    direct_profile_influence_standard_error,
     huber_cdelta_bootstrap_intervals,
+    huber_cdelta_influence_inference,
+    huber_cdelta_jackknife_inference,
     huber_reference_profile,
     permutation_test_profiles,
     profile_permutation_reference,
+    symmetric_lognormal_cdelta_moments,
 )
 
 
 class RobustDefinitionTests(unittest.TestCase):
+    def test_full_influence_inference_is_affine_invariant(self):
+        rng = np.random.default_rng(20260917)
+        x = rng.lognormal(0.0, 0.5, 200)
+        y = np.exp(0.25 * np.log(x) + rng.normal(0.0, 0.45, 200))
+        base = huber_cdelta_influence_inference(x, y)
+        transformed = huber_cdelta_influence_inference(
+            -3.5 * x + 9.0, 2.25 * y - 4.0
+        )
+        for key in ("estimate", "standard_error", "influence_variance"):
+            self.assertAlmostEqual(base[key], transformed[key], places=8)
+        self.assertGreaterEqual(base["p_value"], 0.0)
+        self.assertLessEqual(base["p_value"], 1.0)
+
+    def test_full_influence_matches_direct_term_under_symmetric_model(self):
+        rng = np.random.default_rng(20260918)
+        n, rho = 30_000, 0.4
+        u = rng.normal(size=n)
+        v = rho * u + np.sqrt(1.0 - rho**2) * rng.normal(size=n)
+        x = rng.choice((-1.0, 1.0), n) * np.exp(0.45 * u)
+        y = rng.choice((-1.0, 1.0), n) * np.exp(0.45 * v)
+        result = huber_cdelta_influence_inference(x, y)
+        self.assertAlmostEqual(
+            result["influence_variance"], result["direct_variance"], delta=0.003
+        )
+
+    def test_direct_profile_influence_has_zero_empirical_mean(self):
+        sx = np.array([0.2, 0.8, 1.1, 1.9, 3.0, 4.0])
+        sy = np.array([0.4, 0.6, 1.2, 1.8, 2.5, 4.5])
+        result = direct_profile_influence_standard_error(sx, sy)
+        self.assertAlmostEqual(result["mean_influence"], 0.0, places=12)
+        self.assertGreater(result["standard_error"], 0.0)
+
+    def test_huber_jackknife_inference_is_affine_invariant(self):
+        rng = np.random.default_rng(20260912)
+        x = rng.normal(size=24)
+        y = 0.3 * x + rng.normal(size=24)
+        base = huber_cdelta_jackknife_inference(x, y)
+        transformed = huber_cdelta_jackknife_inference(
+            -4.0 * x + 3.0, 2.5 * y - 8.0
+        )
+        for key in ("estimate", "standard_error"):
+            self.assertAlmostEqual(base[key], transformed[key], places=8)
+        for method in ("normal", "log_normal"):
+            self.assertAlmostEqual(
+                base[method]["lower"], transformed[method]["lower"], places=8
+            )
+            self.assertAlmostEqual(
+                base[method]["upper"], transformed[method]["upper"], places=8
+            )
+
+    def test_symmetric_lognormal_influence_variance_matches_monte_carlo(self):
+        rho, sigma = 0.35, 0.45
+        theory = symmetric_lognormal_cdelta_moments(
+            rho, log_scale=sigma
+        )
+        rng = np.random.default_rng(20260913)
+        u = rng.normal(size=250_000)
+        v = rho * u + np.sqrt(1.0 - rho**2) * rng.normal(size=u.size)
+        a, b = np.exp(sigma * u), np.exp(sigma * v)
+        mean_radius = np.exp(sigma**2 / 2.0)
+        c_delta_value = theory["c_delta"]
+        influence = (
+            a * b / mean_radius**2
+            - c_delta_value * a / mean_radius
+            - c_delta_value * b / mean_radius
+            + c_delta_value
+        )
+        self.assertAlmostEqual(
+            float(np.var(influence)),
+            theory["influence_variance"],
+            delta=0.01,
+        )
+        null = symmetric_lognormal_cdelta_moments(0.0, log_scale=sigma)
+        self.assertAlmostEqual(
+            null["influence_variance"],
+            (np.exp(sigma**2) - 1.0) ** 2,
+            places=12,
+        )
+
     def test_huber_bootstrap_intervals_are_reproducible_and_ordered(self):
         rng = np.random.default_rng(20260906)
         x = rng.normal(size=30)

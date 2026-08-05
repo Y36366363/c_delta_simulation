@@ -5,6 +5,24 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/05/2026
 
+- **Full functional-delta derivation** - Derived the Huber-centre influence,
+  including median/MAD scale coupling, then propagated the numerator and both
+  denominator moments through one complete paired influence function.
+- **Sandwich implementation** - Added plug-in asymptotic variance, normal and
+  log-normal studentized intervals, and one-/two-sided Wald tests for the
+  uncapped continuous-margin primary statistic.
+- **Theory validation** - A closed-form symmetric lognormal benchmark matched
+  a 250,000-draw variance check; 300,000-pair contamination derivatives also
+  confirmed the nonzero MAD/centre nuisance path under skewness.
+- **Finite-sample boundary** - Across the 1,200-repetition coverage grid, the
+  full log-sandwich interval improved mean coverage from `.9198` for the
+  fixed-profile approximation to `.9415`, but still covered only
+  `.9108-.9258` for `rho=.5`. It is not yet a formal replacement for
+  permutation inference.
+- **New theory note** - See
+  `docs/functional_delta_and_studentized_inference_20260805.md` and the
+  corresponding `results/studentized_*` and
+  `results/general_influence_validation_20260805.tsv` files.
 - **Next-phase decision** - Broad calibration grids are no longer the main
   bottleneck. Prioritise the primary statistic's full influence function,
   asymptotic variance, studentized interval, and a formal restricted-
@@ -555,6 +573,12 @@ variants, weighting schemes, and machine-learning examples.
   and soft-cap sensitivity grid.
 - `scripts/run_robust_initial_pilot.py`: stage-1 replay of the original pilot
   scenarios for the new profile definitions.
+- `scripts/run_studentized_inference_validation.py`: oracle, direct-profile,
+  full-sandwich, and jackknife studentized coverage comparison.
+- `scripts/run_studentized_focused_replication.py`: independent strong-effect
+  studentized interval replication.
+- `scripts/run_general_influence_validation.py`: point-contamination finite-
+  difference validation of the complete influence function.
 - `scripts/run_followup_simulations.py`: power curves, non-normal backgrounds,
   and nominal size checks.
 - `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
@@ -601,6 +625,8 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/normalization_followup_summary.md`: corrected-scale follow-up summary.
 - `docs/stable_reporting_guidelines.md`: guidance for report-stable quantities
   after the normalization correction.
+- `docs/functional_delta_and_studentized_inference_20260805.md`: full Huber
+  functional-delta derivation, sandwich variance, and interval validation.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -617,6 +643,8 @@ python3 scripts/run_robust_center_validation.py
 python3 scripts/run_robust_cdelta_grid.py
 python3 scripts/run_robust_parameter_sensitivity.py
 python3 scripts/run_robust_initial_pilot.py
+python3 scripts/run_studentized_inference_validation.py
+python3 scripts/run_general_influence_validation.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

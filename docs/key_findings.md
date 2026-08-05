@@ -754,6 +754,27 @@ earlier results and their interpretation.
 
 Source: `docs/next_theory_and_interval_validation_20260805.md`.
 
+### 32. The Full Paired Influence Function Is Available, but Plug-in Wald Coverage Is Not Yet Reliable
+
+**Evidence: functional-delta derivation, analytic benchmark, contamination derivatives, and 10,800-dataset coverage grid**
+
+The uncapped primary statistic now has an explicit influence function that
+includes the median and MAD effects on each Huber centre, the numerator and
+both denominator moments, and all covariance terms induced by paired X-Y
+observations. For symmetric signed-lognormal radii the nuisance coefficients
+vanish and the resulting closed-form variance matched a 250,000-draw Monte
+Carlo check. In a skew-lognormal model, numerical contamination derivatives
+confirmed that the centre path is nonzero and materially changes the IF.
+
+The full log-sandwich interval improved mean coverage from `.9198` for the
+fixed-profile approximation to `.9415`, with mean estimated-SE/empirical-SD
+ratio `.9668`. However, at `rho=.5` its coverage was only `.9258`, `.9142`, and
+`.9108` for `n=40,80,160`. The derivation is supported, but finite-sample
+studentization still needs density-estimation, correction, and bootstrap-t
+work before the Wald procedure can be called formal.
+
+Source: `docs/functional_delta_and_studentized_inference_20260805.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -776,9 +797,10 @@ Source: `docs/next_theory_and_interval_validation_20260805.md`.
 
 ### High Priority
 
-1. Derive the uncapped primary statistic's full influence function and paired
-   asymptotic variance.
-2. Construct and validate a studentized confidence interval.
+1. Formalise the regularity theorem for the derived full influence function
+   and paired asymptotic variance.
+2. Repair finite-sample studentization using density-estimation diagnostics,
+   small-sample sandwich corrections, and a complete-IF bootstrap-t interval.
 3. Formalise finite-sample within-block permutation validity.
 4. Define a measurement-resolution rule for practically degenerate margins.
 5. Validate the frozen specification on real or realistically structured data.
@@ -803,6 +825,12 @@ Source: `docs/next_theory_and_interval_validation_20260805.md`.
 
 ### 2026-08-05
 
+- Derived and implemented the complete functional-delta influence function,
+  paired sandwich variance, studentized intervals, and Wald test.
+- Verified the symmetric closed-form variance and general contamination
+  derivatives, including a nonzero MAD-to-Huber path under skewness.
+- Found that the plug-in sandwich improves overall coverage but still
+  undercovers stronger effects, so retained permutation inference as primary.
 - Implemented fully refitted Huber c_delta percentile, basic, BCa, and normal
   bootstrap intervals.
 - Tested interval coverage against an analytic population target and found

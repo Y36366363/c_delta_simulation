@@ -613,6 +613,285 @@ def huber_cdelta_bootstrap_intervals(
     }
 
 
+def direct_profile_influence_standard_error(
+    sx: Array | list[float], sy: Array | list[float]
+) -> dict[str, float]:
+    """Estimate c_delta SE from the fixed-profile ratio influence function.
+
+    This treats the two fitted profiles as observed paired variables.  It does
+    not include uncertainty from estimating their marginal reference centres,
+    so it is complete only when the corresponding nuisance coefficients vanish
+    or when used as a diagnostic comparator.
+    """
+    sx_arr = _as_1d(sx, "sx")
+    sy_arr = _as_1d(sy, "sy")
+    if sx_arr.size != sy_arr.size:
+        raise ValueError("sx and sy must have the same length")
+    mean_x, mean_y = float(sx_arr.mean()), float(sy_arr.mean())
+    if mean_x == 0.0 or mean_y == 0.0:
+        raise ValueError("profile influence is undetermined")
+    estimate = float(np.mean(sx_arr * sy_arr) / (mean_x * mean_y))
+    influence = (
+        sx_arr * sy_arr / (mean_x * mean_y)
+        - estimate * sx_arr / mean_x
+        - estimate * sy_arr / mean_y
+        + estimate
+    )
+    standard_error = float(np.std(influence, ddof=1) / np.sqrt(sx_arr.size))
+    return {
+        "estimate": estimate,
+        "standard_error": standard_error,
+        "mean_influence": float(np.mean(influence)),
+        "max_absolute_influence": float(np.max(np.abs(influence))),
+    }
+
+
+def _gaussian_kde_density(values: Array, point: float) -> float:
+    """Return a simple one-dimensional Gaussian KDE density estimate."""
+    n = values.size
+    standard_deviation = float(np.std(values, ddof=1))
+    bandwidth = 1.06 * standard_deviation * n ** (-0.2)
+    if bandwidth <= 0.0:
+        raise ValueError("density estimation is undetermined")
+    standardized = (values - point) / bandwidth
+    return float(
+        np.mean(np.exp(-0.5 * standardized**2))
+        / (np.sqrt(2.0 * np.pi) * bandwidth)
+    )
+
+
+def _huber_location_influence(
+    values: Array, *, huber_c: float
+) -> tuple[float, float, Array]:
+    """Fit the Huber centre and return its plug-in influence values.
+
+    The fixed scale in the Huber equation is the normal-consistent MAD.  The
+    returned influence therefore includes both the median term in the MAD and
+    the MAD's indirect contribution to the Huber location.
+    """
+    median = float(np.median(values))
+    mad = float(np.median(np.abs(values - median)))
+    scale = 1.4826 * mad
+    if scale <= 0.0:
+        raise ValueError("Huber influence is undetermined for zero MAD")
+
+    location = median
+    for _ in range(100):
+        residual = (values - location) / scale
+        weights = np.minimum(
+            1.0, huber_c / np.maximum(np.abs(residual), 1e-15)
+        )
+        updated = float(np.sum(weights * values) / np.sum(weights))
+        if abs(updated - location) < 1e-10 * max(1.0, scale):
+            location = updated
+            break
+        location = updated
+
+    density_median = _gaussian_kde_density(values, median)
+    density_upper = _gaussian_kde_density(values, median + mad)
+    density_lower = _gaussian_kde_density(values, median - mad)
+    median_if = (0.5 - (values <= median).astype(float)) / density_median
+    mad_if = (
+        0.5
+        - (np.abs(values - median) <= mad).astype(float)
+        - (density_upper - density_lower) * median_if
+    ) / (density_upper + density_lower)
+    scale_if = 1.4826 * mad_if
+
+    residual = (values - location) / scale
+    active = (np.abs(residual) < huber_c).astype(float)
+    sensitivity = float(np.mean(active))
+    scale_coupling = float(np.mean(residual * active))
+    if sensitivity <= 0.0:
+        raise ValueError("Huber influence is undetermined")
+    psi = np.clip(residual, -huber_c, huber_c)
+    location_if = (
+        scale / sensitivity * psi
+        - scale_coupling / sensitivity * scale_if
+    )
+    return location, scale, location_if
+
+
+def huber_cdelta_influence_inference(
+    x: Array | list[float],
+    y: Array | list[float],
+    *,
+    huber_c: float = 1.345,
+    alpha: float = 0.05,
+    null_value: float = 1.0,
+    alternative: str = "greater",
+) -> dict[str, float | dict[str, float]]:
+    """Return full plug-in sandwich inference for uncapped Huber c_delta.
+
+    This implements the paired influence function for the numerator and both
+    denominator moments, including the MAD-to-Huber-centre nuisance path.
+    Gaussian KDE is used only for the three marginal density values required
+    by the median and MAD influence functions.  The result is a first-order,
+    continuous-distribution procedure; tied or nearly degenerate margins need
+    permutation inference instead.
+    """
+    x_arr = _as_1d(x, "x")
+    y_arr = _as_1d(y, "y")
+    if x_arr.size != y_arr.size:
+        raise ValueError("x and y must have the same length")
+    if huber_c <= 0.0:
+        raise ValueError("huber_c must be positive")
+    if not 0.0 < alpha < 1.0:
+        raise ValueError("alpha must be between zero and one")
+    if null_value <= 0.0:
+        raise ValueError("null_value must be positive")
+    if alternative not in {"greater", "less", "two-sided"}:
+        raise ValueError("alternative must be 'greater', 'less', or 'two-sided'")
+
+    tx, _, location_if_x = _huber_location_influence(
+        x_arr, huber_c=huber_c
+    )
+    ty, _, location_if_y = _huber_location_influence(
+        y_arr, huber_c=huber_c
+    )
+    ax, ay = np.abs(x_arr - tx), np.abs(y_arr - ty)
+    mean_x, mean_y = float(np.mean(ax)), float(np.mean(ay))
+    if mean_x <= 0.0 or mean_y <= 0.0:
+        raise ValueError("c_delta influence is undetermined")
+    cross = float(np.mean(ax * ay))
+    estimate = cross / (mean_x * mean_y)
+
+    sign_x, sign_y = np.sign(x_arr - tx), np.sign(y_arr - ty)
+    direct = (
+        ax * ay / (mean_x * mean_y)
+        - estimate * ax / mean_x
+        - estimate * ay / mean_y
+        + estimate
+    )
+    coefficient_x = (
+        estimate * float(np.mean(sign_x)) / mean_x
+        - float(np.mean(sign_x * ay)) / (mean_x * mean_y)
+    )
+    coefficient_y = (
+        estimate * float(np.mean(sign_y)) / mean_y
+        - float(np.mean(ax * sign_y)) / (mean_x * mean_y)
+    )
+    influence = (
+        direct
+        + coefficient_x * location_if_x
+        + coefficient_y * location_if_y
+    )
+    influence -= float(np.mean(influence))
+    influence_variance = float(np.var(influence, ddof=1))
+    standard_error = float(np.sqrt(influence_variance / x_arr.size))
+    z_critical = NormalDist().inv_cdf(1.0 - alpha / 2.0)
+    normal_interval = {
+        "lower": float(estimate - z_critical * standard_error),
+        "upper": float(estimate + z_critical * standard_error),
+    }
+    log_standard_error = standard_error / estimate
+    log_interval = {
+        "lower": float(np.exp(np.log(estimate) - z_critical * log_standard_error)),
+        "upper": float(np.exp(np.log(estimate) + z_critical * log_standard_error)),
+    }
+    z_statistic = float((estimate - null_value) / standard_error)
+    normal = NormalDist()
+    if alternative == "greater":
+        p_value = 1.0 - normal.cdf(z_statistic)
+    elif alternative == "less":
+        p_value = normal.cdf(z_statistic)
+    else:
+        p_value = 2.0 * (1.0 - normal.cdf(abs(z_statistic)))
+    return {
+        "estimate": estimate,
+        "influence_variance": influence_variance,
+        "standard_error": standard_error,
+        "normal": normal_interval,
+        "log_normal": log_interval,
+        "z_statistic": z_statistic,
+        "p_value": float(p_value),
+        "direct_variance": float(np.var(direct, ddof=1)),
+        "location_coefficient_x": coefficient_x,
+        "location_coefficient_y": coefficient_y,
+    }
+
+
+def huber_cdelta_jackknife_inference(
+    x: Array | list[float],
+    y: Array | list[float],
+    *,
+    huber_c: float = 1.345,
+    cap: float | None = None,
+    alpha: float = 0.05,
+) -> dict[str, float | dict[str, float]]:
+    """Return full-refit jackknife SE and normal/log-normal intervals."""
+    x_arr = _as_1d(x, "x")
+    y_arr = _as_1d(y, "y")
+    if x_arr.size != y_arr.size:
+        raise ValueError("x and y must have the same length")
+    if x_arr.size < 4:
+        raise ValueError("at least four pairs are required for jackknife inference")
+    if not 0.0 < alpha < 1.0:
+        raise ValueError("alpha must be between zero and one")
+
+    def estimate(x_values: Array, y_values: Array) -> float:
+        value = c_delta_from_profiles(
+            huber_reference_profile(x_values, huber_c=huber_c, cap=cap),
+            huber_reference_profile(y_values, huber_c=huber_c, cap=cap),
+        )["raw"]
+        return float(value)
+
+    observed = estimate(x_arr, y_arr)
+    if not np.isfinite(observed) or observed <= 0.0:
+        raise ValueError("observed Huber c_delta is undetermined")
+    leave_one_out = []
+    for omitted in range(x_arr.size):
+        keep = np.arange(x_arr.size) != omitted
+        value = estimate(x_arr[keep], y_arr[keep])
+        if not np.isfinite(value):
+            raise ValueError("a jackknife sample was undetermined")
+        leave_one_out.append(value)
+    jackknife = np.asarray(leave_one_out)
+    standard_error = float(
+        np.sqrt((x_arr.size - 1) / x_arr.size * np.sum((jackknife - jackknife.mean()) ** 2))
+    )
+    z = NormalDist().inv_cdf(1.0 - alpha / 2.0)
+    normal_interval = {
+        "lower": float(observed - z * standard_error),
+        "upper": float(observed + z * standard_error),
+    }
+    log_standard_error = standard_error / observed
+    log_interval = {
+        "lower": float(np.exp(np.log(observed) - z * log_standard_error)),
+        "upper": float(np.exp(np.log(observed) + z * log_standard_error)),
+    }
+    return {
+        "estimate": observed,
+        "standard_error": standard_error,
+        "normal": normal_interval,
+        "log_normal": log_interval,
+    }
+
+
+def symmetric_lognormal_cdelta_moments(
+    latent_correlation: float, *, log_scale: float = 0.45
+) -> dict[str, float]:
+    """Return analytic c_delta and IF variance for symmetric lognormal radii."""
+    if not -1.0 <= latent_correlation <= 1.0:
+        raise ValueError("latent_correlation must be between -1 and 1")
+    if log_scale <= 0.0:
+        raise ValueError("log_scale must be positive")
+    t = log_scale**2
+    rho = latent_correlation
+    c_delta_value = float(np.exp(t * rho))
+    influence_variance = float(
+        np.exp(2.0 * t + 4.0 * t * rho)
+        + 2.0 * np.exp(t + 2.0 * t * rho)
+        - 4.0 * np.exp(t + 3.0 * t * rho)
+        + 2.0 * np.exp(3.0 * t * rho)
+        - np.exp(2.0 * t * rho)
+    )
+    return {
+        "c_delta": c_delta_value,
+        "influence_variance": influence_variance,
+    }
+
+
 def c_delta_identity_from_divergences(dx: Array, dy: Array) -> dict[str, float]:
     """Return the algebraic decomposition of corrected c_delta.
 
