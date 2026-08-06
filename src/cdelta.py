@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from itertools import permutations
 from math import comb
 from statistics import NormalDist
+from typing import Callable
 import numpy as np
 
 
@@ -660,8 +661,52 @@ def _gaussian_kde_density(values: Array, point: float) -> float:
     )
 
 
+def _influence_density_values(
+    values: Array,
+    points: tuple[float, float, float],
+    *,
+    method: str,
+    analytic_density: Callable[[float], float] | None,
+    folds: int,
+    seed: int,
+) -> tuple[Array, Array, Array]:
+    """Return density values used by each observation's marginal IF."""
+    n = values.size
+    if method == "analytic":
+        if analytic_density is None:
+            raise ValueError("analytic_density is required for analytic density")
+        estimates = [float(analytic_density(point)) for point in points]
+        if min(estimates) <= 0.0 or not np.all(np.isfinite(estimates)):
+            raise ValueError("analytic density must be finite and positive")
+        return tuple(np.full(n, estimate) for estimate in estimates)  # type: ignore[return-value]
+    if method == "kde":
+        estimates = [_gaussian_kde_density(values, point) for point in points]
+        return tuple(np.full(n, estimate) for estimate in estimates)  # type: ignore[return-value]
+    if method != "crossfit_kde":
+        raise ValueError("density_method must be 'kde', 'crossfit_kde', or 'analytic'")
+    if folds < 2 or folds > n // 3:
+        raise ValueError("density_folds must be between 2 and n // 3")
+
+    rng = np.random.default_rng(seed)
+    assignments = np.arange(n) % folds
+    rng.shuffle(assignments)
+    outputs = [np.empty(n), np.empty(n), np.empty(n)]
+    for fold in range(folds):
+        held_out = assignments == fold
+        training = values[~held_out]
+        for output, point in zip(outputs, points):
+            output[held_out] = _gaussian_kde_density(training, point)
+    return outputs[0], outputs[1], outputs[2]
+
+
 def _huber_location_influence(
-    values: Array, *, huber_c: float
+    values: Array,
+    *,
+    huber_c: float,
+    density_method: str,
+    analytic_density: Callable[[float], float] | None,
+    density_folds: int,
+    density_seed: int,
 ) -> tuple[float, float, Array]:
     """Fit the Huber centre and return its plug-in influence values.
 
@@ -687,9 +732,14 @@ def _huber_location_influence(
             break
         location = updated
 
-    density_median = _gaussian_kde_density(values, median)
-    density_upper = _gaussian_kde_density(values, median + mad)
-    density_lower = _gaussian_kde_density(values, median - mad)
+    density_median, density_upper, density_lower = _influence_density_values(
+        values,
+        (median, median + mad, median - mad),
+        method=density_method,
+        analytic_density=analytic_density,
+        folds=density_folds,
+        seed=density_seed,
+    )
     median_if = (0.5 - (values <= median).astype(float)) / density_median
     mad_if = (
         0.5
@@ -720,13 +770,22 @@ def huber_cdelta_influence_inference(
     alpha: float = 0.05,
     null_value: float = 1.0,
     alternative: str = "greater",
+    density_method: str = "kde",
+    analytic_density_x: Callable[[float], float] | None = None,
+    analytic_density_y: Callable[[float], float] | None = None,
+    density_folds: int = 5,
+    density_seed: int = 20260919,
+    small_sample_correction: str = "sample",
+    effective_parameters: int = 9,
 ) -> dict[str, float | dict[str, float]]:
     """Return full plug-in sandwich inference for uncapped Huber c_delta.
 
     This implements the paired influence function for the numerator and both
     denominator moments, including the MAD-to-Huber-centre nuisance path.
-    Gaussian KDE is used only for the three marginal density values required
-    by the median and MAD influence functions.  The result is a first-order,
+    Ordinary KDE, cross-fitted KDE, or supplied analytic densities can provide
+    the three marginal density values required by the median and MAD influence
+    functions.  HC options are scalar finite-sample analogues rather than
+    leverage-specific regression corrections.  The result is a first-order,
     continuous-distribution procedure; tied or nearly degenerate margins need
     permutation inference instead.
     """
@@ -742,12 +801,33 @@ def huber_cdelta_influence_inference(
         raise ValueError("null_value must be positive")
     if alternative not in {"greater", "less", "two-sided"}:
         raise ValueError("alternative must be 'greater', 'less', or 'two-sided'")
+    if small_sample_correction not in {"hc0", "sample", "hc1", "hc3"}:
+        raise ValueError(
+            "small_sample_correction must be 'hc0', 'sample', 'hc1', or 'hc3'"
+        )
+    if effective_parameters < 1:
+        raise ValueError("effective_parameters must be positive")
+    if (
+        small_sample_correction in {"hc1", "hc3"}
+        and effective_parameters >= x_arr.size
+    ):
+        raise ValueError("effective_parameters must be between 1 and n - 1")
 
     tx, _, location_if_x = _huber_location_influence(
-        x_arr, huber_c=huber_c
+        x_arr,
+        huber_c=huber_c,
+        density_method=density_method,
+        analytic_density=analytic_density_x,
+        density_folds=density_folds,
+        density_seed=density_seed,
     )
     ty, _, location_if_y = _huber_location_influence(
-        y_arr, huber_c=huber_c
+        y_arr,
+        huber_c=huber_c,
+        density_method=density_method,
+        analytic_density=analytic_density_y,
+        density_folds=density_folds,
+        density_seed=density_seed + 1,
     )
     ax, ay = np.abs(x_arr - tx), np.abs(y_arr - ty)
     mean_x, mean_y = float(np.mean(ax)), float(np.mean(ay))
@@ -777,7 +857,14 @@ def huber_cdelta_influence_inference(
         + coefficient_y * location_if_y
     )
     influence -= float(np.mean(influence))
-    influence_variance = float(np.var(influence, ddof=1))
+    correction_factors = {
+        "hc0": 1.0,
+        "sample": x_arr.size / (x_arr.size - 1.0),
+        "hc1": x_arr.size / (x_arr.size - effective_parameters),
+        "hc3": (x_arr.size / (x_arr.size - effective_parameters)) ** 2,
+    }
+    correction_factor = correction_factors[small_sample_correction]
+    influence_variance = float(np.mean(influence**2) * correction_factor)
     standard_error = float(np.sqrt(influence_variance / x_arr.size))
     z_critical = NormalDist().inv_cdf(1.0 - alpha / 2.0)
     normal_interval = {
@@ -808,6 +895,95 @@ def huber_cdelta_influence_inference(
         "direct_variance": float(np.var(direct, ddof=1)),
         "location_coefficient_x": coefficient_x,
         "location_coefficient_y": coefficient_y,
+        "variance_correction_factor": correction_factor,
+    }
+
+
+def huber_cdelta_bootstrap_t_interval(
+    x: Array | list[float],
+    y: Array | list[float],
+    *,
+    n_boot: int = 399,
+    seed: int = 20260920,
+    huber_c: float = 1.345,
+    alpha: float = 0.05,
+    density_method: str = "kde",
+    density_folds: int = 5,
+    small_sample_correction: str = "sample",
+) -> dict[str, float | dict[str, float]]:
+    """Return full-refit bootstrap-t intervals using the complete IF SE.
+
+    Both the statistic and its sandwich standard error are recomputed in each
+    paired bootstrap sample.  Analytic-density mode is intentionally excluded
+    because a bootstrap procedure should not require knowledge of the data-
+    generating density.
+    """
+    x_arr = _as_1d(x, "x")
+    y_arr = _as_1d(y, "y")
+    if x_arr.size != y_arr.size:
+        raise ValueError("x and y must have the same length")
+    if n_boot < 39:
+        raise ValueError("n_boot must be at least 39")
+    if density_method == "analytic":
+        raise ValueError("bootstrap-t does not support analytic density")
+
+    observed = huber_cdelta_influence_inference(
+        x_arr,
+        y_arr,
+        huber_c=huber_c,
+        alpha=alpha,
+        density_method=density_method,
+        density_folds=density_folds,
+        density_seed=seed,
+        small_sample_correction=small_sample_correction,
+    )
+    estimate = float(observed["estimate"])
+    standard_error = float(observed["standard_error"])
+    rng = np.random.default_rng(seed)
+    pivots, log_pivots = [], []
+    for bootstrap_index in range(n_boot):
+        indices = rng.integers(0, x_arr.size, size=x_arr.size)
+        try:
+            fitted = huber_cdelta_influence_inference(
+                x_arr[indices],
+                y_arr[indices],
+                huber_c=huber_c,
+                alpha=alpha,
+                density_method=density_method,
+                density_folds=density_folds,
+                density_seed=seed + bootstrap_index + 1,
+                small_sample_correction=small_sample_correction,
+            )
+        except ValueError:
+            continue
+        bootstrap_estimate = float(fitted["estimate"])
+        bootstrap_se = float(fitted["standard_error"])
+        if bootstrap_se <= 0.0 or bootstrap_estimate <= 0.0:
+            continue
+        pivots.append((bootstrap_estimate - estimate) / bootstrap_se)
+        log_pivots.append(
+            (np.log(bootstrap_estimate) - np.log(estimate))
+            / (bootstrap_se / bootstrap_estimate)
+        )
+    if len(pivots) < max(30, int(0.8 * n_boot)):
+        raise ValueError("too few valid bootstrap-t replicates")
+
+    probabilities = (alpha / 2.0, 1.0 - alpha / 2.0)
+    pivot_low, pivot_high = np.quantile(pivots, probabilities)
+    log_low, log_high = np.quantile(log_pivots, probabilities)
+    log_se = standard_error / estimate
+    return {
+        "estimate": estimate,
+        "standard_error": standard_error,
+        "normal_scale": {
+            "lower": float(estimate - pivot_high * standard_error),
+            "upper": float(estimate - pivot_low * standard_error),
+        },
+        "log_scale": {
+            "lower": float(np.exp(np.log(estimate) - log_high * log_se)),
+            "upper": float(np.exp(np.log(estimate) - log_low * log_se)),
+        },
+        "n_boot_used": float(len(pivots)),
     }
 
 

@@ -12,6 +12,7 @@ from cdelta import (
     c_delta_from_profiles,
     direct_profile_influence_standard_error,
     huber_cdelta_bootstrap_intervals,
+    huber_cdelta_bootstrap_t_interval,
     huber_cdelta_influence_inference,
     huber_cdelta_jackknife_inference,
     huber_reference_profile,
@@ -22,6 +23,64 @@ from cdelta import (
 
 
 class RobustDefinitionTests(unittest.TestCase):
+    def test_hc_corrections_inflate_standard_error_in_order(self):
+        rng = np.random.default_rng(20260923)
+        x = rng.lognormal(0.0, 0.6, 50)
+        y = rng.lognormal(0.0, 0.6, 50)
+        standard_errors = {
+            correction: huber_cdelta_influence_inference(
+                x, y, small_sample_correction=correction
+            )["standard_error"]
+            for correction in ("hc0", "sample", "hc1", "hc3")
+        }
+        self.assertLess(standard_errors["hc0"], standard_errors["sample"])
+        self.assertLess(standard_errors["sample"], standard_errors["hc1"])
+        self.assertLess(standard_errors["hc1"], standard_errors["hc3"])
+
+    def test_crossfit_density_inference_is_affine_invariant(self):
+        rng = np.random.default_rng(20260924)
+        x = rng.lognormal(0.0, 0.5, 120)
+        y = rng.lognormal(0.0, 0.5, 120)
+        crossfit = huber_cdelta_influence_inference(
+            x, y, density_method="crossfit_kde", density_seed=44
+        )
+        transformed = huber_cdelta_influence_inference(
+            -2.0 * x + 3.0,
+            4.0 * y - 1.0,
+            density_method="crossfit_kde",
+            density_seed=44,
+        )
+        self.assertAlmostEqual(
+            crossfit["standard_error"], transformed["standard_error"], places=8
+        )
+
+    def test_analytic_density_inference_accepts_known_density(self):
+        rng = np.random.default_rng(20260926)
+        x = rng.normal(size=100)
+        y = 0.2 * x + np.sqrt(0.96) * rng.normal(size=100)
+        normal_density = lambda value: float(
+            np.exp(-0.5 * value**2) / np.sqrt(2.0 * np.pi)
+        )
+        result = huber_cdelta_influence_inference(
+            x,
+            y,
+            density_method="analytic",
+            analytic_density_x=normal_density,
+            analytic_density_y=normal_density,
+        )
+        self.assertTrue(np.isfinite(result["standard_error"]))
+        self.assertGreater(result["standard_error"], 0.0)
+
+    def test_bootstrap_t_interval_is_reproducible_and_ordered(self):
+        rng = np.random.default_rng(20260925)
+        x = rng.normal(size=35)
+        y = 0.3 * x + rng.normal(size=35)
+        first = huber_cdelta_bootstrap_t_interval(x, y, n_boot=39, seed=17)
+        second = huber_cdelta_bootstrap_t_interval(x, y, n_boot=39, seed=17)
+        self.assertEqual(first, second)
+        for method in ("normal_scale", "log_scale"):
+            self.assertLess(first[method]["lower"], first[method]["upper"])
+
     def test_full_influence_inference_is_affine_invariant(self):
         rng = np.random.default_rng(20260917)
         x = rng.lognormal(0.0, 0.5, 200)

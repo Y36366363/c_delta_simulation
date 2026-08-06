@@ -114,7 +114,7 @@ and analogously \(g_Y,h_Y\). For a contaminated **pair** \(z=(x,y)\),
 \end{aligned}
 \]
 
-The ordinary multivariate delta method for \(q(\nu,\mu_X,\mu_Y)) then gives
+The ordinary multivariate delta method for \(q(\nu,\mu_X,\mu_Y)\) then gives
 
 \[
 \boxed{
@@ -295,4 +295,3 @@ wrong. The jackknife improves scale estimation but still covered only about
 - Fay, M. P., and Graubard, B. I. (2001). *Small-Sample Adjustments for
   Wald-Type Tests Using Sandwich Estimators*. Biometrics.
   https://doi.org/10.1111/j.0006-341X.2001.01198.x
-

@@ -1,6 +1,6 @@
 # c_delta Project: Key Findings
 
-Last updated: 2026-08-05
+Last updated: 2026-08-06
 
 This is the central, cumulative record of the project's most important
 findings. It is intended for quick retrieval when preparing emails, follow-up
@@ -775,6 +775,32 @@ work before the Wald procedure can be called formal.
 
 Source: `docs/functional_delta_and_studentized_inference_20260805.md`.
 
+### 33. The Formula Survives Distribution-Level Validation, but Generic Studentization Still Fails
+
+**Evidence: exact marginal calculations, Gaussian-Hermite quadrature, 7,500 density/HC datasets, and 2,400 outer bootstrap-t datasets**
+
+At four regular skew-lognormal contamination points, the complete analytic
+influence function matched population finite differences with maximum scaled
+error `0.0000116`. The MAD-to-Huber-centre contribution reached about `.15`,
+confirming that it cannot be discarded under asymmetry. An atom placed exactly
+at the median exposed the expected directional quantile boundary and must be
+handled separately in the theorem.
+
+KDE, five-fold cross-fitted KDE, and the known true lognormal density changed
+mean sandwich SE by no more than `.2%`; density estimation was not the source
+of undercoverage. HC3-style scalar correction improved skew coverage to
+`.8976`, `.8544`, and `.8712` for `n=40,80,160`, still below nominal. In a
+600-outer-repetition focused study, complete-refit bootstrap-t also failed to
+improve coverage and was unstable on the skew log scale.
+
+The regularity theorem now establishes pointwise asymptotic linearity and
+normality under continuous positive marginal densities, unique positive MADs
+and Huber roots, no mass at derivative knots, positive radius means, and a
+finite joint squared-radius-product moment. This supports the statistic's
+first-order theory, not a universal finite-sample Wald guarantee.
+
+Source: `docs/studentization_refinement_and_theorem_20260806.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -797,10 +823,10 @@ Source: `docs/functional_delta_and_studentized_inference_20260805.md`.
 
 ### High Priority
 
-1. Formalise the regularity theorem for the derived full influence function
-   and paired asymptotic variance.
-2. Repair finite-sample studentization using density-estimation diagnostics,
-   small-sample sandwich corrections, and a complete-IF bootstrap-t interval.
+1. Strengthen the theorem appendix with an explicit tangent space and uniform
+   remainder proof.
+2. Test tail-stabilised IF second moments, `m`-out-of-`n` bootstrap or
+   subsampling, and the onset of the asymptotic regime at larger `n`.
 3. Formalise finite-sample within-block permutation validity.
 4. Define a measurement-resolution rule for practically degenerate margins.
 5. Validate the frozen specification on real or realistically structured data.
@@ -822,6 +848,19 @@ Source: `docs/functional_delta_and_studentized_inference_20260805.md`.
    observation-profile target.
 
 ## Dated Update Log
+
+### 2026-08-06
+
+- Verified the complete influence function at distribution level under a
+  skew-lognormal joint law and isolated the median contamination boundary.
+- Compared KDE, cross-fitted KDE, and true analytic densities; density choice
+  did not explain finite-sample sandwich underestimation.
+- Tested HC0, sample, HC1, and HC3-style scalar corrections; none delivered
+  reliable general 95% coverage.
+- Implemented complete-refit normal- and log-scale bootstrap-t intervals and
+  found no coverage improvement in the focused validation.
+- Stated formal regularity conditions, asymptotic linearity, paired normality,
+  sandwich consistency requirements, and a proof roadmap.
 
 ### 2026-08-05
 

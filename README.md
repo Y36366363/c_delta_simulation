@@ -3,6 +3,31 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/06/2026
+
+- **Distribution-level validation** - Replaced empirical contamination checks
+  with analytic lognormal margins and Gaussian-Hermite joint quadrature. At
+  regular points the full influence derivative matched finite differences to
+  scaled error below `1.2e-5`.
+- **Boundary clarification** - A contaminating atom exactly at the median is a
+  nondifferentiable quantile direction. This is probability-zero for continuous
+  sampling but must be excluded or treated directionally in the theorem.
+- **Density diagnosis** - Across 2,500 skew-lognormal datasets per row,
+  ordinary KDE, five-fold cross-fitted KDE, and the known true density changed
+  mean sandwich SE by at most `0.2%`. KDE is not the main coverage bottleneck.
+- **HC-style corrections** - HC1 and HC3-style scalar inflation improved
+  coverage but remained inadequate; skew-model HC3-style coverage ranged only
+  from `.8544` to `.8976` over `n=40-160`.
+- **Bootstrap-t result** - In 600 outer datasets per condition, complete-refit
+  bootstrap-t did not improve coverage and the skew log-pivot could produce
+  very wide intervals.
+- **Formal theorem** - Stated auditable regularity conditions, asymptotic
+  linearity, paired asymptotic normality, sandwich consistency requirements,
+  and the boundary of the studentized claim.
+- **Inference decision** - Retain permutation inference as formal default;
+  treat the complete-IF interval as asymptotic and exploratory. See
+  `docs/studentization_refinement_and_theorem_20260806.md`.
+
 ## Updates 08/05/2026
 
 - **Full functional-delta derivation** - Derived the Huber-centre influence,
@@ -579,6 +604,12 @@ variants, weighting schemes, and machine-learning examples.
   studentized interval replication.
 - `scripts/run_general_influence_validation.py`: point-contamination finite-
   difference validation of the complete influence function.
+- `scripts/run_population_skew_influence_validation.py`: distribution-level
+  quadrature validation under skew lognormal margins.
+- `scripts/run_density_hc_studentization_validation.py`: KDE, cross-fit, true-
+  density, and HC-style standard-error comparison.
+- `scripts/run_bootstrap_t_validation.py`: focused complete-IF bootstrap-t
+  coverage experiment.
 - `scripts/run_followup_simulations.py`: power curves, non-normal backgrounds,
   and nominal size checks.
 - `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
@@ -627,6 +658,8 @@ variants, weighting schemes, and machine-learning examples.
   after the normalization correction.
 - `docs/functional_delta_and_studentized_inference_20260805.md`: full Huber
   functional-delta derivation, sandwich variance, and interval validation.
+- `docs/studentization_refinement_and_theorem_20260806.md`: distribution-level
+  validation, studentization refinements, and formal first-order theorem.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -645,6 +678,9 @@ python3 scripts/run_robust_parameter_sensitivity.py
 python3 scripts/run_robust_initial_pilot.py
 python3 scripts/run_studentized_inference_validation.py
 python3 scripts/run_general_influence_validation.py
+python3 scripts/run_population_skew_influence_validation.py
+python3 scripts/run_density_hc_studentization_validation.py
+python3 scripts/run_bootstrap_t_validation.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py
