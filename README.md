@@ -27,9 +27,10 @@ correlation-of-divergency coefficient, `c_delta`.
 - **Design-respecting inference confirmed** - Reanalysis of the existing
   18,000-dataset conditional-null experiment gave unrestricted rejection
   `.442-.520`, versus `.047-.048` after within-building permutation.
-- **Teacher-response package** - See
-  `docs/cdelta_response_hoorn_20260807.pdf`, its LaTeX source, and
-  `docs/email_reply_prof_hoorn_20260807.md`.
+- **Teacher-response package** - See the copyable LaTeX text in
+  `docs/cdelta_response_hoorn_20260807.tex` and the proposed reply in
+  `docs/email_reply_prof_hoorn_20260807.md`. The final PDF is intentionally
+  left for the author's established R/LaTeX rendering workflow.
 
 ## Updates 08/06/2026
 
@@ -691,8 +692,10 @@ variants, weighting schemes, and machine-learning examples.
   functional-delta derivation, sandwich variance, and interval validation.
 - `docs/studentization_refinement_and_theorem_20260806.md`: distribution-level
   validation, studentization refinements, and formal first-order theorem.
-- `docs/cdelta_response_hoorn_20260807.tex`: LaTeX source for the technical
-  response to Professor Hoorn; the compiled PDF is stored beside it.
+- `docs/cdelta_response_hoorn_20260807.tex`: copyable LaTeX text for the
+  technical response to Professor Hoorn; generate the final PDF through the
+  author's established R workflow rather than treating a locally compiled PDF
+  as the deliverable.
 - `docs/email_reply_prof_hoorn_20260807.md`: proposed concise email reply.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.

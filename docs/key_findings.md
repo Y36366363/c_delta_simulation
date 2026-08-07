@@ -820,7 +820,7 @@ had zero rank disagreements and zero numerical p-value differences. Dividing
 each profile by its MAD also cancels exactly. Pearson isolates concordance;
 `c_delta_star` additionally weights it by marginal salience heterogeneity.
 
-Source: `docs/cdelta_response_hoorn_20260807.pdf`.
+Source: `docs/cdelta_response_hoorn_20260807.tex`.
 
 ### 35. Original c_delta Does Not Preserve the Full Dyadic Geometry
 
@@ -839,7 +839,7 @@ dataset, while the mean Mantel correlation fell to `.231` under 50% sign
 rewiring. Mantel/QAP and `c_delta` therefore answer different questions:
 dyadic geometry versus labelled observation-level global divergence.
 
-Source: `docs/cdelta_response_hoorn_20260807.pdf`.
+Source: `docs/cdelta_response_hoorn_20260807.tex`.
 
 ### 36. A Robust Reference Centre Does Not Bound Final Observation Leverage
 
@@ -854,7 +854,7 @@ robust-reference, not fully bounded-influence. A meaningful exceptional member
 belongs in the original exact-set estimand; cap 6 is appropriate only when the
 scientific target deliberately limits any one member's final leverage.
 
-Source: `docs/cdelta_response_hoorn_20260807.pdf`.
+Source: `docs/cdelta_response_hoorn_20260807.tex`.
 
 ### 37. Cross-building Claims Require the Design or a Dyadic Method
 
@@ -868,7 +868,7 @@ building-level heterogeneity is present. If the target is full pairwise
 geometry, Mantel/QAP or MRQAP should be considered with an exchangeability
 scheme appropriate to the design.
 
-Source: `docs/cdelta_response_hoorn_20260807.pdf`.
+Source: `docs/cdelta_response_hoorn_20260807.tex`.
 
 ## Reporting Rules
 
@@ -928,7 +928,8 @@ Source: `docs/cdelta_response_hoorn_20260807.pdf`.
   compression and narrowed the corresponding cross-building claim.
 - Separated robust-centre protection from bounded final leverage; retained cap
   6 as a distinct sensitivity estimand.
-- Prepared a six-page technical response and email draft for Professor Hoorn.
+- Prepared a detailed LaTeX-text technical response and email draft for
+  Professor Hoorn; final PDF rendering remains in the author's R workflow.
 
 ### 2026-08-06
 

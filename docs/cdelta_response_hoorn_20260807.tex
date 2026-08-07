@@ -1,31 +1,14 @@
-\documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage{amsmath,amssymb}
-\usepackage{booktabs}
-\usepackage{array}
-\usepackage{longtable}
-\usepackage[dvipsnames]{xcolor}
-\usepackage[hidelinks]{hyperref}
+% Content-only LaTeX text for insertion into the author's established
+% R/LaTeX workflow. The surrounding document class, packages, margins, fonts,
+% title style, and PDF rendering remain controlled by that workflow. This
+% content uses amsmath, amssymb, booktabs, array, longtable, and URL support.
 
-\definecolor{navy}{HTML}{17365D}
-\definecolor{lightblue}{HTML}{EAF1F8}
-\definecolor{darkgray}{HTML}{444444}
-\hypersetup{colorlinks=true,linkcolor=navy,citecolor=navy,urlcolor=navy}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0.55em}
-\renewcommand{\arraystretch}{1.15}
-\pagestyle{plain}
-
-\newcommand{\cd}{c_\delta}
-\newcommand{\cds}{c_\delta^\ast}
-\newcommand{\E}{\mathbb{E}}
-
-\begin{document}
+\providecommand{\cd}{c_\delta}
+\providecommand{\cds}{c_\delta^\ast}
+\providecommand{\E}{\mathbb{E}}
 
 \begin{center}
-{\LARGE\bfseries\color{navy} Technical response on $c_\delta$ and the robustified $c_\delta^\ast$}\par
+{\LARGE\bfseries Technical response on $c_\delta$ and the robustified $c_\delta^\ast$}\par
 \vspace{0.4em}
 {\large Definitions, Pearson equivalence, Mantel comparison, and outlier status}\par
 \vspace{0.6em}
@@ -33,7 +16,7 @@ Jialiang Yao \hfill 7 August 2026
 \end{center}
 
 \vspace{0.5em}
-\colorbox{lightblue}{\parbox{0.94\textwidth}{
+\begin{quote}
 \textbf{Main conclusion.} The robust-centre statistic is best treated as a
 separate $\cds$ measuring concordance of observation-level salience profiles.
 It is not a robust substitute for every purpose of the original $\cd$.
@@ -41,7 +24,7 @@ For a fixed pair of profiles, $\cds$ and Pearson correlation give identical
 one-sided permutation evidence. Mantel instead asks whether the complete
 dyadic distance patterns agree. The three procedures therefore require
 different scientific wording.
-}}
+\end{quote}
 
 \section{Definitions and the change in research question}
 
@@ -371,5 +354,3 @@ Guillot, G., and Rousset, F. (2013). Dismantling the Mantel tests.
 \emph{Methods in Ecology and Evolution}, 4, 336--344.
 \url{https://doi.org/10.1111/2041-210X.12018}
 \end{thebibliography}
-
-\end{document}
