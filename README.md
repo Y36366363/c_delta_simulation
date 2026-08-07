@@ -3,6 +3,34 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/07/2026
+
+- **Two estimands, not one replacement** - Professor Hoorn's distinction is
+  now explicit: original L2 `c_delta` describes concordance of overall
+  divergence for every member of the exact observed set, whereas
+  `c_delta_star` describes robust-centre salience-profile concordance for a
+  typical or generalisable structure.
+- **Exact Pearson identity** - For nondegenerate robust radius profiles,
+  `c_delta_star = 1 + corr(r_x,r_y) CV(r_x) CV(r_y)`. Consequently, Pearson
+  profile correlation and `c_delta_star` have exactly the same one-sided
+  permutation ordering and p-value; MAD scaling cancels from both.
+- **Mantel information boundary** - Mantel compares the complete dyadic
+  distance matrices. Original `c_delta` first compresses each matrix to one
+  row-RMS divergence per labelled observation and therefore cannot establish
+  equality of the complete pairwise geometry. Cross-building claims must be
+  stated at the observation-salience level unless Mantel/QAP/MRQAP is used.
+- **Reference robustness is not bounded influence** - The Huber centre protects
+  ordinary observations from centre displacement, but an uncapped matched
+  extreme can still dominate the final numerator. At planted magnitude 32 its
+  median numerator share was `.965` for uncapped `c_delta_star`, `.474` for old
+  L2, and `.497` for cap 6.
+- **Design-respecting inference confirmed** - Reanalysis of the existing
+  18,000-dataset conditional-null experiment gave unrestricted rejection
+  `.442-.520`, versus `.047-.048` after within-building permutation.
+- **Teacher-response package** - See
+  `docs/cdelta_response_hoorn_20260807.pdf`, its LaTeX source, and
+  `docs/email_reply_prof_hoorn_20260807.md`.
+
 ## Updates 08/06/2026
 
 - **Distribution-level validation** - Replaced empirical contamination checks
@@ -610,6 +638,9 @@ variants, weighting schemes, and machine-learning examples.
   density, and HC-style standard-error comparison.
 - `scripts/run_bootstrap_t_validation.py`: focused complete-IF bootstrap-t
   coverage experiment.
+- `scripts/run_teacher_feedback_20260807.py`: exact profile/Pearson checks,
+  Mantel information-loss construction, exact-set versus typical-set outlier
+  estimands, and cross-building reanalysis prompted by the August 7 feedback.
 - `scripts/run_followup_simulations.py`: power curves, non-normal backgrounds,
   and nominal size checks.
 - `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
@@ -660,6 +691,9 @@ variants, weighting schemes, and machine-learning examples.
   functional-delta derivation, sandwich variance, and interval validation.
 - `docs/studentization_refinement_and_theorem_20260806.md`: distribution-level
   validation, studentization refinements, and formal first-order theorem.
+- `docs/cdelta_response_hoorn_20260807.tex`: LaTeX source for the technical
+  response to Professor Hoorn; the compiled PDF is stored beside it.
+- `docs/email_reply_prof_hoorn_20260807.md`: proposed concise email reply.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -681,6 +715,7 @@ python3 scripts/run_general_influence_validation.py
 python3 scripts/run_population_skew_influence_validation.py
 python3 scripts/run_density_hc_studentization_validation.py
 python3 scripts/run_bootstrap_t_validation.py
+python3 scripts/run_teacher_feedback_20260807.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

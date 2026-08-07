@@ -1,0 +1,375 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{navy}{HTML}{17365D}
+\definecolor{lightblue}{HTML}{EAF1F8}
+\definecolor{darkgray}{HTML}{444444}
+\hypersetup{colorlinks=true,linkcolor=navy,citecolor=navy,urlcolor=navy}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\renewcommand{\arraystretch}{1.15}
+\pagestyle{plain}
+
+\newcommand{\cd}{c_\delta}
+\newcommand{\cds}{c_\delta^\ast}
+\newcommand{\E}{\mathbb{E}}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries\color{navy} Technical response on $c_\delta$ and the robustified $c_\delta^\ast$}\par
+\vspace{0.4em}
+{\large Definitions, Pearson equivalence, Mantel comparison, and outlier status}\par
+\vspace{0.6em}
+Jialiang Yao \hfill 7 August 2026
+\end{center}
+
+\vspace{0.5em}
+\colorbox{lightblue}{\parbox{0.94\textwidth}{
+\textbf{Main conclusion.} The robust-centre statistic is best treated as a
+separate $\cds$ measuring concordance of observation-level salience profiles.
+It is not a robust substitute for every purpose of the original $\cd$.
+For a fixed pair of profiles, $\cds$ and Pearson correlation give identical
+one-sided permutation evidence. Mantel instead asks whether the complete
+dyadic distance patterns agree. The three procedures therefore require
+different scientific wording.
+}}
+
+\section{Definitions and the change in research question}
+
+For observations $x_1,\ldots,x_n$ and $y_1,\ldots,y_n$, define the original
+one-dimensional L2 divergence profiles
+\begin{equation}
+d_{Xi}=\left\{\frac{1}{n-1}\sum_{j\ne i}(x_i-x_j)^2\right\}^{1/2},
+\qquad
+d_{Yi}=\left\{\frac{1}{n-1}\sum_{j\ne i}(y_i-y_j)^2\right\}^{1/2}.
+\end{equation}
+The corrected coefficient is
+\begin{equation}
+\cd=\frac{n^{-1}\sum_i d_{Xi}d_{Yi}}
+{(n^{-1}\sum_i d_{Xi})(n^{-1}\sum_i d_{Yi})}.
+\end{equation}
+It asks whether the same labelled observations have high overall divergence
+from their respective groups.
+
+For the new statistic, let $T_X,T_Y$ be Huber locations fitted using fixed MAD
+scales $s_X,s_Y$, and set
+\begin{equation}
+r_{Xi}=\frac{|x_i-T_X|}{s_X},\qquad
+r_{Yi}=\frac{|y_i-T_Y|}{s_Y},\qquad
+\cds=\frac{n^{-1}\sum_i r_{Xi}r_{Yi}}{\bar r_X\bar r_Y}.
+\end{equation}
+This asks whether the same observations are salient or atypical in the two
+measurements. I therefore agree that the robust-centre version changes the
+research question and merits the notation $\cds$. ``Reproducible anomaly'' or
+``salience-profile concordance'' is a more accurate description than
+``robustified original $\cd$''.
+
+There is still one important qualification. The Huber centre protects the
+reference point, but the uncapped radius scores every remote observation at
+its full distance. Thus $\cds$ is robust in centre fitting, not bounded in its
+final observation leverage.
+
+\section{Question 1 and 2: relationship with Pearson correlation}
+
+For any positive paired profiles $a_i,b_i$ with nonzero variance,
+\begin{equation}
+\frac{\overline{ab}}{\bar a\bar b}
+=1+\operatorname{Cor}(a,b)\operatorname{CV}(a)\operatorname{CV}(b).
+\label{eq:identity}
+\end{equation}
+Consequently,
+\begin{equation}
+\boxed{\cds=1+r_{\mathrm{Pearson}}(r_X,r_Y)\,
+\operatorname{CV}(r_X)\operatorname{CV}(r_Y).}
+\end{equation}
+
+Under permutations of the pairing, the two CVs are fixed and positive.
+Therefore $\cds$ and Pearson correlation have exactly the same permutation
+ordering, one-sided permutation $p$-value, and rejection decision. They are
+not numerically identical estimands: $\cds$ combines concordance with the two
+marginal profile CVs, whereas Pearson isolates standardized concordance.
+
+Multiplying either profile by a positive constant cancels from $\cds$ and
+leaves Pearson correlation unchanged. Hence using absolute deviations from
+the robust centre without MAD normalization gives exactly the same result.
+
+\begin{table}[ht]
+\centering
+\caption{Numerical verification with 4,999 common permutations per scenario.}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Scenario & $\cds$ & Pearson $r$ & $CV_XCV_Y$ & $p_{\cds}=p_r$\\
+\midrule
+Normal correlated & 1.1641 & 0.2805 & 0.5849 & 0.0068\\
+$t_3$ correlated & 1.5217 & 0.4571 & 1.1413 & 0.0012\\
+Skew correlated & 1.4197 & 0.3773 & 1.1124 & 0.0064\\
+Matched outlier & 3.4507 & 0.8893 & 2.7557 & 0.0014\\
+Unmatched outlier & 1.3508 & 0.1377 & 2.5474 & 0.0280\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Across all five cases, the identity error, scale-normalization difference,
+permutation $p$-value difference, and maximum permutation-rank disagreement
+were zero up to floating-point precision.
+
+\textbf{Interpretive consequence.} If the inferential question is only
+``are the two robust residual profiles positively concordant?'', Pearson plus
+the same permutation scheme is sufficient and more familiar. $\cds$ adds a
+distinct descriptive scale only if the product of marginal salience CVs is
+scientifically meaningful and should amplify or attenuate the concordance.
+
+\section{Original $\cd$ versus Mantel (1967)}
+
+Mantel's procedure compares the corresponding entries of two complete
+dissimilarity matrices. In its common standardized form it correlates
+\(\{D^X_{ij}:i<j\}\) with \(\{D^Y_{ij}:i<j\}\), and obtains a reference
+distribution by simultaneously permuting rows and columns (unit labels) of
+one matrix \cite{mantel1967,shi2024}.
+
+The original $\cd$ first compresses each distance matrix to one row summary
+per observation. In one-dimensional L2 form there is an exact identity
+\begin{equation}
+d_{Xi}^2=\frac{n}{n-1}\left\{(x_i-\bar x)^2+s_{X,\mathrm{pop}}^2\right\}.
+\label{eq:l2row}
+\end{equation}
+Thus the entire row profile is a monotone function of absolute centred
+magnitude. It does not remember which other observations are above or below
+$x_i$, or which dyads generated the row total.
+
+\begin{table}[ht]
+\centering
+\caption{Information target of the two procedures.}
+\small
+\begin{tabular}{p{0.21\textwidth}p{0.34\textwidth}p{0.34\textwidth}}
+\toprule
+ & Preserves & Discards or does not isolate\\
+\midrule
+Original $\cd$ & Labelled observation-level global divergence; whether the
+same rooms/persons are overall unusual & Exact dyadic geometry; which pairs
+are far apart; direction/sign in one dimension\\
+Mantel/QAP & Correspondence of every labelled pairwise distance; dyadic
+distance geometry & A dedicated observation-level salience summary; ordinary
+Mantel does not solve spatial/block exchangeability automatically\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+To demonstrate the distinction, 40 observations were arranged as 20
+opposite-sign pairs with fixed absolute radii. Signs were independently
+rewired between $X$ and $Y$ while preserving each observation's absolute
+centred radius. Equation~\eqref{eq:l2row} then makes the two L2 profiles
+identical for every replication.
+
+\begin{table}[ht]
+\centering
+\caption{Same divergence profile, different dyadic geometry; 2,000
+replications per row.}
+\small
+\begin{tabular}{rrrrr}
+\toprule
+Pair-flip probability & Mean $\cd$ & Profile $r$ & Mean Mantel $r$ & Mantel SD\\
+\midrule
+0.00 & 1.0418 & 1.0000 & 1.0000 & 0.0000\\
+0.25 & 1.0418 & 1.0000 & 0.4297 & 0.1881\\
+0.50 & 1.0418 & 1.0000 & 0.2308 & 0.0776\\
+0.75 & 1.0418 & 1.0000 & 0.4170 & 0.1811\\
+1.00 & 1.0418 & 1.0000 & 1.0000 & 0.0000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Therefore Mantel does not make $\cd$ redundant, but $\cd$ cannot be described
+as preserving all pairwise differences. A precise statement is:
+
+\begin{quote}
+$\cd$ compares which labelled units have similar levels of overall divergence
+within their groups. Mantel compares whether the complete pattern of labelled
+pairwise distances agrees.
+\end{quote}
+
+\subsection{Across buildings}
+
+The claim that $\cd$ compares across buildings is defensible only if units
+have meaningful correspondence and the scientific target is node-level global
+divergence. It should not be stated as comparing the complete disease-versus-
+ventilation geometry across apartments.
+
+Building heterogeneity must also be reflected in the permutation design. In
+12 high-replication conditional-null conditions (1,500 datasets each), pooling
+and permuting across blocks produced severe false rejection, whereas
+within-building permutations restored calibration:
+
+\begin{table}[ht]
+\centering
+\caption{Mean null rejection across heterogeneous-block conditions.}
+\small
+\begin{tabular}{lrr}
+\toprule
+Method & Unrestricted permutation & Within-building permutation\\
+\midrule
+Original L2 $\cd$ & 0.4417 & 0.0481\\
+Huber $\cds$ & 0.5158 & 0.0474\\
+Cap-6 sensitivity & 0.5201 & 0.0473\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two separately calculated Mantel correlations should not simply be compared
+by an ordinary Fisher-$z$ difference because dyadic entries are dependent.
+If the aim is to compare relationship strength across buildings, a
+unit/block-level permutation or bootstrap interaction test is preferable. If
+the aim is to explain a disease-distance matrix by ventilation distance plus
+building and other distance predictors, MRQAP is the closer framework
+\cite{dekker2007}. Mantel and partial Mantel also require caution under spatial
+autocorrelation \cite{guillot2013}.
+
+\section{Status of meaningful outliers}
+
+I agree with the proposed distinction:
+\begin{description}
+\item[RQ1: exact group structure.] If the exceptional member genuinely
+belongs to this particular team, its influence is part of the phenomenon.
+The original $\cd$ is a legitimate descriptive statistic, and strong L2
+weighting may be intentional.
+\item[RQ2: stable or transferable structure.] If the target is the ordinary
+or reproducible pattern beyond this exact group, leverage control and
+sensitivity analyses become necessary.
+\end{description}
+
+However, ``the outlier belongs'' and ``its squared leverage is optimal'' are
+different propositions. Inclusion is a scientific decision; the exponent or
+cap is an estimand-weighting decision.
+
+The following experiment used 1,000 independent $n=60$ datasets per condition.
+One high observation was inserted at the same index (matched) or different
+indices (unmatched). ``Top share'' is the largest single contribution to the
+numerator divided by the entire numerator.
+
+\begin{longtable}{llrrrr}
+\caption{Effect of a meaningful extreme observation.}\\
+\toprule
+Condition & Method & Magnitude & Mean coefficient & Profile $r$ & Median top share\\
+\midrule
+\endfirsthead
+\toprule
+Condition & Method & Magnitude & Mean coefficient & Profile $r$ & Median top share\\
+\midrule
+\endhead
+Matched & Original L2 & 8 & 1.200 & 0.852 & 0.273\\
+Matched & Huber uncapped $\cds$ & 8 & 2.028 & 0.709 & 0.632\\
+Matched & Huber cap 6 & 8 & 1.580 & 0.560 & 0.496\\
+Matched & Original L2 & 32 & 1.530 & 0.997 & 0.474\\
+Matched & Huber uncapped $\cds$ & 32 & 10.295 & 0.979 & 0.965\\
+Matched & Huber cap 6 & 32 & 1.582 & 0.560 & 0.497\\
+\midrule
+Unmatched & Original L2 & 32 & 0.991 & -0.018 & 0.101\\
+Unmatched & Huber uncapped $\cds$ & 32 & 0.825 & -0.018 & 0.377\\
+Unmatched & Huber cap 6 & 32 & 0.984 & -0.015 & 0.139\\
+\bottomrule
+\end{longtable}
+
+The original L2 outlier changes ordinary members' divergence scores because
+every row contains a distance to it. At magnitude 32, the mean relative shift
+among ordinary L2 profile entries was about 2.28. For Huber radii it was only
+about 0.046: the centre is protected and spillover is small. Yet the
+uncapped matched observation itself then dominates the product numerator.
+This separates two kinds of robustness:
+\begin{enumerate}
+\item \textbf{reference robustness}: ordinary observations are not moved much;
+\item \textbf{final leverage robustness}: no single observation dominates the
+coefficient.
+\end{enumerate}
+Uncapped $\cds$ has the first property but not the second. Cap 6 is a separate,
+bounded sensitivity estimand that provides the second property.
+
+\section{Recent inferential findings}
+
+For the uncapped Huber $\cds$, a complete functional-delta influence function
+has been derived. It includes the median and MAD effects on both Huber centres,
+the numerator and two denominator moments, and all covariance induced by the
+paired $(X_i,Y_i)$ observations. Under iid pairs, continuous positive marginal
+densities at the median/MAD points, unique positive MADs and Huber roots, no
+mass at derivative knots, positive radius means, and finite joint squared
+radius-product moments,
+\begin{equation}
+\sqrt n(\widehat{\cds}-\cds)
+=\frac{1}{\sqrt n}\sum_{i=1}^n IF_{\cds}(X_i,Y_i)+o_P(1)
+\ \Longrightarrow\ N(0,V).
+\end{equation}
+
+Population-level skew-lognormal quadrature matched regular-point
+contamination derivatives to scaled error below $1.2\times10^{-5}$. The
+theory itself is supported. Finite-sample studentization is not yet reliable:
+true analytic densities and cross-fitted KDE changed mean SE by at most 0.2\%;
+HC-style correction remained below nominal coverage; and complete-refit
+bootstrap-$t$ did not improve coverage. Therefore permutation inference
+remains the formal default, with the sandwich interval labelled exploratory.
+
+\section{Recommended terminology and reporting}
+
+\begin{enumerate}
+\item Keep \textbf{original $\cd$}: exact-set L2 divergence-profile
+concordance. State explicitly that it summarizes row-level/global divergence,
+not full dyadic geometry.
+\item Introduce \textbf{$\cds$}: Huber-reference absolute-salience-profile
+concordance. Avoid claiming bounded robustness for the uncapped version.
+\item Report \textbf{Pearson robust-profile correlation} alongside $\cds$, or
+use Pearson as the inferential statistic, because the permutation test is
+identical. Retain $\cds$ only when its $CV_XCV_Y$ weighting is substantively
+desired.
+\item Keep \textbf{cap-6 $\cds$} as a pre-specified sensitivity estimand, not a
+post-hoc correction and not the same research question as the original $\cd$.
+\item Use \textbf{Mantel/QAP or MRQAP} when the hypothesis concerns complete
+dyadic distance correspondence or multiple distance-matrix predictors.
+\item For multiple buildings, define whether the target is pooled,
+within-building, or an interaction before choosing the permutation scheme.
+\end{enumerate}
+
+\section{Immediate next checks}
+
+\begin{itemize}
+\item Decide whether the $CV_XCV_Y$ weighting in Equation~\eqref{eq:identity}
+is part of the intended construct. This is now the most important definition
+decision for $\cds$.
+\item Test Mantel, profile Pearson, original $\cd$, and $\cds$ on one shared
+building-style data generator with dyadic versus node-salience alternatives.
+\item Formalize an across-building interaction/permutation design using
+matched rooms or explicitly unmatched units.
+\item Derive the cap-6 influence function separately if bounded final leverage
+is to be claimed formally.
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{mantel1967}
+Mantel, N. (1967). The detection of disease clustering and a generalized
+regression approach. \emph{Cancer Research}, 27, 209--220.
+\url{https://pubmed.ncbi.nlm.nih.gov/6018555/}
+
+\bibitem{shi2024}
+Shi, L., and Ding, P. (2024). Asymptotic theory for the quadratic assignment
+procedure. \url{https://arxiv.org/abs/2411.00947}
+
+\bibitem{dekker2007}
+Dekker, D., Krackhardt, D., and Snijders, T. A. B. (2007). Sensitivity of
+MRQAP tests to collinearity and autocorrelation conditions.
+\emph{Psychometrika}, 72, 563--581.
+\url{https://doi.org/10.1007/s11336-007-9016-1}
+
+\bibitem{guillot2013}
+Guillot, G., and Rousset, F. (2013). Dismantling the Mantel tests.
+\emph{Methods in Ecology and Evolution}, 4, 336--344.
+\url{https://doi.org/10.1111/2041-210X.12018}
+\end{thebibliography}
+
+\end{document}

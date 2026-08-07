@@ -1,0 +1,7 @@
+method	permutation_scheme	conditions	repetitions_per_condition	mean_rejection_rate	minimum_rejection_rate	maximum_rejection_rate
+huber_cap6	unrestricted	12	1500	0.5200555555555556	0.14666666666666667	0.9893333333333333
+huber_cap6	within_block	12	1500	0.04727777777777778	0.038	0.06066666666666667
+huber_primary	unrestricted	12	1500	0.5158333333333334	0.14666666666666667	0.9846666666666667
+huber_primary	within_block	12	1500	0.04744444444444445	0.038	0.06066666666666667
+original_l2	unrestricted	12	1500	0.4417222222222222	0.136	0.906
+original_l2	within_block	12	1500	0.04811111111111111	0.036	0.058

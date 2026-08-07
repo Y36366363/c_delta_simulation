@@ -1,6 +1,6 @@
 # c_delta Project: Key Findings
 
-Last updated: 2026-08-06
+Last updated: 2026-08-07
 
 This is the central, cumulative record of the project's most important
 findings. It is intended for quick retrieval when preparing emails, follow-up
@@ -36,11 +36,12 @@ notes, presentations, and the final report.
 > Heavy-tailed backgrounds weaken detection by generating large, usually
 > unmatched background divergence scores.
 
-The leading redefinition is now the dimensionless Huber-reference radius with
-an uncapped formal primary and a separately reported cap-6 sensitivity. It has
-stable exchangeable-null calibration and broader heavy-tail/bimodal power than
-the original L2 profile, but it does not uniformly dominate old L2: clean
-diffuse magnitude alignment remains a substantive counterexample.
+The Huber-reference statistic is now framed as a distinct `c_delta_star`
+estimand rather than a drop-in robust replacement. Original L2 `c_delta`
+answers an exact-set question in which every member's squared distance is part
+of the target. `c_delta_star` answers a typical-structure question using a
+robust reference centre. Its centre is robust, but its uncapped final radius
+does not have bounded leverage; cap 6 remains a separate sensitivity estimand.
 
 ## Main Findings
 
@@ -801,6 +802,74 @@ first-order theory, not a universal finite-sample Wald guarantee.
 
 Source: `docs/studentization_refinement_and_theorem_20260806.md`.
 
+### 34. Pearson Profile Correlation Gives the Same Permutation Evidence
+
+**Evidence: mathematical identity and five focused numerical scenarios**
+
+For positive nondegenerate robust radius profiles,
+
+```text
+c_delta_star = 1 + corr(r_x, r_y) CV(r_x) CV(r_y).
+```
+
+The CV product is fixed and positive under permutations of the pairing.
+Therefore the one-sided ordering, permutation p-value, and rejection decision
+are exactly the same for `c_delta_star` and Pearson profile correlation. The
+five normal, heavy-tail, skew, matched-outlier, and unmatched-outlier checks
+had zero rank disagreements and zero numerical p-value differences. Dividing
+each profile by its MAD also cancels exactly. Pearson isolates concordance;
+`c_delta_star` additionally weights it by marginal salience heterogeneity.
+
+Source: `docs/cdelta_response_hoorn_20260807.pdf`.
+
+### 35. Original c_delta Does Not Preserve the Full Dyadic Geometry
+
+**Evidence: exact one-dimensional identity and 10,000 sign-rewiring datasets**
+
+For one-dimensional squared Euclidean distances, the row-RMS profile satisfies
+
+```text
+d_i^2 = n/(n-1) [(x_i - mean(x))^2 + population_variance(x)].
+```
+
+It consequently retains centred magnitude but not the sign arrangement that
+determines individual pairwise distances. In the sign-rewiring construction,
+the two `c_delta` profiles were identical and had correlation 1 in every
+dataset, while the mean Mantel correlation fell to `.231` under 50% sign
+rewiring. Mantel/QAP and `c_delta` therefore answer different questions:
+dyadic geometry versus labelled observation-level global divergence.
+
+Source: `docs/cdelta_response_hoorn_20260807.pdf`.
+
+### 36. A Robust Reference Centre Does Not Bound Final Observation Leverage
+
+**Evidence: 30,000 exact-set and typical-set outlier simulations**
+
+The Huber centre kept the ordinary-observation profile nearly unchanged as a
+matched planted magnitude increased from 8 to 32. Nevertheless, the uncapped
+matched extreme's median share of the numerator increased from `.632` to
+`.965`, compared with `.273` to `.474` for original L2. Cap 6 held this share
+near `.497`. The uncapped statistic should therefore be called
+robust-reference, not fully bounded-influence. A meaningful exceptional member
+belongs in the original exact-set estimand; cap 6 is appropriate only when the
+scientific target deliberately limits any one member's final leverage.
+
+Source: `docs/cdelta_response_hoorn_20260807.pdf`.
+
+### 37. Cross-building Claims Require the Design or a Dyadic Method
+
+**Evidence: reanalysis of 18,000 conditional-null datasets**
+
+Across 12 building-heterogeneity conditions, mean unrestricted rejection was
+`.4417` for original L2, `.5158` for uncapped Huber, and `.5201` for cap 6.
+Within-building permutation restored `.0481`, `.0474`, and `.0473`. A pooled
+test cannot be interpreted as evidence of within-building concordance when
+building-level heterogeneity is present. If the target is full pairwise
+geometry, Mantel/QAP or MRQAP should be considered with an exchangeability
+scheme appropriate to the design.
+
+Source: `docs/cdelta_response_hoorn_20260807.pdf`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -848,6 +917,18 @@ Source: `docs/studentization_refinement_and_theorem_20260806.md`.
    observation-profile target.
 
 ## Dated Update Log
+
+### 2026-08-07
+
+- Reframed original `c_delta` and robust-centre `c_delta_star` as two distinct
+  estimands for exact-set and typical-structure research questions.
+- Proved and numerically checked the exact equivalence of one-sided permutation
+  inference for `c_delta_star` and Pearson robust-profile correlation.
+- Demonstrated the dyadic information discarded by original row-RMS
+  compression and narrowed the corresponding cross-building claim.
+- Separated robust-centre protection from bounded final leverage; retained cap
+  6 as a distinct sensitivity estimand.
+- Prepared a six-page technical response and email draft for Professor Hoorn.
 
 ### 2026-08-06
 
