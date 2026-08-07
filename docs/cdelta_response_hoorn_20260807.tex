@@ -1,11 +1,11 @@
 % Content-only LaTeX text for insertion into the author's established
 % R/LaTeX workflow. The surrounding document class, packages, margins, fonts,
 % title style, and PDF rendering remain controlled by that workflow. This
-% content uses amsmath, amssymb, booktabs, array, longtable, and URL support.
+% content uses only standard table rules; amsmath and URL support are expected
+% from the normal R Markdown PDF template.
 
 \providecommand{\cd}{c_\delta}
 \providecommand{\cds}{c_\delta^\ast}
-\providecommand{\E}{\mathbb{E}}
 
 \begin{center}
 {\LARGE\bfseries Technical response on $c_\delta$ and the robustified $c_\delta^\ast$}\par
@@ -90,15 +90,15 @@ the robust centre without MAD normalization gives exactly the same result.
 \caption{Numerical verification with 4,999 common permutations per scenario.}
 \small
 \begin{tabular}{lrrrr}
-\toprule
+\hline
 Scenario & $\cds$ & Pearson $r$ & $CV_XCV_Y$ & $p_{\cds}=p_r$\\
-\midrule
+\hline
 Normal correlated & 1.1641 & 0.2805 & 0.5849 & 0.0068\\
 $t_3$ correlated & 1.5217 & 0.4571 & 1.1413 & 0.0012\\
 Skew correlated & 1.4197 & 0.3773 & 1.1124 & 0.0064\\
 Matched outlier & 3.4507 & 0.8893 & 2.7557 & 0.0014\\
 Unmatched outlier & 1.3508 & 0.1377 & 2.5474 & 0.0280\\
-\bottomrule
+\hline
 \end{tabular}
 \end{table}
 
@@ -135,16 +135,16 @@ $x_i$, or which dyads generated the row total.
 \caption{Information target of the two procedures.}
 \small
 \begin{tabular}{p{0.21\textwidth}p{0.34\textwidth}p{0.34\textwidth}}
-\toprule
+\hline
  & Preserves & Discards or does not isolate\\
-\midrule
+\hline
 Original $\cd$ & Labelled observation-level global divergence; whether the
 same rooms/persons are overall unusual & Exact dyadic geometry; which pairs
 are far apart; direction/sign in one dimension\\
 Mantel/QAP & Correspondence of every labelled pairwise distance; dyadic
 distance geometry & A dedicated observation-level salience summary; ordinary
 Mantel does not solve spatial/block exchangeability automatically\\
-\bottomrule
+\hline
 \end{tabular}
 \end{table}
 
@@ -160,15 +160,15 @@ identical for every replication.
 replications per row.}
 \small
 \begin{tabular}{rrrrr}
-\toprule
+\hline
 Pair-flip probability & Mean $\cd$ & Profile $r$ & Mean Mantel $r$ & Mantel SD\\
-\midrule
+\hline
 0.00 & 1.0418 & 1.0000 & 1.0000 & 0.0000\\
 0.25 & 1.0418 & 1.0000 & 0.4297 & 0.1881\\
 0.50 & 1.0418 & 1.0000 & 0.2308 & 0.0776\\
 0.75 & 1.0418 & 1.0000 & 0.4170 & 0.1811\\
 1.00 & 1.0418 & 1.0000 & 1.0000 & 0.0000\\
-\bottomrule
+\hline
 \end{tabular}
 \end{table}
 
@@ -198,13 +198,13 @@ within-building permutations restored calibration:
 \caption{Mean null rejection across heterogeneous-block conditions.}
 \small
 \begin{tabular}{lrr}
-\toprule
+\hline
 Method & Unrestricted permutation & Within-building permutation\\
-\midrule
+\hline
 Original L2 $\cd$ & 0.4417 & 0.0481\\
 Huber $\cds$ & 0.5158 & 0.0474\\
 Cap-6 sensitivity & 0.5201 & 0.0473\\
-\bottomrule
+\hline
 \end{tabular}
 \end{table}
 
@@ -239,28 +239,27 @@ One high observation was inserted at the same index (matched) or different
 indices (unmatched). ``Top share'' is the largest single contribution to the
 numerator divided by the entire numerator.
 
-\begin{longtable}{llrrrr}
-\caption{Effect of a meaningful extreme observation.}\\
-\toprule
+\begin{table}[ht]
+\centering
+\caption{Effect of a meaningful extreme observation.}
+\small
+\begin{tabular}{llrrrr}
+\hline
 Condition & Method & Magnitude & Mean coefficient & Profile $r$ & Median top share\\
-\midrule
-\endfirsthead
-\toprule
-Condition & Method & Magnitude & Mean coefficient & Profile $r$ & Median top share\\
-\midrule
-\endhead
+\hline
 Matched & Original L2 & 8 & 1.200 & 0.852 & 0.273\\
 Matched & Huber uncapped $\cds$ & 8 & 2.028 & 0.709 & 0.632\\
 Matched & Huber cap 6 & 8 & 1.580 & 0.560 & 0.496\\
 Matched & Original L2 & 32 & 1.530 & 0.997 & 0.474\\
 Matched & Huber uncapped $\cds$ & 32 & 10.295 & 0.979 & 0.965\\
 Matched & Huber cap 6 & 32 & 1.582 & 0.560 & 0.497\\
-\midrule
+\hline
 Unmatched & Original L2 & 32 & 0.991 & -0.018 & 0.101\\
 Unmatched & Huber uncapped $\cds$ & 32 & 0.825 & -0.018 & 0.377\\
 Unmatched & Huber cap 6 & 32 & 0.984 & -0.015 & 0.139\\
-\bottomrule
-\end{longtable}
+\hline
+\end{tabular}
+\end{table}
 
 The original L2 outlier changes ordinary members' divergence scores because
 every row contains a distance to it. At magnitude 32, the mean relative shift
