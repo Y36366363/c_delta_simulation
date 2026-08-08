@@ -5,6 +5,19 @@ feedback and separates mathematical claims from empirical checks.
 
 ## Active Questions
 
+### Update after the 2026-08-08 target-separation study
+
+- A common four-building simulation now separates node-salience and dyadic-
+  geometry alternatives. Huber profile methods are more sensitive to the
+  former; Mantel is more sensitive to the latter. This supports estimand-first
+  method choice rather than a universal comparison.
+- The exact permutation equivalence of Huber `c_delta_star` and Pearson robust-
+  profile correlation also holds under within-building restrictions.
+- The unresolved definition question is now narrower: whether the
+  `CV_X CV_Y` weighting is scientifically part of robust salience concordance.
+  At fixed Pearson concordance `.30`, it changes the population coefficient
+  from `1.019` to `3.546` and produces slow high-CV convergence.
+
 | Question | Why it matters | Current status | Next check |
 | --- | --- | --- | --- |
 | What is the right notation for the zero-divergence boundary? | The statistic should not be described as a computational error when empirical divergence vanishes. | Use `\bar D_x \bar D_y \to 0^+` and report "undetermined due to data limitations" at the empirical boundary. | Keep notation consistent in the next report. |
@@ -18,16 +31,21 @@ feedback and separates mathematical claims from empirical checks.
 | Does larger sample size create over-sensitivity? | Large samples may make weak structural signals detectable, but true over-sensitivity would show up as inflated independent-null rejection. | Higher-replication null checks returned close to `.05`. The fixed-`k` versus fixed-proportion tail validation shows that declining power with larger `n` is mainly sparse-signal dilution when `k / n` decreases, not an inherent large-sample problem. | Keep fixed `k` and fixed `k / n` separate in future sample-size reporting. |
 | What does magnitude `8` mean relative to background scale? | Magnitude should be interpreted relative to the background distribution, not as a free-standing number. | Current simulations use standardized or unit-scale backgrounds. | Add a table showing where magnitude `8` falls in each background's empirical quantiles. |
 | Is `c_delta` a general correlation of internal structures? | Row aggregation may discard most pairwise geometric information. | In one-dimensional L2, divergence ranking is exactly absolute-deviation ranking. An exact construction has identical divergence vectors but full distance-matrix correlation `-0.04018`. | Reframe the method as paired observation-level divergence salience; compare against full-matrix methods under deliberately different alternatives. |
+| Does the CV weighting belong in robust `c_delta_star`? | Pearson and `c_delta_star` give identical permutation evidence, but only `c_delta_star` amplifies concordance by marginal heterogeneity. | At fixed population Pearson `.30`, the coefficient ranged `1.019-3.546`; the highest-CV setting remained variable at `n=2000`. | Ask whether heterogeneity amplification is part of the construct; otherwise prefer Pearson as the direct effect scale. |
+| Do profile and Mantel methods target different alternatives in the same design? | Separate simulations cannot establish construct-specific sensitivity. | Two independent building runs show Huber advantage for node salience and Mantel advantage for shared dyadic geometry. | Vary the node/dyad mixture continuously and add MRQAP only when multiple dyadic predictors are present. |
 | Should the test be upper-tail, lower-tail, or two-sided? | The original implementation only tested positive alignment. | All three alternatives are null-calibrated in the focused simulation. Directional tests have higher power when direction is pre-specified. | Retain greater as the primary default; treat less/two-sided as scientifically motivated extensions. |
 | Can the paired-standout interpretation be expressed theoretically? | A verbal description alone does not identify how overlap enters the signal. | For equal-size binary standout sets, `r = (n m - k^2) / (k (n-k))`; continuous simulations follow this ordering but are attenuated by background salience. | Decide whether to present the binary model as an explanatory limiting case in the revision. |
 | Does chance overlap inflate rejection when both datasets contain strong standouts? | Deliberately disjoint sets are not a proper random-set null. | With independently selected size-4 standout sets, overlap follows the exact hypergeometric law and rejection remains `.0377-.0493` across L1/L2 and normal/`t3`/`t2`. | Explain conditional overlap signal separately from unconditional null calibration. |
 
 ## Suggested Priority
 
-1. Use the meeting to confirm the paired divergence-salience estimand and the
-   scientific meaning of observation pairing.
-2. Decide whether the binary-overlap model belongs in the revised manuscript.
-3. Decide whether negative salience alignment is scientifically meaningful.
-4. If general internal structure remains an intended claim, compare with a
-   full-distance-matrix statistic under deliberately separated alternatives.
-5. Add robust or rank-based sensitivity checks only after the estimand is fixed.
+1. Ask whether `CV_X CV_Y` is part of the intended robust-salience construct;
+   this determines whether Pearson or raw `c_delta_star` is the cleaner effect
+   scale.
+2. Confirm whether the substantive target is labelled-room salience, complete
+   dyadic geometry, or both as separately reported questions.
+3. Formalise within-building permutation validity and define the observational
+   unit before cross-building application.
+4. Vary node and dyadic signal continuously to map the transition between the
+   two methods rather than adding another broad background grid.
+5. Add MRQAP only for a concrete multi-predictor distance-matrix question.

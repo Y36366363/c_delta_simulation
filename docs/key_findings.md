@@ -1,6 +1,6 @@
 # c_delta Project: Key Findings
 
-Last updated: 2026-08-07
+Last updated: 2026-08-08
 
 This is the central, cumulative record of the project's most important
 findings. It is intended for quick retrieval when preparing emails, follow-up
@@ -870,6 +870,47 @@ scheme appropriate to the design.
 
 Source: `docs/cdelta_response_hoorn_20260807.tex`.
 
+### 38. Salience and Dyadic Methods Win on Their Intended Targets
+
+**Evidence: two independent 800-dataset building-style runs**
+
+With within-building permutations, combined rejection under sign-rewired node
+salience was `.823` for Huber `c_delta_star`, `.749` for original L2, and
+`.713` for Mantel. Under shared dyadic geometry the ordering reversed: Mantel
+rejected `.959`, versus `.797` for Huber and `.722` for original L2. The first
+run's Wilson intervals were disjoint in both directions, and the second seed
+reproduced both orderings. This is construct-specific sensitivity, not a
+universal ranking of methods.
+
+Source: `docs/building_target_separation_20260808.md`.
+
+### 39. The CV Weighting Prevents Naive Cross-Sample Effect Comparison
+
+**Evidence: exact lognormal population formula and 45,000 simulated samples**
+
+At fixed population profile correlation `.30`, changing only the marginal
+lognormal heterogeneity moved population `c_delta_star` from `1.019` to
+`3.546`. In the highest-CV row, relative bias remained `-3.5%` and sample SD
+was `1.464` even at `n=2000`. Low-to-moderate CV rows stabilised much earlier.
+The CV product is therefore a substantive weighting and a potential
+finite-sample instability source. Cross-group reports must give Pearson
+profile correlation and marginal CVs alongside raw `c_delta_star`.
+
+Source: `docs/building_target_separation_20260808.md`.
+
+### 40. Design-Respecting Equivalence Includes Mantel Calibration
+
+**Evidence: two independent conditional-null building runs**
+
+Across the two seeds, unrestricted conditional-null rejection averaged
+`.222-.239` across the profile methods and `.229` for Mantel. Within-building
+permutation restored `.041-.044` for the profiles and `.046` for Mantel.
+Huber `c_delta_star` and Huber-profile Pearson p-values were identical in every
+dataset under both permutation schemes. The scientific unit and allowed label
+permutation remain part of the definition for both node and dyadic methods.
+
+Source: `docs/building_target_separation_20260808.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -917,6 +958,18 @@ Source: `docs/cdelta_response_hoorn_20260807.tex`.
    observation-profile target.
 
 ## Dated Update Log
+
+### 2026-08-08
+
+- Built a common four-building generator separating node-salience and complete
+  dyadic-geometry alternatives.
+- Compared original L2, Huber `c_delta_star`, Huber-profile Pearson, cap 6, and
+  Mantel with common design-respecting permutations.
+- Independently replicated the opposite target-specific power orderings.
+- Extended exact Pearson/c-delta-star permutation equivalence to block-
+  restricted inference.
+- Quantified the effect-scale and convergence consequences of `CV_X CV_Y` at
+  fixed population concordance.
 
 ### 2026-08-07
 

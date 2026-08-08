@@ -3,6 +3,30 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/08/2026
+
+- **Common-target building simulation** - Compared original L2 `c_delta`,
+  Huber `c_delta_star`, Huber-profile Pearson, cap 6, and Mantel in one
+  four-building design with node-salience and dyadic-geometry alternatives.
+- **Construct-specific power** - Across two independent 800-dataset runs,
+  Huber `c_delta_star` exceeded Mantel for sign-rewired node salience (`.823`
+  versus `.713` combined), while Mantel exceeded Huber for shared dyadic
+  geometry (`.959` versus `.797`). Neither method universally dominates.
+- **Building restriction replicated** - Conditional-null rejection averaged
+  about `.222-.239` under unrestricted permutations and `.041-.046` under
+  within-building permutations.
+- **Pearson equivalence extended** - Huber `c_delta_star` and Huber-profile
+  Pearson had identical p-values in every unrestricted and block-restricted
+  permutation test.
+- **CV weighting boundary** - At fixed population Pearson concordance `.30`,
+  theoretical `c_delta_star` ranged from `1.019` to `3.546` solely because the
+  marginal CV product changed. The highest-CV row still had `-3.5%` relative
+  bias and SD `1.46` at `n=2000`.
+- **Interpretation update** - Report Pearson as the direct profile-concordance
+  effect and report `c_delta_star` together with both CVs only when marginal
+  heterogeneity weighting is scientifically intentional. See
+  `docs/building_target_separation_20260808.md`.
+
 ## Updates 08/07/2026
 
 - **Two estimands, not one replacement** - Professor Hoorn's distinction is
@@ -642,6 +666,9 @@ variants, weighting schemes, and machine-learning examples.
 - `scripts/run_teacher_feedback_20260807.py`: exact profile/Pearson checks,
   Mantel information-loss construction, exact-set versus typical-set outlier
   estimands, and cross-building reanalysis prompted by the August 7 feedback.
+- `scripts/run_building_target_separation_20260808.py`: common building-style
+  comparison of salience-profile and dyadic targets, plus fixed-correlation CV
+  weighting and convergence diagnostics.
 - `scripts/run_followup_simulations.py`: power curves, non-normal backgrounds,
   and nominal size checks.
 - `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
@@ -697,6 +724,8 @@ variants, weighting schemes, and machine-learning examples.
   author's established R workflow rather than treating a locally compiled PDF
   as the deliverable.
 - `docs/email_reply_prof_hoorn_20260807.md`: proposed concise email reply.
+- `docs/building_target_separation_20260808.md`: two-seed target-separation,
+  building-permutation, and CV-weighting findings.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -719,6 +748,7 @@ python3 scripts/run_population_skew_influence_validation.py
 python3 scripts/run_density_hc_studentization_validation.py
 python3 scripts/run_bootstrap_t_validation.py
 python3 scripts/run_teacher_feedback_20260807.py
+python3 scripts/run_building_target_separation_20260808.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py
