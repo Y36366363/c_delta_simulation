@@ -26,6 +26,21 @@ correlation-of-divergency coefficient, `c_delta`.
   effect and report `c_delta_star` together with both CVs only when marginal
   heterogeneity weighting is scientifically intentional. See
   `docs/building_target_separation_20260808.md`.
+- **Continuous node--dyad mixture** - Interpolated standardized node-salience
+  and dyadic components over weights `0-1`, then refined the crossover region
+  with two independent 1,200-dataset runs per grid point.
+- **Transition region** - Combined paired-power analysis estimates the Huber-
+  versus-Mantel crossover at dyadic variance weight `.216`. Huber has a
+  resolved advantage through `.175`, neither has a resolved advantage over
+  `.20-.25`, and Mantel has a resolved advantage from `.275` onward in this
+  generator.
+- **Comparator distinction** - Original L2 crosses earlier at `.137`; cap 6
+  and uncapped Huber both cross at `.216`, confirming that the cap is mostly
+  inactive without a severe leverage event.
+- **Non-universality** - The transition is conditional on the selected node
+  and dyadic correlations, sample size, building design, and permutation
+  scheme. It is not a data-driven rule for choosing a test. See
+  `docs/node_dyad_mixture_transition_20260808.md`.
 
 ## Updates 08/07/2026
 
@@ -669,6 +684,10 @@ variants, weighting schemes, and machine-learning examples.
 - `scripts/run_building_target_separation_20260808.py`: common building-style
   comparison of salience-profile and dyadic targets, plus fixed-correlation CV
   weighting and convergence diagnostics.
+- `scripts/run_node_dyad_mixture_20260808.py`: coarse, refined, and replicated
+  power curves over a continuous node-to-dyad variance mixture.
+- `scripts/summarize_node_dyad_mixture_20260808.py`: combine paired rejection
+  counts and estimate method crossover locations without rerunning simulation.
 - `scripts/run_followup_simulations.py`: power curves, non-normal backgrounds,
   and nominal size checks.
 - `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
@@ -726,6 +745,8 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/email_reply_prof_hoorn_20260807.md`: proposed concise email reply.
 - `docs/building_target_separation_20260808.md`: two-seed target-separation,
   building-permutation, and CV-weighting findings.
+- `docs/node_dyad_mixture_transition_20260808.md`: current framework, mixture
+  construction, paired transition estimates, and interpretation limits.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -749,6 +770,8 @@ python3 scripts/run_density_hc_studentization_validation.py
 python3 scripts/run_bootstrap_t_validation.py
 python3 scripts/run_teacher_feedback_20260807.py
 python3 scripts/run_building_target_separation_20260808.py
+python3 scripts/run_node_dyad_mixture_20260808.py
+python3 scripts/summarize_node_dyad_mixture_20260808.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

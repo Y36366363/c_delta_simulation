@@ -911,6 +911,22 @@ permutation remain part of the definition for both node and dyadic methods.
 
 Source: `docs/building_target_separation_20260808.md`.
 
+### 41. The Node--Dyad Power Transition Is a Region, Not a Universal Cutoff
+
+**Evidence: coarse grid plus two independent 1,200-dataset refined runs**
+
+With standardized node and dyadic components mixed by variance weight, the
+combined Huber-versus-Mantel power difference changed sign between `.20` and
+`.225`; linear interpolation estimated `.216`. The two independent estimates
+were `.213` and `.225`, and both gave the same unresolved band `.20-.25`.
+Huber had a significant advantage through `.175`, whereas Mantel had a
+significant advantage from `.275` onward. Original L2 crossed earlier at
+`.137`; cap 6 matched uncapped Huber at `.216` because no severe leverage event
+was present. These values describe the chosen generator and must not be used
+as a post-hoc test-selection threshold.
+
+Source: `docs/node_dyad_mixture_transition_20260808.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -970,6 +986,9 @@ Source: `docs/building_target_separation_20260808.md`.
   restricted inference.
 - Quantified the effect-scale and convergence consequences of `CV_X CV_Y` at
   fixed population concordance.
+- Mapped a continuous node--dyad mixture, refined and independently replicated
+  its profile-versus-Mantel transition, and identified `.20-.25` as the
+  unresolved region in the current generator.
 
 ### 2026-08-07
 

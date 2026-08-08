@@ -17,6 +17,9 @@ feedback and separates mathematical claims from empirical checks.
   `CV_X CV_Y` weighting is scientifically part of robust salience concordance.
   At fixed Pearson concordance `.30`, it changes the population coefficient
   from `1.019` to `3.546` and produces slow high-CV convergence.
+- A continuous variance mixture locates the Huber-versus-Mantel transition at
+  about `.216` in the current generator, with a reproducible unresolved band
+  `.20-.25`. This is a diagnostic boundary, not a universal decision rule.
 
 | Question | Why it matters | Current status | Next check |
 | --- | --- | --- | --- |
@@ -33,6 +36,7 @@ feedback and separates mathematical claims from empirical checks.
 | Is `c_delta` a general correlation of internal structures? | Row aggregation may discard most pairwise geometric information. | In one-dimensional L2, divergence ranking is exactly absolute-deviation ranking. An exact construction has identical divergence vectors but full distance-matrix correlation `-0.04018`. | Reframe the method as paired observation-level divergence salience; compare against full-matrix methods under deliberately different alternatives. |
 | Does the CV weighting belong in robust `c_delta_star`? | Pearson and `c_delta_star` give identical permutation evidence, but only `c_delta_star` amplifies concordance by marginal heterogeneity. | At fixed population Pearson `.30`, the coefficient ranged `1.019-3.546`; the highest-CV setting remained variable at `n=2000`. | Ask whether heterogeneity amplification is part of the construct; otherwise prefer Pearson as the direct effect scale. |
 | Do profile and Mantel methods target different alternatives in the same design? | Separate simulations cannot establish construct-specific sensitivity. | Two independent building runs show Huber advantage for node salience and Mantel advantage for shared dyadic geometry. | Vary the node/dyad mixture continuously and add MRQAP only when multiple dyadic predictors are present. |
+| Where does profile-versus-Mantel power change under mixed signals? | Real applications may contain both node salience and dyadic geometry. | In the current standardized mixture, Huber crosses Mantel at `.216`; `.20-.25` is unresolved, with clear Huber advantage by `.175` and Mantel advantage by `.275`. | Vary both component correlations to test whether the boundary follows a stable signal-ratio surface; do not select a test post hoc from the observed mixture. |
 | Should the test be upper-tail, lower-tail, or two-sided? | The original implementation only tested positive alignment. | All three alternatives are null-calibrated in the focused simulation. Directional tests have higher power when direction is pre-specified. | Retain greater as the primary default; treat less/two-sided as scientifically motivated extensions. |
 | Can the paired-standout interpretation be expressed theoretically? | A verbal description alone does not identify how overlap enters the signal. | For equal-size binary standout sets, `r = (n m - k^2) / (k (n-k))`; continuous simulations follow this ordering but are attenuated by background salience. | Decide whether to present the binary model as an explanatory limiting case in the revision. |
 | Does chance overlap inflate rejection when both datasets contain strong standouts? | Deliberately disjoint sets are not a proper random-set null. | With independently selected size-4 standout sets, overlap follows the exact hypergeometric law and rejection remains `.0377-.0493` across L1/L2 and normal/`t3`/`t2`. | Explain conditional overlap signal separately from unconditional null calibration. |
@@ -46,6 +50,7 @@ feedback and separates mathematical claims from empirical checks.
    dyadic geometry, or both as separately reported questions.
 3. Formalise within-building permutation validity and define the observational
    unit before cross-building application.
-4. Vary node and dyadic signal continuously to map the transition between the
-   two methods rather than adding another broad background grid.
+4. Extend the completed one-dimensional mixture into a small node-strength by
+   dyad-strength surface and test whether the transition follows a stable
+   signal-ratio relationship.
 5. Add MRQAP only for a concrete multi-predictor distance-matrix question.

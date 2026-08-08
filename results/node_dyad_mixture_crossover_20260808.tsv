@@ -1,0 +1,13 @@
+phase	profile_method	bracket_low	bracket_high	linear_crossover_estimate	zero_difference_ci_band_low	zero_difference_ci_band_high	grid_points	repetitions_per_point	n_perm
+coarse	original_l2_cdelta	0.1	0.2	0.13636363636363638	0.1	0.1	11	500	199
+coarse	huber_cdelta_star	0.2	0.30000000000000004	0.23225806451612907	0.2	0.2	11	500	199
+coarse	huber_cap6_cdelta_star	0.2	0.30000000000000004	0.23225806451612907	0.2	0.2	11	500	199
+refined	original_l2_cdelta	0.125	0.15	0.13804347826086957	0.1	0.175	13	1200	399
+refined	huber_cdelta_star	0.2	0.225	0.21250000000000002	0.2	0.25	13	1200	399
+refined	huber_cap6_cdelta_star	0.2	0.225	0.21250000000000002	0.2	0.25	13	1200	399
+replication	original_l2_cdelta	0.1	0.125	0.1075	0.1	0.175	13	1200	399
+replication	huber_cdelta_star	0.2	0.225	0.225	0.2	0.25	13	1200	399
+replication	huber_cap6_cdelta_star	0.2	0.225	0.225	0.2	0.25	13	1200	399
+combined	original_l2_cdelta	0.125	0.15	0.13703703703703704	0.1	0.175	13	2400	399
+combined	huber_cdelta_star	0.2	0.225	0.215625	0.2	0.25	13	2400	399
+combined	huber_cap6_cdelta_star	0.2	0.225	0.215625	0.2	0.25	13	2400	399
