@@ -1,6 +1,6 @@
 # c_delta Project: Key Findings
 
-Last updated: 2026-08-08
+Last updated: 2026-08-09
 
 This is the central, cumulative record of the project's most important
 findings. It is intended for quick retrieval when preparing emails, follow-up
@@ -927,6 +927,22 @@ as a post-hoc test-selection threshold.
 
 Source: `docs/node_dyad_mixture_transition_20260808.md`.
 
+### 42. Crossover Location Is Not Explained by Signal-Strength Ratio Alone
+
+**Evidence: nine-cell strength surface, independent local replication, and targeted extension**
+
+Crossovers increased primarily with node-radius correlation: `.148-.170` at
+node strength `.35`, `.211-.234` at `.55`, and `.253-.304` at `.75`. Raw and
+Fisher-z node/dyad ratio models had logit-crossover R-squared `.686` and `.644`
+and leave-one-cell-out RMSE `.202` and `.215`. A model entering the two Fisher-z
+strengths separately reached R-squared `.938` and LOOCV RMSE `.118`, with
+coefficients `+.756` for node and `-.093` for dyad. The coefficients are not
+equal-and-opposite, and dyad effects were nonmonotone within node rows. The
+simple ratio hypothesis is therefore unsupported in this grid; the separate
+fit is descriptive, not a test-selection rule.
+
+Source: `docs/signal_strength_surface_20260809.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -974,6 +990,18 @@ Source: `docs/node_dyad_mixture_transition_20260808.md`.
    observation-profile target.
 
 ## Dated Update Log
+
+### 2026-08-09
+
+- Verified the clean 85-test project baseline before extending the generator.
+- Constructed a three-by-three node-strength by dyad-strength surface with
+  adaptive local crossover refinement and independent seeds.
+- Added a targeted two-seed extension rather than dropping the one cell whose
+  refined grid missed its coarse bracket.
+- Compared raw-ratio, Fisher-z-ratio, and separate-strength crossover models,
+  including leave-one-cell-out predictive errors.
+- Rejected the simple ratio-only explanation within the tested grid and kept
+  method choice estimand-first.
 
 ### 2026-08-08
 

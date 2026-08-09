@@ -3,6 +3,24 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/09/2026
+
+- **Clean project baseline** - All 85 pre-existing tests passed, all Python
+  sources compiled, and the working tree was clean before the new study.
+- **Two-dimensional strength surface** - Crossed node-radius correlations
+  `.35,.55,.75` with dyadic-value correlations `.45,.65,.80`, estimating a
+  locally refined profile-versus-Mantel crossover for every cell.
+- **No simple ratio law** - Raw and Fisher-z strength-ratio models explained
+  only `.686` and `.644` of logit-crossover variation. Allowing node and dyad
+  strengths to enter separately increased R-squared to `.938` and reduced
+  leave-one-cell-out RMSE from `.202-.215` to `.118`.
+- **Node strength dominates the surface** - Crossovers were `.148-.170` for
+  node strength `.35`, `.211-.234` for `.55`, and `.253-.304` for `.75`.
+  Dyad strength produced a smaller, nonmonotone within-row adjustment.
+- **Interpretation boundary** - The separate model is descriptive and does not
+  support post-hoc method selection. Profile versus Mantel choice remains
+  estimand-first. See `docs/signal_strength_surface_20260809.md`.
+
 ## Updates 08/08/2026
 
 - **Common-target building simulation** - Compared original L2 `c_delta`,
@@ -688,6 +706,12 @@ variants, weighting schemes, and machine-learning examples.
   power curves over a continuous node-to-dyad variance mixture.
 - `scripts/summarize_node_dyad_mixture_20260808.py`: combine paired rejection
   counts and estimate method crossover locations without rerunning simulation.
+- `scripts/run_signal_strength_surface_20260809.py`: coarse and refined
+  node-strength by dyad-strength crossover surface and ratio-model comparison.
+- `scripts/run_signal_strength_extension_20260809.py`: targeted independent
+  extension for the one cell whose refined grid missed its coarse bracket.
+- `scripts/summarize_signal_strength_surface_20260809.py`: assemble the final
+  complete surface and refit ratio and separate-strength models.
 - `scripts/run_followup_simulations.py`: power curves, non-normal backgrounds,
   and nominal size checks.
 - `scripts/run_multi_extreme_simulations.py`: one-vs-subgroup extreme-value
@@ -747,6 +771,8 @@ variants, weighting schemes, and machine-learning examples.
   building-permutation, and CV-weighting findings.
 - `docs/node_dyad_mixture_transition_20260808.md`: current framework, mixture
   construction, paired transition estimates, and interpretation limits.
+- `docs/signal_strength_surface_20260809.md`: two-dimensional crossover
+  surface, ratio-hypothesis test, validation, and limitations.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -772,6 +798,9 @@ python3 scripts/run_teacher_feedback_20260807.py
 python3 scripts/run_building_target_separation_20260808.py
 python3 scripts/run_node_dyad_mixture_20260808.py
 python3 scripts/summarize_node_dyad_mixture_20260808.py
+python3 scripts/run_signal_strength_surface_20260809.py
+python3 scripts/run_signal_strength_extension_20260809.py
+python3 scripts/summarize_signal_strength_surface_20260809.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

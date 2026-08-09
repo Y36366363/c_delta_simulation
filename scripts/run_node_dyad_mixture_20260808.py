@@ -95,6 +95,8 @@ def make_mixed_building_pair(
     *,
     n_blocks: int = 4,
     rooms_per_block: int = 12,
+    node_radius_rho: float = 0.55,
+    dyadic_value_rho: float = 0.70,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Mix standardized node and dyadic components by variance weight.
 
@@ -114,8 +116,12 @@ def make_mixed_building_pair(
     geometry_weight = sqrt(dyadic_weight)
     for block in range(n_blocks):
         members = np.flatnonzero(blocks == block)
-        node_x, node_y = _node_components(rng, rooms_per_block)
-        dyad_x, dyad_y = _dyadic_components(rng, rooms_per_block)
+        node_x, node_y = _node_components(
+            rng, rooms_per_block, radius_rho=node_radius_rho
+        )
+        dyad_x, dyad_y = _dyadic_components(
+            rng, rooms_per_block, value_rho=dyadic_value_rho
+        )
         x[members] = building_scales[block] * (
             node_weight * node_x + geometry_weight * dyad_x
         )
