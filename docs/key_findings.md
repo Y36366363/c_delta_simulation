@@ -943,6 +943,24 @@ fit is descriptive, not a test-selection rule.
 
 Source: `docs/signal_strength_surface_20260809.md`.
 
+### 43. Pure Paths Explain Node Dominance, but External Cells Restore a Ratio Approximation
+
+**Evidence: analytic population paths, eight million simulated dyads, and seven-cell external validation**
+
+For a Gaussian dyadic signal, the profile correlation of absolute values and
+the Mantel correlation of absolute pair differences have exactly the same
+population formula. For sign-rewired lognormal node radii, the profile-minus-
+Mantel Monte Carlo correlation gap instead increased from `.209` at node
+correlation `.35` to `.445` at `.75`. This explains why node strength more
+strongly changes relative power. In seven new intermediate-node/lower-dyad
+cells, however, the original raw-ratio fit predicted crossovers with RMSE
+`.0247`. Across all 16 cells, raw ratio reached R-squared `.803`, while separate
+Fisher-z strengths reached `.903` with coefficients `+.785` for node and
+`-.360` for dyad. Node is the larger direction, but dyad is not negligible;
+the strict nine-cell rejection of a useful ratio approximation is revised.
+
+Source: `docs/pure_paths_and_external_strength_validation_20260809.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -993,6 +1011,14 @@ Source: `docs/signal_strength_surface_20260809.md`.
 
 ### 2026-08-09
 
+- Derived and million-dyad-validated the pure node and pure dyadic population
+  paths for profile `c_delta_star` and correlation targets.
+- Added a seven-cell external grid using intermediate node strength `.65` and
+  lower dyad strength `.30`, with targeted extension and weak-signal boundary
+  replication where initial local grids were inadequate.
+- Found that the original raw-ratio model generalized with crossover RMSE
+  `.0247`; revised the earlier ratio rejection while retaining unequal node
+  and dyad effects in the 16-cell surface.
 - Verified the clean 85-test project baseline before extending the generator.
 - Constructed a three-by-three node-strength by dyad-strength surface with
   adaptive local crossover refinement and independent seeds.

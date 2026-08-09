@@ -5,15 +5,31 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/09/2026
 
+- **Pure-path theory** - Derived closed forms for lognormal node salience and
+  Gaussian dyadic signals. On the pure dyad path, profile and Mantel population
+  correlations are exactly equal; on the sign-rewired node path, their Monte
+  Carlo gap increased from `.209` at node correlation `.35` to `.445` at `.75`.
+- **External row-and-column validation** - Added intermediate node strength
+  `.65` and lower dyad strength `.30`, producing seven new cells with refined,
+  independently repeated crossover estimates.
+- **Ratio conclusion revised** - The original raw-ratio model predicted the
+  seven new crossovers with RMSE `.0247`. Across all 16 cells it achieved
+  `R-squared=.803`; separate strengths improved this to `.903`, with node and
+  dyad coefficients `+.785` and `-.360`.
+- **Qualified node dominance** - Node strength remains the larger crossover
+  direction, consistent with the pure-path mechanism, but lower dyad strength
+  has a non-negligible monotone effect. See
+  `docs/pure_paths_and_external_strength_validation_20260809.md`.
 - **Clean project baseline** - All 85 pre-existing tests passed, all Python
   sources compiled, and the working tree was clean before the new study.
 - **Two-dimensional strength surface** - Crossed node-radius correlations
   `.35,.55,.75` with dyadic-value correlations `.45,.65,.80`, estimating a
   locally refined profile-versus-Mantel crossover for every cell.
-- **No simple ratio law** - Raw and Fisher-z strength-ratio models explained
+- **Initial nine-cell result** - Raw and Fisher-z strength-ratio models explained
   only `.686` and `.644` of logit-crossover variation. Allowing node and dyad
   strengths to enter separately increased R-squared to `.938` and reduced
-  leave-one-cell-out RMSE from `.202-.215` to `.118`.
+  leave-one-cell-out RMSE from `.202-.215` to `.118`; the new external grid
+  above shows this was too small a basis for rejecting a ratio approximation.
 - **Node strength dominates the surface** - Crossovers were `.148-.170` for
   node strength `.35`, `.211-.234` for `.55`, and `.253-.304` for `.75`.
   Dyad strength produced a smaller, nonmonotone within-row adjustment.
