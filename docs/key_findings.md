@@ -961,6 +961,23 @@ the strict nine-cell rejection of a useful ratio approximation is revised.
 
 Source: `docs/pure_paths_and_external_strength_validation_20260809.md`.
 
+### 44. Mixed-Path Crossover Reflects Faster Profile Decline
+
+**Evidence: pathwise moment derivative, four million-dyad validation, and two independent 800-dataset power runs per path**
+
+For the square-root variance mixture, the generic covariance/variance
+derivative was specialized to robust radii and pair distances. A `.001`
+central difference matched all eight population effect derivatives to maximum
+error `.000166`. Near four representative crossovers, both profile and Mantel
+effect slopes were negative, but the profile-minus-Mantel slopes were
+`-.309` to `-.485`. Finite-sample power showed the same ordering: combined
+difference slopes were `-.538,-.094,-.331,-.519`; the weak-both value was not
+resolved, while the other three were. The crossover therefore usually marks
+faster dilution of node-profile information, not a required rise in Mantel
+power. A new pure-path seed reproduced the earlier mechanism within `.00150`.
+
+Source: `docs/mixed_path_local_slopes_20260810.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -1008,6 +1025,19 @@ Source: `docs/pure_paths_and_external_strength_validation_20260809.md`.
    observation-profile target.
 
 ## Dated Update Log
+
+### 2026-08-10
+
+- Re-ran all pre-existing tests and independently reproduced the pure node and
+  dyad population-path conclusions.
+- Derived the interior square-root-mixture tangent and propagated it through
+  generic correlation moments, profile radii, and pair distances.
+- Verified the pathwise effect derivatives against common-random-number
+  central differences over four representative crossover configurations.
+- Estimated local power slopes with two independent seeds and two half-widths;
+  found faster profile decline except for an unresolved weak-both contrast.
+- Separated changes in dyad correlation strength from changes in dyadic
+  mixture weight and retained the estimand-first reporting rule.
 
 ### 2026-08-09
 

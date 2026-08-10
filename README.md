@@ -3,6 +3,26 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/10/2026
+
+- **Prior logic independently reproduced** - A new eight-million-dyad seed
+  reproduced the growing pure-node profile-minus-Mantel gap within `.00131`
+  and the near-zero pure-dyad gap within `.00150`; all 95 pre-existing tests
+  also passed before the new work.
+- **Mixed-path tangent derived** - For the square-root variance mixture,
+  derived the component tangent and propagated it through profile-radius and
+  pair-distance correlations using the full covariance/variance derivative.
+- **Pathwise formula verified** - Across four configurations and eight method
+  rows, the analytic/pathwise effect slope agreed with a `.001` central
+  difference to maximum error `.000166`.
+- **Power slopes independently repeated** - Two 800-dataset seeds showed that
+  both methods' power generally falls near the crossover, but profile power
+  falls faster. The combined profile-minus-Mantel slopes ranged from `-.094`
+  to `-.538`; only the weak-both path remained unresolved.
+- **Mechanism refined** - Crossover is caused locally by faster loss of the
+  node-specific profile advantage, not necessarily by Mantel power increasing.
+  See `docs/mixed_path_local_slopes_20260810.md`.
+
 ## Updates 08/09/2026
 
 - **Pure-path theory** - Derived closed forms for lognormal node salience and
