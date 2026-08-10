@@ -1,0 +1,3 @@
+phase	configuration	bracket_low	bracket_high	crossover_estimate	zero_difference_band_low	zero_difference_band_high	grid_points	repetitions_per_point	n_perm
+combined	moderate_skew	0.125	0.15	0.13125	0.1	0.15	9	1600	199
+combined	strong_skew	0.025	0.05	0.04285714285714286	0.0	0.075	13	1600	199

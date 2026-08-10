@@ -978,6 +978,25 @@ power. A new pure-path seed reproduced the earlier mechanism within `.00150`.
 
 Source: `docs/mixed_path_local_slopes_20260810.md`.
 
+### 45. Skewness Restores a Material Huber Path and Moves Crossover Earlier
+
+**Evidence: transport derivative, two population seeds, bandwidth/sample-size sensitivity, eight-by-500,000 confirmation, and independently repeated power grids**
+
+For a smooth skew path, the median derivative is the conditional boundary
+velocity and the MAD derivative combines both median-shifted density
+boundaries. Implicit Huber differentiation adds a direct location term and the
+`-B dot(s)/A` MAD pathway. Preferred-step full derivatives matched complete
+refits within `.000217` in the high-precision experiment. MAD indirect profile
+components were `.0016-.0039`, while total location components were about
+`.077-.082`; the latter reversed the strong-skew profile slope from negative
+to positive. Mantel still rose faster, so relative profile advantage declined.
+Power crossovers moved to `.131` for moderate skew and `.043` for strong skew,
+with independent local replication and targeted extension. Raw `c_delta_star`
+could remain nearly flat while profile correlation rose, again exposing its
+CV weighting.
+
+Source: `docs/skew_mixed_path_huber_mad_derivatives_20260810.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -1028,6 +1047,15 @@ Source: `docs/mixed_path_local_slopes_20260810.md`.
 
 ### 2026-08-10
 
+- Extended the mixed-path derivative to skew margins with conditional boundary
+  velocities for the median and MAD and an implicit Huber-location derivative.
+- Rejected the inconsistent empirical-order-velocity shortcut and replaced it
+  with a population boundary regression after complete-refit diagnostics.
+- Confirmed derivative accuracy with independent seeds, three finite-
+  difference steps, three bandwidths, two sample sizes, and a higher-precision
+  eight-by-500,000 experiment.
+- Mapped and independently repeated skew finite-sample crossovers, including a
+  targeted low-weight extension for strong skew.
 - Re-ran all pre-existing tests and independently reproduced the pure node and
   dyad population-path conclusions.
 - Derived the interior square-root-mixture tangent and propagated it through

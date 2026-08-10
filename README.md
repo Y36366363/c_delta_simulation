@@ -5,6 +5,20 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/10/2026
 
+- **Skew-path nuisance theory** - Derived transport derivatives for the median,
+  MAD, and Huber location, including the nonzero MAD-to-Huber indirect term,
+  then propagated them through profile correlation and `c_delta_star`.
+- **Population derivative confirmed** - In the final eight-by-500,000 check,
+  preferred-step complete-refit errors were at most `.000217` and below their
+  Monte Carlo SE; two seeds, three steps, three boundary bandwidths, and two
+  sample sizes preserved the substantive directions.
+- **Huber movement matters more than MAD alone** - MAD indirect profile terms
+  were `.0016-.0039`, while total location terms were about `.077-.082` and
+  could reverse the profile slope under strong skewness.
+- **Skew crossover replicated** - Two independent local power runs placed the
+  moderate-skew crossover at `.131` and targeted low-weight extensions placed
+  strong skew at `.043`. All profile-ratio/Pearson permutation p-values stayed
+  identical. See `docs/skew_mixed_path_huber_mad_derivatives_20260810.md`.
 - **Prior logic independently reproduced** - A new eight-million-dyad seed
   reproduced the growing pure-node profile-minus-Mantel gap within `.00131`
   and the near-zero pure-dyad gap within `.00150`; all 95 pre-existing tests
