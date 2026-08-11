@@ -1015,6 +1015,27 @@ corrected.
 
 Source: `docs/skew_mechanism_factorial_20260811.md`.
 
+### 47. Directional Agreement, Radial Salience, and Block Centres Are Distinct
+
+**Evidence: application-oriented 2x2x2 grid, two independent power seeds, four conditional-null stress designs, and exact small-orbit enumeration**
+
+In a six-building model with marginal sign prevalence controlled separately,
+increasing directional sign agreement produced an average power gain of `.381`
+for the Huber profile and `.524` for Mantel. Increasing shared radial
+heterogeneity produced gains `.157` and `.103`, respectively. Moving positive
+prevalence from `.50` to `.70` reduced both by about `.09-.10`. Sign
+consistency therefore contains dyadic/directional geometry; shared unsigned
+radial heterogeneity is the cleaner profile-salience signal, while prevalence
+is another distribution-shape axis. Correlated block-centre displacement
+reduced average power but was conditioned out by within-building permutation.
+Fully retrained CV calibrated at
+`.043-.045` and nested-max at `.038-.049` over four 2,000-dataset nulls. The
+product-group orbit proof establishes finite-sample validity when the complete
+weight learner is reapplied to every permutation; cross-fitting without that
+symmetry is not a general guarantee.
+
+Source: `docs/application_node_decomposition_and_permutation_20260812.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -1062,6 +1083,18 @@ Source: `docs/skew_mechanism_factorial_20260811.md`.
    observation-profile target.
 
 ## Dated Update Log
+
+### 2026-08-12
+
+- Built an application-oriented model separately controlling marginal sign
+  prevalence, directional agreement, shared radial heterogeneity, block-centre
+  displacement, and dyadic signal.
+- Found that sign agreement primarily carries dyadic geometry, while radial
+  heterogeneity is the more profile-specific node mechanism.
+- Tested fixed, naive-selected, nested-max, frozen-CV, and fully retrained-CV
+  rules in four conditional-null designs with two independent seeds.
+- Formalised within-building permutation as a product-group orbit test and
+  verified the adaptive rank result by complete small-orbit enumeration.
 
 ### 2026-08-11
 

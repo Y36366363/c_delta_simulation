@@ -3,6 +3,31 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/12/2026
+
+- **Application mechanism model added** - Separately controlled marginal
+  positive-sign prevalence, directional sign agreement, shared radial
+  heterogeneity, correlated building-centre offsets, and a declared dyadic
+  component in a six-building generator.
+- **Node terminology refined** - Across two 400-dataset seeds per factorial
+  cell, sign agreement helped Mantel more (`+.524` average power effect versus
+  `+.381` for Huber profile), whereas radial heterogeneity helped profile more
+  (`+.157` versus `+.103`). Positive prevalence and correlated block centres
+  acted as power-reducing distribution/nuisance axes rather than equivalent
+  measures of within-building node signal.
+- **Adaptive weighting calibrated conditionally** - Four null designs with
+  2,000 datasets each placed fully retrained CV at `.043-.045` and nested-max
+  at `.038-.049`. The adaptive weight is a method-preference diagnostic, not
+  a latent node/dyad mixture estimate.
+- **Within-building theorem completed** - Stated the product-permutation-group
+  orbit proof and verified all `3!^2=36` permutations in a small example.
+  Data-driven weights require pre-specification, group invariance, independent
+  training, or complete refitting under every permutation.
+- **Environment audit** - The project passes 112 tests in the Anaconda
+  scientific Python environment. The system Python lacks NumPy/SciPy, so its
+  import failure is an environment issue rather than a project regression.
+  See `docs/application_node_decomposition_and_permutation_20260812.md`.
+
 ## Updates 08/11/2026
 
 - **Project audit clean** - All 103 pre-existing tests passed before the study;
@@ -844,12 +869,22 @@ variants, weighting schemes, and machine-learning examples.
   construction, paired transition estimates, and interpretation limits.
 - `docs/signal_strength_surface_20260809.md`: two-dimensional crossover
   surface, ratio-hypothesis test, validation, and limitations.
+- `docs/application_node_decomposition_and_permutation_20260812.md`:
+  application-oriented mechanism decomposition, adaptive weighting, and the
+  finite-sample within-building permutation theorem.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
 ## Quick Start
 
-From this folder:
+For the complete test suite on this machine, use the Anaconda scientific
+environment; the default system Python does not contain NumPy/SciPy:
+
+```bash
+/opt/anaconda3/bin/python -m pytest -q
+```
+
+From an environment with the scientific dependencies installed:
 
 ```bash
 python3 -m unittest discover -s tests
@@ -872,6 +907,8 @@ python3 scripts/summarize_node_dyad_mixture_20260808.py
 python3 scripts/run_signal_strength_surface_20260809.py
 python3 scripts/run_signal_strength_extension_20260809.py
 python3 scripts/summarize_signal_strength_surface_20260809.py
+python3 scripts/run_application_node_decomposition_20260812.py
+python3 scripts/summarize_application_node_decomposition_20260812.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

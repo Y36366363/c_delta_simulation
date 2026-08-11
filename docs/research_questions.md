@@ -5,6 +5,24 @@ feedback and separates mathematical claims from empirical checks.
 
 ## Active Questions
 
+### Update after the 2026-08-12 application-mechanism study
+
+- `Node strength` is now decomposed into marginal sign prevalence, directional
+  sign agreement, shared radial heterogeneity, and block-centre displacement.
+  The joint Bernoulli generator varies prevalence and agreement independently.
+  Sign agreement helped Mantel more, so it should not be equated with unsigned
+  node salience.
+- Correlated building centres are a block-level nuisance for within-building
+  inference. They may reduce power, but the conditional test does not count
+  their fixed between-building agreement as within-building evidence.
+- A continuous leave-one-building-out profile weight was calibrated only as a
+  method-preference diagnostic. It is not an estimate of latent node/dyad
+  mixture weight and is not ready to replace predeclared estimands.
+- The within-building finite-sample theorem is now explicit. Any adaptive
+  learner is allowed if the complete statistic, including weight refitting, is
+  reapplied to every permitted permutation. Frozen observed-data weights need
+  a group-invariance, external-training, or held-out-test justification.
+
 ### Update after the 2026-08-11 skew-mechanism audit
 
 - The `.131/.043` crossover shift is not a general marginal-skewness result.
@@ -101,8 +119,9 @@ feedback and separates mathematical claims from empirical checks.
    scale.
 2. Confirm whether the substantive target is labelled-room salience, complete
    dyadic geometry, or both as separately reported questions.
-3. Formalise within-building permutation validity and define the observational
-   unit before cross-building application.
+3. Use the completed within-building permutation theorem to define the
+   observational unit and exchangeability blocks before application; next test
+   unequal building sizes and application-derived covariates.
 4. Treat the completed pure-path and external-grid result as a mechanistic
    approximation; pursue mixed-path local power theory only if needed for the
    report, not as a post-hoc method-selection rule.
