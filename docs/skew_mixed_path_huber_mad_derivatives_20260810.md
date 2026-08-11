@@ -1,5 +1,12 @@
 # Skew Mixed Paths: Huber Location and MAD Derivatives
 
+> **Retrospective clarification (2026-08-11):** the `moderate_skew` and
+> `strong_skew` names below identify composite generators. A later 2x2 audit
+> found that their early power crossover was driven mainly by positive-sign
+> prevalence and its change to node geometry, not by marginal skewness alone.
+> The Huber/MAD derivative validation is unchanged. See
+> `docs/skew_mechanism_factorial_20260811.md`.
+
 ## Scope
 
 The symmetric mixed-path calculation set the population Huber location and its
@@ -241,9 +248,12 @@ power were approximately `-.413` and `-.350`, respectively. Profile/
 `c_delta_star` and profile-Pearson permutation p-values were identical in all
 72 simulated grid rows.
 
-Skewness therefore moves the crossover substantially earlier than the
-symmetric default value near `.216`, especially in the strong-skew generator.
-It does not reverse the local decline in profile's relative power advantage.
+These composite configurations move crossover substantially earlier than the
+symmetric default value near `.216`, especially in the configuration named
+`strong_skew`. The later mechanism audit shows that this is mainly a node
+sign-prevalence/geometry effect rather than a general monotone effect of
+skewness. It does not reverse the local decline in profile's relative power
+advantage within these generators.
 
 ## 9. Conclusions
 

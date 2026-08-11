@@ -216,13 +216,27 @@ def huber_population_transport_fit(
 
 
 def _standardize_signed_lognormal(
-    latent: np.ndarray, signs: np.ndarray, sigma: float, positive_probability: float
+    latent: np.ndarray,
+    signs: np.ndarray,
+    sigma: float,
+    positive_probability: float,
+    positive_multiplier: float = 1.0,
+    negative_multiplier: float = 1.0,
 ) -> np.ndarray:
-    sign_mean = 2.0 * positive_probability - 1.0
-    mean = sign_mean * exp(0.5 * sigma**2)
-    second_moment = exp(2.0 * sigma**2)
+    signed_multiplier_mean = (
+        positive_probability * positive_multiplier
+        - (1.0 - positive_probability) * negative_multiplier
+    )
+    mean = signed_multiplier_mean * exp(0.5 * sigma**2)
+    second_moment = exp(2.0 * sigma**2) * (
+        positive_probability * positive_multiplier**2
+        + (1.0 - positive_probability) * negative_multiplier**2
+    )
     standard_deviation = sqrt(second_moment - mean**2)
-    return (signs * np.exp(sigma * latent) - mean) / standard_deviation
+    multipliers = np.where(
+        signs > 0.0, positive_multiplier, negative_multiplier
+    )
+    return (signs * multipliers * np.exp(sigma * latent) - mean) / standard_deviation
 
 
 def _standardize_lognormal(latent: np.ndarray, sigma: float) -> np.ndarray:
@@ -238,7 +252,10 @@ def skew_components(
     dyad_rho = float(configuration["dyad_rho"])
     positive_probability = float(configuration["positive_sign_probability"])
     node_sigma = float(configuration["node_sigma"])
+    positive_multiplier = float(configuration.get("positive_radius_multiplier", 1.0))
+    negative_multiplier = float(configuration.get("negative_radius_multiplier", 1.0))
     dyad_sigma = float(configuration["dyad_sigma"])
+    dyad_distribution = str(configuration.get("dyad_distribution", "lognormal"))
 
     node_x_latent = rng.normal(size=size)
     node_y_latent = (
@@ -248,10 +265,20 @@ def skew_components(
     sign_x = np.where(rng.random(size) < positive_probability, 1.0, -1.0)
     sign_y = np.where(rng.random(size) < positive_probability, 1.0, -1.0)
     node_x = _standardize_signed_lognormal(
-        node_x_latent, sign_x, node_sigma, positive_probability
+        node_x_latent,
+        sign_x,
+        node_sigma,
+        positive_probability,
+        positive_multiplier,
+        negative_multiplier,
     )
     node_y = _standardize_signed_lognormal(
-        node_y_latent, sign_y, node_sigma, positive_probability
+        node_y_latent,
+        sign_y,
+        node_sigma,
+        positive_probability,
+        positive_multiplier,
+        negative_multiplier,
     )
 
     dyad_x_latent = rng.normal(size=size)
@@ -259,8 +286,13 @@ def skew_components(
         dyad_rho * dyad_x_latent
         + sqrt(1.0 - dyad_rho**2) * rng.normal(size=size)
     )
-    dyad_x = _standardize_lognormal(dyad_x_latent, dyad_sigma)
-    dyad_y = _standardize_lognormal(dyad_y_latent, dyad_sigma)
+    if dyad_distribution == "lognormal":
+        dyad_x = _standardize_lognormal(dyad_x_latent, dyad_sigma)
+        dyad_y = _standardize_lognormal(dyad_y_latent, dyad_sigma)
+    elif dyad_distribution == "gaussian":
+        dyad_x, dyad_y = dyad_x_latent, dyad_y_latent
+    else:
+        raise ValueError("dyad_distribution must be 'gaussian' or 'lognormal'")
     return node_x, node_y, dyad_x, dyad_y
 
 

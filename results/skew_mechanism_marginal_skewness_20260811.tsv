@@ -1,0 +1,7 @@
+configuration	node_marginal_skewness	dyad_marginal_skewness	positive_sign_probability
+balanced_node_gaussian_dyad	0.0	0.0	0.5
+imbalanced_node_gaussian_dyad	0.07202940971807366	0.0	0.8
+balanced_node_lognormal_dyad	0.0	3.689292296091298	0.5
+imbalanced_node_lognormal_dyad	0.07202940971807366	3.689292296091298	0.8
+balanced_magnitude_skew_gaussian_dyad	-0.43211091656524425	0.0	0.5
+balanced_magnitude_skew_lognormal_dyad	-0.43211091656524425	3.689292296091298	0.5

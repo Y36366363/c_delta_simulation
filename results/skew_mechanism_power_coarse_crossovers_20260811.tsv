@@ -1,0 +1,5 @@
+phase	configuration	bracket_low	bracket_high	crossover_estimate	zero_difference_band_low	zero_difference_band_high	grid_points	repetitions_per_point	n_perm
+coarse	balanced_node_gaussian_dyad	0.3	0.4	0.325	0.25	0.4	12	250	199
+coarse	balanced_node_lognormal_dyad	0.25	0.3	0.2785714285714286	0.15	0.5	12	250	199
+coarse	imbalanced_node_gaussian_dyad	0.0	0.05	0.030000000000000002	0.0	0.2	12	250	199
+coarse	imbalanced_node_lognormal_dyad	0.0	0.05	0.02222222222222222	0.0	0.1	12	250	199

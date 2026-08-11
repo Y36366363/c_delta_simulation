@@ -978,7 +978,7 @@ power. A new pure-path seed reproduced the earlier mechanism within `.00150`.
 
 Source: `docs/mixed_path_local_slopes_20260810.md`.
 
-### 45. Skewness Restores a Material Huber Path and Moves Crossover Earlier
+### 45. Skew Paths Restore a Material Huber Nuisance Path
 
 **Evidence: transport derivative, two population seeds, bandwidth/sample-size sensitivity, eight-by-500,000 confirmation, and independently repeated power grids**
 
@@ -990,12 +990,30 @@ refits within `.000217` in the high-precision experiment. MAD indirect profile
 components were `.0016-.0039`, while total location components were about
 `.077-.082`; the latter reversed the strong-skew profile slope from negative
 to positive. Mantel still rose faster, so relative profile advantage declined.
-Power crossovers moved to `.131` for moderate skew and `.043` for strong skew,
-with independent local replication and targeted extension. Raw `c_delta_star`
-could remain nearly flat while profile correlation rose, again exposing its
-CV weighting.
+Composite-generator power crossovers were `.131` and `.043`, with independent
+local replication and targeted extension. The 08/11 factorial audit later
+showed that these early locations were driven mainly by node sign prevalence,
+not marginal skewness alone. Raw `c_delta_star` could remain nearly flat while
+profile correlation rose, again exposing its CV weighting.
 
 Source: `docs/skew_mixed_path_huber_mad_derivatives_20260810.md`.
+
+### 46. Early Skew-Generator Crossover Was a Sign-Prevalence Effect
+
+**Evidence: 2x2 mechanism factorial, two population seeds, two local-power seeds, and balanced-sign magnitude-skew controls**
+
+With node/dyad correlations and tail parameters fixed, changing positive node
+sign probability from `.50` to `.80` shifted crossover by `-.277` on average;
+changing Gaussian dyads to lognormal shifted it only `+.009`. The prevalence
+node margin had skewness only `.072`. A balanced-sign magnitude control with
+larger absolute skewness `-.432` moved crossover only `-.035` under Gaussian
+dyads and `+.022` under lognormal dyads. Thus the earlier `.131/.043` result
+cannot support a monotone skewness law: positive-sign prevalence changed the
+node geometry and nearly eliminated the pure-node profile advantage. The
+Huber/MAD derivative theory remains valid; only the power attribution is
+corrected.
+
+Source: `docs/skew_mechanism_factorial_20260811.md`.
 
 ## Reporting Rules
 
@@ -1044,6 +1062,17 @@ Source: `docs/skew_mixed_path_huber_mad_derivatives_20260810.md`.
    observation-profile target.
 
 ## Dated Update Log
+
+### 2026-08-11
+
+- Decomposed node sign prevalence and dyadic lognormal skew in a 2x2 population
+  derivative and finite-power study.
+- Found a large sign-prevalence crossover shift and a negligible dyadic-skew
+  crossover main effect.
+- Added a balanced-sign magnitude-skew control with substantially larger
+  marginal skewness but only modest, direction-dependent crossover shifts.
+- Corrected the prior attribution from generic skewness to sign-prevalence/
+  node-geometry change while retaining the validated Huber/MAD derivatives.
 
 ### 2026-08-10
 

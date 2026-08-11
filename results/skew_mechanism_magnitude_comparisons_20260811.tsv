@@ -1,0 +1,7 @@
+dyad_margin	comparison	estimate
+gaussian	balanced_reference	0.28
+gaussian	sign_prevalence_shift	-0.26625000000000004
+gaussian	magnitude_skew_shift	-0.03468750000000004
+lognormal	balanced_reference	0.3
+lognormal	sign_prevalence_shift	-0.2875
+lognormal	magnitude_skew_shift	0.022058823529411797

@@ -3,6 +3,25 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/11/2026
+
+- **Project audit clean** - All 103 pre-existing tests passed before the study;
+  the completed project now passes 106 tests and compiles without errors.
+- **Skew attribution audited** - Decomposed node positive-sign prevalence and
+  dyadic lognormal margins in a 2x2 study with two population and two local-
+  power seeds per cell.
+- **Sign structure, not skew magnitude, drove the early transition** - Node
+  sign prevalence shifted crossover by about `-.277`; dyadic lognormal skew
+  shifted it only `+.009` on average.
+- **Balanced magnitude-skew control** - A node margin with skewness `-.432`
+  but unchanged sign agreement moved crossover only `-.035` with Gaussian
+  dyads and `+.022` with lognormal dyads. The prevalence cell had skewness only
+  `.072` yet moved crossover by `-.266` to `-.288`.
+- **Prior wording corrected** - The `.131/.043` configurations remain valid
+  composite-generator results, but no longer support “greater skew implies an
+  earlier crossover.” Huber/MAD derivative conclusions are unchanged. See
+  `docs/skew_mechanism_factorial_20260811.md`.
+
 ## Updates 08/10/2026
 
 - **Skew-path nuisance theory** - Derived transport derivatives for the median,
@@ -15,10 +34,12 @@ correlation-of-divergency coefficient, `c_delta`.
 - **Huber movement matters more than MAD alone** - MAD indirect profile terms
   were `.0016-.0039`, while total location terms were about `.077-.082` and
   could reverse the profile slope under strong skewness.
-- **Skew crossover replicated** - Two independent local power runs placed the
-  moderate-skew crossover at `.131` and targeted low-weight extensions placed
-  strong skew at `.043`. All profile-ratio/Pearson permutation p-values stayed
-  identical. See `docs/skew_mixed_path_huber_mad_derivatives_20260810.md`.
+- **Composite skew-generator crossover replicated** - Two independent local
+  power runs placed the two composite configurations at `.131` and `.043`.
+  The 08/11 mechanism audit attributes the early values mainly to node sign
+  prevalence, not marginal skewness alone. All profile-ratio/Pearson
+  permutation p-values stayed identical. See
+  `docs/skew_mixed_path_huber_mad_derivatives_20260810.md`.
 - **Prior logic independently reproduced** - A new eight-million-dyad seed
   reproduced the growing pure-node profile-minus-Mantel gap within `.00131`
   and the near-zero pure-dyad gap within `.00150`; all 95 pre-existing tests
