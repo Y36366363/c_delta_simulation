@@ -1036,6 +1036,25 @@ symmetry is not a general guarantee.
 
 Source: `docs/application_node_decomposition_and_permutation_20260812.md`.
 
+### 48. Learned Mixtures Fail, but Standardized Max Is a Viable Omnibus Candidate
+
+**Evidence: three size allocations, fixed-size and informative-size controls, four application alternatives, nine temperatures, three aggregation targets, two independent seeds, and a 1,600-dataset restriction check**
+
+At fixed total `n=72`, unequal building size alone did not systematically
+reduce power; informative size produced larger changes because room count
+co-varied with building covariates and signal. Raw and orbit-standardized LOO
+weights moved in the wrong radial-versus-dyadic direction, and power was best
+near temperature zero rather than under aggressive learning. Building versus
+room weighting materially changed adaptive power. Permutation-standardized max
+instead averaged `.422` power over four alternatives, compared with `.402`
+profile and `.418` Mantel, while remaining close to the stronger component in
+each class. Within-building null rejection was `.043-.046` in the high-
+replication covariate check, versus `.001-.314` under invalid unrestricted
+permutation. Standardized max is therefore a promising omnibus sensitivity,
+not yet a replacement for the separately interpretable effect parameters.
+
+Source: `docs/unequal_building_covariate_adaptive_20260813.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -1083,6 +1102,19 @@ Source: `docs/application_node_decomposition_and_permutation_20260812.md`.
    observation-profile target.
 
 ## Dated Update Log
+
+### 2026-08-13
+
+- Separated pure unequal building size from informative cluster size using a
+  fixed-total-sample control.
+- Added age, floor-area, centrality, retrofit, scale, centre, prevalence, and
+  local-signal covariate pathways to the application generator.
+- Scanned nine temperatures and three building aggregation targets for raw and
+  orbit-standardized cross-validated mixtures.
+- Rejected learned adaptive mixtures as primary candidates after directional,
+  aggregation, and temperature failures.
+- Added and validated permutation-standardized max as a candidate omnibus
+  sensitivity test, without changing the primary `c_delta_star` definition.
 
 ### 2026-08-12
 

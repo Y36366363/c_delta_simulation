@@ -3,6 +3,31 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/13/2026
+
+- **Unequal building sizes separated from informative size** - Held total
+  `n=72` fixed across balanced, moderately unequal, and severely unequal
+  allocations. Size imbalance alone did not cause systematic power loss;
+  larger changes arose when building size co-varied with floor area, age,
+  heteroscedasticity, prevalence, and signal strength.
+- **Temperature learning did not validate** - Scanned temperatures
+  `0,.1,.25,.5,1,2,4,8,16`. Orbit-standardized CV power was flat near
+  `0-.25` and then declined; temperature zero is a fixed 50/50 mixture. Learned
+  weights also moved in the wrong radial-versus-dyadic direction.
+- **Aggregation is an estimand choice** - Equal-building, square-root-room,
+  and equal-room weights gave materially different adaptive results under
+  severe imbalance; they cannot be selected as a technical afterthought.
+- **Standardized-max candidate** - Permutation-standardized max stayed close
+  to the better fixed method and averaged `.422` over four alternatives,
+  versus `.402` profile and `.418` Mantel. It is an omnibus test without a
+  unified effect size, so it is retained as a promising sensitivity candidate,
+  not promoted to primary method.
+- **Covariate-conditioned inference confirmed** - In the severe-imbalance
+  null, unrestricted rejection ranged from `.001` to `.314`, while every
+  within-building method calibrated at `.043-.046`.
+- **Project audit** - The complete project passes 121 tests. See
+  `docs/unequal_building_covariate_adaptive_20260813.md`.
+
 ## Updates 08/12/2026
 
 - **Application mechanism model added** - Separately controlled marginal
@@ -872,6 +897,9 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/application_node_decomposition_and_permutation_20260812.md`:
   application-oriented mechanism decomposition, adaptive weighting, and the
   finite-sample within-building permutation theorem.
+- `docs/unequal_building_covariate_adaptive_20260813.md`: unequal-size versus
+  informative-size validation, temperature sensitivity, covariate-conditioned
+  inference, and the adaptive-omnibus decision assessment.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -909,6 +937,8 @@ python3 scripts/run_signal_strength_extension_20260809.py
 python3 scripts/summarize_signal_strength_surface_20260809.py
 python3 scripts/run_application_node_decomposition_20260812.py
 python3 scripts/summarize_application_node_decomposition_20260812.py
+python3 scripts/run_unequal_building_adaptive_validation_20260813.py
+python3 scripts/summarize_unequal_building_adaptive_20260813.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

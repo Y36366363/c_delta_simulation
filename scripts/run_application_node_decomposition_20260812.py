@@ -213,10 +213,12 @@ def _component_statistics(
         local_mantel_observed = float(
             centered_local_dx @ centered_local_dy / local_mantel_scale
         )
-        within_positions = np.searchsorted(members, local_indices)
-        local_permuted_dy = local_dy_matrix[
-            within_positions[:, local_upper[0]],
-            within_positions[:, local_upper[1]],
+        # Use the full Y-distance matrix so this fold calculation also remains
+        # correct for diagnostic unrestricted permutations whose source labels
+        # may come from another building.
+        local_permuted_dy = dy_matrix[
+            local_indices[:, local_upper[0]],
+            local_indices[:, local_upper[1]],
         ]
         local_mantel_permuted = (
             local_permuted_dy - np.mean(local_dy_matrix[local_upper])
@@ -234,7 +236,10 @@ def _component_statistics(
 
 
 def cross_validated_weight_statistic(
-    block_scores: np.ndarray, *, temperature: float = 4.0
+    block_scores: np.ndarray,
+    *,
+    temperature: float = 4.0,
+    block_weights: np.ndarray | None = None,
 ) -> tuple[np.ndarray, np.ndarray]:
     """Leave-one-building-out continuous method weighting.
 
@@ -243,17 +248,31 @@ def cross_validated_weight_statistic(
     """
     if block_scores.ndim != 3 or block_scores.shape[2] != 2:
         raise ValueError("block_scores must have shape (orbit, blocks, 2)")
-    if block_scores.shape[1] < 2 or temperature <= 0.0:
-        raise ValueError("at least two blocks and positive temperature are required")
-    total = np.sum(block_scores, axis=1, keepdims=True)
-    training_mean = (total - block_scores) / (block_scores.shape[1] - 1)
+    if block_scores.shape[1] < 2 or temperature < 0.0:
+        raise ValueError("at least two blocks and nonnegative temperature are required")
+    if block_weights is None:
+        weights = np.ones(block_scores.shape[1])
+    else:
+        weights = np.asarray(block_weights, dtype=float)
+        if weights.shape != (block_scores.shape[1],):
+            raise ValueError("block_weights must have one value per block")
+        if np.any(weights <= 0.0) or not np.all(np.isfinite(weights)):
+            raise ValueError("block_weights must be finite and positive")
+    weighted_scores = block_scores * weights[None, :, None]
+    total = np.sum(weighted_scores, axis=1, keepdims=True)
+    training_weight = np.sum(weights) - weights
+    training_mean = (total - weighted_scores) / training_weight[None, :, None]
     difference = training_mean[:, :, 0] - training_mean[:, :, 1]
     profile_weight = 1.0 / (1.0 + np.exp(-temperature * difference))
     heldout_score = (
         profile_weight * block_scores[:, :, 0]
         + (1.0 - profile_weight) * block_scores[:, :, 1]
     )
-    return np.mean(heldout_score, axis=1), np.mean(profile_weight, axis=1)
+    normalized_weights = weights / np.sum(weights)
+    return (
+        np.sum(heldout_score * normalized_weights[None, :], axis=1),
+        np.sum(profile_weight * normalized_weights[None, :], axis=1),
+    )
 
 
 def adaptive_permutation_outcomes(
@@ -263,6 +282,7 @@ def adaptive_permutation_outcomes(
     block_permuted: np.ndarray,
     *,
     temperature: float = 4.0,
+    block_weights: np.ndarray | None = None,
 ) -> dict[str, float]:
     """Compare fixed, naive, nested-max and LOO-weight permutation rules."""
     n_perm = global_permuted.shape[0]
@@ -277,28 +297,69 @@ def adaptive_permutation_outcomes(
     max_permuted = np.max(global_permuted, axis=1)
     nested_max_p = (1 + int(np.sum(max_permuted >= max_observed))) / (n_perm + 1)
 
+    global_orbit = np.vstack((global_observed, global_permuted))
+    global_center = np.mean(global_orbit, axis=0)
+    global_scale = np.std(global_orbit, axis=0)
+    if np.any(global_scale <= 0.0):
+        raise ValueError("global permutation score is degenerate")
+    standardized_global = (global_orbit - global_center) / global_scale
+    standardized_max = np.max(standardized_global, axis=1)
+    standardized_max_p = (
+        1 + int(np.sum(standardized_max[1:] >= standardized_max[0]))
+    ) / (n_perm + 1)
+
     observed_cv, observed_weights = cross_validated_weight_statistic(
-        block_observed[None, :, :], temperature=temperature
+        block_observed[None, :, :],
+        temperature=temperature,
+        block_weights=block_weights,
     )
     permuted_cv, permuted_weights = cross_validated_weight_statistic(
-        block_permuted, temperature=temperature
+        block_permuted,
+        temperature=temperature,
+        block_weights=block_weights,
     )
     retrained_cv_p = (1 + int(np.sum(permuted_cv >= observed_cv[0]))) / (
         n_perm + 1
     )
-    observed_training_total = np.sum(block_observed, axis=0, keepdims=True)
+    block_orbit = np.concatenate((block_observed[None, :, :], block_permuted), axis=0)
+    block_center = np.mean(block_orbit, axis=0, keepdims=True)
+    block_scale = np.std(block_orbit, axis=0, keepdims=True)
+    if np.any(block_scale <= 0.0):
+        raise ValueError("block permutation score is degenerate")
+    standardized_blocks = (block_orbit - block_center) / block_scale
+    standardized_cv, standardized_weights = cross_validated_weight_statistic(
+        standardized_blocks,
+        temperature=temperature,
+        block_weights=block_weights,
+    )
+    standardized_cv_p = (
+        1 + int(np.sum(standardized_cv[1:] >= standardized_cv[0]))
+    ) / (n_perm + 1)
+    if block_weights is None:
+        frozen_weights = np.ones(block_observed.shape[0])
+    else:
+        frozen_weights = np.asarray(block_weights, dtype=float)
+    observed_training_total = np.sum(
+        block_observed * frozen_weights[:, None], axis=0, keepdims=True
+    )
     observed_training = (
-        observed_training_total - block_observed
-    ) / (block_observed.shape[0] - 1)
+        observed_training_total - block_observed * frozen_weights[:, None]
+    ) / (np.sum(frozen_weights) - frozen_weights)[:, None]
     frozen_profile_weight = 1.0 / (
         1.0
         + np.exp(
             -temperature * (observed_training[:, 0] - observed_training[:, 1])
         )
     )
-    frozen_permuted = np.mean(
-        frozen_profile_weight[None, :] * block_permuted[:, :, 0]
-        + (1.0 - frozen_profile_weight[None, :]) * block_permuted[:, :, 1],
+    normalized_frozen_weights = frozen_weights / np.sum(frozen_weights)
+    # Apply the declared building aggregation target after constructing the
+    # frozen foldwise mixture.
+    frozen_permuted = np.sum(
+        (
+            frozen_profile_weight[None, :] * block_permuted[:, :, 0]
+            + (1.0 - frozen_profile_weight[None, :]) * block_permuted[:, :, 1]
+        )
+        * normalized_frozen_weights[None, :],
         axis=1,
     )
     frozen_cv_p = (1 + int(np.sum(frozen_permuted >= observed_cv[0]))) / (
@@ -309,9 +370,12 @@ def adaptive_permutation_outcomes(
         "mantel_p": fixed_p[1],
         "naive_selected_p": naive_p,
         "nested_max_p": nested_max_p,
+        "standardized_max_p": standardized_max_p,
         "cv_retrained_p": retrained_cv_p,
+        "cv_standardized_p": standardized_cv_p,
         "cv_frozen_p": frozen_cv_p,
         "observed_profile_weight": float(observed_weights[0]),
+        "observed_standardized_profile_weight": float(standardized_weights[0]),
         "mean_permuted_profile_weight": float(np.mean(permuted_weights)),
     }
 

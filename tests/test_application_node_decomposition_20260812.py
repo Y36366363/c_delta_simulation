@@ -63,6 +63,9 @@ def test_nested_rules_return_valid_probability_range():
         if key.endswith("_p"):
             assert 0.0 < value <= 1.0
     assert 0.0 < outcomes["observed_profile_weight"] < 1.0
+    assert 0.0 < outcomes["observed_standardized_profile_weight"] < 1.0
+    assert 0.0 < outcomes["standardized_max_p"] <= 1.0
+    assert 0.0 < outcomes["cv_standardized_p"] <= 1.0
 
 
 def test_retrained_cv_statistic_has_exact_orbit_rank_validity():
@@ -78,19 +81,28 @@ def test_retrained_cv_statistic_has_exact_orbit_rank_validity():
         group.append(index)
     group = np.asarray(group)
     orbit_statistics = []
+    standardized_p_values = []
+    standardized_max_p_values = []
     for index in group:
         permuted_y = y[index]
-        _, _, block_observed, _ = _component_statistics(
-            x, permuted_y, blocks, group
-        )
+        components = _component_statistics(x, permuted_y, blocks, group)
+        _, _, block_observed, _ = components
         statistic, _ = cross_validated_weight_statistic(block_observed[None, :, :])
         orbit_statistics.append(float(statistic[0]))
+        outcomes = adaptive_permutation_outcomes(*components)
+        standardized_p_values.append(outcomes["cv_standardized_p"])
+        standardized_max_p_values.append(outcomes["standardized_max_p"])
     orbit_statistics = np.asarray(orbit_statistics)
     exact_p = np.mean(
         orbit_statistics[None, :] >= orbit_statistics[:, None], axis=1
     )
     for alpha in (0.05, 0.10, 0.20):
         assert np.mean(exact_p <= alpha) <= alpha + 1e-12
+        assert np.mean(np.asarray(standardized_p_values) <= alpha) <= alpha + 1e-12
+        assert (
+            np.mean(np.asarray(standardized_max_p_values) <= alpha)
+            <= alpha + 1e-12
+        )
 
 
 def test_combiner_recovers_counts_and_factor_effects():

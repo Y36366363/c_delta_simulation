@@ -5,6 +5,25 @@ feedback and separates mathematical claims from empirical checks.
 
 ## Active Questions
 
+### Update after the 2026-08-13 unequal-building and covariate study
+
+- Unequal building size alone did not systematically damage power at fixed
+  total `n`; the important complication is informative size, where room count
+  co-varies with building covariates, nuisance scale, and signal strength.
+- Building-equal, square-root-room, and room-equal aggregation define distinct
+  targets. Adaptive results were materially sensitive to this choice under
+  severe imbalance.
+- Raw and orbit-standardized LOO learners failed the construct-direction check:
+  they did not give relatively more profile weight to radial alternatives or
+  more Mantel weight to dyadic alternatives. Temperature `0-.25` was best,
+  showing little support for actual weight learning.
+- A permutation-standardized maximum is now the leading omnibus candidate. It
+  stayed close to the stronger component and calibrated under conditional
+  permutation, but it has no single effect-size interpretation.
+- Do not promote learned adaptive mixture to primary. Whether standardized max
+  becomes a primary test or a sensitivity test is now an explicit scientific
+  decision about “any internal-structure concordance” versus a named estimand.
+
 ### Update after the 2026-08-12 application-mechanism study
 
 - `Node strength` is now decomposed into marginal sign prevalence, directional
@@ -119,9 +138,9 @@ feedback and separates mathematical claims from empirical checks.
    scale.
 2. Confirm whether the substantive target is labelled-room salience, complete
    dyadic geometry, or both as separately reported questions.
-3. Use the completed within-building permutation theorem to define the
-   observational unit and exchangeability blocks before application; next test
-   unequal building sizes and application-derived covariates.
+3. Decide with Professor Hoorn whether a primary test should target a named
+   profile/dyadic estimand or the standardized-max union question. Retain the
+   latter as sensitivity until that scientific choice is explicit.
 4. Treat the completed pure-path and external-grid result as a mechanistic
    approximation; pursue mixed-path local power theory only if needed for the
    report, not as a post-hoc method-selection rule.

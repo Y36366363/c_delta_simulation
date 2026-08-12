@@ -1,0 +1,13 @@
+phase	design	scenario	permutation_scheme	temperature	aggregation	method	repetitions	n_perm	rejection_rate	wilson_low	wilson_high
+seed1	severely_unequal	conditional_null_covariate_confounding	unrestricted	4.0	building_equal	profile	800	199	0.13875	0.1165170579037789	0.16443568015482207
+seed1	severely_unequal	conditional_null_covariate_confounding	unrestricted	4.0	building_equal	mantel	800	199	0.29875	0.26805591116118055	0.33136758651160414
+seed1	severely_unequal	conditional_null_covariate_confounding	unrestricted	4.0	building_equal	nested_max	800	199	0.15125	0.12809208007527473	0.17774118607818434
+seed1	severely_unequal	conditional_null_covariate_confounding	unrestricted	4.0	building_equal	standardized_max	800	199	0.28	0.2499945212188517	0.3121081843116459
+seed1	severely_unequal	conditional_null_covariate_confounding	unrestricted	4.0	building_equal	cv_retrained	800	199	0.00125	0.0002206897828266447	0.007046239232335199
+seed1	severely_unequal	conditional_null_covariate_confounding	unrestricted	4.0	building_equal	cv_standardized	800	199	0.0175	0.010452543513909231	0.029159072024568154
+seed1	severely_unequal	conditional_null_covariate_confounding	within_building	4.0	building_equal	profile	800	199	0.04	0.02847453376055327	0.05592203234866869
+seed1	severely_unequal	conditional_null_covariate_confounding	within_building	4.0	building_equal	mantel	800	199	0.04375	0.03162362448958758	0.060237100048091796
+seed1	severely_unequal	conditional_null_covariate_confounding	within_building	4.0	building_equal	nested_max	800	199	0.0375	0.026392096712790934	0.05302836377745939
+seed1	severely_unequal	conditional_null_covariate_confounding	within_building	4.0	building_equal	standardized_max	800	199	0.045	0.032679556110122895	0.0616692212370423
+seed1	severely_unequal	conditional_null_covariate_confounding	within_building	4.0	building_equal	cv_retrained	800	199	0.0475	0.03480005831285475	0.06452482465328206
+seed1	severely_unequal	conditional_null_covariate_confounding	within_building	4.0	building_equal	cv_standardized	800	199	0.04625	0.033738403716588684	0.06309842644006232
