@@ -24,6 +24,23 @@ feedback and separates mathematical claims from empirical checks.
   becomes a primary test or a sensitivity test is now an explicit scientific
   decision about “any internal-structure concordance” versus a named estimand.
 
+### Update after the 2026-08-13 omnibus interpretability follow-up
+
+- Standardized max can be accompanied by simultaneous maxT-adjusted profile
+  and Mantel evidence; its p-value is the minimum adjusted component value.
+- In explicit target-separation alternatives, the standardized winner selected
+  profile `.735` under node salience and Mantel `.998` under dyadic geometry.
+  Most rejecting datasets still supported both components, correctly exposing
+  construct overlap rather than forcing an exclusive mechanism label.
+- Across 18 unequal-building alternative cells, mean 999-permutation regret
+  was `.017` and worst observed regret `.060`. Thus robustness has a finite but
+  bounded empirical power cost in the current grid.
+- 499 permutations reproduced 999-permutation decisions `.984`, winners `.988`,
+  and adjusted attribution `.968`; use 999 for final weak-signal claims.
+- The component evidence has weak/global-null family-wise validity. Strong
+  component discovery needs subset pivotality or partial-null validation and
+  remains the main theoretical obstacle to promoting the omnibus.
+
 ### Update after the 2026-08-12 application-mechanism study
 
 - `Node strength` is now decomposed into marginal sign prevalence, directional
@@ -141,6 +158,8 @@ feedback and separates mathematical claims from empirical checks.
 3. Decide with Professor Hoorn whether a primary test should target a named
    profile/dyadic estimand or the standardized-max union question. Retain the
    latter as sensitivity until that scientific choice is explicit.
+4. Construct partial-null profile-only and dyadic-only laws and test subset
+   pivotality; if it fails, derive a closed-testing interpretation.
 4. Treat the completed pure-path and external-grid result as a mechanistic
    approximation; pursue mixed-path local power theory only if needed for the
    report, not as a post-hoc method-selection rule.

@@ -51,6 +51,21 @@ def test_size_only_control_removes_covariate_scale_and_center_effects():
     assert abs(diagnostics["scale_ratio"] - 1.0) < 1e-12
 
 
+def test_signal_multiplier_is_validated_and_changes_signal():
+    counts = ROOM_DESIGNS["balanced"]
+    try:
+        make_covariate_building_pair(
+            np.random.default_rng(122),
+            counts,
+            "radial_node",
+            signal_multiplier=-0.1,
+        )
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("negative signal multiplier must fail")
+
+
 def test_aggregation_weights_represent_distinct_targets():
     counts = ROOM_DESIGNS["moderately_unequal"]
     assert np.all(aggregation_weights(counts, "building_equal") == 1.0)

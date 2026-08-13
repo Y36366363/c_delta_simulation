@@ -1055,6 +1055,26 @@ not yet a replacement for the separately interpretable effect parameters.
 
 Source: `docs/unequal_building_covariate_adaptive_20260813.md`.
 
+### 49. Standardized Max Is Interpretable as Joint Evidence, Not Unique Mechanism Identification
+
+**Evidence: two unequal designs, three signal strengths, 199/499/999 paired permutation pools, two independent seeds, and two 600-dataset construct-separation checks**
+
+The omnibus now returns maxT-adjusted profile and Mantel evidence and their
+standardized winner. Across 18 alternative cells, 499 permutations matched
+999-permutation decisions `.984`, winners `.988`, and attribution `.968`; mean
+999-permutation regret versus the better fixed component was `.017`, with
+worst observed `.060`. In the explicit node-salience alternative, profile won
+`.735` and omnibus power was `.812` versus `.825` profile. Under shared dyadic
+geometry, Mantel won `.998` and omnibus power was `.952` versus `.958` Mantel.
+Most rejections had adjusted evidence in both components, showing that the
+constructs overlap. The maxT family is valid under the joint random-pairing
+null, but strong component discovery still requires subset pivotality or a
+partial-null argument. Standardized max therefore remains an interpretable
+omnibus sensitivity, not a unique mechanism classifier or replacement effect
+parameter.
+
+Source: `docs/omnibus_interpretability_20260813.md`.
+
 ## Reporting Rules
 
 1. Use the corrected raw formula everywhere.
@@ -1115,6 +1135,10 @@ Source: `docs/unequal_building_covariate_adaptive_20260813.md`.
   aggregation, and temperature failures.
 - Added and validated permutation-standardized max as a candidate omnibus
   sensitivity test, without changing the primary `c_delta_star` definition.
+- Added maxT-adjusted component evidence, explicit target attribution, regret
+  analysis, and 199/499/999 permutation stability checks.
+- Distinguished globally valid simultaneous evidence from unproved strong
+  partial-null component discovery.
 
 ### 2026-08-12
 

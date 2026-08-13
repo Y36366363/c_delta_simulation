@@ -307,6 +307,14 @@ def adaptive_permutation_outcomes(
     standardized_max_p = (
         1 + int(np.sum(standardized_max[1:] >= standardized_max[0]))
     ) / (n_perm + 1)
+    component_adjusted_p = np.asarray(
+        [
+            (1 + int(np.sum(standardized_max[1:] >= standardized_global[0, j])))
+            / (n_perm + 1)
+            for j in range(2)
+        ]
+    )
+    standardized_winner = int(standardized_global[0, 1] > standardized_global[0, 0])
 
     observed_cv, observed_weights = cross_validated_weight_statistic(
         block_observed[None, :, :],
@@ -371,6 +379,11 @@ def adaptive_permutation_outcomes(
         "naive_selected_p": naive_p,
         "nested_max_p": nested_max_p,
         "standardized_max_p": standardized_max_p,
+        "standardized_profile_z": float(standardized_global[0, 0]),
+        "standardized_mantel_z": float(standardized_global[0, 1]),
+        "standardized_winner": "mantel" if standardized_winner else "profile",
+        "adjusted_profile_p": float(component_adjusted_p[0]),
+        "adjusted_mantel_p": float(component_adjusted_p[1]),
         "cv_retrained_p": retrained_cv_p,
         "cv_standardized_p": standardized_cv_p,
         "cv_frozen_p": frozen_cv_p,

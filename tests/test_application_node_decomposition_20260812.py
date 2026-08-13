@@ -66,6 +66,12 @@ def test_nested_rules_return_valid_probability_range():
     assert 0.0 < outcomes["observed_standardized_profile_weight"] < 1.0
     assert 0.0 < outcomes["standardized_max_p"] <= 1.0
     assert 0.0 < outcomes["cv_standardized_p"] <= 1.0
+    assert outcomes["standardized_winner"] in {"profile", "mantel"}
+    assert outcomes["standardized_max_p"] == min(
+        outcomes["adjusted_profile_p"], outcomes["adjusted_mantel_p"]
+    )
+    assert outcomes["adjusted_profile_p"] >= outcomes["profile_p"]
+    assert outcomes["adjusted_mantel_p"] >= outcomes["mantel_p"]
 
 
 def test_retrained_cv_statistic_has_exact_orbit_rank_validity():

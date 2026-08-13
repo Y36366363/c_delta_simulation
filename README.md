@@ -5,6 +5,28 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/13/2026
 
+- **Omnibus interpretation validated** - Added permutation maxT-adjusted
+  profile/Mantel evidence and a standardized winner. The omnibus p-value is
+  exactly the minimum of the two adjusted component values.
+- **Focused attribution check** - In two 600-dataset target-separation rows,
+  profile was the standardized winner `.735` under node salience and Mantel
+  was winner `.998` under shared dyadic geometry. Omnibus regret was only
+  `.013` and `.007`, respectively.
+- **Construct overlap made explicit** - Most significant datasets supported
+  both adjusted components because node salience and dyadic geometry are not
+  orthogonal. Winner/evidence describe relative support; they do not identify
+  a unique causal mechanism.
+- **Permutation resolution** - Relative to 999 permutations, 499 achieved
+  `.984` decision, `.988` winner, and `.968` attribution agreement across 18
+  alternative cells; 499 is suitable for routine simulation and 999 remains
+  preferable for final near-threshold attribution.
+- **Theoretical boundary** - maxT controls the declared family under the joint
+  random-pairing null. Strong component discovery still requires subset-
+  pivotality or partial-null validation, so standardized max remains an
+  interpretable omnibus sensitivity rather than the primary method. See
+  `docs/omnibus_interpretability_20260813.md`.
+- **Project audit** - The completed project passes 125 tests; all new omnibus
+  result files and conditional attribution shares passed consistency checks.
 - **Unequal building sizes separated from informative size** - Held total
   `n=72` fixed across balanced, moderately unequal, and severely unequal
   allocations. Size imbalance alone did not cause systematic power loss;
@@ -25,7 +47,8 @@ correlation-of-divergency coefficient, `c_delta`.
 - **Covariate-conditioned inference confirmed** - In the severe-imbalance
   null, unrestricted rejection ranged from `.001` to `.314`, while every
   within-building method calibrated at `.043-.046`.
-- **Project audit** - The complete project passes 121 tests. See
+- **Earlier project audit** - The project passed 121 tests at the end of the
+  unequal-building stage. See
   `docs/unequal_building_covariate_adaptive_20260813.md`.
 
 ## Updates 08/12/2026
@@ -900,6 +923,9 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/unequal_building_covariate_adaptive_20260813.md`: unequal-size versus
   informative-size validation, temperature sensitivity, covariate-conditioned
   inference, and the adaptive-omnibus decision assessment.
+- `docs/omnibus_interpretability_20260813.md`: maxT component evidence,
+  construct attribution, power regret, permutation stability, and the
+  global-null/partial-null interpretation boundary.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -939,6 +965,8 @@ python3 scripts/run_application_node_decomposition_20260812.py
 python3 scripts/summarize_application_node_decomposition_20260812.py
 python3 scripts/run_unequal_building_adaptive_validation_20260813.py
 python3 scripts/summarize_unequal_building_adaptive_20260813.py
+python3 scripts/run_omnibus_interpretability_20260813.py
+python3 scripts/summarize_omnibus_interpretability_20260813.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

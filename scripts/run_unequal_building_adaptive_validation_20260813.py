@@ -73,10 +73,14 @@ def make_covariate_building_pair(
     rng: np.random.Generator,
     room_counts: np.ndarray,
     scenario: str,
+    *,
+    signal_multiplier: float = 1.0,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, dict[str, float]]:
     """Generate a stylized portfolio with covariate-driven nuisance structure."""
     if scenario not in SCENARIOS:
         raise ValueError(f"unknown scenario: {scenario}")
+    if signal_multiplier < 0.0:
+        raise ValueError("signal_multiplier must be nonnegative")
     covariates = building_covariates(room_counts)
     age = covariates["age"]
     area = covariates["log_floor_area"]
@@ -116,6 +120,8 @@ def make_covariate_building_pair(
             dyad_rho = float(0.30 + 0.25 / (1.0 + exp(centrality[block])))
         else:
             radius_rho, dyad_rho = 0.0, 0.0
+        radius_rho = float(np.clip(radius_rho * signal_multiplier, -0.95, 0.95))
+        dyad_rho = float(np.clip(dyad_rho * signal_multiplier, -0.95, 0.95))
 
         radius_x, radius_y = _correlated_normals(rng, int(count), radius_rho)
         dyad_x, dyad_y = _correlated_normals(rng, int(count), dyad_rho)
