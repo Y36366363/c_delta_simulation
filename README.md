@@ -5,6 +5,25 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/14/2026
 
+- **Fully recomputed studentized permutation passed its first iid gate** - On
+  every permutation, the profile method recomputes all pairing-dependent
+  complete-IF terms and Mantel recomputes its node-level Hájek variance. At
+  `n=80`, Holm true-null FWER was `.050/.030` under two global nulls and
+  `.0417/.0367` under the two partial nulls.
+- **Larger-iid extension remained conservative after Holm** - At `n=160`,
+  global/partial-null Holm FWER ranged from `.0225` to `.0350`, while both-
+  alternative Holm power was `1.000`. One individual Mantel null row reached
+  `.070`, so the evidence is pointwise rather than a uniform guarantee.
+- **Six-building room-iid inference rejected** - Treating 120 rooms as iid
+  produced family error `.2450` under Gaussian clusters and `.3685` under
+  skew-scale clusters.
+- **Small-building corrections remain unresolved** - Building-summed `t_5`
+  plus Holm reduced FWER to `.0405` under Gaussian clusters but remained
+  `.0735` under skew scales. A linearized building sign-flip was severely
+  invalid (`.180/.236`) and was rejected. Increasing to 12/24 buildings did
+  not repair the skew-scale cluster-t row, indicating that the global Mantel
+  cross-building U-structure needs a separate cluster-level derivation. See
+  `docs/studentized_permutation_and_small_building_20260814.md`.
 - **Weak-null local tests derived** - Added the complete functional-delta
   influence function for the Huber-radius profile correlation and the
   order-two Hájek-projection influence function for the Mantel distance
@@ -1009,6 +1028,8 @@ python3 scripts/run_omnibus_interpretability_20260813.py
 python3 scripts/summarize_omnibus_interpretability_20260813.py
 python3 scripts/run_partial_null_subset_pivotality_20260813.py --phase confirmatory
 python3 scripts/run_weak_null_local_tests_20260814.py --phase confirmatory
+python3 scripts/run_studentized_permutation_weak_null_20260814.py --phase confirmatory
+python3 scripts/run_small_building_weak_null_20260814.py --phase confirmatory
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

@@ -1,0 +1,4 @@
+phase	scenario	n_buildings	rooms_per_building	repetitions	room_iid_profile_rejection	cluster_t_profile_rejection	signflip_profile_rejection	room_iid_mantel_rejection	cluster_t_mantel_rejection	signflip_mantel_rejection	room_iid_raw_fwer	cluster_t_holm_fwer	cluster_t_holm_wilson_low	cluster_t_holm_wilson_high	signflip_holm_fwer	mean_profile_max_cluster_score_share	mean_mantel_max_cluster_score_share	cluster_t_both_rejection	signflip_both_rejection
+pilot	gaussian_cluster_null	6	20	500	0.156	0.048	0.15	0.226	0.062	0.166	0.252	0.04	0.026040797389777257	0.060973595834850805	0.196	0.33923852968042556	0.35203392875518397	0.014	0.09
+pilot	skew_scale_cluster_null	6	20	500	0.326	0.068	0.216	0.328	0.082	0.222	0.372	0.068	0.04906650742490687	0.0935209227338743	0.242	0.3422031883660161	0.34797101823089244	0.052	0.174
+pilot	correlated_cluster_alt	6	20	500	0.718	0.492	0.664	0.88	0.59	0.806	nan	nan	nan	nan	nan	0.35167116090301664	0.35338678453002514	0.416	0.64

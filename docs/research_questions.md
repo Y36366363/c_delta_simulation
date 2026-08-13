@@ -160,10 +160,12 @@ feedback and separates mathematical claims from empirical checks.
    latter as sensitivity until that scientific choice is explicit.
 4. Partial-null profile-only and dyadic-only laws now reject subset
    pivotality. Complete local influence functions and jackknife studentizers
-   are now implemented, but global-null calibration is not yet uniform at
-   `n=80-160`. Test fully recomputed studentized permutation and building-level
-   resampling before activating Holm/closed-Bonferroni; until then component
-   attribution remains descriptive after the globally valid omnibus test.
+   are now implemented. Fully recomputed studentized permutation plus Holm
+   passed the first iid `n=80/160` gate, but not a uniform theorem. Six-
+   building room-iid and sign-flip rules failed, and skew-scale cluster-t Holm
+   remained anti-conservative. Derive the declared building-level estimand and
+   its cluster U-projection before formal component inference in the current
+   application.
 4. Treat the completed pure-path and external-grid result as a mechanistic
    approximation; pursue mixed-path local power theory only if needed for the
    report, not as a post-hoc method-selection rule.

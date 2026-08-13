@@ -1125,6 +1125,16 @@ Source: `docs/omnibus_interpretability_20260813.md`.
 
 ### 2026-08-14
 
+- Implemented fully recomputed studentized permutation for both profile and
+  Mantel weak nulls. Holm FWER passed the first iid global/partial-null gate at
+  `n=80` and remained conservative in an `n=160` extension.
+- Demonstrated that room-iid inference is unusable with six buildings (FWER
+  `.245-.369`). Building-summed `t_5` improved Gaussian-cluster calibration
+  but remained anti-conservative under skew building scales (`.0735`).
+- Rejected a linearized building sign-flip after FWER `.180-.236`; increasing
+  to 12/24 buildings did not repair the skew cluster-t row, motivating a
+  proper cluster-level U-functional derivation rather than another scalar
+  correction.
 - Derived a complete Huber/MAD nuisance-aware influence function for the
   profile-correlation weak null and a node-level Hájek projection for the
   Mantel U-functional weak null.
