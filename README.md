@@ -3,6 +3,31 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/14/2026
+
+- **Weak-null local tests derived** - Added the complete functional-delta
+  influence function for the Huber-radius profile correlation and the
+  order-two Hájek-projection influence function for the Mantel distance
+  correlation. Both test `correlation = 0` without assuming label
+  exchangeability.
+- **Proper Mantel sampling unit** - The `n(n-1)/2` edges are not treated as
+  independent. The sandwich uses node-level U-statistic projections, and the
+  alternative jackknife deletes one node and all incident edges.
+- **Iid partial-null confirmation** - Replaced fixed templates with genuinely
+  iid weak-null laws. At `n=80/160`, Mantel-null/profile-alternative jackknife
+  rejection was `.055/.047`; profile-null/Mantel-alternative rejection was
+  `.053/.064`.
+- **Finite-sample boundary remains** - Full-refit/delete-node jackknife improved
+  on the raw sandwich, but global-null local rejection still reached `.075`
+  for profile and `.097` for Mantel. The local tests are theoretically
+  motivated research implementations, not report-ready defaults.
+- **Multiplicity decision deferred** - Holm equals closed Bonferroni for the
+  two component nulls and does not require subset pivotality, but it does
+  require valid local p-values. Confirmatory global-null Holm FWER remained as
+  high as `.080` at `n=80` and `.073` at `n=160`; neither Holm nor closed
+  testing is promoted. See
+  `docs/weak_null_local_tests_and_multiplicity_20260814.md`.
+
 ## Updates 08/13/2026
 
 - **Subset pivotality rejected for weak component nulls** - Constructed
@@ -983,6 +1008,7 @@ python3 scripts/summarize_unequal_building_adaptive_20260813.py
 python3 scripts/run_omnibus_interpretability_20260813.py
 python3 scripts/summarize_omnibus_interpretability_20260813.py
 python3 scripts/run_partial_null_subset_pivotality_20260813.py --phase confirmatory
+python3 scripts/run_weak_null_local_tests_20260814.py --phase confirmatory
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

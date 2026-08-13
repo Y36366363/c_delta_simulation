@@ -159,9 +159,11 @@ feedback and separates mathematical claims from empirical checks.
    profile/dyadic estimand or the standardized-max union question. Retain the
    latter as sensitivity until that scientific choice is explicit.
 4. Partial-null profile-only and dyadic-only laws now reject subset
-   pivotality. Derive valid studentized local tests for the weak component
-   nulls before considering closed testing; until then component attribution
-   remains descriptive after the globally valid omnibus test.
+   pivotality. Complete local influence functions and jackknife studentizers
+   are now implemented, but global-null calibration is not yet uniform at
+   `n=80-160`. Test fully recomputed studentized permutation and building-level
+   resampling before activating Holm/closed-Bonferroni; until then component
+   attribution remains descriptive after the globally valid omnibus test.
 4. Treat the completed pure-path and external-grid result as a mechanistic
    approximation; pursue mixed-path local power theory only if needed for the
    report, not as a post-hoc method-selection rule.

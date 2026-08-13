@@ -1123,6 +1123,23 @@ Source: `docs/omnibus_interpretability_20260813.md`.
 
 ## Dated Update Log
 
+### 2026-08-14
+
+- Derived a complete Huber/MAD nuisance-aware influence function for the
+  profile-correlation weak null and a node-level Hájek projection for the
+  Mantel U-functional weak null.
+- Implemented plug-in sandwich, full-refit profile jackknife, and delete-node
+  Mantel jackknife local tests under genuinely iid partial-null laws.
+- Found that jackknife studentization substantially improves calibration and
+  works near nominal on the two partial-null paths, but global-null rejection
+  remains distribution-dependent and reaches `.075` for profile and `.097`
+  for Mantel.
+- Established that two-test Holm is equivalent to closed Bonferroni and avoids
+  a subset-pivotality requirement, but cannot repair locally invalid p-values;
+  it therefore remains unapproved for formal component discovery.
+- Prioritised fully recomputed studentized permutation and building-level
+  resampling as the next inference checks.
+
 ### 2026-08-13
 
 - Separated pure unequal building size from informative cluster size using a
