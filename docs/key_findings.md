@@ -1139,6 +1139,14 @@ Source: `docs/omnibus_interpretability_20260813.md`.
   analysis, and 199/499/999 permutation stability checks.
 - Distinguished globally valid simultaneous evidence from unproved strong
   partial-null component discovery.
+- Constructed two independently calibrated weak partial-null paths and rejected
+  general subset pivotality: the null Mantel distribution collapsed toward
+  zero (KS `.596`) under a strong profile alternative. The cleaned profile-
+  null path remained calibrated (`.038` maxT rejection versus `.044` under its
+  matched global null), so neither confirmatory path showed Type-I inflation.
+- Retained standardized max only as a globally valid joint-null omnibus;
+  component adjusted p-values remain descriptive, and closed testing requires
+  separately valid local weak-null tests before it can be used.
 
 ### 2026-08-12
 

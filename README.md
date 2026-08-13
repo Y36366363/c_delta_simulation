@@ -5,6 +5,21 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/13/2026
 
+- **Subset pivotality rejected for weak component nulls** - Constructed
+  independently calibrated profile-null/Mantel-alternative and Mantel-null/
+  profile-alternative laws at `n=60`. The true-null standardized component
+  distribution changed materially when the other component was non-null.
+- **Partial-null behavior quantified** - Under profile-null/Mantel-alternative
+  data, raw/maxT profile rejection was `.056/.038`, close to the matched
+  global-null `.056/.044`. Under the reverse path, the null Mantel score SD
+  collapsed from `1.083` to `.075` (KS `.596`) and rejected `0`. No inflation
+  appeared in these cleaned paths, but the distributional change disproves a
+  general subset-pivotality claim.
+- **Interpretation boundary tightened** - Standardized max remains valid for
+  the joint random-pairing omnibus null. Adjusted component p-values and winner
+  labels remain descriptive rather than strong partial-null discoveries.
+  Closed testing cannot be used until valid local weak-null tests are derived.
+  See `docs/partial_null_subset_pivotality_20260813.md`.
 - **Omnibus interpretation validated** - Added permutation maxT-adjusted
   profile/Mantel evidence and a standardized winner. The omnibus p-value is
   exactly the minimum of the two adjusted component values.
@@ -967,6 +982,7 @@ python3 scripts/run_unequal_building_adaptive_validation_20260813.py
 python3 scripts/summarize_unequal_building_adaptive_20260813.py
 python3 scripts/run_omnibus_interpretability_20260813.py
 python3 scripts/summarize_omnibus_interpretability_20260813.py
+python3 scripts/run_partial_null_subset_pivotality_20260813.py --phase confirmatory
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py
