@@ -3,6 +3,27 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/15/2026
+
+- **Iid stress test sharpened the promotion boundary** - A new `n=80`,
+  300-dataset, 199-permutation pilot tested fully recomputed studentized
+  permutation under `t_5`, `t_3`, strong skewness, and both partial-null
+  directions. Regular-row Holm true-null error ranged from `.0200` to `.0533`,
+  strengthening its status as a pointwise iid candidate.
+- **Near-degenerate profile inference rejected** - When population radii had
+  SD only `.03` inside separated sign mixtures, unstable median/MAD reference
+  fitting dominated the genuine profile variation: mean estimated profile
+  correlation was `.9123` and true-null rejection was `.9533`. A stable
+  Huber/MAD fit and profile variances bounded away from zero are now explicit
+  reporting requirements; failure should yield ``weakly identified'' or
+  ``undetermined'', not an ordinary local p-value.
+- **Professor update package** - Added a concise email in
+  `docs/email_update_prof_hoorn_20260815.md`, copyable LaTeX in
+  `docs/cdelta_inference_update_20260815.tex`, and the focused interpretation
+  in `docs/studentized_permutation_stress_20260815.md`.
+- **Project audit** - The full Anaconda test suite now passes 139 tests, and
+  the new LaTeX attachment compiles as a three-page note without `booktabs`.
+
 ## Updates 08/14/2026
 
 - **Fully recomputed studentized permutation passed its first iid gate** - On
@@ -985,6 +1006,12 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/omnibus_interpretability_20260813.md`: maxT component evidence,
   construct attribution, power regret, permutation stability, and the
   global-null/partial-null interpretation boundary.
+- `docs/studentized_permutation_stress_20260815.md`: heavy-tail, skewness,
+  partial-null, and near-degenerate stress-test interpretation.
+- `docs/cdelta_inference_update_20260815.tex`: copyable LaTeX attachment for
+  the current inference and building-level decision update.
+- `docs/email_update_prof_hoorn_20260815.md`: concise proposed email to
+  Professor Hoorn.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -1030,6 +1057,7 @@ python3 scripts/run_partial_null_subset_pivotality_20260813.py --phase confirmat
 python3 scripts/run_weak_null_local_tests_20260814.py --phase confirmatory
 python3 scripts/run_studentized_permutation_weak_null_20260814.py --phase confirmatory
 python3 scripts/run_small_building_weak_null_20260814.py --phase confirmatory
+python3 scripts/run_studentized_permutation_stress_20260814.py --phase pilot
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

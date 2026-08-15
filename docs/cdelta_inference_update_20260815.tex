@@ -1,0 +1,193 @@
+% Content-only LaTeX for insertion into the author's existing R Markdown or
+% LaTeX workflow. It deliberately uses \hline rather than booktabs commands.
+% The surrounding template should provide amsmath; no custom table package is
+% required by this text.
+
+\providecommand{\cds}{c_\delta^\ast}
+\providecommand{\rhoP}{\rho_{\mathrm{P}}}
+\providecommand{\rhoM}{\rho_{\mathrm{M}}}
+
+\begin{center}
+{\LARGE\bfseries Inference update for $\cds$ and the profile--Mantel decomposition}\par
+\vspace{0.4em}
+{\large Studentized permutation, multiplicity, and the building-level boundary}\par
+\vspace{0.6em}
+Jialiang Yao \hfill 15 August 2026
+\end{center}
+
+\vspace{0.5em}
+\begin{quote}
+\textbf{Main conclusion.} Fully recomputed studentized permutation is now the
+leading candidate for testing the two local weak nulls in genuinely iid data.
+Holm adjustment passed the first global-null, partial-null, heavy-tail, and
+skewness checks. The claim is pointwise rather than uniform: inference fails
+near a nonregular boundary where the fitted Huber/MAD radius profiles have
+almost no genuine variation. None of these iid results resolves inference for
+an application with only six buildings.
+\end{quote}
+
+\section{Two scientific components}
+
+Let $T_X$ and $T_Y$ be Huber location functionals, with MAD scales used in
+their estimating equations, and define the observation-level radii
+\begin{equation}
+R_X=|X-T_X|, \qquad R_Y=|Y-T_Y|.
+\end{equation}
+The profile component is
+\begin{equation}
+\rhoP=\operatorname{Cor}(R_X,R_Y).
+\end{equation}
+It asks whether the same labelled observation is salient in both variables.
+For nondegenerate profiles, $\cds$ is related to this correlation by
+\begin{equation}
+\cds=1+\rhoP\operatorname{CV}(R_X)\operatorname{CV}(R_Y).
+\end{equation}
+
+With an independent copy $(X',Y')$, the population Mantel component is
+\begin{equation}
+\rhoM=\operatorname{Cor}(|X-X'|,|Y-Y'|).
+\end{equation}
+It asks whether the complete dyadic distance geometry agrees. The two local
+weak nulls are
+\begin{equation}
+H_{0P}:\rhoP=0, \qquad H_{0M}:\rhoM=0.
+\end{equation}
+They are scientifically related but are not the same null hypothesis.
+
+\section{Fully recomputed studentized permutation}
+
+For component $j\in\{P,M\}$ and permutation $\pi$, define
+\begin{equation}
+Z_j^\pi=\frac{\widehat\rho_j^\pi}{\widehat{\operatorname{SE}}_j^\pi},
+\qquad
+p_j=\frac{1+\sum_{r=1}^{R}
+I\{|Z_{j,r}^\pi|\geq |Z_{j,\mathrm{obs}}|\}}{R+1}.
+\end{equation}
+For the profile statistic, every permutation recomputes the five joint
+profile moments, the correlation gradient, the two location-nuisance
+coefficients, the paired ordering of the location influence values, and the
+complete influence variance. For Mantel, every permutation recomputes the
+five distance-kernel moments, all node-conditional kernel means, the
+order-two Hajek projection, and its node-level variance. Marginal Huber/MAD
+fits are not refitted because they are invariant to permutations of the
+pairing.
+
+The two local p-values are adjusted by Holm. With two hypotheses, the smaller
+raw p-value is multiplied by two and the larger adjusted p-value is the
+maximum of the first adjusted value and the larger raw value. Holm does not
+require subset pivotality, but it does require valid local p-values.
+
+\section{Main iid calibration}
+
+At $n=80$, 600 datasets per cell and 499 permutations gave the following
+results.
+
+\begin{table}[ht]
+\centering
+\caption{Fully recomputed local tests and Holm adjustment.}
+\small
+\begin{tabular}{lrrr}
+\hline
+Scenario & Profile reject & Mantel reject & Holm true-null error\\
+\hline
+Signed-lognormal global null & .0650 & .0550 & .0500\\
+Profile null, Mantel alternative & .0483 & .9317 & .0417\\
+Calibrated-mixture global null & .0367 & .0383 & .0300\\
+Mantel null, profile alternative & .6433 & .0467 & .0367\\
+Both positive alternatives & .9833 & .9983 & ---\\
+\hline
+\end{tabular}
+\end{table}
+
+At $n=160$, the tested global- and partial-null Holm errors ranged from
+.0225 to .0350. One individual Mantel local-null row reached .0700, while its
+Holm family error was .0350. Thus the simulations support pointwise candidacy,
+not uniform finite-sample validity.
+
+\section{Heavy-tail, skewness, and boundary stress test}
+
+A focused pilot used $n=80$, 300 datasets per row, and 199 permutations.
+
+\begin{table}[ht]
+\centering
+\caption{Stress-test rejection rates.}
+\small
+\begin{tabular}{lrrr}
+\hline
+Scenario & Profile local & Mantel local & Holm true-null error\\
+\hline
+Independent $t_5$ & .0333 & .0367 & .0200\\
+Independent $t_3$ & .0333 & .0567 & .0233\\
+Independent strongly skew margins & .0400 & .0667 & .0300\\
+Profile null, heavy-tail sign link & .0533 & .9267 & .0533\\
+Profile null, nearly constant radii & .9533 & 1.0000 & .9533\\
+Mantel null, profile alternative & .6500 & .0333 & .0300\\
+\hline
+\end{tabular}
+\end{table}
+
+The first, second, and third rows are global nulls. The fourth row retains a
+true profile null while creating strong dyadic sign agreement. The sixth row
+retains a true Mantel null while making the profile component nonzero. The
+regular heavy-tail, skew, and partial-null rows are broadly compatible with
+nominal behavior after Holm adjustment.
+
+The fifth row deliberately approaches a nonregular boundary. Both margins
+are separated symmetric sign mixtures and the independent population radii
+have standard deviation only .03. At the population reference, $\rhoP=0$.
+In samples, however, the low-density median/MAD region is unstable and the
+$O_p(n^{-1/2})$ fitted-location error can dominate the genuine radius
+variation. Shared signs then make the two fitted errors move together. The
+mean estimated profile correlation was .9123, and studentization could not
+repair the failed regular expansion.
+
+This result motivates explicit regularity conditions: a locally unique
+Huber/MAD solution, adequate density at the relevant median and MAD
+quantiles, and both profile variances bounded away from zero. If these checks
+fail, the profile component should be reported as weakly identified or
+undetermined rather than assigned an ordinary local p-value.
+
+\section{Why the six-building case remains unresolved}
+
+The building simulation used six independent buildings with 20 rooms each.
+
+\begin{table}[ht]
+\centering
+\caption{Familywise error under building dependence.}
+\small
+\begin{tabular}{lrrr}
+\hline
+Null model & Room-iid & Building-summed $t_5$ & Linear sign-flip\\
+\hline
+Gaussian buildings & .2450 & .0405 & .1800\\
+Skew-scale buildings & .3685 & .0735 & .2360\\
+\hline
+\end{tabular}
+\end{table}
+
+Room-iid inference is therefore rejected. The building-summed $t_5$ method
+was adequate in the Gaussian row but not under skewed building scales, and
+the linearized sign-flip was invalid in both rows. Increasing the number of
+buildings to 12 or 24 did not repair the skew-scale row, suggesting that the
+problem is not only degrees of freedom. Global Mantel geometry contains
+cross-building dyads, so a room-level influence projected and then summed by
+building may omit relevant finite-cluster U-statistic structure.
+
+\section{Decision requested and proposed next step}
+
+Before deriving another building correction, the target should be fixed:
+
+\begin{description}
+\item[Average within-building target.] Calculate one profile/Mantel effect
+vector per building and use a small-sample multivariate procedure. This is
+comparatively interpretable, but cross-building dyads are excluded by
+definition.
+\item[One global building target.] Preserve all within- and cross-building
+dyads. This is closer to the current pooled geometry, but requires a new
+cluster-level projection for the distance U-functional before resampling.
+\end{description}
+
+The immediate recommendation is to retain studentized permutation plus Holm
+as an iid research candidate, add a nondegeneracy/stability screen, and defer
+formal six-building component discovery until the scientific target above is
+chosen.
