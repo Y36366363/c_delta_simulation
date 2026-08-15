@@ -17,12 +17,10 @@ correlation-of-divergency coefficient, `c_delta`.
   Huber/MAD fit and profile variances bounded away from zero are now explicit
   reporting requirements; failure should yield ``weakly identified'' or
   ``undetermined'', not an ordinary local p-value.
-- **Professor update package** - Added a concise email in
-  `docs/email_update_prof_hoorn_20260815.md`, copyable LaTeX in
-  `docs/cdelta_inference_update_20260815.tex`, and the focused interpretation
-  in `docs/studentized_permutation_stress_20260815.md`.
-- **Project audit** - The full Anaconda test suite now passes 139 tests, and
-  the new LaTeX attachment compiles as a three-page note without `booktabs`.
+- **Technical reporting note** - Added the focused interpretation in
+  `docs/studentized_permutation_stress_20260815.md`; email and LaTeX drafts
+  are delivered in conversation rather than stored in the project.
+- **Project audit** - The full Anaconda test suite now passes 139 tests.
 
 ## Updates 08/14/2026
 
@@ -1008,10 +1006,6 @@ variants, weighting schemes, and machine-learning examples.
   global-null/partial-null interpretation boundary.
 - `docs/studentized_permutation_stress_20260815.md`: heavy-tail, skewness,
   partial-null, and near-degenerate stress-test interpretation.
-- `docs/cdelta_inference_update_20260815.tex`: copyable LaTeX attachment for
-  the current inference and building-level decision update.
-- `docs/email_update_prof_hoorn_20260815.md`: concise proposed email to
-  Professor Hoorn.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
