@@ -5,6 +5,24 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/16/2026
 
+- **Sample-size diagnostic comparison completed** - Across `n=40-640`, the
+  severe radial `.10` profile null remained invalid (`.887` to `.553`
+  rejection), while root-n scaled bootstrap Huber-reference spread increased
+  from `2.53` to `5.22`. The `.20` path recovered to nominal rejection even
+  though spacing and central density still warned, separating assumption
+  diagnostics from operational estimator stability.
+- **Bootstrap reference stability is the leading operational warning** - In
+  16 external null cells its scaled median stayed `1.03-1.39` and its largest
+  90th percentile was `1.69`. A provisional value above `2` separates the
+  severe path in this grid, but remains an exploratory warning rather than a
+  formal gate. At least 199 bootstrap draws are recommended for reportable
+  continuous scores.
+- **Fixed spacing gate not promoted** - The `.50` spacing rule over-warned
+  small strongly skewed samples, whereas central valley density described the
+  theoretical low-density boundary but also warned after finite-sample
+  rejection recovered. Current reporting should retain two tiers rather than
+  combine them automatically.
+
 - **Horizontal testing comparison completed** - Pearson/CCC weak-null theory
   supports fully recomputed studentization; distance correlation/HSIC target
   independence and have different degenerate-null resampling theory; spatial
@@ -28,7 +46,8 @@ correlation-of-divergency coefficient, `c_delta`.
   alone is not the failure mechanism.
 - **Project audit** - The comparison is documented in
   `docs/comparator_testing_and_regularity_gate_20260816.md` with canonical
-  result tables and reproducible code; the full suite now passes 144 tests.
+  result tables and reproducible code; after the diagnostic-scaling extension,
+  the full suite now passes 152 tests.
 
 ## Updates 08/15/2026
 
@@ -1036,6 +1055,9 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/comparator_testing_and_regularity_gate_20260816.md`: horizontal
   parameter-test comparison, continuous recovery path, and provisional
   profile-regularity warning gate.
+- `docs/profile_diagnostic_scaling_20260816.md`: sample-size scaling,
+  spacing-versus-density-versus-bootstrap comparison, external validation, and
+  bootstrap Monte Carlo precision.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -1084,6 +1106,9 @@ python3 scripts/run_small_building_weak_null_20260814.py --phase confirmatory
 python3 scripts/run_studentized_permutation_stress_20260814.py --phase pilot
 python3 scripts/run_profile_regularity_comparison_20260816.py --phase pilot
 python3 scripts/run_profile_regularity_comparison_20260816.py --phase pilot --design gate_cv
+python3 scripts/run_profile_diagnostic_scaling_20260816.py --phase pilot --design path --n 80 --radial-log-sd 0.2
+python3 scripts/run_profile_diagnostic_scaling_20260816.py --phase pilot --design external --n 80 --scenario independent_t5
+python3 scripts/run_bootstrap_reference_precision_20260816.py --phase pilot --n 80 --scenario radial_0p1
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py
