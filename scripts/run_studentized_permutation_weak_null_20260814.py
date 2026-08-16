@@ -98,9 +98,10 @@ def profile_studentized_permutation_test(
     observed, observed_z = _profile_studentized_score(
         x, y, location_if_x, location_if_y, tx, ty
     )
+    permuted_estimates = np.empty(indices.shape[0])
     permuted_z = np.empty(indices.shape[0])
     for orbit, index in enumerate(indices):
-        _, permuted_z[orbit] = _profile_studentized_score(
+        permuted_estimates[orbit], permuted_z[orbit] = _profile_studentized_score(
             x,
             y[index],
             location_if_x,
@@ -115,6 +116,7 @@ def profile_studentized_permutation_test(
         "estimate": observed,
         "z_statistic": observed_z,
         "p_value": float(p_value),
+        "permuted_estimates": permuted_estimates,
         "permuted_z": permuted_z,
     }
 

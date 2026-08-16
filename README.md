@@ -3,6 +3,33 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/16/2026
+
+- **Horizontal testing comparison completed** - Pearson/CCC weak-null theory
+  supports fully recomputed studentization; distance correlation/HSIC target
+  independence and have different degenerate-null resampling theory; spatial
+  Mantel work reinforces structure-preserving permutations rather than
+  unrestricted room labels.
+- **Continuous regularity path located the recovery region** - Under a true
+  profile weak null with shared signs, ordinary profile permutation rejected
+  `.907/.903/.520/.157/.053` as radial log-SD increased
+  `.03/.10/.20/.40/.80`; studentization reduced this to
+  `.947/.840/.203/.030/.017`. It helps materially but cannot repair a
+  nonregular Huber/MAD reference.
+- **Scale-free gap diagnostic piloted** - Largest central spacing divided by
+  IQR fell from median `.945` at the severe boundary to `.237` in the regular
+  endpoint. A provisional `.50` warning gate removed the failed `.03-.20`
+  path, retained `.997` of `t_5`, `.997` of the regular profile partial null,
+  and `.797` of strong-skew samples. It is a conservative diagnostic, not a
+  universal cutoff.
+- **Small raw scale separated from nonregular geometry** - Independent
+  continuous margins scaled by `10^-12` passed the `.50` gate in every
+  replication and retained rejection `.033`, confirming that affine scale
+  alone is not the failure mechanism.
+- **Project audit** - The comparison is documented in
+  `docs/comparator_testing_and_regularity_gate_20260816.md` with canonical
+  result tables and reproducible code; the full suite now passes 144 tests.
+
 ## Updates 08/15/2026
 
 - **Iid stress test sharpened the promotion boundary** - A new `n=80`,
@@ -1006,6 +1033,9 @@ variants, weighting schemes, and machine-learning examples.
   global-null/partial-null interpretation boundary.
 - `docs/studentized_permutation_stress_20260815.md`: heavy-tail, skewness,
   partial-null, and near-degenerate stress-test interpretation.
+- `docs/comparator_testing_and_regularity_gate_20260816.md`: horizontal
+  parameter-test comparison, continuous recovery path, and provisional
+  profile-regularity warning gate.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -1052,6 +1082,8 @@ python3 scripts/run_weak_null_local_tests_20260814.py --phase confirmatory
 python3 scripts/run_studentized_permutation_weak_null_20260814.py --phase confirmatory
 python3 scripts/run_small_building_weak_null_20260814.py --phase confirmatory
 python3 scripts/run_studentized_permutation_stress_20260814.py --phase pilot
+python3 scripts/run_profile_regularity_comparison_20260816.py --phase pilot
+python3 scripts/run_profile_regularity_comparison_20260816.py --phase pilot --design gate_cv
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

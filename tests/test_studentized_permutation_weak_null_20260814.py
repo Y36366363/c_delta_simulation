@@ -19,6 +19,9 @@ def test_fully_recomputed_studentized_permutation_returns_rank_p_values():
     ):
         assert result["permuted_z"].shape == (99,)
         assert np.all(np.isfinite(result["permuted_z"]))
+        if "permuted_estimates" in result:
+            assert result["permuted_estimates"].shape == (99,)
+            assert np.all(np.isfinite(result["permuted_estimates"]))
         assert 0.0 < result["p_value"] <= 1.0
         assert abs(result["p_value"] * 100 - round(result["p_value"] * 100)) < 1e-10
 
