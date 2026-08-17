@@ -5,6 +5,23 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/17/2026
 
+- **Matched-density bridge families refined the identification claim** - Four
+  bridge laws with identical `f(0)=epsilon/2` preserved the main
+  `n*epsilon^2` ordering (`R-squared=.931`). Family terms raised R-squared only
+  to `.949`, but a targeted 500-dataset transition cell confirmed a modest
+  residual family effect (`p=.00013`, Cramer's V `.101`). Centre density alone
+  is therefore not a complete finite-sample condition.
+- **MAD collapse added to the diagnostic audit** - Within the confirmed
+  transition cell, small fixed-MAD-scale/IQR had risk-oriented Spearman
+  correlations `.726-.777` with rejection, stronger and more consistent than
+  bootstrap location spread. Bootstrap MAD spread itself had the wrong
+  directional interpretation and is not recommended as a risk score.
+- **External MAD-ratio check passed a conservative warning boundary** - In
+  2,000-dataset external cells, `MAD-scale/IQR < .40` never warned for `t_5`,
+  affine near-constant, or the regular-behaving sign-link path, and warned
+  `.028/0` under strong skew at `n=80/320`. It remains descriptive, not a
+  conditional-validity gate.
+
 - **Independent boundary calibration reproduced the failure transition** - At
   `n=80`, studentized rejection fell from `.847` to `.053` as radial log-SD
   increased `.10` to `.30`; at `n=320` it fell from `.753` to `.033`.
@@ -22,7 +39,7 @@ correlation-of-divergency coefficient, `c_delta`.
   certify local p-values.
 - **Project audit** - New boundary, bridge, collapse, and external validation
   artifacts are documented in `docs/profile_bridge_calibration_20260817.md`;
-  the full suite now passes 157 tests.
+  after the matched-family extension, the full suite now passes 167 tests.
 
 ## Updates 08/16/2026
 
@@ -1081,6 +1098,9 @@ variants, weighting schemes, and machine-learning examples.
   bootstrap Monte Carlo precision.
 - `docs/profile_bridge_calibration_20260817.md`: independent fine-grid
   replication, positive-density bridge scaling, and diagnostic-gate audit.
+- `docs/profile_bridge_family_validation_20260817.md`: matched-centre-density
+  bridge families, targeted family confirmation, MAD nuisance audit, and
+  external scale-ratio validation.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -1134,6 +1154,10 @@ python3 scripts/run_profile_diagnostic_scaling_20260816.py --phase pilot --desig
 python3 scripts/run_bootstrap_reference_precision_20260816.py --phase pilot --n 80 --scenario radial_0p1
 python3 scripts/run_profile_bridge_calibration_20260817.py --phase pilot --design bridge --n 80 --bridge-probability 0.1
 python3 scripts/summarize_profile_bridge_calibration_20260817.py
+python3 scripts/run_profile_bridge_family_validation_20260817.py --phase pilot --n 80 --bridge-probability 0.1 --bridge-family half_normal
+python3 scripts/summarize_profile_bridge_family_validation_20260817.py
+python3 scripts/run_profile_bridge_family_nuisance_20260817.py --phase confirmatory --bridge-family uniform
+python3 scripts/run_mad_ratio_crossvalidation_20260817.py --design external --n 80 --scenario independent_t5
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

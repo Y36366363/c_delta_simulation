@@ -1,0 +1,4 @@
+model	parameters	r_squared	rmse_logit
+log_kappa_only	2	0.9306352636828414	0.2897806287766429
+log_kappa_plus_family	5	0.9485796038458377	0.24949835680166169
+log_kappa_family_interaction	8	0.9558906382350996	0.23108160085098406

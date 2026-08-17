@@ -1,0 +1,7 @@
+diagnostic_risk_score	orientation	spearman_rejection	spearman_p
+median_spacing_risk	high_risk	0.8803310557753034	1.4138591797605922e-08
+median_valley_density_iqr	low_is_risk	0.10791997124679943	0.6157068686860057
+median_sqrt_n_bootstrap_spread	high_risk	0.7489123811118621	2.5506528331338225e-05
+spacing_warning_rate	high_risk	0.8205049944263126	9.119899934336018e-07
+valley_density_warning_rate	high_risk	-0.27648289786515784	0.19092576854291235
+bootstrap_warning_rate	high_risk	0.7884197525552713	4.742288962990052e-06
