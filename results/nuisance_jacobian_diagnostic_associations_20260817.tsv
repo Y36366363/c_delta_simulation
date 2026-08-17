@@ -1,0 +1,6 @@
+population_risk_diagnostic	risk_orientation	spearman_rejection	spearman_p
+sqrt_n_minimum_singular_value	smaller	0.9712797412211948	3.308824433758868e-15
+jacobian_condition_number	larger	0.7696346799022717	1.0992376745610702e-05
+standardized_median_density	smaller	0.7609086631233344	1.5827725665588376e-05
+standardized_mad_density_sum	smaller	-0.7539278497001846	2.0961258639654745e-05
+huber_location_curvature	smaller	-0.3123914006859561	0.1372296090456781

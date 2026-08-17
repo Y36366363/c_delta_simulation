@@ -5,6 +5,25 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/17/2026
 
+- **Complete nuisance Jacobian computed and numerically verified** - The
+  standardized median/MAD/Huber Jacobian includes centre density, both MAD
+  endpoint densities, MAD asymmetry, Huber active-score curvature, and scale
+  coupling. Central finite differences reproduced all entries within `5e-6`.
+- **Smallest Jacobian singular value unifies the bridge scaling** - Across 24
+  matched-family cells, smaller `sqrt(n)*sigma_min(J)` correlated `.971` with
+  rejection and gave logit `R-squared=.932`. The binding direction was
+  `d*f(m)`; nominal rows appeared only after the sample-scaled value was well
+  above one, although no universal cutoff is claimed.
+- **Residual family effect is beyond first order** - Adding MAD endpoint
+  density and Huber curvature increased R-squared only to `.938`, while the
+  matched-family Jacobians were nearly identical. The confirmed family
+  difference is therefore a higher-order/nonlocal median-MAD selection effect,
+  not a missing term in the functional delta derivative.
+- **Skew benchmark restored the full coupling** - For lognormal log-SD `1.1`,
+  the standardized MAD density difference was `-.294`, Huber scale coupling
+  was `-.270`, and the Jacobian condition number was `3.74`, confirming the
+  implemented indirect MAD-to-location path outside symmetry.
+
 - **Matched-density bridge families refined the identification claim** - Four
   bridge laws with identical `f(0)=epsilon/2` preserved the main
   `n*epsilon^2` ordering (`R-squared=.931`). Family terms raised R-squared only
@@ -39,7 +58,7 @@ correlation-of-divergency coefficient, `c_delta`.
   certify local p-values.
 - **Project audit** - New boundary, bridge, collapse, and external validation
   artifacts are documented in `docs/profile_bridge_calibration_20260817.md`;
-  after the matched-family extension, the full suite now passes 167 tests.
+  after the nuisance-Jacobian extension, the full suite now passes 171 tests.
 
 ## Updates 08/16/2026
 
@@ -1101,6 +1120,9 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/profile_bridge_family_validation_20260817.md`: matched-centre-density
   bridge families, targeted family confirmation, MAD nuisance audit, and
   external scale-ratio validation.
+- `docs/nuisance_jacobian_20260817.md`: complete nuisance estimating system,
+  finite-difference verification, singular-value identification scale, and
+  skew benchmark.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -1158,6 +1180,8 @@ python3 scripts/run_profile_bridge_family_validation_20260817.py --phase pilot -
 python3 scripts/summarize_profile_bridge_family_validation_20260817.py
 python3 scripts/run_profile_bridge_family_nuisance_20260817.py --phase confirmatory --bridge-family uniform
 python3 scripts/run_mad_ratio_crossvalidation_20260817.py --design external --n 80 --scenario independent_t5
+python3 scripts/run_nuisance_jacobian_20260817.py
+python3 scripts/summarize_nuisance_jacobian_20260817.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

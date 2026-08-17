@@ -1,0 +1,3 @@
+model	parameters_including_intercept	r_squared	rmse_logit
+minimum_singular_value_only	2	0.9315596901044934	0.2878431934466354
+full_first_order_jacobian	4	0.9378769021567026	0.27423730522571466
