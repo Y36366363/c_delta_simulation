@@ -3,6 +3,27 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/17/2026
+
+- **Independent boundary calibration reproduced the failure transition** - At
+  `n=80`, studentized rejection fell from `.847` to `.053` as radial log-SD
+  increased `.10` to `.30`; at `n=320` it fell from `.753` to `.033`.
+  Root-n bootstrap reference spread moved with this transition, whereas fixed
+  spacing and density warnings remained too structural to determine validity.
+- **Positive centre density is not enough at finite n** - Adding independent
+  Uniform bridge radii makes `f(0)=epsilon/2>0`, yet `epsilon=.05` still gave
+  rejection `.487/.313` at `n=80/320`. Recovery approximately followed
+  `n*epsilon^2`, as predicted by the median error scale
+  `1/(epsilon*sqrt(n))`; the constrained collapse R-squared was `.919`.
+- **Bootstrap warning remains diagnostic, not a gate** - The exploratory
+  scaled-spread threshold `2` had zero warnings in eight external-null cells
+  and tracked the broad recovery path, but samples passing the warning could
+  still have strongly inflated conditional rejection. It must not be used to
+  certify local p-values.
+- **Project audit** - New boundary, bridge, collapse, and external validation
+  artifacts are documented in `docs/profile_bridge_calibration_20260817.md`;
+  the full suite now passes 157 tests.
+
 ## Updates 08/16/2026
 
 - **Sample-size diagnostic comparison completed** - Across `n=40-640`, the
@@ -1058,6 +1079,8 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/profile_diagnostic_scaling_20260816.md`: sample-size scaling,
   spacing-versus-density-versus-bootstrap comparison, external validation, and
   bootstrap Monte Carlo precision.
+- `docs/profile_bridge_calibration_20260817.md`: independent fine-grid
+  replication, positive-density bridge scaling, and diagnostic-gate audit.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -1109,6 +1132,8 @@ python3 scripts/run_profile_regularity_comparison_20260816.py --phase pilot --de
 python3 scripts/run_profile_diagnostic_scaling_20260816.py --phase pilot --design path --n 80 --radial-log-sd 0.2
 python3 scripts/run_profile_diagnostic_scaling_20260816.py --phase pilot --design external --n 80 --scenario independent_t5
 python3 scripts/run_bootstrap_reference_precision_20260816.py --phase pilot --n 80 --scenario radial_0p1
+python3 scripts/run_profile_bridge_calibration_20260817.py --phase pilot --design bridge --n 80 --bridge-probability 0.1
+python3 scripts/summarize_profile_bridge_calibration_20260817.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py
