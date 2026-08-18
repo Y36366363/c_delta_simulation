@@ -3,6 +3,26 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/18/2026
+
+- **Project moved to paper-definition phase** - The core narrative is now
+  regular iid validity, severe finite-sample distortion under near-degenerate
+  robust-reference fitting, and the first-order explanatory role of
+  `sqrt(n)*sigma_min(J)`. New simulations should serve one of these claims
+  rather than open unrelated anomaly branches.
+- **Evidence boundaries frozen** - Pointwise iid asymptotic normality is kept
+  separate from exact permutation invariance; the Jacobian formula is
+  analytic, while the predictive strength and lack of a universal cutoff for
+  the conditioning index are empirical conclusions.
+- **Higher-order family effects retained as the main limitation** - Matched
+  first-order Jacobians do not remove the confirmed family residual. Curvature,
+  influence-tail shape, and nonlocal median/MAD switching are future focused
+  theory, not a reason for another broad simulation grid.
+- **Conceptual and claim audit added** - The proposed paper structure, ten
+  required conceptual explanations, evidence ledger, forbidden claims, and
+  decisions for Professor Hoorn are in
+  `docs/paper_architecture_and_conceptual_guide_20260818.md`.
+
 ## Updates 08/17/2026
 
 - **Complete nuisance Jacobian computed and numerically verified** - The

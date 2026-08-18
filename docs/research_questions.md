@@ -3,6 +3,25 @@
 This note keeps the simulation work aligned with Professor Hoorn's latest
 feedback and separates mathematical claims from empirical checks.
 
+## Paper-definition update after 2026-08-18
+
+The active question is now **“What is the paper?”**, not “What experiment can
+we run next?”  Work is organized around three claims:
+
+1. pointwise regular-iid inference for the robust-reference paired-salience
+   estimand;
+2. severe finite-sample distortion from near-degenerate reference fitting;
+3. first-order organization of the transition by
+   `sqrt(n)*sigma_min(J)`.
+
+The confirmed higher-order matched-family residual is the principal
+limitation.  Until the paper scope is settled with Professor Hoorn, do not add
+broad anomaly searches, power surfaces, adaptive-weight grids, or universal
+diagnostic thresholds.  Priority work is notation/estimand choice, formal
+proof completion, selection of canonical existing simulations, and
+claim-by-claim evidence auditing.  See
+`paper_architecture_and_conceptual_guide_20260818.md`.
+
 ## Active Questions
 
 ### Update after the 2026-08-13 unequal-building and covariate study
