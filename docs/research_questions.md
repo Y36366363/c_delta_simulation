@@ -3,6 +3,23 @@
 This note keeps the simulation work aligned with Professor Hoorn's latest
 feedback and separates mathematical claims from empirical checks.
 
+## Consolidation update after 2026-08-19
+
+- Recommend `rho_P` as the primary direct salience-concordance estimand and
+  historical `C` as a secondary CV-weighted scale. This preserves permutation
+  evidence while preventing marginal heterogeneity from being mistaken for
+  stronger concordance.
+- The pointwise iid theorem now has a formal appendix proof draft. The exact
+  permutation theorem remains a group-invariance result; a conditional
+  combinatorial-CLT proof is still needed before fully recomputed studentized
+  permutation can be called a theorem under arbitrary regular weak nulls.
+- The manuscript evidence is frozen into four panels with source hashes,
+  fixed root seeds, integer rejection counts, MCSEs, and Wilson intervals.
+  New experiments require a direct gap in one of these panels or in the proof.
+- The next mathematical priority is an independent proof audit, followed only
+  if necessary by the weak-null conditional permutation proof or a focused
+  second-order remainder comparison.
+
 ## Paper-definition update after 2026-08-18
 
 The active question is now **“What is the paper?”**, not “What experiment can

@@ -1,0 +1,6 @@
+criterion	source_file	value	implication
+algebraic_identity	results/teacher_profile_pearson_20260807.tsv	4.440892098500626e-16	C equals 1 + rho_P times the marginal CV product
+permutation_p_equivalence	results/teacher_profile_pearson_20260807.tsv	0.0	C and rho_P give identical fixed-margin permutation evidence
+fixed_rho_population_C_range	results/fixed_correlation_cv_weighting_20260808.tsv	2.5269724132322002	at rho_P=0.30, changing only marginal heterogeneity moves C from 1.019 to 3.546
+high_CV_C_sd_at_n2000	results/fixed_correlation_cv_weighting_20260808.tsv	1.4638149538291403	raw C remains unstable under extreme profile heterogeneity
+estimand_decision	derived from the two sources above	rho_P primary; C secondary	rho_P isolates concordance; report C with both CVs when historical or scientific heterogeneity weighting is desired

@@ -3,6 +3,27 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/19/2026
+
+- **Primary estimand recommendation resolved** - Use Huber-profile correlation
+  `rho_P` as the direct concordance estimand and retain historical `C` as a
+  secondary CV-weighted scale. Existing checks give identity error below
+  `4.5e-16` and exactly equal permutation p-values, while fixed `rho_P=.30`
+  allows population `C` to range from `1.019` to `3.546` as marginal CVs vary.
+- **Formal appendix proof drafted** - The median, MAD, Huber, five joint
+  moments, profile correlation, and c_delta derivatives are assembled into an
+  iid asymptotic theorem and studentized Wald corollary. Exact randomization
+  validity is separated from the still-incomplete conditional proof for
+  studentized permutation under arbitrary weak nulls.
+- **Four canonical evidence panels frozen** - Regular calibration,
+  near-degenerate failure, 24-cell bridge recovery, and the confirmatory
+  family residual are now selected from existing fixed-seed results. The
+  34-row canonical table records source hashes, seeds, counts, Monte Carlo SEs,
+  and Wilson intervals.
+- **No anomaly expansion** - Today's computation only audited and froze
+  existing evidence. See `docs/appendix_asymptotic_theory_20260819.md` and
+  `docs/estimand_and_canonical_evidence_20260819.md`.
+
 ## Updates 08/18/2026
 
 - **Project moved to paper-definition phase** - The core narrative is now
