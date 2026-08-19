@@ -5,6 +5,18 @@ feedback and separates mathematical claims from empirical checks.
 
 ## Consolidation update after 2026-08-19
 
+- The independent proof audit found that the original 2+eta marginal moment
+  condition did not ensure finite variance for the a-squared and b-squared
+  terms in the profile-correlation influence function. The revised theorem
+  uses separate C and rho_P moment conditions, with marginal 4+eta moments
+  for general nonzero-rho inference. At rho_P=0 those gradient terms vanish,
+  so the formal weak-null corollary retains the weaker product-moment route.
+- Stochastic equicontinuity and in-sample plug-in variance consistency are now
+  explicit lemmas. The remaining theoretical work is narrower: cite and map
+  the local VC/Euclidean entropy results, check the estimated-median MAD
+  Bahadur remainder independently, and decide whether a conditional weak-null
+  permutation theorem is necessary.
+
 - Recommend `rho_P` as the primary direct salience-concordance estimand and
   historical `C` as a secondary CV-weighted scale. This preserves permutation
   evidence while preventing marginal heterogeneity from being mistaken for

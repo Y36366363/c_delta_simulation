@@ -5,6 +5,20 @@ correlation-of-divergency coefficient, `c_delta`.
 
 ## Updates 08/19/2026
 
+- **Independent appendix audit completed** - The earlier moment assumption was
+  sufficient for the C influence but not for profile correlation, whose
+  general nonzero-effect variance terms require marginal fourth moments. The
+  revision separates A5-C from the stronger general A5-rho, while proving a
+  weaker-moment corollary specifically at the profile weak null.
+- **Empirical-process gaps repaired explicitly** - A local
+  VC/Euclidean-class condition and stochastic-equicontinuity lemma now control
+  random nuisance substitution. Plug-in variance consistency is proved through
+  population L2 convergence plus a Glivenko-Cantelli squared influence class,
+  rather than pointwise convergence alone.
+- **Remaining proof boundary recorded** - Precise entropy citations, an
+  independent estimated-median MAD Bahadur check, and any conditional weak-null
+  permutation CLT remain publication tasks. See
+  docs/appendix_proof_audit_20260819.md.
 - **Primary estimand recommendation resolved** - Use Huber-profile correlation
   `rho_P` as the direct concordance estimand and retain historical `C` as a
   secondary CV-weighted scale. Existing checks give identity error below
