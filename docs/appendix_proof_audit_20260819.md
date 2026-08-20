@@ -171,20 +171,21 @@ Then
 implies consistency at \(\widehat m\) and
 \(\widehat m\pm\widehat d\).
 
-## Finding 5: what remains open
+## Finding 5: 2026-08-20 closure update
 
-The revised proof still deliberately leaves four tasks:
+The three proof-completion items identified by the audit have now been
+resolved at draft level. Every A8 subclass is mapped to an explicit
+VC-subgraph or compact finite-dimensional Lipschitz theorem; Theorem 2.1 of
+van der Vaart and Wellner (2007) is used for the random estimated index; and
+the code's exact NumPy midpoint median/MAD convention is recorded. Its
+difference from the generalized-inverse convention is O_P(n^{-1}) by the
+central-spacing argument and is confirmed by a fixed-seed normal/skew audit.
 
-1. attach precise citations for the VC/Euclidean closure theorem used in A8;
-2. decide whether to retain A8 as a transparent high-level assumption or
-   replace it with primitive entropy bounds;
-3. independently verify the Bahadur remainder for MAD with an estimated
-   median under the exact empirical convention used by the code;
-4. prove the conditional combinatorial CLT only if fully recomputed
-   studentized permutation under weak nulls becomes a formal paper claim.
-
-The first three are proof-completion tasks. The fourth is a separate theorem,
-not a missing line in the present iid Wald argument.
+An external mathematical review remains appropriate, especially for the
+estimated-centre MAD spacing step and the piecewise VC decompositions. The
+conditional combinatorial CLT is a separate theorem, not a missing line in
+the iid Wald argument, and is not required under the current paper scope.
+See `entropy_mad_permutation_decision_20260820.md`.
 
 ## Primary-source cross-check
 

@@ -1,7 +1,7 @@
 # Appendix: asymptotic theory for robust paired-salience concordance
 
 Date: 2026-08-19
-Audit revision: 2026-08-19
+Audit revision: 2026-08-20
 
 ## A.1 Scope and notation
 
@@ -109,9 +109,16 @@ This stronger condition is used for inference at a general, possibly nonzero
 weak null \(\rho_P=0\), both squared-moment gradient coefficients vanish and
 the moment condition can be relaxed; see Corollary A.2.
 
-**A6 (empirical roots).** The selected empirical medians, MADs, and Huber
-roots are measurable and consistent. Generalized empirical quantile roots
-satisfy their estimating equations up to \(o_P(n^{-1/2})\).
+**A6 (empirical roots and convention).** The selected empirical medians,
+MADs, and Huber roots are measurable and consistent. The implementation uses
+the NumPy midpoint convention: at even sample size the median is the average
+of the two central order statistics, and MAD applies that same convention to
+the absolute deviations from the midpoint sample median. Generalized
+empirical quantile roots satisfy their estimating equations up to
+\(o_P(n^{-1/2})\). Under A2, the NumPy midpoint convention differs from the
+generalized-inverse lower empirical quantile by a central spacing of
+\(O_P(n^{-1})\), for both median and estimated-centre MAD, and therefore has
+the same first-order Bahadur representation.
 
 **A7 (density plug-in).** The density estimators used at the median and the
 two MAD boundaries are uniformly consistent on fixed neighbourhoods of those
@@ -150,20 +157,35 @@ consistency:
 \end{aligned}
 \]
 
-Here \(u=(w-T)/(kd)\). The indicator, sign, active-score, and clipped-score
-subclasses are VC-type or bounded transformations of VC-type classes. The
-moment subclasses and their displayed products are finite-dimensional
-Lipschitz/Euclidean classes with envelopes controlled by
+Here \(u=(w-T)/(kd)\). The half-line and interval indicators are VC set
+classes. Their polynomial covering numbers follow from Theorem 2.6.7 of van
+der Vaart and Wellner (1996), and the uniform-entropy Donsker theorem and its
+VC-subgraph corollary (Theorems 2.5.2 and 2.6.8) apply with bounded envelopes.
+Sign is an affine transform of a half-line indicator. The active Huber
+interval is an interval whose endpoints are finite-dimensional functions of
+\((T,d)\). The active score and sign-times-radius functions are
+piecewise-linear VC-subgraph classes: split at their finitely many moving
+knots and apply the finite-union/intersection and negativity-set results in
+Lemmas 2.6.17--2.6.18.
+
+On a compact neighbourhood with \(d\) bounded below, the clipped Huber score,
+translated absolute residuals, squared residuals, and paired absolute product
+are finite-dimensional Lipschitz/Euclidean classes. Example 19.7 of van der
+Vaart (1998) gives the Donsker conclusion from their \(L_2(P)\) Lipschitz
+coefficients. The moment subclasses have envelopes controlled by
 
 \[
 1+|X|+|Y|+X^2+Y^2+|XY|.
 \]
 
-A5-C makes the reduced-class envelopes integrable for \(C\), and
-A5-\(\rho\) does so for the full class. Thus A8 may be verified from standard
-VC/Euclidean-class closure results rather than treated as an independent
-modelling restriction; it is stated explicitly to expose the
-stochastic-equicontinuity and in-sample variance steps.
+A5-C makes the reduced-class envelopes square integrable for \(C\), and
+A5-\(\rho\) does so for the full class. The finite influence-function closure
+uses the entropy preservation result in Theorem 2.10.20 of van der Vaart and
+Wellner (1996). For the squared influence class, truncate its envelope, apply
+the locally Lipschitz square map and the same closure theorem, and remove the
+truncation using integrability of the squared envelope. This gives the local
+Glivenko--Cantelli property used in Lemma A.5. A class-by-class envelope ledger
+is recorded in `entropy_mad_permutation_decision_20260820.md`.
 
 For a pathwise statement, let \(\mathcal T\) consist of signed tangent
 measures \(h\) with total mass zero, the weighted variation required by the
@@ -444,8 +466,11 @@ and
 
 for a finite neighbourhood bound \(M\). The Lipschitz coefficients are in
 \(L_2(P)\) under A5-\(\rho\). These are therefore Euclidean, hence
-\(P\)-Donsker, local classes with \(L_2(P)\)-continuous semimetric. Asymptotic
-equicontinuity of a Donsker empirical process yields the display. ∎
+\(P\)-Donsker, local classes with \(L_2(P)\)-continuous semimetric. Theorem
+2.1 of van der Vaart and Wellner (2007) now applies: localization supplies its
+fixed nuisance set, and the displayed inequalities plus the no-boundary-mass
+conditions supply its required \(L_2(P)\) convergence. This yields the
+display. ∎
 
 Lemma A.3 supplies the missing justification for substituting fitted Huber
 locations into the five empirical moments. It also clarifies that mere
@@ -685,7 +710,11 @@ studentized statistic under a regular weak null. A proof that its conditional
 permutation distribution has the same standard-normal limit additionally
 requires a combinatorial triangular-array CLT and conditional consistency of
 the fully recomputed orbit studentizer. This appendix does not claim that
-result.
+result. It is not required for the present paper if weak-null inference is
+reported through Corollary A.1 and permutation exactness is restricted to
+Proposition A.2. It becomes necessary only if fully recomputed studentized
+permutation is promoted to the primary weak-null procedure or a formal main
+claim.
 
 ## A.10 Why the theorem is not uniform near degeneracy
 
@@ -720,16 +749,22 @@ The audit corrected the marginal moment requirement for general
 stochastic-equicontinuity sentence with Lemma A.3, and replaced the invalid
 pointwise-to-empirical-\(L_2\) shortcut with Lemmas A.4–A.5.
 
-The remaining publication-level tasks are:
+The 2026-08-20 completion maps every displayed A8 class to a precise
+VC-subgraph or finite-dimensional Lipschitz route, records the NumPy sample
+MAD convention, and verifies its first-order equivalence to the
+generalized-inverse quantile convention. A8 is retained as a readable
+localization-and-envelope assumption, but its verification is no longer left
+as an uncited standard-result claim.
 
-1. map each displayed A8 class to a precise VC/Euclidean closure theorem and
-   record the envelope calculation in the final proof;
-2. decide whether A8 will remain an explicit high-level assumption or be
-   replaced entirely by primitive entropy and envelope conditions;
-3. obtain an independent check of the joint MAD-with-estimated-median
-   Bahadur remainder;
-4. add a separate conditional combinatorial-CLT proof only if weak-null
-   studentized permutation is promoted to a formal theorem.
+The remaining publication-level tasks are narrower:
+
+1. obtain an external mathematical review of the estimated-centre MAD
+   central-spacing argument and the piecewise VC decompositions;
+2. decide whether the detailed entropy ledger belongs in the appendix or an
+   online supplement;
+3. add a separate conditional combinatorial-CLT proof only if weak-null
+   studentized permutation is promoted to a formal theorem. Under the current
+   paper scope, that proof is deliberately not required.
 
 Primary sources supporting these remaining mappings are:
 

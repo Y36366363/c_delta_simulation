@@ -3,6 +3,26 @@
 This note keeps the simulation work aligned with Professor Hoorn's latest
 feedback and separates mathematical claims from empirical checks.
 
+## Consolidation update after 2026-08-20
+
+- A8 is no longer backed by an undifferentiated standard-result statement.
+  Every indicator, Huber, radius, paired-product, sign-times-radius, influence,
+  and squared-influence class now has an explicit VC-subgraph,
+  finite-dimensional Lipschitz, or truncation theorem route.
+- The implementation convention is NumPy midpoint median plus midpoint MAD
+  about that fitted median. A 20-cell, fixed-seed audit confirms that its gap
+  from the generalized-inverse convention is n-scale rather than root-n
+  scale under normal and skewed continuous laws. This resolves the
+  first-order convention issue but does not extend A2 to discrete or
+  near-degenerate margins.
+- The weak-null conditional permutation CLT is frozen as out of scope for the
+  present three-claim paper. Formal weak-null inference uses the iid Wald
+  theorem; exact permutation language remains restricted to group invariance.
+  Reopen the CLT only if permutation is promoted to a main method or required
+  by review.
+- Remaining proof work is external checking and presentation placement, not a
+  new simulation branch. See `entropy_mad_permutation_decision_20260820.md`.
+
 ## Consolidation update after 2026-08-19
 
 - The independent proof audit found that the original 2+eta marginal moment

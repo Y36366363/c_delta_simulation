@@ -3,6 +3,32 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/20/2026
+
+- **A8 entropy claims matched class by class** - Half-lines, intervals,
+  signs, active Huber pieces, sign-times-radius terms, Lipschitz moment
+  classes, influence closures, and squared influence classes now each have an
+  explicit VC-subgraph, Euclidean, or truncation route. Random nuisance
+  substitution is tied directly to van der Vaart--Wellner Theorem 2.1 rather
+  than a generic appeal to stochastic equicontinuity.
+- **The exact sample MAD convention is frozen** - Both production paths use
+  NumPy's midpoint median for even samples and apply the same midpoint rule to
+  deviations from that centre, followed by the separate 1.4826 scale factor.
+  This differs finitely from the generalized-inverse lower median but only by
+  central-spacing order under the regular theorem assumptions.
+- **Fixed-seed convention audit supports first-order equivalence** - Across
+  normal and lognormal sampling at `n=40-640`, 6,000 repetitions per cell,
+  the root-n-scaled median absolute MAD gap declined by roughly a factor of
+  four while its n-scaled version stayed near `0.80-0.83` and `1.08-1.10`,
+  respectively. The difference is therefore numerically consistent with
+  `O_P(1/n)`, not a root-n theorem term.
+- **Weak-null permutation CLT decision closed for this paper** - It is not
+  needed under the frozen three-claim scope. Use iid influence-function Wald
+  inference for the regular weak null and claim exact permutation only under
+  group invariance. Reopen the conditional CLT only if fully recomputed
+  studentized permutation becomes a headline method or formal main claim.
+  See `docs/entropy_mad_permutation_decision_20260820.md`.
+
 ## Updates 08/19/2026
 
 - **Independent appendix audit completed** - The earlier moment assumption was
@@ -1178,6 +1204,13 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/nuisance_jacobian_20260817.md`: complete nuisance estimating system,
   finite-difference verification, singular-value identification scale, and
   skew benchmark.
+- `docs/appendix_asymptotic_theory_20260819.md`: formal iid functional-delta,
+  influence-function, plug-in variance, and studentized Wald appendix.
+- `docs/appendix_proof_audit_20260819.md`: independent audit of moment,
+  stochastic-equicontinuity, and in-sample L2 arguments.
+- `docs/entropy_mad_permutation_decision_20260820.md`: exact class-by-class
+  entropy mapping, NumPy sample-MAD convention audit, and decision boundary
+  for a conditional weak-null permutation CLT.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -1237,6 +1270,7 @@ python3 scripts/run_profile_bridge_family_nuisance_20260817.py --phase confirmat
 python3 scripts/run_mad_ratio_crossvalidation_20260817.py --design external --n 80 --scenario independent_t5
 python3 scripts/run_nuisance_jacobian_20260817.py
 python3 scripts/summarize_nuisance_jacobian_20260817.py
+python3 scripts/audit_mad_convention_20260820.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py
