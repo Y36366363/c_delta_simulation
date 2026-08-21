@@ -10,12 +10,12 @@ finite-dimensional Lipschitz route, and random-nuisance substitution is an
 application of Theorem 2.1 of van der Vaart and Wellner (2007).
 
 The implementation uses the NumPy midpoint convention for both the sample
-median and the median of absolute deviations. This is not exactly the
-generalized-inverse empirical quantile when n is even, but under A2 their
-difference is of central-spacing order, hence O_P(n^{-1}) and
-o_P(n^{-1/2}). The same first-order median/MAD influence representation
-therefore applies. A fixed-seed audit checks the predicted scale under normal
-and skewed continuous distributions.
+median and the median of absolute deviations. External review confirmed that
+this is exactly the convention used by Mazumder and Serfling (2009), including
+the average of the two central absolute deviations. Their weak Bahadur theorem
+therefore applies directly under A2. The generalized-inverse comparison is a
+secondary software-sensitivity audit, not part of the theorem's logical
+foundation.
 
 A conditional weak-null permutation CLT is not required for the present
 three-claim paper. The paper should use the iid studentized Wald result for the
@@ -111,11 +111,13 @@ distribution and its central spacing give
 mad_np - mad_lower = O_P(n^{-1}).
 
 Both differences are o_P(n^{-1/2}); hence they have the same Bahadur linear
-term and influence functions in Lemma A.1. This is consistent with Mazumder
-and Serfling (2009), who establish weak and strong Bahadur representations for
-sample MAD with an estimated sample median. The convention equivalence here
-is an additional central-spacing argument, not a claim that their finite
-sample statistic must use NumPy's interpolation rule.
+term and influence functions in Lemma A.1. More strongly, Mazumder and
+Serfling (2009) define their usual sample median as the average of the two
+central indexed order statistics and define sample MAD by applying that same
+rule to deviations about that sample median. Their statistic is therefore
+identical to the implemented NumPy statistic. Their Theorem 2 supplies the
+required weak Bahadur remainder directly. The central-spacing comparison
+concerns only the alternative lower-quantile software convention.
 
 There is also no estimating-equation conflict. With continuous data and even
 n, both the midpoint and lower median satisfy the empirical half-mass equation
@@ -130,8 +132,9 @@ using 6,000 repetitions per cell, seed 20260820, under standard normal and
 lognormal log-SD 1.1 sampling. It reports Monte Carlo uncertainty for the mean
 absolute convention gap and both root-n and n-scaled summaries.
 
-The numerical audit is a diagnostic confirmation of the rate argument, not
-the proof of it. It cannot validate discrete or near-degenerate cases, which
+The numerical audit is a diagnostic comparison of alternative software
+conventions, not the proof of the implemented statistic's Bahadur
+representation. It cannot validate discrete or near-degenerate cases, which
 are intentionally outside A2.
 
 The predicted separation is clear. From n=40 to n=640, the median of the

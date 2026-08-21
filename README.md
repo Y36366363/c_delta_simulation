@@ -3,6 +3,30 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/21/2026
+
+- **External source-level mathematical review completed** - The principal MAD
+  reference defines exactly the same midpoint sample median and midpoint MAD
+  used by NumPy, so its weak Bahadur theorem applies directly under A2. The
+  lower-quantile comparison is retained only as a software-sensitivity audit.
+- **Skew MAD sign independently protected** - A distribution-level lognormal
+  contamination check matched the implemented asymmetric endpoint-density
+  term within `1.4e-6`; reversing its sign missed by `0.46`. The existing code
+  and appendix formula are therefore retained.
+- **Entropy closure refined** - The squared influence class now cites the
+  continuous-transform Glivenko--Cantelli preservation theorem with an
+  integrable envelope, rather than implying that an algebraic closure theorem
+  alone controls unbounded tails. The four-piece sign-times-radius identity
+  had zero discrepancy in 10,000 fixed-seed checks.
+- **Final appendix placement fixed** - Main Appendix A keeps assumptions,
+  nuisance/moment derivatives, a concise empirical-process verification,
+  studentized Wald theory, and the nonuniform Jacobian boundary. Full entropy,
+  convention, and truncation details move to Online Supplement S1;
+  permutation equivalence and group invariance move to Supplement S2 or a
+  short methods note. No weak-null conditional permutation CLT is added under
+  the current paper scope. See
+  `docs/external_math_review_appendix_placement_20260821.md`.
+
 ## Updates 08/20/2026
 
 - **A8 entropy claims matched class by class** - Half-lines, intervals,
@@ -1211,6 +1235,9 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/entropy_mad_permutation_decision_20260820.md`: exact class-by-class
   entropy mapping, NumPy sample-MAD convention audit, and decision boundary
   for a conditional weak-null permutation CLT.
+- `docs/external_math_review_appendix_placement_20260821.md`: external
+  source-level proof cross-check, numerical safeguards, claim boundary, and
+  final main-appendix versus online-supplement placement.
 - `docs/research_questions.md`: active research questions and next checks.
 - `tests/test_cdelta.py`: minimal unit tests using Python's built-in `unittest`.
 
@@ -1271,6 +1298,7 @@ python3 scripts/run_mad_ratio_crossvalidation_20260817.py --design external --n 
 python3 scripts/run_nuisance_jacobian_20260817.py
 python3 scripts/summarize_nuisance_jacobian_20260817.py
 python3 scripts/audit_mad_convention_20260820.py
+python3 scripts/audit_external_math_review_20260821.py
 python3 scripts/run_followup_simulations.py
 python3 scripts/run_multi_extreme_simulations.py
 python3 scripts/run_near_zero_boundary.py

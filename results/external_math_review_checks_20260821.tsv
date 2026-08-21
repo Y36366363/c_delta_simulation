@@ -1,0 +1,6 @@
+check	value	reference	passed
+midpoint_mad_deterministic_bound	1.1102230246251565e-16	1e-12	True
+skew_mad_if_finite_difference_error	1.3331598017751745e-06	0.0001	True
+skew_mad_reversed_sign_error	0.4604750134940112	0.1	True
+sign_radius_piecewise_error	0.0	1e-12	True
+skew_mad_if_analytic_value	0.6501288089504372	0.650130142110239	True

@@ -181,11 +181,18 @@ the code's exact NumPy midpoint median/MAD convention is recorded. Its
 difference from the generalized-inverse convention is O_P(n^{-1}) by the
 central-spacing argument and is confirmed by a fixed-seed normal/skew audit.
 
-An external mathematical review remains appropriate, especially for the
-estimated-centre MAD spacing step and the piecewise VC decompositions. The
-conditional combinatorial CLT is a separate theorem, not a missing line in
-the iid Wald argument, and is not required under the current paper scope.
-See `entropy_mad_permutation_decision_20260820.md`.
+The 2026-08-21 external source review resolved the convention question more
+directly: Mazumder and Serfling define exactly the midpoint sample median and
+midpoint sample MAD implemented by NumPy, and their weak Bahadur remainder is
+therefore directly applicable under A2. The review also checked the
+piecewise-VC algebra, the continuous-transform squared-class GC route, and
+the skew MAD endpoint-density sign against a population contamination finite
+difference. The detailed ledger now belongs in Online Supplement S1, while a
+concise verification proposition remains in manuscript Appendix A.
+
+The conditional combinatorial CLT is a separate theorem, not a missing line
+in the iid Wald argument, and is not required under the current paper scope.
+See `external_math_review_appendix_placement_20260821.md`.
 
 ## Primary-source cross-check
 

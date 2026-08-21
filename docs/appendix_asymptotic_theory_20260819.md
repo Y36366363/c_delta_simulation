@@ -1,7 +1,7 @@
 # Appendix: asymptotic theory for robust paired-salience concordance
 
 Date: 2026-08-19
-Audit revision: 2026-08-20
+Audit revision: 2026-08-21
 
 ## A.1 Scope and notation
 
@@ -113,12 +113,12 @@ the moment condition can be relaxed; see Corollary A.2.
 MADs, and Huber roots are measurable and consistent. The implementation uses
 the NumPy midpoint convention: at even sample size the median is the average
 of the two central order statistics, and MAD applies that same convention to
-the absolute deviations from the midpoint sample median. Generalized
-empirical quantile roots satisfy their estimating equations up to
-\(o_P(n^{-1/2})\). Under A2, the NumPy midpoint convention differs from the
-generalized-inverse lower empirical quantile by a central spacing of
-\(O_P(n^{-1})\), for both median and estimated-centre MAD, and therefore has
-the same first-order Bahadur representation.
+the absolute deviations from the midpoint sample median. This is exactly the
+sample convention defined by Mazumder and Serfling (2009), whose weak Bahadur
+theorem gives an \(o_P(n^{-1/2})\) remainder under conditions implied by A2.
+Generalized empirical quantile roots satisfy their estimating equations up to
+\(o_P(n^{-1/2})\). The separate lower-quantile audit remains a software
+sensitivity check, not a required bridge to the cited MAD theorem.
 
 **A7 (density plug-in).** The density estimators used at the median and the
 two MAD boundaries are uniformly consistent on fixed neighbourhoods of those
@@ -181,11 +181,12 @@ coefficients. The moment subclasses have envelopes controlled by
 A5-C makes the reduced-class envelopes square integrable for \(C\), and
 A5-\(\rho\) does so for the full class. The finite influence-function closure
 uses the entropy preservation result in Theorem 2.10.20 of van der Vaart and
-Wellner (1996). For the squared influence class, truncate its envelope, apply
-the locally Lipschitz square map and the same closure theorem, and remove the
-truncation using integrability of the squared envelope. This gives the local
-Glivenko--Cantelli property used in Lemma A.5. A class-by-class envelope ledger
-is recorded in `entropy_mad_permutation_decision_20260820.md`.
+Wellner (1996). For the squared influence class, the continuous-transform
+Glivenko--Cantelli preservation theorem of van der Vaart and Wellner (2000)
+applies because the class has an integrable squared envelope. Equivalently,
+one may truncate the envelope, apply the locally Lipschitz square map, and
+remove the truncation by uniform integrability. A class-by-class envelope
+ledger is recorded in `entropy_mad_permutation_decision_20260820.md`.
 
 For a pathwise statement, let \(\mathcal T\) consist of signed tangent
 measures \(h\) with total mass zero, the weighted variation required by the
@@ -751,22 +752,23 @@ pointwise-to-empirical-\(L_2\) shortcut with Lemmas A.4–A.5.
 
 The 2026-08-20 completion maps every displayed A8 class to a precise
 VC-subgraph or finite-dimensional Lipschitz route, records the NumPy sample
-MAD convention, and verifies its first-order equivalence to the
-generalized-inverse quantile convention. A8 is retained as a readable
-localization-and-envelope assumption, but its verification is no longer left
-as an uncited standard-result claim.
+MAD convention, and verifies its first-order relation to alternative software
+conventions. The 2026-08-21 external review then established that Mazumder and
+Serfling use exactly the implemented midpoint median/MAD convention, so no
+convention-equivalence argument is needed to invoke their weak Bahadur
+theorem. It also independently confirmed the asymmetric endpoint-density sign
+by a distribution-level contamination derivative.
 
-The remaining publication-level tasks are narrower:
+Final placement is now fixed. The main manuscript Appendix A retains the
+assumptions, nuisance and moment derivatives, concise empirical-process
+verification, main theorem, studentization, and nonuniformity boundary. The
+full class-by-class entropy ledger, squared-class preservation details, and
+software-convention numerical audit move to Online Supplement S1. Permutation
+equivalence and group invariance belong in Supplement S2 or a short methods
+note. A separate conditional combinatorial CLT is added only if weak-null
+studentized permutation is later promoted to a formal main claim.
 
-1. obtain an external mathematical review of the estimated-centre MAD
-   central-spacing argument and the piecewise VC decompositions;
-2. decide whether the detailed entropy ledger belongs in the appendix or an
-   online supplement;
-3. add a separate conditional combinatorial-CLT proof only if weak-null
-   studentized permutation is promoted to a formal theorem. Under the current
-   paper scope, that proof is deliberately not required.
-
-Primary sources supporting these remaining mappings are:
+Primary sources supporting the completed audit are:
 
 - van der Vaart and Wellner, *Empirical processes indexed by estimated
   functions*, for replacing a random estimated function by its population
@@ -780,3 +782,7 @@ Primary sources supporting these remaining mappings are:
   deviation and its modifications*, for weak and strong sample-MAD
   representations with an estimated median:
   https://doi.org/10.1016/j.spl.2009.05.006
+- van der Vaart and Wellner, *Preservation theorems for Glivenko--Cantelli and
+  uniform Glivenko--Cantelli classes*, for continuous transformations under an
+  integrable envelope:
+  https://doi.org/10.1007/978-1-4612-1358-1_9

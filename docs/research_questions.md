@@ -3,6 +3,25 @@
 This note keeps the simulation work aligned with Professor Hoorn's latest
 feedback and separates mathematical claims from empirical checks.
 
+## Consolidation update after 2026-08-21
+
+- External source matching shows that the implemented NumPy midpoint median
+  and midpoint MAD are exactly the sample convention in Mazumder--Serfling,
+  not merely an asymptotically equivalent alternative. Their weak Bahadur
+  theorem can therefore be cited directly under A2.
+- The asymmetric MAD endpoint-density sign passed a population contamination
+  derivative check to `1.4e-6`; the reversed sign failed by `0.46`. The
+  existing influence implementation is retained.
+- The squared influence GC step is now tied to continuous-transform
+  preservation with an integrable envelope. The piecewise sign-times-radius
+  algebra also received an explicit fixed-seed safeguard.
+- Final placement is frozen: concise proof roadmap in manuscript Appendix A,
+  entropy/convention/GC ledger in Online Supplement S1, and permutation
+  equivalence/group invariance in Supplement S2 or Methods. Do not start a
+  conditional weak-null permutation CLT unless it becomes a main paper claim.
+- The next task is manuscript assembly against this structure, not another
+  broad mathematical or simulation branch.
+
 ## Consolidation update after 2026-08-20
 
 - A8 is no longer backed by an undifferentiated standard-result statement.
