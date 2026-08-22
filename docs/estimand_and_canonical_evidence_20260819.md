@@ -47,20 +47,34 @@ the integer rejection count, and adds Monte Carlo SE plus a 95% Wilson
 interval.  The canonical long table contains 34 rows in
 `results/canonical_evidence_20260819.tsv`.
 
-## Panel A: regular calibration
+### Inference-track correction (2026-08-22)
+
+All four frozen panels use fully recomputed studentized permutation. They are
+empirical finite-sample panels, not direct simulation validation of the iid
+Wald theorem in Appendix A. Exactness requires the declared permutation-group
+invariance null; weak-null validity would require the conditional CLT that is
+deliberately outside the current paper scope. The canonical table now records
+this distinction explicitly. A separate theorem-aligned Wald audit is in
+`results/wald_convergence_audit_20260822.tsv`.
+
+## Panel A: selected calibration examples
 
 These are `n=80`, 300-replication, 199-permutation profile tests with root seed
 `2026081452`.
 
-| Regular weak-null law | Rejection | MCSE | 95% Wilson interval |
+| Selected weak-null law | Rejection | MCSE | 95% Wilson interval |
 |---|---:|---:|---:|
 | independent `t5` | `.033` | `.010` | `[.018,.060]` |
 | independent strong skew | `.040` | `.011` | `[.023,.069]` |
 | shared-sign `t5`, independent radii | `.053` | `.013` | `[.033,.085]` |
 
-These rows support pointwise feasibility, not uniform validity.  The last row
-is especially important because it is a dependent weak null rather than a
-full independence or exchangeability null.
+These rows support empirical feasibility of the studentized-permutation
+candidate, not uniform or theorem-level validity. The last row is a dependent
+weak null rather than a full independence null, but its positive radial offset
+creates a centre-density gap. It therefore does **not** satisfy the appendix
+regularity condition and must not be labelled a regular theorem-validation
+cell. The 2026-08-22 Wald audit supplies a genuinely regular dependent weak
+null using normal margins, a shared sign, and independent half-normal radii.
 
 ## Panel B: near-degenerate failure
 
@@ -120,8 +134,9 @@ nonlocal reference selection.
 
 The four panels now have distinct jobs:
 
-- Panel A establishes that the proposed inference is not generically broken
-  in regular iid examples.
+- Panel A records that studentized permutation is not generically broken in
+  the selected examples; only its two independent rows are regular in the
+  appendix sense, and the panel does not validate the Wald theorem.
 - Panel B supplies the counterexample mechanism and magnitude of failure.
 - Panel C provides the first-order organizing quantity.
 - Panel D prevents overclaiming and states what first order misses.

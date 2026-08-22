@@ -786,8 +786,10 @@ def huber_cdelta_influence_inference(
     the three marginal density values required by the median and MAD influence
     functions.  HC options are scalar finite-sample analogues rather than
     leverage-specific regression corrections.  The result is a first-order,
-    continuous-distribution procedure; tied or nearly degenerate margins need
-    permutation inference instead.
+    continuous-distribution procedure and is not covered for tied or nearly
+    degenerate margins.  Permutation inference is finite-sample exact only
+    under a separately declared group-invariance null; it is not an automatic
+    remedy for an arbitrary weak null.
     """
     x_arr = _as_1d(x, "x")
     y_arr = _as_1d(y, "y")

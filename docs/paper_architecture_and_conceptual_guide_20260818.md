@@ -59,11 +59,12 @@ and hence pointwise asymptotic normality and consistent sandwich
 studentization when the nuisance quantities are consistently estimated.
 
 **Current status:** theorem-level statement with a complete influence formula,
-distribution-level numerical derivative validation, and an auditable proof
-route.  A publication proof must still spell out the tangent space and the
-empirical remainder argument.  Fully recomputed studentized permutation under
-a weak null is a theoretically motivated and empirically supported candidate,
-not yet a uniform theorem in this project.
+distribution-level numerical derivative validation, and an externally
+source-matched appendix proof including the empirical remainder argument.
+The 2026-08-22 theorem-aligned simulation audit supports good calibration in
+a regular dependent weak null, while showing slow finite-sample convergence
+under strong skew. Fully recomputed studentized permutation under a weak null
+is an empirically supported candidate, not a theorem in this project.
 
 ### Main Claim 2: finite-sample distortion near degeneracy
 

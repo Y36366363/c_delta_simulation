@@ -3,6 +3,28 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/22/2026
+
+- **End-to-end pipeline audit passed with one claim-boundary correction** -
+  The statistic, MAD/Huber influence path, nuisance Jacobian, appendix proof,
+  stored result schemas, and canonical source hashes remain internally
+  consistent. The 34 frozen rows are now regenerated in tests rather than
+  checking only that their hash strings have the right length.
+- **Wald and permutation tracks are now separated** - Appendix A proves iid
+  full-IF Wald inference, while the four frozen panels use fully recomputed
+  studentized permutation. The latter are empirical weak-null evidence and
+  are exact only under a declared group-invariance null; they are not direct
+  validation of the Wald theorem.
+- **One historical regularity label was too strong** - The frozen shared-sign
+  t5 model has a centre-density gap and is not regular under A2. A replacement
+  dependent weak-null model with normal margins is properly regular and gave
+  Wald rejection `.052`, `.052`, and `.047` at `n=160,320,640`.
+- **Regular does not mean finite-sample automatic** - With 600 repetitions,
+  strong-skew Wald rejection declined from `.147` at `n=80` to `.102` at
+  `n=640`, but remained `.082` at `n=2560`. This supports pointwise theory
+  while requiring an explicit slow-convergence limitation. See
+  `docs/end_to_end_pipeline_audit_20260822.md`.
+
 ## Updates 08/21/2026
 
 - **External source-level mathematical review completed** - The principal MAD
@@ -65,10 +87,11 @@ correlation-of-divergency coefficient, `c_delta`.
   random nuisance substitution. Plug-in variance consistency is proved through
   population L2 convergence plus a Glivenko-Cantelli squared influence class,
   rather than pointwise convergence alone.
-- **Remaining proof boundary recorded** - Precise entropy citations, an
-  independent estimated-median MAD Bahadur check, and any conditional weak-null
-  permutation CLT remain publication tasks. See
-  docs/appendix_proof_audit_20260819.md.
+- **At the 08/19 checkpoint, proof boundaries were recorded** - The entropy
+  citations and exact sample-MAD/Bahadur convention were resolved on
+  08/20--08/21. The conditional weak-null permutation CLT was deliberately
+  left outside the frozen paper scope. See
+  `docs/appendix_proof_audit_20260819.md` and the later dated updates above.
 - **Primary estimand recommendation resolved** - Use Huber-profile correlation
   `rho_P` as the direct concordance estimand and retain historical `C` as a
   secondary CV-weighted scale. Existing checks give identity error below

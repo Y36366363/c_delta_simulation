@@ -1,3 +1,5 @@
+import csv
+import hashlib
 from pathlib import Path
 
 import numpy as np
@@ -33,11 +35,50 @@ def test_four_canonical_groups_have_expected_fixed_rows_and_uncertainty():
     }
     for rows in groups.values():
         for row in rows:
-            assert Path(PROJECT_ROOT / row["source_file"]).exists()
+            source = Path(PROJECT_ROOT / row["source_file"])
+            assert source.exists()
             assert row["wilson_95_low"] <= row["rejection_rate"]
             assert row["rejection_rate"] <= row["wilson_95_high"]
             assert row["monte_carlo_se"] >= 0.0
-            assert len(row["source_sha256"]) == 64
+            assert row["source_sha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
+            assert row["inference_track"] == "fully_recomputed_studentized_permutation_empirical"
+            assert "not direct validation of iid Wald theorem" in row["theorem_alignment"]
+
+
+def test_stored_canonical_table_matches_regenerated_rows():
+    regenerated = (
+        freeze_regular_calibration()
+        + freeze_near_degenerate_failure()
+        + freeze_bridge_recovery()
+        + freeze_family_residual()
+    )
+    path = PROJECT_ROOT / "results" / "canonical_evidence_20260819.tsv"
+    with path.open(newline="") as stream:
+        stored = list(csv.DictReader(stream, delimiter="\t"))
+    assert len(stored) == len(regenerated) == 34
+    for observed, expected in zip(stored, regenerated, strict=True):
+        for key in (
+            "evidence_group",
+            "inference_track",
+            "theorem_alignment",
+            "source_file",
+            "source_sha256",
+            "scenario",
+            "notes",
+        ):
+            assert observed[key] == str(expected[key])
+        for key in (
+            "n",
+            "repetitions",
+            "n_perm",
+            "root_seed",
+            "rejections",
+            "rejection_rate",
+            "monte_carlo_se",
+            "wilson_95_low",
+            "wilson_95_high",
+        ):
+            assert np.isclose(float(observed[key]), float(expected[key]), atol=1e-14)
 
 
 def test_conditioning_index_orders_severe_and_recovered_bridge_cells():

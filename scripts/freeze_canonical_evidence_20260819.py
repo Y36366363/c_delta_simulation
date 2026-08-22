@@ -72,6 +72,11 @@ def canonical_row(
     low, high = wilson(successes, repetitions)
     return {
         "evidence_group": evidence_group,
+        "inference_track": "fully_recomputed_studentized_permutation_empirical",
+        "theorem_alignment": (
+            "not direct validation of iid Wald theorem; exact only under "
+            "declared group invariance"
+        ),
         "source_file": str(source.relative_to(PROJECT_ROOT)),
         "source_sha256": sha256(source),
         "scenario": scenario,
