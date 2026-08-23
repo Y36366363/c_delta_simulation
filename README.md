@@ -3,6 +3,25 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/23/2026
+
+- **Three frozen claims tested directly with independent seeds** - New
+  1,000-repetition Wald cells confirm calibration for the regular dependent
+  weak null (`.052/.044` at `n=160/640`) and near-calibration for independent
+  t5 by `n=640` (`.059`), while independently reproducing slow strong-skew
+  convergence (`.122` at `n=640`, `.082` at `n=2560`).
+- **Reference fitting mechanism isolated by a paired counterfactual** - With
+  radial log-SD `.10`, refitting the robust reference rejected at
+  `.777/.541` for `n=80/640`; fixing the symmetry reference at zero on the
+  same samples reduced this to `.054/.050`. At radial log-SD `.40`, the paired
+  differences were only `-.018/-.006`. This directly strengthens Claim 2
+  without implying universal near-degenerate failure.
+- **Conditioning claim now has out-of-family validation** - A logit model using
+  only `log(sqrt(n) sigma_min(J))` reduced pooled leave-one-family-out MAE from
+  `.158` to `.040` (`74.7%`) and log loss by `13.9%`. All four families
+  improved, but residual MAE `.030-.055` preserves the higher-order-family
+  limitation. See `docs/claim_directed_validation_20260823.md`.
+
 ## Updates 08/22/2026
 
 - **End-to-end pipeline audit passed with one claim-boundary correction** -

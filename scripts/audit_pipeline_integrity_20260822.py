@@ -75,10 +75,14 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "docs/appendix_asymptotic_theory_20260819.md",
         "docs/entropy_mad_permutation_decision_20260820.md",
         "docs/external_math_review_appendix_placement_20260821.md",
+        "docs/claim_directed_validation_20260823.md",
         "scripts/freeze_canonical_evidence_20260819.py",
         "scripts/audit_wald_convergence_20260822.py",
         "results/canonical_evidence_20260819.tsv",
         "results/wald_convergence_audit_20260822.tsv",
+        "results/claim1_wald_validation_20260823.tsv",
+        "results/claim2_reference_mechanism_validation_20260823.tsv",
+        "results/claim3_conditioning_lofo_summary_validation_20260823.tsv",
     )
     missing = [item for item in required if not (PROJECT_ROOT / item).exists()]
     rows.append(
@@ -93,6 +97,10 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         RESULTS_DIR / "estimand_choice_audit_20260819.tsv",
         RESULTS_DIR / "external_math_review_checks_20260821.tsv",
         RESULTS_DIR / "wald_convergence_audit_20260822.tsv",
+        RESULTS_DIR / "claim1_wald_validation_20260823.tsv",
+        RESULTS_DIR / "claim2_reference_mechanism_validation_20260823.tsv",
+        RESULTS_DIR / "claim3_conditioning_lofo_predictions_validation_20260823.tsv",
+        RESULTS_DIR / "claim3_conditioning_lofo_summary_validation_20260823.tsv",
     )
     current_malformed = []
     for path in current_tables:
