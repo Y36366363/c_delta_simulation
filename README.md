@@ -3,6 +3,27 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/24/2026
+
+- **Claim 1 tail mechanism refined** - In 800-repetition diagnostics, the
+  regular dependent-normal model had reported-SE/empirical-SD ratios
+  `1.007/1.014` and rejection `.055/.051`. Under strong skew, the ratio had
+  recovered to `.980` by `n=2560`, yet the studentized 2.5%/97.5% quantiles
+  remained `-2.741/1.705` and rejection `.083`. The residual problem is an
+  asymmetric higher-order/self-normalization effect, not merely a constant SE
+  underestimation that a scalar HC factor would necessarily repair.
+- **Claim 2 switching trigger isolated** - In the severe centre-gap model,
+  forcing exact sign balance reduced rejection from `.766` to `.058` at
+  `n=80` and from `.535` to `.060` at `n=640`; mean maximum absolute Huber
+  centre displacement fell from `.491/.239` to `.013/.005`. This is a
+  mechanism intervention showing how IID sign-count noise triggers reference
+  switching, not a proposed correction or a new IID theorem.
+- **Claim 3 passed stricter transport checks** - Cross-sample-size prediction
+  improved MAE by `77.6%` and log loss by `23.7%`; leaving an entire
+  `(n, epsilon)` conditioning level out improved them by `72.2%` and `18.0%`.
+  The index still organizes rather than fully explains the transition. See
+  `docs/claim_stress_validation_20260824.md`.
+
 ## Updates 08/23/2026
 
 - **Three frozen claims tested directly with independent seeds** - New
