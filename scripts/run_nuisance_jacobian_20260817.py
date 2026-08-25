@@ -36,6 +36,8 @@ def bridge_pdf(radius: float, family: str) -> float:
         return float(2.0 * norm.pdf(radius / scale) / scale)
     if family == "scaled_beta12":
         return float(1.0 - radius / 2.0) if radius <= 2.0 else 0.0
+    if family == "hyperexponential":
+        return float(0.25 * np.exp(-0.5 * radius) + 0.75 * np.exp(-1.5 * radius))
     raise ValueError(f"unknown bridge family: {family}")
 
 
@@ -53,6 +55,8 @@ def bridge_cdf(radius: float, family: str) -> float:
         if radius >= 2.0:
             return 1.0
         return float(1.0 - (1.0 - radius / 2.0) ** 2)
+    if family == "hyperexponential":
+        return float(1.0 - 0.5 * np.exp(-0.5 * radius) - 0.5 * np.exp(-1.5 * radius))
     raise ValueError(f"unknown bridge family: {family}")
 
 

@@ -3,6 +3,27 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/25/2026
+
+- **Claim 1 separated from Claim 2 mechanistically** - Fixing
+  distribution-level population Huber centres in the independent strong-skew
+  model left rejection and asymmetric tails essentially unchanged
+  (`.120/.125` at `n=640`, `.092/.090` at `n=2560`, refitted/oracle). Strong-
+  skew slow convergence is therefore a radius-correlation/studentization
+  higher-order problem, not near-degenerate reference estimation.
+- **Claim 2 gained a coupling dose response** - As shared-sign coupling rose
+  from `0` to `1`, mean refitted effects rose monotonically from
+  `-.006` to `.806` at `n=80` and `.001` to `.626` at `n=640`, while fixed-zero
+  effects remained near zero. This demonstrates how coupled mode selection,
+  rather than radial concordance, activates the centre-gap failure.
+- **Claim 3 received a prospective family test** - A fifth hyperexponential
+  bridge with exactly matched origin density preserved the coarse recovery
+  ordering across conditioning levels. The old-family model improved MAE by `47.6%` and log loss by
+  `14.5%` over its intercept baseline, but systematically overpredicted all
+  six rejection levels. This simultaneously supports first-order ordering and
+  the higher-order-family limitation. See
+  `docs/claim_external_validation_20260825.md`.
+
 ## Updates 08/24/2026
 
 - **Claim 1 tail mechanism refined** - In 800-repetition diagnostics, the

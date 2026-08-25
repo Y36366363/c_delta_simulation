@@ -1,0 +1,2 @@
+claim	family	cells	mean_absolute_error	baseline_mean_absolute_error	mae_improvement_fraction	mean_log_loss	baseline_mean_log_loss	log_loss_improvement_fraction	old_family_log_index_slope
+claim3_prospective_family_validation	hyperexponential	6	0.07866553732446578	0.15	0.47556308450356144	0.4054655027661224	0.4744461615253595	0.14539196299420376	-1.559021011004621

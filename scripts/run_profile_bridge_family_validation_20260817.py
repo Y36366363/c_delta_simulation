@@ -24,7 +24,13 @@ from scripts.run_studentized_permutation_weak_null_20260814 import (
 
 
 RESULTS_DIR = PROJECT_ROOT / "results"
-BRIDGE_FAMILIES = ("uniform", "exponential", "half_normal", "scaled_beta12")
+BRIDGE_FAMILIES = (
+    "uniform",
+    "exponential",
+    "half_normal",
+    "scaled_beta12",
+    "hyperexponential",
+)
 
 
 def sample_unit_origin_density_radius(
@@ -40,6 +46,12 @@ def sample_unit_origin_density_radius(
         return np.abs(rng.normal(0.0, scale, size=size))
     if family == "scaled_beta12":
         return 2.0 * rng.beta(1.0, 2.0, size=size)
+    if family == "hyperexponential":
+        # 0.5 Exp(0.5) + 0.5 Exp(1.5) has right density
+        # 0.5*0.5 + 0.5*1.5 = 1 at the origin, but a heavier tail than the
+        # fitted exponential bridge family.
+        rates = np.where(rng.random(size) < 0.5, 0.5, 1.5)
+        return rng.exponential(1.0 / rates)
     raise ValueError(f"unknown bridge family: {family}")
 
 
