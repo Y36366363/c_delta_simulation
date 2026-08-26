@@ -1,0 +1,13 @@
+claim	audit	metric	value	target	absolute_error	tolerance	passed
+claim1	independence_reference_orthogonality	rho	2.4074034684082494e-17	0.0	2.4074034684082494e-17	1e-14	1
+claim1	independence_reference_orthogonality	kappa_x	-5.913838775638647e-17	0.0	5.913838775638647e-17	1e-14	1
+claim1	independence_reference_orthogonality	kappa_y	1.6128889729271072e-17	0.0	1.6128889729271072e-17	1e-14	1
+claim2	binary_mode_switching_limit	same_positive_mode	1.0	1.0	0.0	1e-14	1
+claim2	binary_mode_switching_limit	same_negative_mode	1.0	1.0	0.0	1e-14	1
+claim2	binary_mode_switching_limit	opposite_modes	-1.0	-1.0	0.0	1e-14	1
+claim3	positive_affine_invariance	hyperexponential_epsilon_0.1:max_abs_J_difference	2.7510029323110548e-12	0.0	2.7510029323110548e-12	2e-07	1
+claim3	positive_affine_invariance	hyperexponential_epsilon_0.1:minimum_singular_value_difference	2.1788126858268697e-14	0.0	2.1788126858268697e-14	2e-07	1
+claim3	positive_affine_invariance	hyperexponential_epsilon_0.1:inverse_norm_identity_error	0.0	0.0	0.0	1e-12	1
+claim3	positive_affine_invariance	skew_lognormal_1.1:max_abs_J_difference	2.7754298859150595e-11	0.0	2.7754298859150595e-11	2e-07	1
+claim3	positive_affine_invariance	skew_lognormal_1.1:minimum_singular_value_difference	1.539296468067164e-12	0.0	1.539296468067164e-12	2e-07	1
+claim3	positive_affine_invariance	skew_lognormal_1.1:inverse_norm_identity_error	0.0	0.0	0.0	1e-12	1

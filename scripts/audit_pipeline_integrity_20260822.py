@@ -78,7 +78,9 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "docs/claim_directed_validation_20260823.md",
         "docs/claim_stress_validation_20260824.md",
         "docs/claim_external_validation_20260825.md",
+        "docs/manuscript_claim_ledger_20260826.md",
         "scripts/freeze_canonical_evidence_20260819.py",
+        "scripts/audit_claim_theory_20260826.py",
         "scripts/audit_wald_convergence_20260822.py",
         "results/canonical_evidence_20260819.tsv",
         "results/wald_convergence_audit_20260822.tsv",
@@ -91,6 +93,7 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "results/claim1_oracle_reference_validation_20260825.tsv",
         "results/claim2_sign_coupling_validation_20260825.tsv",
         "results/claim3_prospective_family_summary_validation_20260825.tsv",
+        "results/claim_theory_audit_20260826.tsv",
     )
     missing = [item for item in required if not (PROJECT_ROOT / item).exists()]
     rows.append(
@@ -118,6 +121,7 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         RESULTS_DIR / "claim2_sign_coupling_validation_20260825.tsv",
         RESULTS_DIR / "claim3_prospective_family_validation_20260825.tsv",
         RESULTS_DIR / "claim3_prospective_family_summary_validation_20260825.tsv",
+        RESULTS_DIR / "claim_theory_audit_20260826.tsv",
     )
     current_malformed = []
     for path in current_tables:

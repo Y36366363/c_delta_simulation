@@ -3,6 +3,37 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+## Updates 08/26/2026
+
+- **The paper-level claim ledger is now frozen** - The primary estimand remains
+  profile correlation \(\rho_P\), with \(C\) retained as the original scale.
+  The three main claims are separated into theorem-level results, exact
+  finite-dimensional propositions, and empirical observations, with an
+  explicit list of claims that cannot currently be made. This establishes a
+  stopping rule against open-ended anomaly search. See
+  `docs/manuscript_claim_ledger_20260826.md`.
+- **Claim 1 gained an independence-orthogonality corollary** - At global
+  independence, the two marginal Huber-reference coefficients in the
+  profile-correlation influence function cancel exactly. A deterministic
+  product-law audit found errors below `6e-17`. This explains why fixing
+  population centres did not cure the independent strong-skew distortion,
+  without extending the result to every dependent weak null.
+- **Claim 2's switching mechanism now has an exact limiting calculation** -
+  In the binary two-radius construction, common selected modes produce profile
+  correlation `+1`, whereas opposite modes produce `-1`. This provides the
+  algebraic core behind the coupling dose response, while the broad severity
+  claim remains finite-sample evidence rather than a universal theorem.
+- **Claim 3 is now scale interpretable** - The standardized nuisance Jacobian,
+  its minimum singular value, and
+  \(I_n=\sqrt n\,\sigma_{\min}(J)\) are invariant to location shifts and
+  positive changes of units. Numerical audits on hyperexponential-bridge and
+  skew-lognormal laws matched transformed Jacobians within `3e-11`. The index
+  remains an organizer, not a universal cutoff.
+- **Appendix source protection was added** - The source contains the correct
+  single-numerator MAD derivative. Regression tests now reject duplicated
+  numerator terms, control characters, or broken LaTeX escapes in the new
+  corollary and proposition.
+
 ## Updates 08/25/2026
 
 - **Claim 1 separated from Claim 2 mechanistically** - Fixing

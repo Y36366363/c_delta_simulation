@@ -679,6 +679,31 @@ The same argument applies to \(b\) and the cross terms. Thus fourth marginal
 moments are required for the general-\(\rho_P\) confidence theorem, but not
 for the first-order test of \(H_0:\rho_P=0\).
 
+### Corollary A.3 (reference orthogonality under independence)
+
+Suppose in addition that \(X\) and \(Y\) are independent and
+\(v_a,v_b>0\). Then \(\rho_P=0\), and the coefficient multiplying the
+\(X\)-margin location influence in \(IF_\rho\) is
+
+\[
+\kappa_X=
+\frac{-E\{\operatorname{sign}(X-T_X)b\}
++E\{\operatorname{sign}(X-T_X)\}E(b)}{D}
+-\frac{\rho_P}{2v_a}
+\left[-2E(X-T_X)+2\mu_aE\{\operatorname{sign}(X-T_X)\}\right].
+\]
+
+Independence factorizes the first expectation, and \(\rho_P=0\), so
+\(\kappa_X=0\). The same argument gives \(\kappa_Y=0\). Therefore estimation
+of the two marginal Huber references makes no first-order contribution to
+profile correlation at the global independence null.
+
+This is an orthogonality statement, not a claim that reference fitting is
+irrelevant at every dependent weak null. It explains why fixing the population
+references does not remove the strong-skew distortion in the independent
+lognormal--gamma experiment: that distortion is higher order in the skewed
+radius-correlation studentization rather than a first-order nuisance term.
+
 ## A.9 Permutation statements
 
 ### Proposition A.1 (fixed-margin equivalence)
@@ -717,7 +742,32 @@ Proposition A.2. It becomes necessary only if fully recomputed studentized
 permutation is promoted to the primary weak-null procedure or a formal main
 claim.
 
-## A.10 Why the theorem is not uniform near degeneracy
+## A.10 Affine invariance of the nuisance conditioning index
+
+### Proposition A.3 (positive affine invariance)
+
+Let \(W^*=a+bW\), where \(a\in\mathbb R\) and \(b>0\), and construct the
+standardized nuisance Jacobian \(J^*\) from \(W^*\) using the same \(c\) and
+\(k\). Then
+
+\[
+m^*=a+bm,\qquad d^*=bd,\qquad T^*=a+bT,
+\]
+
+and \(f^*(a+bw)=f(w)/b\). The standardized Huber residual \(U\), and hence
+\(A\) and \(B\), are unchanged. Substitution into the displayed formula for
+\(J\) gives
+
+\[
+J^*=J.
+\]
+
+Consequently, \(\sigma_{\min}(J)\) and
+\(I_n=\sqrt n\,\sigma_{\min}(J)\) are invariant to changes of measurement
+origin and positive units. This invariance depends on using the standardized
+Jacobian; it would not hold for the unscaled \(J_0\).
+
+## A.11 Why the theorem is not uniform near degeneracy
 
 The nuisance expansion is schematically
 
@@ -743,12 +793,18 @@ makes no claim when
 In that region, curvature and nonlocal median/MAD selection can be of the same
 order as the nominal first-order term.
 
-## A.11 Audited proof status
+## A.12 Audited proof status
 
 The audit corrected the marginal moment requirement for general
 \(\rho_P\), recorded its weak-null relaxation, replaced the unsupported
 stochastic-equicontinuity sentence with Lemma A.3, and replaced the invalid
 pointwise-to-empirical-\(L_2\) shortcut with Lemmas A.4–A.5.
+
+The 2026-08-26 claim audit added the independence-orthogonality corollary and
+proved positive affine invariance of the standardized conditioning index. A
+line-number source audit also confirmed that the displayed MAD derivative has
+one, not two, numerator terms; an earlier duplicated rendering was not present
+in the source file.
 
 The 2026-08-20 completion maps every displayed A8 class to a precise
 VC-subgraph or finite-dimensional Lipschitz route, records the NumPy sample
