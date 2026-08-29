@@ -32,6 +32,13 @@ all-to-all `c_d` remains the motivating arXiv predecessor.
   reference fitting can fool it in finite samples; Claim 3 supplies a
   principled but incomplete conditioning diagnostic. Higher-order family
   effects remain the explicit limitation.
+- **Manuscript assembly has started** - A section-level skeleton now maps the
+  introduction, estimands, regular theorem, constructive failure, conditioning
+  diagnostic, simulations, discussion, and supplements to frozen evidence.
+  The readiness audit identifies two material remaining decisions: whether a
+  genuine applied illustration is required and whether \(I_n\) remains an
+  explanatory warning quantity or is intended to become an operational rule.
+  See `docs/manuscript_skeleton_and_readiness_20260829.md`.
 
 ## Updates 08/26/2026
 
