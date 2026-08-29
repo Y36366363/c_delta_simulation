@@ -35,8 +35,16 @@ The reasons are:
 
 Thus the decision changes the interpretation and reported effect scale, but
 does not discard historical c_delta or alter its fixed-margin permutation
-evidence.  Professor Hoorn can override this if the scientific construct is
-explicitly intended to reward populations with more heterogeneous salience.
+evidence.
+
+### Supervisor confirmation (2026-08-29)
+
+Professor Hoorn confirmed this estimand decision and the accompanying paper
+scope. The corrected original all-to-all \(c_d\) paper remains the broad arXiv
+measure. The separate Yao--Hoorn paper makes \(\rho_P\) the primary
+robust-reference profile-similarity quantity and retains \(C\) as a secondary
+or historical effect scale. The new paper's central contribution is inference
+reliability and diagnosis, not another general-purpose coefficient.
 
 ## Evidence-freezing rule
 

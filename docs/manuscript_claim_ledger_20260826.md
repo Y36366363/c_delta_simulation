@@ -2,12 +2,20 @@
 
 ## Frozen paper question
 
-The paper is not a search for every distribution on which a robust distance
-coefficient behaves unusually. Its focused question is:
+Professor Hoorn's 2026-08-29 scope decision separates the projects. The
+corrected original \(c_d\) paper retains the broad all-to-all divergence
+coefficient on arXiv. The new Yao--Hoorn paper cites that work but studies a
+different primary object: robust-reference profile correlation and the
+reliability of its inference.
 
-> When does influence-function inference for robust profile correlation work,
-> what fails near a poorly identified robust reference, and how much of that
-> finite-sample transition is organized by nuisance conditioning?
+The paper is therefore not a search for every distribution on which a robust
+distance coefficient behaves unusually, nor a second attempt to define a
+general-purpose \(c_d\). Its focused question is:
+
+> If similarity of internal divergence is represented by paired profiles
+> around robust references, when is the resulting inference trustworthy, when
+> can unstable reference fitting fool us, and how much of that transition is
+> organized by nuisance conditioning?
 
 The primary estimand is the profile correlation
 
@@ -24,6 +32,19 @@ C=\frac{E(|X-T_X||Y-T_Y|)}{E|X-T_X|E|Y-T_Y|}
 is retained as the original scientific scale and secondary estimand. The
 identity linking the two makes their fixed-margin permutation rankings the
 same, but it does not make their Wald intervals identical.
+
+This preserves the scientific lineage without equating the constructs. The
+original statistic compares all-to-all within-group divergences. In the
+one-dimensional L2 case its row profile satisfies
+
+\[
+D_i^2=\frac{n}{n-1}\{(X_i-\bar X)^2+s_X^2\},
+\]
+
+whereas the new primary profile is \(|X_i-\widehat T_X|\), with
+\(\widehat T_X\) obtained from the median/MAD/Huber system. Thus the old and
+new papers ask related paired-salience questions through different reference
+and profile constructions.
 
 ## Claim ledger
 
@@ -112,11 +133,11 @@ panels.
 
 ## Stopping rule and next decision
 
-The current three-claim package is sufficiently coherent to stop anomaly
-search. Until substantive feedback changes the paper question, new computation
-is justified only if it closes one of these claims, checks reproducibility, or
-tests a stated boundary. The next high-value task is manuscript assembly and
-alignment of the main tables with this ledger, not another marginal scenario.
+The 2026-08-29 supervisor decision confirms the three-claim package and closes
+the estimand and scope questions. New computation is justified only if it
+closes one of these claims, checks reproducibility, or tests a stated boundary.
+The next high-value task is manuscript assembly and alignment of the main
+tables with this ledger, not another marginal scenario.
 
 The 2026-08-26 deterministic audit records machine-precision cancellation for
 independence orthogonality, exact binary-switching correlations, and numerical

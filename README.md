@@ -3,6 +3,36 @@
 This is a small first-stage project for studying the finite-sample behavior of the
 correlation-of-divergency coefficient, `c_delta`.
 
+The project now supports a separate Yao--Hoorn manuscript on the reliability
+of inference for robust-reference profile correlation. The corrected original
+all-to-all `c_d` remains the motivating arXiv predecessor.
+
+## Updates 08/29/2026
+
+- **Supervisor scope decision incorporated** - The original corrected
+  all-to-all \(c_d\) remains on arXiv, while the robust-reference work becomes
+  a separate Yao--Hoorn paper led by Yao. Its main question is when inference
+  for paired robust-reference divergence profiles can be trusted or can be
+  misleading, rather than how to define another broad general-purpose
+  coefficient.
+- **\(\rho_P\) is formally frozen as the lead estimand** - Profile correlation
+  directly expresses similarity around the robust references. \(C\) remains a
+  historical or secondary effect scale and should be accompanied by both
+  profile CVs when used. The old/new construct map and manuscript consequences
+  are recorded in `docs/professor_scope_decision_20260829.md`.
+- **The old/new relationship was audited without a new simulation grid** -
+  The implemented all-to-all L2 profile matched its exact mean-centred
+  closed form to machine precision, while a fixed example confirmed that
+  standardization does not turn it into the Huber-reference profile. Existing
+  evidence again gave the \(C\)-\(\rho_P\)-CV identity error below `5e-16`,
+  zero fixed-margin permutation p-value difference, and a \(C\) range above
+  `2.5` at fixed \(\rho_P=.30\).
+- **The three claims now answer one paper question** - Claim 1 states when
+  regular IID Wald inference is trustworthy; Claim 2 shows how unstable
+  reference fitting can fool it in finite samples; Claim 3 supplies a
+  principled but incomplete conditioning diagnostic. Higher-order family
+  effects remain the explicit limitation.
+
 ## Updates 08/26/2026
 
 - **The paper-level claim ledger is now frozen** - The primary estimand remains

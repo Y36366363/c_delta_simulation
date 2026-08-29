@@ -1,0 +1,6 @@
+check	value	comparison	threshold	passed	interpretation
+old_l2_all_to_all_closed_form	8.881784197001252e-16	less_than	1e-12	1	old L2 row divergence is exactly a nonlinear mean-centred radial profile
+old_and_robust_profiles_not_same_functional	0.331308580667187	greater_than	0.1	1	standardizing does not make the all-to-all and Huber-reference profiles identical
+C_rho_CV_identity	4.440892098500626e-16	less_than	2e-15	1	C is rho_P multiplied by marginal profile heterogeneity around its null value
+fixed_margin_permutation_p_equivalence	0.0	equal_to	0.0	1	making rho_P primary does not discard fixed-margin permutation evidence
+C_changes_at_fixed_rho	2.5269724132322002	greater_than	2.5	1	C mixes profile similarity with marginal heterogeneity and is therefore secondary

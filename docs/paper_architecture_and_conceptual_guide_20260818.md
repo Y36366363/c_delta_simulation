@@ -1,6 +1,6 @@
 # Paper architecture and conceptual guide
 
-Date: 2026-08-18
+Date: 2026-08-18; supervisor scope decision incorporated 2026-08-29
 
 ## Stage decision
 
@@ -8,6 +8,13 @@ The project is now in a **paper-definition and consolidation phase**.  New
 simulations should be run only when they distinguish wording, assumptions, or
 evidence for one of the three proposed main claims.  Unexplained anomalies are
 recorded, but they no longer automatically generate a new branch of testing.
+
+Professor Hoorn's 2026-08-29 decision makes this a separate Yao--Hoorn paper.
+The corrected original \(c_d\) paper remains on arXiv as the broad all-to-all
+divergence measure. The new paper cites it, but its primary contribution is
+the theory and diagnosis of inference for robust-reference profile
+correlation. It must not be framed as merely another general definition of
+\(c_d\).
 
 The most coherent current paper is not a universal comparison of profile,
 Mantel, adaptive, and building-level procedures.  It is a focused paper about
@@ -17,18 +24,17 @@ by the conditioning of the nuisance estimating system.
 
 ### Working one-sentence pitch
 
-> Robust-reference paired-salience concordance has standard pointwise iid
-> inference under regular nuisance identification, but near-degenerate
-> median/MAD/Huber reference fitting can cause severe finite-sample distortion;
-> a sample-scaled nuisance-Jacobian singular value explains much of this
-> transition at first order while leaving identifiable higher-order family
-> effects.
+> When similarity of internal divergence is measured through paired profiles
+> around robust references, pointwise iid inference is trustworthy under
+> regular reference identification but can be badly misleading near
+> degeneracy; a sample-scaled nuisance-Jacobian singular value organizes much
+> of this transition at first order while leaving higher-order family effects.
 
 This wording deliberately says **pointwise**, **iid**, **much of**, and
 **first order**.  Removing any of those qualifications would exceed the
 current evidence.
 
-## Proposed main claims and their evidence level
+## Main claims and their evidence level
 
 ### Main Claim 1: regular iid theory
 
@@ -39,7 +45,13 @@ a_P(x)=|x-T_X(P_X)|,\qquad b_P(y)=|y-T_Y(P_Y)|,
 \]
 
 where each `T` is the Huber location fitted with a normal-consistent MAD
-scale.  The robust c_delta functional is
+scale. The primary functional is
+
+\[
+\rho_P(P)=\operatorname{Corr}_P\{a_P(X),b_P(Y)\}.
+\]
+
+The historical secondary scale is
 
 \[
 C(P)=\frac{E_P\{a_P(X)b_P(Y)\}}
@@ -51,12 +63,13 @@ nondegeneracy, and moment conditions, the complete functional delta method
 gives
 
 \[
-\sqrt n\{C(P_n)-C(P)\}
-=n^{-1/2}\sum_{i=1}^n IF_C(Z_i;P)+o_P(1),
+\sqrt n\{\rho_P(P_n)-\rho_P(P)\}
+=n^{-1/2}\sum_{i=1}^n IF_\rho(Z_i;P)+o_P(1),
 \]
 
 and hence pointwise asymptotic normality and consistent sandwich
-studentization when the nuisance quantities are consistently estimated.
+studentization when the nuisance quantities are consistently estimated. An
+analogous result is retained for \(C\), but it is not the lead estimand.
 
 **Current status:** theorem-level statement with a complete influence formula,
 distribution-level numerical derivative validation, and an externally
@@ -133,12 +146,12 @@ to start another broad simulation grid now.
 
 ## The ten concepts that must be explainable without code
 
-### 1. What is the c_delta estimand?
+### 1. What are the primary and secondary estimands?
 
-For the current robust version, the estimand is `C(P)` above: normalized
-cross-moment concordance between the **labelled observation-level radial
-saliences** relative to fitted marginal Huber centres.  It is not a general
-measure of independence and not a comparison of the entire pairwise geometry.
+For the new paper, the primary estimand is \(\rho_P\): standardized
+concordance between the **labelled observation-level radial saliences**
+relative to fitted marginal Huber centres. It is not a general measure of
+independence and not a comparison of the entire pairwise geometry.
 
 Writing
 
@@ -155,9 +168,10 @@ C=1+\rho_P\,CV(a_P)CV(b_P).
 Thus `C=1` is the zero-covariance weak-null boundary, but `C-1` combines
 salience correlation with marginal salience heterogeneity.  For fixed
 marginal profiles, `C`, covariance, and Pearson profile correlation have the
-same permutation ordering.  The paper must explicitly decide whether `C` or
-`rho_P` is the primary scientific effect scale; that is a construct choice,
-not a numerical choice.
+same permutation ordering. The construct decision is now closed:
+\(\rho_P\) is primary because it directly expresses profile similarity;
+\(C\) is secondary and historical, and must be accompanied by both marginal
+CVs when reported.
 
 ### 2. How do the permutation null and weak null differ?
 
