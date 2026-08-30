@@ -7,6 +7,24 @@ The project now supports a separate Yao--Hoorn manuscript on the reliability
 of inference for robust-reference profile correlation. The corrected original
 all-to-all `c_d` remains the motivating arXiv predecessor.
 
+## Updates 08/30/2026
+
+- **Formal manuscript drafting began** - Sections 1--2 now provide a complete
+  English Introduction and robust-reference estimand section. The draft leads
+  with inference reliability rather than a new coefficient, fixes \(\rho_P\)
+  as the primary effect, retains \(C\) as a secondary historical scale, and
+  states the old/new construct boundary without claiming method superiority.
+- **Definitions are implementation- and theorem-aligned** - The text records
+  the midpoint median/MAD convention, \(k=1.4826\), default Huber
+  \(c=1.345\), population and sample profiles, the
+  \(C=1+\rho_PCV_XCV_Y\) identity, zero-profile handling, and the exact 1D L2
+  all-to-all closed form.
+- **Inference boundaries are explicit before the theorem section** - The draft
+  distinguishes a weak profile-covariance null from independence and label
+  exchangeability, separates Wald theory from permutation evidence, and keeps
+  \(I_n\) explanatory rather than presenting it as a universal cutoff. See
+  `docs/manuscript_draft_sections_1_2_20260830.md`.
+
 ## Updates 08/29/2026
 
 - **Supervisor scope decision incorporated** - The original corrected

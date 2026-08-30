@@ -81,6 +81,7 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "docs/manuscript_claim_ledger_20260826.md",
         "docs/professor_scope_decision_20260829.md",
         "docs/manuscript_skeleton_and_readiness_20260829.md",
+        "docs/manuscript_draft_sections_1_2_20260830.md",
         "scripts/freeze_canonical_evidence_20260819.py",
         "scripts/audit_claim_theory_20260826.py",
         "scripts/audit_scope_decision_20260829.py",

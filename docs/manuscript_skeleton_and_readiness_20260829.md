@@ -290,7 +290,7 @@ not visually conflated.
 | Applied illustration | Unresolved | Decide with Professor Hoorn whether a genuine application is required |
 | Literature positioning | Needs targeted work | Review robust correlation, generated-regressor/reference inference, weak identification, and nonuniform asymptotics |
 | Reproducibility | Strong | Freeze final display-generating scripts and a single run manifest |
-| Main manuscript prose | Started here | Draft Introduction and Estimand sections next |
+| Main manuscript prose | Sections 1--2 drafted | Draft the compact main-text theorem and Section 3 next |
 
 ## Maturity gates before submission
 
@@ -309,8 +309,9 @@ not visually conflated.
 
 ## Immediate next action
 
-This skeleton completes the first post-decision step. The next safe writing
-task is to draft Sections 1–2 from the frozen scope and estimand materials.
-The next decision that should be taken with Professor Hoorn is whether the
+The first manuscript-writing step is complete in
+`docs/manuscript_draft_sections_1_2_20260830.md`. The next safe writing task is
+to draft the compact main-text theorem and Section 3 from the audited Appendix
+A. The next decision that should be taken with Professor Hoorn is whether the
 paper needs a real-data illustration and whether \(I_n\) remains explanatory
 or is intended to become an operational warning rule.
