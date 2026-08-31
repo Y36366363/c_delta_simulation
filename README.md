@@ -4,8 +4,32 @@ This is a small first-stage project for studying the finite-sample behavior of t
 correlation-of-divergency coefficient, `c_delta`.
 
 The project now supports a separate Yao--Hoorn manuscript on the reliability
-of inference for robust-reference profile correlation. The corrected original
-all-to-all `c_d` remains the motivating arXiv predecessor.
+of inference for robust-reference profile correlation. The original all-to-all
+`c_d` remains the motivating arXiv predecessor; its planned `1/n`
+normalization correction was not yet present in the v2 PDF inspected on
+08/31/2026.
+
+## Updates 08/31/2026
+
+- **The archived predecessor was verified directly** - Hoorn's original paper
+  is `arXiv:2510.16717`, currently v2 (revised 2026-03-08). Visual inspection
+  of Eq. 4 confirmed that the online v2 numerator is still a sum, not an
+  empirical mean. The planned correction therefore belongs to a future arXiv
+  version; active manuscript text no longer says the archived PDF is already
+  corrected.
+- **Section 3 passed its blocking readiness audit** - The primary
+  \(\rho_P\) estimate and complete standard error were positively affine
+  invariant to below `1e-14`, empirical influence centering was below `2e-17`,
+  the full theorem/studentization chain remained present, and both frozen
+  regular dependent Wald cells remained compatible with nominal size.
+- **The finite-sample boundary remains visible** - Strong-skew Wald rejection
+  decreased from `.122` at `n=640` to `.082` at `n=2560`, supporting the
+  pointwise theorem without suggesting uniform calibration.
+- **One nonblocking software gap was recorded** - The validated primary
+  profile-correlation inference routine still lives in a simulation script and
+  should be promoted into `src/cdelta.py` before a software release. This does
+  not block drafting Section 3. See
+  `docs/archive_and_section3_readiness_20260831.md`.
 
 ## Updates 08/30/2026
 
@@ -27,8 +51,8 @@ all-to-all `c_d` remains the motivating arXiv predecessor.
 
 ## Updates 08/29/2026
 
-- **Supervisor scope decision incorporated** - The original corrected
-  all-to-all \(c_d\) remains on arXiv, while the robust-reference work becomes
+- **Supervisor scope decision incorporated** - The original all-to-all
+  \(c_d\) remains on arXiv with a normalization revision planned, while the robust-reference work becomes
   a separate Yao--Hoorn paper led by Yao. Its main question is when inference
   for paired robust-reference divergence profiles can be trusted or can be
   misleading, rather than how to define another broad general-purpose

@@ -1,0 +1,8 @@
+check	observed	criterion	threshold	passed	blocking	interpretation
+rho_estimate_positive_affine_invariance	4.0245584642661925e-16	less_than	1e-12	1	1	the primary estimator is invariant to separate positive changes of origin and units
+rho_standard_error_positive_affine_invariance	2.0816681711721685e-17	less_than	1e-12	1	1	the complete plug-in standard error respects the same invariance
+rho_empirical_influence_centering	1.5543122344752193e-17	less_than	1e-12	1	1	the implemented paired influence values are empirically centered
+appendix_theorem_chain_complete	1.0	equal_to	1.0	1	1	the audited theorem, studentization, weak-null, orthogonality, and boundary pieces are present
+regular_dependent_wald_wilson_contains_nominal	1.0	equal_to	1.0	1	1	both frozen regular dependent weak-null cells are compatible with 5 percent size
+strong_skew_rejection_declines_with_n	0.039999999999999994	greater_than	0.03	1	1	the frozen stress cells support pointwise convergence while retaining a slow-convergence warning
+primary_rho_inference_promoted_to_public_src_api	0.0	equal_to	1.0	0	0	open software-release task: the validated rho routine currently lives in a simulation script

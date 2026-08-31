@@ -3,8 +3,9 @@
 ## Frozen paper question
 
 Professor Hoorn's 2026-08-29 scope decision separates the projects. The
-corrected original \(c_d\) paper retains the broad all-to-all divergence
-coefficient on arXiv. The new Yao--Hoorn paper cites that work but studies a
+original \(c_d\) paper retains the broad all-to-all divergence coefficient on
+arXiv, with a normalization revision planned after the currently archived v2.
+The new Yao--Hoorn paper cites that work but studies a
 different primary object: robust-reference profile correlation and the
 reliability of its inference.
 

@@ -5,10 +5,11 @@
 Working manuscript draft, Sections 1--2  
 Date: 2026-08-30
 
-> Editorial note: the citation to the corrected original \(c_d\) paper is
-> temporarily written as “Hoorn (2025).” Its final arXiv metadata and the
-> targeted methodological citations will be inserted during the literature
-> pass. No placeholder below should be treated as a completed bibliography.
+> Editorial note: the original paper is archived as Hoorn (2025),
+> arXiv:2510.16717. The online version inspected on 2026-08-31 was v2, revised
+> 2026-03-08. Its Eq. 4 still lacks the planned \(1/n\) numerator correction,
+> so version-specific wording must be checked again after the next arXiv
+> revision. Targeted methodological citations remain for the literature pass.
 
 ## 1. Introduction
 
@@ -24,7 +25,7 @@ inside its own marginal distribution.
 The correlation-of-divergency coefficient \(c_d\) was introduced for this
 purpose by constructing an all-to-all within-group divergence score for every
 observation and comparing the two resulting labelled profiles [Hoorn (2025),
-final corrected arXiv citation to be inserted]. This construction asks whether
+arXiv:2510.16717]. This construction asks whether
 two groups are internally divergent in a similar way. It is distinct from an
 ordinary correlation between the raw measurements, because observations may
 occupy very different numerical positions while retaining similar relative

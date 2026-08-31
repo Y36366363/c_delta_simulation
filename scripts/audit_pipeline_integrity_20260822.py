@@ -82,9 +82,11 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "docs/professor_scope_decision_20260829.md",
         "docs/manuscript_skeleton_and_readiness_20260829.md",
         "docs/manuscript_draft_sections_1_2_20260830.md",
+        "docs/archive_and_section3_readiness_20260831.md",
         "scripts/freeze_canonical_evidence_20260819.py",
         "scripts/audit_claim_theory_20260826.py",
         "scripts/audit_scope_decision_20260829.py",
+        "scripts/audit_section3_readiness_20260831.py",
         "scripts/audit_wald_convergence_20260822.py",
         "results/canonical_evidence_20260819.tsv",
         "results/wald_convergence_audit_20260822.tsv",
@@ -99,6 +101,7 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "results/claim3_prospective_family_summary_validation_20260825.tsv",
         "results/claim_theory_audit_20260826.tsv",
         "results/scope_decision_audit_20260829.tsv",
+        "results/section3_readiness_audit_20260831.tsv",
     )
     missing = [item for item in required if not (PROJECT_ROOT / item).exists()]
     rows.append(
@@ -128,6 +131,7 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         RESULTS_DIR / "claim3_prospective_family_summary_validation_20260825.tsv",
         RESULTS_DIR / "claim_theory_audit_20260826.tsv",
         RESULTS_DIR / "scope_decision_audit_20260829.tsv",
+        RESULTS_DIR / "section3_readiness_audit_20260831.tsv",
     )
     current_malformed = []
     for path in current_tables:

@@ -49,7 +49,8 @@ def test_draft_preserves_claim_and_inference_boundaries():
     assert "can* invalidate" in text
     assert "Neither construction is a uniformly" in text
     assert "A conditional weak-null" in text
-    assert "final corrected arXiv citation to be inserted" in text
+    assert "arXiv:2510.16717" in text
+    assert "final corrected arXiv citation to be inserted" not in text
     for forbidden in (
         "always invalidates",
         "universally valid",

@@ -10,8 +10,9 @@ evidence for one of the three proposed main claims.  Unexplained anomalies are
 recorded, but they no longer automatically generate a new branch of testing.
 
 Professor Hoorn's 2026-08-29 decision makes this a separate Yao--Hoorn paper.
-The corrected original \(c_d\) paper remains on arXiv as the broad all-to-all
-divergence measure. The new paper cites it, but its primary contribution is
+The original \(c_d\) paper remains on arXiv as the broad all-to-all divergence
+measure; its \(1/n\) normalization revision is planned after the currently
+archived v2. The new paper cites it, but its primary contribution is
 the theory and diagnosis of inference for robust-reference profile
 correlation. It must not be framed as merely another general definition of
 \(c_d\).

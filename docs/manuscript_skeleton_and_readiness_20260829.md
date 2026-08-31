@@ -44,7 +44,8 @@ a proved weak-null permutation theorem.
 
 Purpose:
 
-- cite the corrected original \(c_d\) paper as the motivating predecessor;
+- cite Hoorn (2025), arXiv:2510.16717, as the motivating predecessor and
+  distinguish its currently archived v2 from the planned normalization update;
 - retain the substantive question of whether matched observations stand out
   similarly inside their respective groups;
 - state that the robust-reference construction changes the estimand;
@@ -291,6 +292,10 @@ not visually conflated.
 | Literature positioning | Needs targeted work | Review robust correlation, generated-regressor/reference inference, weak identification, and nonuniform asymptotics |
 | Reproducibility | Strong | Freeze final display-generating scripts and a single run manifest |
 | Main manuscript prose | Sections 1--2 drafted | Draft the compact main-text theorem and Section 3 next |
+
+The archive and Section 3 preparation audit is complete in
+`docs/archive_and_section3_readiness_20260831.md`; it found no blocking
+mathematical issue for the main-text theorem.
 
 ## Maturity gates before submission
 
