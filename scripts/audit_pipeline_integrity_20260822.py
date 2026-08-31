@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import csv
-import hashlib
 from pathlib import Path
 import sys
 
@@ -12,6 +11,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.robust_extension_utils import write_tsv
+from scripts.freeze_canonical_evidence_20260819 import normalized_text_sha256
 
 
 RESULTS_DIR = PROJECT_ROOT / "results"
@@ -52,7 +52,7 @@ def audit_pipeline() -> list[dict[str, str | int]]:
     hash_failures = []
     for row in canonical:
         source = PROJECT_ROOT / row["source_file"]
-        actual = hashlib.sha256(source.read_bytes()).hexdigest() if source.exists() else "missing"
+        actual = normalized_text_sha256(source) if source.exists() else "missing"
         if actual != row["source_sha256"]:
             hash_failures.append(row["source_file"])
     rows.append(
@@ -83,6 +83,7 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "docs/manuscript_skeleton_and_readiness_20260829.md",
         "docs/manuscript_draft_sections_1_2_20260830.md",
         "docs/archive_and_section3_readiness_20260831.md",
+        "docs/canonical_hash_repair_20260831.md",
         "scripts/freeze_canonical_evidence_20260819.py",
         "scripts/audit_claim_theory_20260826.py",
         "scripts/audit_scope_decision_20260829.py",

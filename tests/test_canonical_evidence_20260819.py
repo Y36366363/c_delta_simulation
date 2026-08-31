@@ -1,5 +1,4 @@
 import csv
-import hashlib
 from pathlib import Path
 
 import numpy as np
@@ -11,6 +10,7 @@ from scripts.freeze_canonical_evidence_20260819 import (
     freeze_family_residual,
     freeze_near_degenerate_failure,
     freeze_regular_calibration,
+    normalized_text_sha256,
     wilson,
 )
 
@@ -40,7 +40,7 @@ def test_four_canonical_groups_have_expected_fixed_rows_and_uncertainty():
             assert row["wilson_95_low"] <= row["rejection_rate"]
             assert row["rejection_rate"] <= row["wilson_95_high"]
             assert row["monte_carlo_se"] >= 0.0
-            assert row["source_sha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
+            assert row["source_sha256"] == normalized_text_sha256(source)
             assert row["inference_track"] == "fully_recomputed_studentized_permutation_empirical"
             assert "not direct validation of iid Wald theorem" in row["theorem_alignment"]
 
@@ -95,3 +95,11 @@ def test_estimand_audit_supports_profile_correlation_as_primary():
     assert rows["permutation_p_equivalence"]["value"] == 0.0
     assert rows["fixed_rho_population_C_range"]["value"] > 2.5
     assert rows["estimand_decision"]["value"] == "rho_P primary; C secondary"
+
+
+def test_canonical_hash_is_invariant_to_lf_and_crlf(tmp_path):
+    lf = tmp_path / "lf.tsv"
+    crlf = tmp_path / "crlf.tsv"
+    lf.write_bytes(b"a\tb\n1\t2\n")
+    crlf.write_bytes(b"a\tb\r\n1\t2\r\n")
+    assert normalized_text_sha256(lf) == normalized_text_sha256(crlf)

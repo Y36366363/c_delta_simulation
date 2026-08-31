@@ -11,6 +11,12 @@ normalization correction was not yet present in the v2 PDF inspected on
 
 ## Updates 08/31/2026
 
+- **Canonical evidence hashes are now checkout-stable** - The four stale
+  source hashes were refreshed after hashing tabular text with CRLF and lone
+  CR normalized to LF. The 34 frozen evidence rows, fixed seeds, rejection
+  counts, Monte Carlo uncertainty, and scientific conclusions are unchanged;
+  a regression test now verifies LF/CRLF invariance. See
+  `docs/canonical_hash_repair_20260831.md`.
 - **The archived predecessor was verified directly** - Hoorn's original paper
   is `arXiv:2510.16717`, currently v2 (revised 2026-03-08). Visual inspection
   of Eq. 4 confirmed that the online v2 numerator is still a sum, not an

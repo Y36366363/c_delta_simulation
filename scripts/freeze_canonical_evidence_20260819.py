@@ -35,8 +35,16 @@ def write_tsv(path: Path, rows: Iterable[dict[str, object]]) -> None:
         writer.writerows(rows)
 
 
-def sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def normalized_text_sha256(path: Path) -> str:
+    """Hash tabular text after normalizing platform line endings to LF.
+
+    The result tables are written through :mod:`csv`, which uses CRLF by
+    default, while Git or another checkout may materialize the same text with
+    LF.  Canonical evidence should detect content changes, not this transport
+    detail.
+    """
+    content = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(content).hexdigest()
 
 
 def wilson(successes: int, repetitions: int, z: float = 1.959963984540054) -> tuple[float, float]:
@@ -78,7 +86,7 @@ def canonical_row(
             "declared group invariance"
         ),
         "source_file": str(source.relative_to(PROJECT_ROOT)),
-        "source_sha256": sha256(source),
+        "source_sha256": normalized_text_sha256(source),
         "scenario": scenario,
         "n": n,
         "repetitions": repetitions,
