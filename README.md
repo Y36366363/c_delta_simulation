@@ -73,13 +73,15 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 Run the test suite from the repository root:
 
-```bash
+~~~bash
 python3 -m unittest discover -s tests
+~~~
 
 Individual simulations and audits are available in [`scripts/`](scripts/).
 The repository is currently research code rather than a packaged software
 release. A consolidated dependency specification and public inference API
 remain part of the software-readiness work.
+
 Detailed Research Log
 The dated entries below preserve the development history, claim-boundary
 decisions, simulation audits, and manuscript-readiness checks.
