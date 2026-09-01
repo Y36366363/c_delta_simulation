@@ -1,13 +1,95 @@
-# c_delta Simulation Pilot
+# Reliable Inference for Robust-Reference Profile Correlation
 
-This is a small first-stage project for studying the finite-sample behavior of the
-correlation-of-divergency coefficient, `c_delta`.
+Research code and manuscript support for studying when inference on paired
+robust-reference divergence profiles is reliable—and when finite-sample
+behavior can be misleading.
 
-The project now supports a separate Yao--Hoorn manuscript on the reliability
-of inference for robust-reference profile correlation. The original all-to-all
-`c_d` remains the motivating arXiv predecessor; its planned `1/n`
-normalization correction was not yet present in the v2 PDF inspected on
-08/31/2026.
+## Project at a Glance
+
+| Item | Description |
+|---|---|
+| Research question | When can inference for correlation between paired robust-reference divergence profiles be trusted? |
+| Primary estimand | Profile correlation, \(\rho_P\) |
+| Secondary scale | The historical \(C\) scale, reported with profile coefficients of variation when used |
+| Current stage | Active manuscript development and reproducibility audit |
+| Role | Independent research project and implementation |
+| Main methods | Influence-function inference, permutation procedures, bootstrap analysis, simulation studies, and conditioning diagnostics |
+
+This repository began as a finite-sample simulation study of the
+correlation-of-divergency coefficient, `c_delta`. It now supports a separate
+Yao–Hoorn methodological manuscript focused on inference reliability for
+profiles defined around robust references.
+
+The motivating all-to-all coefficient remains associated with the earlier
+[arXiv predecessor](https://arxiv.org/abs/2510.16717). The current project does
+not claim that robust-reference profiles are universally superior; it studies
+the conditions under which their inferential behavior is reliable or unstable.
+
+## Current Evidence
+
+The current theoretical and simulation work supports four main conclusions:
+
+1. **Regular settings can support reliable Wald inference.**
+   Under a properly regular dependent weak-null design, frozen simulation cells
+   remain compatible with nominal rejection levels.
+
+2. **Regularity does not guarantee fast finite-sample convergence.**
+   Strongly skewed settings exhibit asymmetric studentized tails and slow
+   convergence even at comparatively large sample sizes.
+
+3. **Unstable reference fitting can create severe finite-sample distortion.**
+   Controlled counterfactual experiments show that coupled switching of fitted
+   robust references can produce misleading profile correlation behavior.
+
+4. **Conditioning diagnostics organize—but do not fully determine—severity.**
+   The standardized nuisance-Jacobian index helps order instability across
+   several families, but it is not presented as a universal cutoff or complete
+   explanation.
+
+These statements deliberately separate theorem-level results, exact
+finite-dimensional calculations, and empirical simulation evidence.
+
+## Repository Guide
+
+| Location | Purpose |
+|---|---|
+| [`src/`](src/) | Core statistical implementation |
+| [`scripts/`](scripts/) | Simulation, diagnostic, and audit entry points |
+| [`tests/`](tests/) | Regression, mathematical-consistency, and pipeline tests |
+| [`results/`](results/) | Stored simulation outputs and reporting tables |
+| [`figures/`](figures/) | Generated figures used in analysis and reporting |
+| [`docs/`](docs/) | Manuscript drafts, claim ledgers, audits, and research decisions |
+| [`TEST_PLAN.md`](TEST_PLAN.md) | Testing strategy and planned validation |
+
+## Key Research Documents
+
+- [Manuscript skeleton and readiness audit](docs/manuscript_skeleton_and_readiness_20260829.md)
+- [Draft manuscript Sections 1–2](docs/manuscript_draft_sections_1_2_20260830.md)
+- [Archive and Section 3 readiness audit](docs/archive_and_section3_readiness_20260831.md)
+- [Paper-level claim ledger](docs/manuscript_claim_ledger_20260826.md)
+- [End-to-end pipeline audit](docs/end_to_end_pipeline_audit_20260822.md)
+
+## Reproducibility
+
+Run the test suite from the repository root:
+
+~~~bash
+python3 -m pytest -q
+~~~
+
+Individual simulations and audits are available in [`scripts/`](scripts/).
+The repository is currently research code rather than a packaged software
+release. The primary \(\rho_P\) inference API is now public in `src/cdelta.py`;
+a consolidated dependency specification remains part of the software-readiness
+work.
+
+## Detailed Research Log
+
+The dated entries below preserve the development history, claim-boundary
+decisions, simulation audits, and manuscript-readiness checks.
+
+<details>
+<summary><strong>Expand dated research updates</strong></summary>
 
 ## Updates 09/01/2026
 
@@ -1576,3 +1658,5 @@ If using the Codex bundled runtime on this machine:
 - Add comparisons with energy distance and MMD.
 - Add machine-learning examples, such as comparing dispersion structures in
   embedding dimensions, model residuals, or representation clusters.
+
+</details>
