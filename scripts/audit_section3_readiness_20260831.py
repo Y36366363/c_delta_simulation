@@ -150,7 +150,7 @@ def section3_readiness_audit() -> list[dict[str, object]]:
             1.0,
             production_rho_api,
             False,
-            "open software-release task: the validated rho routine currently lives in a simulation script",
+            "the validated rho routine is now public in src/cdelta.py and the simulation entry point delegates to it",
         ),
     ]
 

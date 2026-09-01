@@ -9,6 +9,20 @@ of inference for robust-reference profile correlation. The original all-to-all
 normalization correction was not yet present in the v2 PDF inspected on
 08/31/2026.
 
+## Updates 09/01/2026
+
+- **The primary \(\rho_P\) procedure now has a public API** -
+  `huber_profile_correlation_inference` exposes the validated robust-reference
+  profile estimate, complete first-order influence values, plug-in standard
+  error, Wald interval, and test. The historical simulation entry point now
+  delegates to the same implementation.
+- **Validation stayed claim-directed** - One fixed regular sample, rather than
+  another distribution grid, checks implementation equivalence, direct
+  estimand agreement, positive-affine invariance, influence centering, and the
+  secondary \(C=1+\rho_PCV_XCV_Y\) identity. The API documentation explicitly
+  retains the pointwise/nonuniform and robust-reference/not-globally-robust
+  boundaries. See `docs/public_rho_api_validation_20260901.md`.
+
 ## Updates 08/31/2026
 
 - **Canonical evidence hashes are now checkout-stable** - The four stale

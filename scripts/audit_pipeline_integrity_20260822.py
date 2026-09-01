@@ -84,10 +84,12 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "docs/manuscript_draft_sections_1_2_20260830.md",
         "docs/archive_and_section3_readiness_20260831.md",
         "docs/canonical_hash_repair_20260831.md",
+        "docs/public_rho_api_validation_20260901.md",
         "scripts/freeze_canonical_evidence_20260819.py",
         "scripts/audit_claim_theory_20260826.py",
         "scripts/audit_scope_decision_20260829.py",
         "scripts/audit_section3_readiness_20260831.py",
+        "scripts/audit_public_rho_api_20260901.py",
         "scripts/audit_wald_convergence_20260822.py",
         "results/canonical_evidence_20260819.tsv",
         "results/wald_convergence_audit_20260822.tsv",
@@ -103,6 +105,7 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "results/claim_theory_audit_20260826.tsv",
         "results/scope_decision_audit_20260829.tsv",
         "results/section3_readiness_audit_20260831.tsv",
+        "results/public_rho_api_audit_20260901.tsv",
     )
     missing = [item for item in required if not (PROJECT_ROOT / item).exists()]
     rows.append(

@@ -146,15 +146,13 @@ The deterministic 2026-08-31 audit found:
 The reproducible values are in
 `results/section3_readiness_audit_20260831.tsv`.
 
-## 7. One nonblocking implementation gap
+## 7. Nonblocking implementation gap resolved (2026-09-01)
 
-The validated primary \(\rho_P\) inference routine currently lives in
-`scripts/run_weak_null_local_tests_20260814.py`, whereas the reusable public
-module in `src/cdelta.py` still exposes its full general inference entry point
-mainly on the secondary \(C\) scale. This does not block drafting Section 3 or
-the mathematical theorem. Before a software release or replication package is
-frozen, the \(\rho_P\) routine should be promoted to a public source API and
-the simulation script should call that shared implementation.
+The validated primary \(\rho_P\) inference routine is now exposed as
+`huber_profile_correlation_inference` in `src/cdelta.py`. The original
+simulation entry point delegates to this shared implementation, preventing the
+manuscript-validation and reusable-code paths from drifting apart. Fixed-sample
+API checks are recorded in `docs/public_rho_api_validation_20260901.md`.
 
 ## 8. Readiness decision
 

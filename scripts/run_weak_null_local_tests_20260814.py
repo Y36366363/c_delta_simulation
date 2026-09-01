@@ -15,7 +15,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
-from cdelta import _huber_location_influence, huber_reference_profile
+from cdelta import huber_profile_correlation_inference, huber_reference_profile
 from scripts.robust_extension_utils import write_tsv
 from scripts.run_robust_cdelta_grid import wilson
 
@@ -71,74 +71,16 @@ def profile_weak_null_test(
     density_method: str = "kde",
     small_sample_correction: str = "sample",
 ) -> dict[str, float | np.ndarray]:
-    """Full-IF Wald test of Corr(|X-T_X|, |Y-T_Y|) = null_value.
-
-    Marginal MAD scaling cancels from Pearson correlation, but MAD still enters
-    indirectly through each Huber location influence function.
-    """
-    x = np.asarray(x, dtype=float)
-    y = np.asarray(y, dtype=float)
-    if x.ndim != 1 or y.shape != x.shape or x.size < 12:
-        raise ValueError("x and y must be matching one-dimensional arrays of size >= 12")
-    tx, _, location_if_x = _huber_location_influence(
+    """Compatibility wrapper for the production ``rho_P`` Wald API."""
+    return huber_profile_correlation_inference(
         x,
-        huber_c=huber_c,
-        density_method=density_method,
-        analytic_density=None,
-        density_folds=5,
-        density_seed=2026081401,
-    )
-    ty, _, location_if_y = _huber_location_influence(
         y,
+        null_value=null_value,
+        alternative=alternative,
         huber_c=huber_c,
         density_method=density_method,
-        analytic_density=None,
-        density_folds=5,
-        density_seed=2026081402,
+        small_sample_correction=small_sample_correction,
     )
-    a = np.abs(x - tx)
-    b = np.abs(y - ty)
-    moments = np.asarray((np.mean(a * b), np.mean(a), np.mean(b), np.mean(a**2), np.mean(b**2)))
-    estimate, gradient = _correlation_delta(
-        moments[1], moments[2], moments[0], moments[3], moments[4]
-    )
-    direct_moment_if = np.column_stack(
-        (a * b, a, b, a**2, b**2)
-    ) - moments
-    direct_if = direct_moment_if @ gradient
-
-    mean_a, mean_b = moments[1], moments[2]
-    variance_a = moments[3] - mean_a**2
-    variance_b = moments[4] - mean_b**2
-    denominator = sqrt(variance_a * variance_b)
-    sign_x = np.sign(x - tx)
-    sign_y = np.sign(y - ty)
-    covariance_tx = -np.mean(sign_x * b) + np.mean(sign_x) * mean_b
-    covariance_ty = -np.mean(a * sign_y) + mean_a * np.mean(sign_y)
-    variance_tx = -2.0 * np.mean(x - tx) + 2.0 * mean_a * np.mean(sign_x)
-    variance_ty = -2.0 * np.mean(y - ty) + 2.0 * mean_b * np.mean(sign_y)
-    coefficient_x = covariance_tx / denominator - 0.5 * estimate * variance_tx / variance_a
-    coefficient_y = covariance_ty / denominator - 0.5 * estimate * variance_ty / variance_b
-    influence = direct_if + coefficient_x * location_if_x + coefficient_y * location_if_y
-    influence -= np.mean(influence)
-    factors = {"hc0": 1.0, "sample": x.size / (x.size - 1.0), "hc1": x.size / (x.size - 6.0)}
-    if small_sample_correction not in factors:
-        raise ValueError("small_sample_correction must be hc0, sample, or hc1")
-    influence_variance = float(np.mean(influence**2) * factors[small_sample_correction])
-    standard_error = sqrt(influence_variance / x.size)
-    if standard_error <= 0.0:
-        raise ValueError("profile weak-null standard error is degenerate")
-    z_statistic = (estimate - null_value) / standard_error
-    return {
-        "estimate": float(estimate),
-        "standard_error": float(standard_error),
-        "z_statistic": float(z_statistic),
-        "p_value": float(_p_value(z_statistic, alternative)),
-        "influence_variance": influence_variance,
-        "location_coefficient_x": float(coefficient_x),
-        "location_coefficient_y": float(coefficient_y),
-        "influence": influence,
-    }
 
 
 def profile_jackknife_test(

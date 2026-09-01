@@ -6,15 +6,16 @@ from scripts.audit_section3_readiness_20260831 import section3_readiness_audit
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_section3_blocking_readiness_checks_pass_and_gap_is_explicit():
+def test_section3_readiness_checks_all_pass_after_public_api_promotion():
     rows = section3_readiness_audit()
     assert len(rows) == 7
-    assert all(int(row["passed"]) for row in rows if int(row["blocking"]))
-    open_gaps = [row for row in rows if not int(row["passed"])]
-    assert [row["check"] for row in open_gaps] == [
-        "primary_rho_inference_promoted_to_public_src_api"
-    ]
-    assert int(open_gaps[0]["blocking"]) == 0
+    assert all(int(row["passed"]) for row in rows)
+    api = next(
+        row
+        for row in rows
+        if row["check"] == "primary_rho_inference_promoted_to_public_src_api"
+    )
+    assert int(api["blocking"]) == 0
 
 
 def test_archive_audit_distinguishes_existing_v2_from_planned_correction():

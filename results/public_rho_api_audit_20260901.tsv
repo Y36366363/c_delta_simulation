@@ -1,0 +1,9 @@
+check	observed	criterion	threshold	passed	interpretation
+legacy_wrapper_estimate_matches_public_api	0.0	less_than_or_equal_to	1e-14	1	the existing simulation entry point delegates without changing rho_P
+legacy_wrapper_se_matches_public_api	0.0	less_than_or_equal_to	1e-14	1	the complete first-order standard error is shared by both paths
+legacy_wrapper_influence_matches_public_api	0.0	less_than_or_equal_to	1e-14	1	the empirical influence values cannot drift between code paths
+public_estimate_matches_direct_profile_correlation	3.0531133177191805e-16	less_than_or_equal_to	1e-14	1	the public estimate targets Corr(|X-T_X|, |Y-T_Y|)
+public_estimate_positive_affine_invariance	2.983724378680108e-16	less_than_or_equal_to	1e-12	1	separate positive changes of origin and units preserve rho_P
+public_se_positive_affine_invariance	2.0816681711721685e-17	less_than_or_equal_to	1e-12	1	the complete plug-in standard error respects the same invariance
+public_influence_empirically_centered	2.2204460492503132e-17	less_than_or_equal_to	1e-12	1	the returned empirical influence representation is centered
+secondary_C_identity_retained	0.0	less_than_or_equal_to	1e-12	1	C remains a secondary scale linked by C=1+rho_P CV_X CV_Y

@@ -1,8 +1,9 @@
-"""Utilities for a first simulation study of c_delta.
+"""Original c-delta utilities and robust-reference profile inference.
 
-The implementation follows the coefficient as a comparison of internal
-divergence vectors. It intentionally keeps the formulas explicit so the code can
-serve as a discussion artifact with a supervisor.
+The all-to-all divergence coefficient and the Yao--Hoorn robust-reference
+profile correlation are kept as distinct constructs.  Formulas remain explicit
+so the implementation can support both reproducible simulations and the
+methodological manuscript.
 """
 
 from __future__ import annotations
@@ -760,6 +761,182 @@ def _huber_location_influence(
         - scale_coupling / sensitivity * scale_if
     )
     return location, scale, location_if
+
+
+def huber_profile_correlation_inference(
+    x: Array | list[float],
+    y: Array | list[float],
+    *,
+    huber_c: float = 1.345,
+    alpha: float = 0.05,
+    null_value: float = 0.0,
+    alternative: str = "two-sided",
+    density_method: str = "kde",
+    analytic_density_x: Callable[[float], float] | None = None,
+    analytic_density_y: Callable[[float], float] | None = None,
+    density_folds: int = 5,
+    density_seed: int = 2026081401,
+    small_sample_correction: str = "sample",
+    effective_parameters: int = 6,
+) -> dict[str, float | Array | dict[str, float]]:
+    """Estimate and test robust-reference profile correlation ``rho_P``.
+
+    The estimand is ``Corr(|X - T_X|, |Y - T_Y|)``, where each marginal
+    reference ``T`` is the median/MAD-scaled Huber location functional.  The
+    returned first-order influence function includes the indirect MAD path
+    through each fitted Huber location.  Marginal MAD scaling is not applied to
+    the final profiles because separate positive scales cancel from Pearson
+    correlation.
+
+    This is pointwise Wald inference for a fixed regular IID law, not a uniform
+    guarantee near weakly identified or multimodal reference fits.  The robust
+    references limit marginal location influence; they do not make ``rho_P`` a
+    globally robust correlation coefficient.
+    """
+    x_arr = _as_1d(x, "x")
+    y_arr = _as_1d(y, "y")
+    if x_arr.size != y_arr.size:
+        raise ValueError("x and y must have the same length")
+    if x_arr.size < 12:
+        raise ValueError("x and y must contain at least 12 paired observations")
+    if huber_c <= 0.0:
+        raise ValueError("huber_c must be positive")
+    if not 0.0 < alpha < 1.0:
+        raise ValueError("alpha must be between zero and one")
+    if not -1.0 <= null_value <= 1.0:
+        raise ValueError("null_value must be between -1 and 1")
+    if alternative not in {"greater", "less", "two-sided"}:
+        raise ValueError("alternative must be 'greater', 'less', or 'two-sided'")
+    if small_sample_correction not in {"hc0", "sample", "hc1"}:
+        raise ValueError("small_sample_correction must be 'hc0', 'sample', or 'hc1'")
+    if effective_parameters < 1:
+        raise ValueError("effective_parameters must be positive")
+    if small_sample_correction == "hc1" and effective_parameters >= x_arr.size:
+        raise ValueError("effective_parameters must be between 1 and n - 1")
+
+    tx, scale_x, location_if_x = _huber_location_influence(
+        x_arr,
+        huber_c=huber_c,
+        density_method=density_method,
+        analytic_density=analytic_density_x,
+        density_folds=density_folds,
+        density_seed=density_seed,
+    )
+    ty, scale_y, location_if_y = _huber_location_influence(
+        y_arr,
+        huber_c=huber_c,
+        density_method=density_method,
+        analytic_density=analytic_density_y,
+        density_folds=density_folds,
+        density_seed=density_seed + 1,
+    )
+
+    profile_x = np.abs(x_arr - tx)
+    profile_y = np.abs(y_arr - ty)
+    moments = np.asarray(
+        (
+            np.mean(profile_x * profile_y),
+            np.mean(profile_x),
+            np.mean(profile_y),
+            np.mean(profile_x**2),
+            np.mean(profile_y**2),
+        )
+    )
+    mean_x, mean_y = float(moments[1]), float(moments[2])
+    variance_x = float(moments[3] - mean_x**2)
+    variance_y = float(moments[4] - mean_y**2)
+    if variance_x <= 0.0 or variance_y <= 0.0:
+        raise ValueError("profile correlation is undetermined for a degenerate margin")
+    covariance = float(moments[0] - mean_x * mean_y)
+    denominator = float(np.sqrt(variance_x * variance_y))
+    estimate = covariance / denominator
+    gradient = np.asarray(
+        (
+            1.0 / denominator,
+            -mean_y / denominator + estimate * mean_x / variance_x,
+            -mean_x / denominator + estimate * mean_y / variance_y,
+            -0.5 * estimate / variance_x,
+            -0.5 * estimate / variance_y,
+        )
+    )
+    direct_moment_if = np.column_stack(
+        (
+            profile_x * profile_y,
+            profile_x,
+            profile_y,
+            profile_x**2,
+            profile_y**2,
+        )
+    ) - moments
+    direct_if = direct_moment_if @ gradient
+
+    sign_x = np.sign(x_arr - tx)
+    sign_y = np.sign(y_arr - ty)
+    covariance_tx = -float(np.mean(sign_x * profile_y)) + float(
+        np.mean(sign_x)
+    ) * mean_y
+    covariance_ty = -float(np.mean(profile_x * sign_y)) + mean_x * float(
+        np.mean(sign_y)
+    )
+    variance_tx = -2.0 * float(np.mean(x_arr - tx)) + 2.0 * mean_x * float(
+        np.mean(sign_x)
+    )
+    variance_ty = -2.0 * float(np.mean(y_arr - ty)) + 2.0 * mean_y * float(
+        np.mean(sign_y)
+    )
+    coefficient_x = (
+        covariance_tx / denominator - 0.5 * estimate * variance_tx / variance_x
+    )
+    coefficient_y = (
+        covariance_ty / denominator - 0.5 * estimate * variance_ty / variance_y
+    )
+    influence = (
+        direct_if
+        + coefficient_x * location_if_x
+        + coefficient_y * location_if_y
+    )
+    influence -= float(np.mean(influence))
+
+    correction_factors = {
+        "hc0": 1.0,
+        "sample": x_arr.size / (x_arr.size - 1.0),
+        "hc1": x_arr.size / (x_arr.size - effective_parameters),
+    }
+    correction_factor = correction_factors[small_sample_correction]
+    influence_variance = float(np.mean(influence**2) * correction_factor)
+    standard_error = float(np.sqrt(influence_variance / x_arr.size))
+    if standard_error <= 0.0:
+        raise ValueError("profile correlation standard error is degenerate")
+
+    z_statistic = float((estimate - null_value) / standard_error)
+    normal = NormalDist()
+    if alternative == "greater":
+        p_value = 1.0 - normal.cdf(z_statistic)
+    elif alternative == "less":
+        p_value = normal.cdf(z_statistic)
+    else:
+        p_value = 2.0 * (1.0 - normal.cdf(abs(z_statistic)))
+    z_critical = normal.inv_cdf(1.0 - alpha / 2.0)
+
+    return {
+        "estimate": float(estimate),
+        "standard_error": standard_error,
+        "normal": {
+            "lower": float(estimate - z_critical * standard_error),
+            "upper": float(estimate + z_critical * standard_error),
+        },
+        "z_statistic": z_statistic,
+        "p_value": float(p_value),
+        "influence_variance": influence_variance,
+        "location_coefficient_x": float(coefficient_x),
+        "location_coefficient_y": float(coefficient_y),
+        "influence": influence,
+        "reference_location_x": float(tx),
+        "reference_location_y": float(ty),
+        "reference_scale_x": float(scale_x),
+        "reference_scale_y": float(scale_y),
+        "variance_correction_factor": float(correction_factor),
+    }
 
 
 def huber_cdelta_influence_inference(
