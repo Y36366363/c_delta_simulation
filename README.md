@@ -91,6 +91,24 @@ decisions, simulation audits, and manuscript-readiness checks.
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
 
+## Updates 09/02/2026
+
+- **Stavig's absolute-deviation correlation was resolved at the estimand
+  level** - The ranked coefficient is a Spearman-footrule form, while the
+  interval coefficient is a normalized L1 discrepancy between signed marginal
+  z scores. Neither is the correlation of unsigned distances from fitted
+  robust marginal references.
+- **A classical-alternatives positioning table is now frozen** - Ten rows place
+  the primary \(\rho_P\) beside Hoorn's all-to-all \(c_d\), both Stavig
+  coefficients, fixed-reference profile correlation, Pearson, rank, robust
+  raw-data, Gini, distance-correlation, and Mantel alternatives. Deterministic
+  sign-reversal and sign-rewiring witnesses verify the target distinction
+  without extending the general distribution grid. The resulting novelty
+  claim is about generated-reference inference, switching failure, and its
+  conditioning diagnostic--not the absolute-value transform or a broadly new
+  correlation coefficient. See
+  `docs/novelty_and_classical_positioning_20260902.md`.
+
 ## Updates 09/01/2026
 
 - **The primary \(\rho_P\) procedure now has a public API** -

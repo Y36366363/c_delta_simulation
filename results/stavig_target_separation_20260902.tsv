@@ -1,0 +1,4 @@
+scenario	n	stavig_interval_r_ad	rho_p	raw_pearson	profile_max_abs_difference	interpretation
+identical_signed_values	12	1.0	1.0	0.9999999999999998	0.0	agreement on the trivial equality case
+global_sign_reversal	12	-0.562056822572276	1.0	-0.9999999999999998	0.0	identical radial profiles but opposite signed standardized values
+within_radius_sign_rewiring	12	0.10739610138727107	1.0	-0.23076923076923073	0.0	identical radial profiles with selected signs reassigned

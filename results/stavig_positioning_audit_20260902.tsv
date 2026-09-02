@@ -1,0 +1,8 @@
+check	observed	criterion	threshold	passed	interpretation
+identity_agreement	0.0	less_than_or_equal_to	1e-14	1	both measures equal one when signed observations are identical
+sign_reversal_preserves_rho_p	0.0	less_than_or_equal_to	1e-14	1	rho_P intentionally treats equal radii as equal profiles
+sign_reversal_separates_stavig_from_rho_p	-0.562056822572276	less_than_or_equal_to	-0.1	1	Stavig retains signed z-score information and becomes negative
+sign_rewiring_preserves_rho_p	0.0	less_than_or_equal_to	1e-14	1	equal robust-reference radii imply equal profiles despite sign rewiring
+sign_rewiring_separates_targets	-0.8926038986127289	less_than_or_equal_to	-0.2	1	the two coefficients differ materially on a same-profile witness
+stavig_positive_affine_invariance	0.0	less_than_or_equal_to	1e-14	1	separate positive affine transforms cancel under marginal z scoring
+rho_p_positive_affine_invariance	0.0	less_than_or_equal_to	1e-12	1	separate positive affine transforms preserve robust radial profiles
