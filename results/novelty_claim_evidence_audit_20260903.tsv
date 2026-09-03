@@ -1,0 +1,14 @@
+novelty_component	check	observed	criterion	threshold	passed	interpretation
+complete_generated_profile_inference	rho_p_population_if_finite_difference	1.581875132403066e-05	less_than	0.0005	1	the primary rho_P IF, not only C, matches a smooth-law contamination derivative
+complete_generated_profile_inference	reference_path_is_numerically_active	0.3144630702193523	greater_than	0.001	1	the finite-difference agreement is not a vacuous fixed-reference case
+complete_generated_profile_inference	mad_indirect_path_is_numerically_active	0.058711712204880584	greater_than	0.0001	1	MAD scaling contributes through the fitted Huber location
+complete_generated_profile_inference	regular_large_n_wilson_intervals_cover_nominal	1.0	equal_to	1.0	1	both fixed regular n=640 calibration designs remain compatible with 5 percent
+complete_generated_profile_inference	regular_large_n_studentized_sd	0.036619448836244795	less_than	0.08	1	studentized spread is close to one in the two regular benchmark designs
+complete_generated_profile_inference	strong_skew_slow_convergence_boundary_detected	0.082	greater_than	0.07	1	pointwise theory does not imply uniformly accurate moderate-sample calibration
+reference_switching_distortion	paired_fixed_reference_removes_severe_failure	0.491	greater_than	0.45	1	on identical samples, fixing the symmetry reference removes most severe distortion
+reference_switching_distortion	fixed_reference_contrast_is_specific_to_near_degeneracy	0.018	less_than	0.03	1	the same intervention is nearly neutral after radial variation recovers
+reference_switching_distortion	exact_sign_balance_mechanism_intervention	0.47500000000000003	greater_than	0.45	1	removing sign-count fluctuations suppresses the fitted-reference switching path
+conditioning_diagnostic	leave_one_family_out_mae_improvement	0.7468332342214623	greater_than	0.65	1	I_n transports coarse transition information across the four bridge families
+conditioning_diagnostic	stricter_grouped_cv_mae_improvement	0.7220387931281419	greater_than	0.65	1	the index retains signal under cross-size and held-conditioning-level checks
+conditioning_diagnostic	prospective_family_rank_order	-0.942857142857143	less_than	-0.8	1	larger I_n prospectively corresponds to lower rejection in a fifth family
+conditioning_diagnostic	prospective_family_systematic_residual	0.018853538593705886	greater_than	0.0	1	all prospective predictions are too high, preserving the higher-order family limitation

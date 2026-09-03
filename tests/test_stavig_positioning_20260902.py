@@ -33,9 +33,10 @@ def test_witnesses_separate_signed_agreement_from_radial_profile_agreement():
 def test_positioning_table_contains_two_stavig_definitions_and_core_alternatives():
     rows = positioning_rows()
     methods = {row["method"] for row in rows}
-    assert len(rows) == 10
+    assert len(rows) == 11
     assert {"Stavig ranked r_ad", "Stavig interval r_AD"} <= methods
     assert {"Hoorn c_d", "distance correlation", "Mantel statistic/test"} <= methods
+    assert "MAD/median principal-variable correlation" in methods
     assert all(row["primary_source"] for row in rows)
 
 

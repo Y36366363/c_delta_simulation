@@ -172,6 +172,17 @@ def positioning_rows() -> list[dict[str, str]]:
             "primary_source": "https://doi.org/10.1093/biomet/62.3.531",
         },
         {
+            "method": "MAD/median principal-variable correlation",
+            "input_object": "signed standardized sums and differences of paired raw values",
+            "center_or_transform": "median/MAD marginal standardization and robust scales of principal variables",
+            "direction_retained": "yes",
+            "scientific_target": "outlier-resistant signed raw-value correlation",
+            "overlap_with_rho_p": "uses median/MAD nuisance fits and absolute deviations inside robust scales",
+            "decisive_difference": "robustifies signed correlation; it does not correlate unsigned marginal radii",
+            "manuscript_role": "closest robust-correlation family; Huber/MAD ingredients alone are not novelty",
+            "primary_source": "https://doi.org/10.1016/S0167-7152(02)00058-5",
+        },
+        {
             "method": "Gini correlation",
             "input_object": "paired raw values and marginal ranks/CDF values",
             "center_or_transform": "covariance with a rank transform",

@@ -91,6 +91,25 @@ decisions, simulation audits, and manuscript-readiness checks.
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
 
+## Updates 09/03/2026
+
+- **The three-part novelty package passed a claim-directed adjudication** - A
+  new distribution-level contamination calculation verifies the complete
+  influence function for the primary \(\rho_P\), including active five-moment,
+  fitted-location, and indirect MAD paths. Existing paired interventions were
+  then recombined to verify that reference refitting, rather than the fixed
+  radial target alone, can generate the studied severe distortion.
+- **The novelty boundary is now stricter and more defensible** - Functional
+  delta methods, generated-regressor corrections, MAD/median robust
+  correlations, M-estimator uniqueness, and singular-Jacobian identification
+  diagnostics all have established precedents. The paper's contribution is
+  their problem-specific development for unsigned robust-reference profiles:
+  complete regular IID inference, an isolated nonlocal switching mechanism,
+  and a dimensionless first-order conditioning organizer. LOFO and prospective
+  checks retain strong coarse ordering while the systematic fifth-family
+  residual remains explicit. See
+  `docs/novelty_claim_adjudication_20260903.md`.
+
 ## Updates 09/02/2026
 
 - **Stavig's absolute-deviation correlation was resolved at the estimand
@@ -98,10 +117,11 @@ decisions, simulation audits, and manuscript-readiness checks.
   interval coefficient is a normalized L1 discrepancy between signed marginal
   z scores. Neither is the correlation of unsigned distances from fitted
   robust marginal references.
-- **A classical-alternatives positioning table is now frozen** - Ten rows place
+- **A classical-alternatives positioning table is now frozen** - Eleven rows place
   the primary \(\rho_P\) beside Hoorn's all-to-all \(c_d\), both Stavig
   coefficients, fixed-reference profile correlation, Pearson, rank, robust
-  raw-data, Gini, distance-correlation, and Mantel alternatives. Deterministic
+  raw-data and MAD/median robust correlations, Gini, distance-correlation, and
+  Mantel alternatives. Deterministic
   sign-reversal and sign-rewiring witnesses verify the target distinction
   without extending the general distribution grid. The resulting novelty
   claim is about generated-reference inference, switching failure, and its

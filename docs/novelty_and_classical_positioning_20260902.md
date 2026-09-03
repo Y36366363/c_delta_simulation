@@ -57,7 +57,7 @@ within-radius sign rewiring also leaves \(\rho_P=1\) but materially changes
 Stavig's coefficient.  These are target-separation examples, not performance
 claims and not Monte Carlo evidence.
 
-The complete ten-row positioning table is stored in
+The complete eleven-row positioning table is stored in
 `results/classical_alternative_positioning_20260902.tsv`; the witness values
 and pass/fail audit are in `results/stavig_target_separation_20260902.tsv` and
 `results/stavig_positioning_audit_20260902.tsv`.
@@ -68,7 +68,9 @@ The paper should not argue that correlating absolute deviations is itself a
 new algebraic operation.  Once two profiles are fixed,
 \(\operatorname{Corr}(|X-t_X|,|Y-t_Y|)\) is ordinary Pearson correlation
 after a prespecified transformation.  Nor should the title similarity with
-Stavig be ignored.  Instead, the defensible contribution is the combined
+Stavig be ignored.  The established MAD/median principal-variable correlation
+family also shows that robust marginal centering and scaling are not by
+themselves novel.  Instead, the defensible contribution is the combined
 methodological problem:
 
 1. define a scientifically interpretable, generated robust-reference profile
@@ -121,6 +123,9 @@ that organizes that transition to first order.
 - Devlin, S. J., Gnanadesikan, R., & Kettenring, J. R. (1975). Robust
   estimation and outlier detection with correlation coefficients.
   <https://doi.org/10.1093/biomet/62.3.531>
+- Shevlyakov, G. L., & Vilchevski, N. O. (2002). Minimax variance estimation
+  of a correlation coefficient for epsilon-contaminated bivariate normal
+  distributions. <https://doi.org/10.1016/S0167-7152(02)00058-5>
 - Schechtman, E., & Yitzhaki, S. (1987). A measure of association based on
   Gini's mean difference. <https://doi.org/10.1080/03610928708829359>
 - Székely, G. J., Rizzo, M. L., & Bakirov, N. K. (2007). Measuring and testing
