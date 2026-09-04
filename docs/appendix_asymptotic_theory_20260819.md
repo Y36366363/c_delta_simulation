@@ -806,6 +806,16 @@ line-number source audit also confirmed that the displayed MAD derivative has
 one, not two, numerator terms; an earlier duplicated rendering was not present
 in the source file.
 
+The 2026-09-03 primary-estimand audit additionally checked the complete
+\(IF_\rho\), rather than only the secondary \(IF_C\), against
+distribution-level contamination derivatives under one fixed regular
+correlated-lognormal law. Across four smooth contamination directions, the
+maximum scaled error at contamination weight \(10^{-6}\) was
+\(1.58\times10^{-5}\). The fitted-reference and indirect MAD components were
+nonzero, confirming that the calculation exercises the complete nuisance
+path. The reproducible values are in
+`results/rho_p_population_if_validation_20260903.tsv`.
+
 The 2026-08-20 completion maps every displayed A8 class to a precise
 VC-subgraph or finite-dimensional Lipschitz route, records the NumPy sample
 MAD convention, and verifies its first-order relation to alternative software

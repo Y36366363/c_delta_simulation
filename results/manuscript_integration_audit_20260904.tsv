@@ -1,0 +1,12 @@
+check	passed	detail
+sections_3_to_5_present	1	regular theory, switching mechanism, and conditioning diagnostic
+complete_if_chain_present	1	median, MAD, Huber, five moments, theorem, equicontinuity, and L2 plug-in
+all_four_frozen_boundaries_present	1	pointwise/can-cause/first-order/robust-reference boundaries
+literature_boundaries_integrated	1	absolute-deviation, robust correlation, generated nuisance, and identification
+manuscript_numeric_signposts_frozen	1	all cited values match the frozen source cells
+claim_crosswalk_sources_exist	1	16 statements mapped to 9 frozen tables
+evidence_types_not_collapsed	1	theorem support, mechanism intervention, prediction, and limitation remain labelled
+population_diagnostic_not_operationalized	1	I_n remains explanatory rather than a sample gate
+primary_rho_derivative_linked_to_appendix	1	primary-estimand numerical audit now has an Appendix A interface
+latex_operator_typo_removed	1	Section 2 covariance identity uses a valid LaTeX command
+no_new_distribution_grid	1	integration consumes existing frozen evidence only

@@ -57,6 +57,19 @@ aligned even when the population profile correlation is zero. Robustness of a
 location equation to ordinary contamination does not by itself prevent this
 reference-selection failure.
 
+This distinction is also necessary relative to established correlation
+methods. Stavig's (1982) interval absolute-deviation coefficient is a
+normalized \(L_1\) discrepancy between *signed* marginal standard scores, and
+its ranked version is a Spearman-footrule form. Robust median/MAD correlation
+estimators instead obtain signed raw-value association from robust scales of
+principal sums and differences (Shevlyakov and Vilchevski, 2002). Neither
+targets correlation between two *unsigned* marginal radius profiles. We do
+not claim novelty for applying an absolute-value transform, using MAD/Huber
+ingredients, or propagating estimated nuisance parameters in general. The
+contribution is the problem-specific combination of a robust-reference
+profile estimand, its complete inference, an isolated reference-switching
+failure, and a conditioning diagnostic for that failure.
+
 We take the population correlation of the two robust-reference radius
 profiles as the primary estimand,
 
@@ -261,7 +274,7 @@ Then
 \[
 \begin{aligned}
 C
-&=\frac{\mu_a\mu_b+operatorname{Cov}\{a_P(X),b_P(Y)\}}
+&=\frac{\mu_a\mu_b+\operatorname{Cov}\{a_P(X),b_P(Y)\}}
         {\mu_a\mu_b}\\
 &=1+\rho_P\,CV(a_P)CV(b_P).
 \end{aligned}

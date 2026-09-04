@@ -282,16 +282,16 @@ not visually conflated.
 | Scientific question and authorship direction | Closed | Confirm final title and terminology during manuscript review |
 | Old/new construct separation | Ready | Convert the scope map into concise introduction prose |
 | Primary estimand | Closed | Use \(\rho_P\) consistently throughout all active manuscript material |
-| Functional delta-method theory | Substantively ready | Typeset, shorten the main theorem, and perform final notation/citation review |
+| Functional delta-method theory | Integrated through Section 3 and Appendix A | Perform final journal-style notation and bibliography review |
 | Claim 1 validation | Ready with boundary | Lead with Wald evidence; retain slow strong-skew convergence as a limitation |
 | Claim 2 mechanism | Ready | Compress several interventions into one causal evidence sequence |
 | Claim 3 first-order explanation | Ready as explanatory evidence | Do not turn \(I_n\) into a cutoff without a new calibration decision |
 | Higher-order limitation | Ready | State possible curvature/tail explanations without claiming they are proved |
-| Inference-track presentation | Needs consolidation | Visibly separate Wald theorem evidence from empirical permutation panels |
+| Inference-track presentation | Separation fixed in prose | Build Section 6 displays with Wald and empirical permutation tracks visibly distinct |
 | Applied illustration | Unresolved | Decide with Professor Hoorn whether a genuine application is required |
-| Literature positioning | Needs targeted work | Review robust correlation, generated-regressor/reference inference, weak identification, and nonuniform asymptotics |
+| Literature positioning | Core comparator pass complete | Final review must remain open to additional related work; do not claim exhaustive priority |
 | Reproducibility | Strong | Freeze final display-generating scripts and a single run manifest |
-| Main manuscript prose | Sections 1--2 drafted | Draft the compact main-text theorem and Section 3 next |
+| Main manuscript prose | Sections 1--5 drafted | Consolidate the frozen displays and write Section 6 without generating new scenarios |
 
 The archive and Section 3 preparation audit is complete in
 `docs/archive_and_section3_readiness_20260831.md`; it found no blocking
@@ -314,9 +314,13 @@ mathematical issue for the main-text theorem.
 
 ## Immediate next action
 
-The first manuscript-writing step is complete in
-`docs/manuscript_draft_sections_1_2_20260830.md`. The next safe writing task is
-to draft the compact main-text theorem and Section 3 from the audited Appendix
-A. The next decision that should be taken with Professor Hoorn is whether the
-paper needs a real-data illustration and whether \(I_n\) remains explanatory
-or is intended to become an operational warning rule.
+Sections 1--2 are in `docs/manuscript_draft_sections_1_2_20260830.md`, and the
+integrated regularity--switching--conditioning argument for Sections 3--5 is
+in `docs/manuscript_draft_sections_3_5_20260904.md`. The next safe writing task
+is Section 6: generate the final manuscript tables and figures only from the
+frozen evidence, visibly separate Wald theorem-aligned evidence from empirical
+permutation evidence, and use the source crosswalk to prevent numeric drift.
+The remaining scientific decision for Professor Hoorn is whether a genuine
+application is required. Promoting \(I_n\) from a population explanation to an
+operational warning rule would be a separate theoretical decision and is not
+assumed by the current draft.

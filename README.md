@@ -91,6 +91,23 @@ decisions, simulation audits, and manuscript-readiness checks.
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
 
+## Updates 09/04/2026
+
+- **Manuscript integration has replaced open-ended exploration** - Sections
+  3--5 now form one continuous regularity--switching--conditioning argument.
+  Section 3 states the compact regular IID theorem and complete paired
+  influence function; Section 4 presents fixed-reference, exact-balance, and
+  sign-coupling interventions as a causal mechanism sequence; Section 5 joins
+  the first-order rationale for \(I_n\) to both its grouped predictive evidence
+  and the prospective family residual.
+- **Every numerical manuscript statement now has a frozen source** - A
+  sixteen-row crosswalk maps Section 3--5 signposts to exact result tables and
+  preserves their evidence types. The primary-\(\rho_P\) derivative audit now
+  has an explicit Appendix A interface, and Sections 1--2 incorporate the
+  Stavig and MAD/median-correlation priority boundaries. No new distribution
+  grid was run. See `docs/manuscript_draft_sections_3_5_20260904.md` and
+  `results/manuscript_claim_source_crosswalk_20260904.tsv`.
+
 ## Updates 09/03/2026
 
 - **The three-part novelty package passed a claim-directed adjudication** - A

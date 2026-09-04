@@ -1,0 +1,17 @@
+manuscript_location	evidence_type	statement	source_file	source_metric	source_value	uncertainty_or_boundary
+3.4	population derivative audit	complete rho_P IF maximum scaled error at epsilon 1e-6	results/rho_p_population_if_validation_20260903.tsv	max scaled_error	1.5818751324e-05	four fixed smooth contamination directions
+3.4	Monte Carlo observation	dependent-normal regular rejection at n=640	results/claim1_wald_validation_20260823.tsv	rejection_rate	0.044	Wilson [0.0329382145884185, 0.058551789150407776]
+3.4	Monte Carlo observation	independent-t5 regular rejection at n=640	results/claim1_wald_validation_20260823.tsv	rejection_rate	0.059	Wilson [0.04601429821280047, 0.07536090277145915]
+3.4	boundary observation	strong-skew rejection remains elevated at n=2560	results/claim1_wald_validation_20260823.tsv	rejection_rate	0.082	supports pointwise, not uniform wording
+4.2	paired mechanism intervention	fixed reference reduction in severe n=80 design	results/claim2_reference_mechanism_validation_20260823.tsv	paired_rejection_rate_difference	0.723	paired MCSE 0.01450797992421693
+4.2	paired mechanism intervention	fixed reference reduction in severe n=640 design	results/claim2_reference_mechanism_validation_20260823.tsv	paired_rejection_rate_difference	0.491	paired MCSE 0.017094186474097307
+4.2	negative-control intervention	diffuse n=80 refit-fixed difference	results/claim2_reference_mechanism_validation_20260823.tsv	paired_rejection_rate_difference	-0.018	largest absolute diffuse difference across n
+4.2	trigger intervention	n=80 IID-sign rejection	results/claim2_sign_balance_intervention_validation_20260824.tsv	rejection_rate	0.76625	compare with exact balance on the same construction
+4.2	trigger intervention	n=80 exactly-balanced-sign rejection	results/claim2_sign_balance_intervention_validation_20260824.tsv	rejection_rate	0.0575	intervention, not proposed correction
+4.2	dose response	n=640 fitted profile effect at q=0	results/claim2_sign_coupling_validation_20260825.tsv	mean_refitted_profile_effect	0.000852233176943	fixed-reference population rho_P remains zero
+4.2	dose response	n=640 fitted profile effect at q=1	results/claim2_sign_coupling_validation_20260825.tsv	mean_refitted_profile_effect	0.62552142709	mechanism gradient, not monotone rejection theorem
+5.2	leave-one-family-out prediction	pooled conditioning-index MAE improvement	results/claim3_conditioning_lofo_summary_validation_20260823.tsv	mae_improvement_fraction	0.746833234221	within bridge construction
+5.2	grouped cross-validation	cross-sample-size MAE improvement	results/claim3_stricter_cv_summary_validation_20260824.tsv	mae_improvement_fraction	0.776007702561	holds out one entire sample size
+5.2	grouped cross-validation	held-conditioning-level MAE improvement	results/claim3_stricter_cv_summary_validation_20260824.tsv	mae_improvement_fraction	0.722038793128	holds out one n-by-bridge-probability level
+5.2	prospective family validation	hyperexponential-family MAE improvement	results/claim3_prospective_family_summary_validation_20260825.tsv	mae_improvement_fraction	0.475563084504	family selected before rejection simulation
+5.3	higher-order residual	smallest prospective old-family overprediction	results/claim3_prospective_family_validation_20260825.tsv	min predicted minus observed	0.0188535385937	all six residuals have the same positive sign

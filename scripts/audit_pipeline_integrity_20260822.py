@@ -87,6 +87,7 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "docs/public_rho_api_validation_20260901.md",
         "docs/novelty_and_classical_positioning_20260902.md",
         "docs/novelty_claim_adjudication_20260903.md",
+        "docs/manuscript_draft_sections_3_5_20260904.md",
         "scripts/freeze_canonical_evidence_20260819.py",
         "scripts/audit_claim_theory_20260826.py",
         "scripts/audit_scope_decision_20260829.py",
@@ -94,6 +95,7 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "scripts/audit_public_rho_api_20260901.py",
         "scripts/audit_stavig_positioning_20260902.py",
         "scripts/audit_novelty_claims_20260903.py",
+        "scripts/audit_manuscript_integration_20260904.py",
         "scripts/audit_wald_convergence_20260822.py",
         "results/canonical_evidence_20260819.tsv",
         "results/wald_convergence_audit_20260822.tsv",
@@ -116,6 +118,8 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         "results/rho_p_population_if_validation_20260903.tsv",
         "results/novelty_claim_evidence_audit_20260903.tsv",
         "results/novelty_contribution_adjudication_20260903.tsv",
+        "results/manuscript_claim_source_crosswalk_20260904.tsv",
+        "results/manuscript_integration_audit_20260904.tsv",
     )
     missing = [item for item in required if not (PROJECT_ROOT / item).exists()]
     rows.append(
@@ -153,6 +157,8 @@ def audit_pipeline() -> list[dict[str, str | int]]:
         RESULTS_DIR / "rho_p_population_if_validation_20260903.tsv",
         RESULTS_DIR / "novelty_claim_evidence_audit_20260903.tsv",
         RESULTS_DIR / "novelty_contribution_adjudication_20260903.tsv",
+        RESULTS_DIR / "manuscript_claim_source_crosswalk_20260904.tsv",
+        RESULTS_DIR / "manuscript_integration_audit_20260904.tsv",
     )
     current_malformed = []
     for path in current_tables:
