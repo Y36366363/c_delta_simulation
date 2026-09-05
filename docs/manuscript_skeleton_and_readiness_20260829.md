@@ -287,11 +287,11 @@ not visually conflated.
 | Claim 2 mechanism | Ready | Compress several interventions into one causal evidence sequence |
 | Claim 3 first-order explanation | Ready as explanatory evidence | Do not turn \(I_n\) into a cutoff without a new calibration decision |
 | Higher-order limitation | Ready | State possible curvature/tail explanations without claiming they are proved |
-| Inference-track presentation | Separation fixed in prose | Build Section 6 displays with Wald and empirical permutation tracks visibly distinct |
+| Inference-track presentation | Section 6 display separation audited | Maintain the separation in final journal typesetting and captions |
 | Applied illustration | Unresolved | Decide with Professor Hoorn whether a genuine application is required |
 | Literature positioning | Core comparator pass complete | Final review must remain open to additional related work; do not claim exhaustive priority |
-| Reproducibility | Strong | Freeze final display-generating scripts and a single run manifest |
-| Main manuscript prose | Sections 1--5 drafted | Consolidate the frozen displays and write Section 6 without generating new scenarios |
+| Reproducibility | Strong | Section 6 reporting script, source-hash manifest, and display audit frozen |
+| Main manuscript prose | Sections 1--6 drafted | Consolidate the working sections into journal format; no new scenarios are needed |
 
 The archive and Section 3 preparation audit is complete in
 `docs/archive_and_section3_readiness_20260831.md`; it found no blocking
@@ -303,24 +303,27 @@ mathematical issue for the main-text theorem.
    are agreed.
 2. **Theory gate — nearly passed.** The proof is complete; final typesetting,
    notation consistency, and targeted citation review remain.
-3. **Evidence gate — nearly passed.** No broad simulation is needed, but the
-   two inference tracks must be consolidated into manuscript displays.
+3. **Evidence gate — passed for the frozen three-claim package.** No broad
+   simulation is needed. Section 6 now keeps theorem-aligned Wald cells,
+   finite-sample mechanism interventions, and empirical permutation cells in
+   distinct displays.
 4. **Diagnostic gate — limited pass.** \(I_n\) is defensible as a first-order
    organizer, not yet as a formal decision rule.
 5. **Application gate — open.** The need and choice of an application require
    a scientific decision.
-6. **Presentation gate — open.** Main prose, figures, tables, abstract, and
-   reproducible display scripts remain to be assembled.
+6. **Presentation gate — progressing.** Sections 1--6, Table 2, three main
+   figures, and reproducible display scripts are assembled. Journal-style
+   typesetting, abstract, and the application decision remain.
 
 ## Immediate next action
 
-Sections 1--2 are in `docs/manuscript_draft_sections_1_2_20260830.md`, and the
+Sections 1--2 are in `docs/manuscript_draft_sections_1_2_20260830.md`, the
 integrated regularity--switching--conditioning argument for Sections 3--5 is
-in `docs/manuscript_draft_sections_3_5_20260904.md`. The next safe writing task
-is Section 6: generate the final manuscript tables and figures only from the
-frozen evidence, visibly separate Wald theorem-aligned evidence from empirical
-permutation evidence, and use the source crosswalk to prevent numeric drift.
-The remaining scientific decision for Professor Hoorn is whether a genuine
-application is required. Promoting \(I_n\) from a population explanation to an
-operational warning rule would be a separate theoretical decision and is not
-assumed by the current draft.
+in `docs/manuscript_draft_sections_3_5_20260904.md`, and the frozen displays
+and Section 6 text are in `docs/manuscript_draft_section_6_20260905.md`.
+The next safe writing task is journal-style consolidation of the existing
+Sections 1--6, followed by the application decision in Section 7 and the
+bounded discussion in Section 8. The remaining scientific decision for
+Professor Hoorn is whether a genuine application is required. Promoting
+\(I_n\) from a population explanation to an operational warning rule would be
+a separate theoretical decision and is not assumed by the current draft.

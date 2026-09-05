@@ -91,6 +91,21 @@ decisions, simulation audits, and manuscript-readiness checks.
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
 
+## Updates 09/05/2026
+
+- **Section 6 formal displays are now frozen and auditably separated by
+  evidence role** - Table 2 contains only six theorem-aligned regular-IID Wald
+  cells. Figure 1 is separately labelled as empirical finite-sample switching
+  interventions, not theorem calibration. Figures 2--3 contain only fully
+  recomputed studentized-permutation evidence and retain the group-invariance
+  / weak-null boundary in their captions.
+- **No new scenarios were generated** - A deterministic reporting script reads
+  fixed-source result tables, records source hashes and Monte Carlo
+  uncertainty, and writes a display manifest. The Section 6 audit rebuilds all
+  five display tables and verifies that the Wald and permutation tracks never
+  share a main display. See `docs/manuscript_draft_section_6_20260905.md` and
+  `results/section6_display_manifest_20260905.tsv`.
+
 ## Updates 09/04/2026
 
 - **Manuscript integration has replaced open-ended exploration** - Sections
