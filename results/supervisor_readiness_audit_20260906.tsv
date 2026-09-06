@@ -1,0 +1,13 @@
+check	passed	status	detail	supervisor_implication
+sections_1_to_6_are_structurally_complete	1	ready	all six planned main-text section headings are present	The manuscript has a coherent reportable backbone; consolidation is editorial.
+primary_estimand_and_predecessor_are_separated	1	ready	rho_P is primary and the original all-to-all c_d remains the predecessor	Report a related but distinct paper, not a replacement coefficient.
+regular_iid_theorem_matches_appendix	1	ready	main theorem, appendix theorem, and Wald corollary are linked	Claim 1 can be presented as theorem-level under declared assumptions.
+external_proof_safeguards_pass	1	ready_with_publication_review	MAD convention, endpoint-density sign, and piecewise algebra checks pass	Only final journal-level measurability and citation editing remain.
+claim1_regular_calibration_and_boundary_are_preserved	1	ready_with_boundary	n=640 regular Wilson intervals contain .05; strong-skew rejection declines 0.122 to 0.082	Report pointwise validity and slow skew convergence together.
+claim2_switching_mechanism_has_triangulated_support	1	ready_as_mixed_theory_empirical_claim	minimum severe refit-fixed reduction=0.491; diffuse maximum=0.018; minimum balance reduction=0.475; n=640 coupling effect increase=0.625	Keep the exact two-mode proposition separate from finite-sample evidence.
+claim3_first_order_transport_and_residual_are_both_visible	1	ready_as_explanatory_diagnostic	LOFO/cross-size/held-level MAE improvements are at least 0.722; prospective improvement=0.476; all six residuals are positive	Report I_n as a first-order organizer, never as an operational gate.
+public_rho_p_api_is_implementation_consistent	1	ready	all eight API equivalence, invariance, and influence checks pass	The implementation supports the primary estimand used in the manuscript.
+section6_evidence_tracks_remain_separate	1	ready	Wald, mechanism, and empirical permutation displays pass all ten checks	The empirical permutation panels do not validate the IID Wald theorem.
+display_sources_and_hashes_are_current	1	ready	all seven Section 6 source-manifest entries match current normalized hashes	Reported numbers are traceable to frozen fixed-seed sources.
+claim_boundaries_are_present_and_overclaims_absent	1	ready	all four permanent boundaries are explicit; prohibited positive claims absent	Use the same bounded wording in the abstract, cover letter, and meeting.
+application_and_scope_expansions_are_explicitly_open	1	supervisor_decision_required	application choice and any operational diagnostic remain outside the frozen package	Ask whether to add a real application and whether stronger local theory is desired.

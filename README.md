@@ -91,6 +91,23 @@ decisions, simulation audits, and manuscript-readiness checks.
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
 
+## Updates 09/06/2026
+
+- **A supervisor-readiness audit now closes the reportable three-claim
+  package** - Twelve checks confirm that Sections 1--6, Appendix A, the
+  primary `rho_P` API, fixed numerical evidence, source hashes, and inference
+  tracks remain mutually consistent. Claim 1 is ready as a pointwise regular
+  IID theorem, Claim 2 remains an exact limiting proposition plus
+  triangulated finite-sample evidence, and Claim 3 remains a first-order
+  explanatory diagnostic with an explicit family residual.
+- **Remaining work is now decision-driven** - The meeting brief separates
+  necessary manuscript tasks from expansions that require Professor Hoorn's
+  direction: a real application, local-to-degeneracy theory, a weak-null
+  permutation theorem, or an operational sample version of `I_n`. No further
+  general distribution grid is recommended. See
+  `docs/supervisor_discussion_brief_20260906.md` and
+  `results/supervisor_readiness_audit_20260906.tsv`.
+
 ## Updates 09/05/2026
 
 - **Section 6 formal displays are now frozen and auditably separated by
