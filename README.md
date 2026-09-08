@@ -71,6 +71,8 @@ finite-dimensional calculations, and empirical simulation evidence.
 - [Paper-level claim ledger](docs/manuscript_claim_ledger_20260826.md)
 - [End-to-end pipeline audit](docs/end_to_end_pipeline_audit_20260822.md)
 - [Active-nuisance validation and claim refinement](docs/active_nuisance_validation_20260907.md)
+- [Working Discussion, Section 8](docs/manuscript_draft_section_8_20260908.md)
+- [High-standard referee review and open issues](docs/referee_readiness_review_20260908.md)
 
 ## Reproducibility
 
@@ -93,6 +95,41 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+## Updates 09/08/2026
+
+- **A demanding referee review now distinguishes a substantial working paper
+  from submission readiness** - The central concerns are nonroutine novelty,
+  practical undercoverage, independent mathematical review, the missing
+  stochastic bridge behind the switching account, and the scientific purpose
+  of an application. Passing source checks is not peer review. The active
+  skeleton no longer says only typesetting remains; Section 7 and any stronger
+  inferential promise remain supervisor decisions.
+- **Section 8 is drafted in English** - Discussion now integrates pointwise
+  theory, nonzero-effect undercoverage, nonregular reference fitting, the
+  target-projection limitation of `I_n`, fair comparator interpretation, and
+  design-respecting inference boundaries. No new distribution grid or practical
+  correction was introduced. Appendix A explicitly records the negligible
+  numerical score-residual condition needed for its empirical Huber root.
+- **Frozen-draw diagnosis separates the tails and studentization** - At
+  `n=2560`, complete-IF intervals miss below/above truth at `.0595/.0135`.
+  An infeasible population-asymptotic-SE diagnostic has coverage `.958`, versus
+  reported `.927`. It changes random scale and its association with the
+  estimate simultaneously; it is post hoc evidence, not a recommended
+  interval or proof that a simple SE correction works. Tail Wilson intervals,
+  interval widths, paired MCSE and source hashes are saved. An exact
+  studentization identity also accounts for the empirical mean shift without
+  claiming a complete higher-order coverage-error theory.
+- **Root replay checks did not identify a numerical explanation** - Eighteen
+  already simulated regular fits agree with independently bracketed roots to
+  within `2.35e-11` scale units. This is not a general solver guarantee. See
+  `docs/referee_readiness_review_20260908.md` and
+  `results/referee_coverage_diagnostics_20260908.tsv`. No original canonical
+  evidence or September 7 replication records were overwritten.
+- **Regression validation** - The full suite passes **259 tests**, including
+  six new checks for tail accounting, numerical identity, fixed-sample replay,
+  source hashes, and manuscript/theorem boundaries. Passing these checks does
+  not close the independent mathematical-review gate.
 
 ## Updates 09/07/2026
 

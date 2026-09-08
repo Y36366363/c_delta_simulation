@@ -2,6 +2,10 @@
 
 Date: 2026-08-29
 
+Readiness and scope revision: 2026-09-08. This map is current working guidance,
+not an independent peer-review certification. See
+`docs/referee_readiness_review_20260908.md` for unresolved submission issues.
+
 ## Working identity
 
 ### Working title
@@ -33,7 +37,8 @@ The abstract should contain exactly these six moves:
 4. state the regular pointwise IID inference result;
 5. state the near-degenerate failure and the role of
    \(\sqrt n\sigma_{\min}(J)\);
-6. end with the higher-order-family limitation and practical caution.
+6. end with the unexplained-family residual and observed finite-sample
+   undercoverage, not an assurance of practical calibration.
 
 No sentence should claim uniform validity, a universal diagnostic cutoff, or
 a proved weak-null permutation theorem.
@@ -117,9 +122,11 @@ Validation source: `results/claim1_wald_validation_20260823.tsv` and
 
 ### 4. A constructive failure from unstable robust references
 
-Introduce the separated-mode weak-null family. Explain that nearly flat
-central identification allows sample sign imbalance to select or displace the
-reference, manufacturing aligned radial profiles.
+Introduce the separated-mode weak-null family. Its unbridged signed-lognormal
+median is nonregular at every positive radial spread; its population Huber
+score at the declared MAD scale is not flat. Explain the nonlocal empirical
+median/MAD-to-reference pathway without treating it as a regular first-order
+scale derivative at symmetry.
 
 The evidence sequence should be causal rather than catalogued:
 
@@ -127,7 +134,9 @@ The evidence sequence should be causal rather than catalogued:
 2. disappearance under paired fixed-reference analysis;
 3. disappearance under exact sign-balance intervention;
 4. monotone return under increasing shared-sign coupling;
-5. exact binary-mode correlations \(+1\) and \(-1\).
+5. binary-profile correlations \(+1\) and \(-1\) conditional on imposed
+   nonzero offsets, not a fitted-switching probability theorem; the binary
+   zero-reference target is undefined.
 
 Primary sources:
 
@@ -164,8 +173,10 @@ Explain the natural scaling through
 \|\widehat\theta-\theta\|_{\mathrm{standardized}}=O_P(1/I_n)
 \]
 
-along the least-identified standardized direction. State positive affine
-invariance. Then report bridge ordering, leave-one-family-out prediction,
+as a local linear amplification rationale, not a uniform stochastic rate
+along arbitrary degenerating laws. Score covariance and target projection
+also matter. State positive affine invariance under the declared equation
+normalization. Then report bridge ordering, leave-one-family-out prediction,
 stricter grouped validation, and prospective hyperexponential validation.
 
 Primary sources:
@@ -184,10 +195,15 @@ The main simulations should be organized by claim rather than chronology.
 
 #### 6.1 Regular IID Wald behavior
 
-Use the dependent-normal weak null, independent t5 convergence, and the
+Use the normal-margin shared-sign weak null, independent t5 convergence, and the
 strong-skew slow-convergence stress. These directly align with Theorem A.1.
 
 Primary source: `results/claim1_wald_validation_20260823.tsv`.
+
+Also retain the existing-law nonzero-effect validation:
+`results/active_nuisance_summary_20260907.tsv`. Its complete 95% coverage
+remains .927 at n=2560. This is a calibration limitation, not a passed
+finite-sample safety gate.
 
 #### 6.2 Near-degenerate failure and intervention
 
@@ -204,10 +220,12 @@ direct theorem validation.
 
 Primary source: `results/canonical_evidence_20260819.tsv`.
 
-#### 6.4 Higher-order residual
+#### 6.4 Family residual unexplained by the index
 
 Use the matched-\(J\) family comparison and prospective fifth family to show
-both first-order transport and systematic residual error.
+both first-order transport and systematic residual error. Similar J does not
+match score covariance or the target projection; the residual is not proved
+entirely higher order.
 
 Primary sources: `results/canonical_evidence_20260819.tsv` and
 `results/claim3_prospective_family_validation_20260825.tsv`.
@@ -238,11 +256,15 @@ The discussion should separate:
 - what is demonstrated constructively in finite samples;
 - what \(I_n\) explains empirically;
 - strong-skew slow convergence outside the reference-switching mechanism;
-- higher-order family residuals;
+- family residuals not explained by the scalar conditioning index;
 - the boundary between weak-null Wald inference and exact randomization under
   group invariance;
 - extensions to clustered buildings, multidimensional profiles, and formal
   weak-null permutation theory as future work rather than current claims.
+
+Working text: `docs/manuscript_draft_section_8_20260908.md`. It includes
+the active-nuisance coverage limitation and the explicitly post hoc
+population-SE diagnostic; neither is a new inferential recommendation.
 
 ## Proposed main displays
 
@@ -282,16 +304,16 @@ not visually conflated.
 | Scientific question and authorship direction | Closed | Confirm final title and terminology during manuscript review |
 | Old/new construct separation | Ready | Convert the scope map into concise introduction prose |
 | Primary estimand | Closed | Use \(\rho_P\) consistently throughout all active manuscript material |
-| Functional delta-method theory | Integrated through Section 3 and Appendix A | Perform final journal-style notation and bibliography review |
-| Claim 1 validation | Ready with boundary | Lead with Wald evidence; retain slow strong-skew convergence as a limitation |
-| Claim 2 mechanism | Ready | Compress several interventions into one causal evidence sequence |
+| Functional delta-method theory | Full draft, independent review open | Resolve precise topology, joint Z-expansion, entropy and numerical-root interface; not merely typesetting |
+| Claim 1 validation | Evidence assembled; practical calibration not established | Lead with Wald evidence; retain active-nuisance undercoverage and slow skew convergence |
+| Claim 2 mechanism | Algebra plus intervention evidence | Distinguish imposed offsets from a switching-probability theorem and nonregular median from flat Huber curvature |
 | Claim 3 first-order explanation | Ready as explanatory evidence | Do not turn \(I_n\) into a cutoff without a new calibration decision |
-| Higher-order limitation | Ready | State possible curvature/tail explanations without claiming they are proved |
+| Family residual limitation | Explicit | Do not infer purely higher-order effects from matching J or the scalar index |
 | Inference-track presentation | Section 6 display separation audited | Maintain the separation in final journal typesetting and captions |
 | Applied illustration | Unresolved | Decide with Professor Hoorn whether a genuine application is required |
 | Literature positioning | Core comparator pass complete | Final review must remain open to additional related work; do not claim exhaustive priority |
-| Reproducibility | Strong | Section 6 reporting script, source-hash manifest, and display audit frozen |
-| Main manuscript prose | Sections 1--6 drafted | Consolidate the working sections into journal format; no new scenarios are needed |
+| Reproducibility | Strong in the current environment | Dependency specification and independent clean build remain unverified |
+| Main manuscript prose | Sections 1--6 and 8 drafted | Consolidate sources; Section 7 and abstract remain scope-dependent |
 
 The archive and Section 3 preparation audit is complete in
 `docs/archive_and_section3_readiness_20260831.md`; it found no blocking
@@ -301,10 +323,11 @@ mathematical issue for the main-text theorem.
 
 1. **Scope gate — passed.** Separate paper, primary estimand, and three claims
    are agreed.
-2. **Theory gate — nearly passed.** The proof is complete; final typesetting,
-   notation consistency, and targeted citation review remain.
-3. **Evidence gate — passed for the frozen three-claim package.** No broad
-   simulation is needed. Section 6 now keeps theorem-aligned Wald cells,
+2. **Theory gate — independent review open.** The full proof draft exists;
+   mathematical review and theorem-to-implementation obligations remain.
+3. **Evidence gate — assembled with limitations.** No broad simulation is
+   needed. Practical nonzero-effect Wald calibration is not established.
+   Section 6 keeps theorem-aligned Wald cells,
    finite-sample mechanism interventions, and empirical permutation cells in
    distinct displays.
 4. **Diagnostic gate — limited pass.** \(I_n\) is defensible as a first-order
@@ -321,9 +344,10 @@ Sections 1--2 are in `docs/manuscript_draft_sections_1_2_20260830.md`, the
 integrated regularity--switching--conditioning argument for Sections 3--5 is
 in `docs/manuscript_draft_sections_3_5_20260904.md`, and the frozen displays
 and Section 6 text are in `docs/manuscript_draft_section_6_20260905.md`.
-The next safe writing task is journal-style consolidation of the existing
-Sections 1--6, followed by the application decision in Section 7 and the
-bounded discussion in Section 8. The remaining scientific decision for
-Professor Hoorn is whether a genuine application is required. Promoting
+Section 8 is drafted in `docs/manuscript_draft_section_8_20260908.md`.
+Next prepare independent mathematical review and a clean reproduction recipe.
+Section 7 remains open. The scientific decisions for Professor Hoorn include
+whether a genuine application, stronger local theory, or practically calibrated
+intervals are essential to the intended paper. Promoting
 \(I_n\) from a population explanation to an operational warning rule would be
 a separate theoretical decision and is not assumed by the current draft.

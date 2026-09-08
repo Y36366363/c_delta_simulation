@@ -114,7 +114,8 @@ estimation cancels, although higher-order skewness and self-normalization can
 still cause slow finite-sample convergence.
 
 Second, we construct a continuous weak-null family in which the
-robust-reference system is nearly degenerate. In that family, empirical mode
+robust-reference system is nonregular: its median has zero density at its
+unique root, although the population Huber equation need not be flat. Empirical mode
 imbalance moves the fitted references and can create severe finite-sample
 distortion. Paired interventions that fix the population reference or enforce
 exact sign balance isolate reference fitting as the mechanism in this
@@ -136,6 +137,8 @@ families and sample sizes, \(I_n\) organizes much of the observed transition
 from severe distortion toward calibration and transports to a prospectively
 held-out family. It does not fully determine finite-sample behavior: families
 with nearly identical first-order Jacobians retain different rejection rates.
+Matching the Jacobian does not match score covariance or the target's
+nuisance projection, so those differences are not proved entirely higher order.
 We therefore treat \(I_n\) as an explanatory and cautionary diagnostic, not as
 a universal cutoff or a data-driven accept/reject gate.
 
@@ -148,6 +151,12 @@ The theory is pointwise and IID. Exact randomization inference additionally
 requires invariance under the declared permutation group; the weak null
 \(\rho_P=0\) alone does not supply that invariance. A conditional weak-null
 permutation central limit theorem is outside the claims of this paper.
+
+Even at a fixed regular nonzero-effect skew law, our complete-IF confidence
+intervals under-cover at all three tested sample sizes. We therefore do not
+claim that the proposed Wald procedure is a generally calibrated finite-sample
+solution. Its pointwise foundation and demonstrated practical limitations
+are both part of the contribution; Section 8 develops this distinction.
 
 The remainder of the paper is organized as follows. Section 2 defines the
 robust-reference profiles, the primary and secondary estimands, their sample

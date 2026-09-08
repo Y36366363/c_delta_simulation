@@ -120,6 +120,15 @@ Generalized empirical quantile roots satisfy their estimating equations up to
 \(o_P(n^{-1/2})\). The separate lower-quantile audit remains a software
 sensitivity check, not a required bridge to the cited MAD theorem.
 
+For the Huber component, the selected consistent root is exact or satisfies
+\(P_n\psi_c\{(W-\widehat T)/(k\widehat d)\}=o_P(n^{-1/2})\).
+This approximate-root condition is needed when invoking the Z-expansion.
+A fixed numerical tolerance or a fixed iteration cap does not by itself
+prove this asymptotic condition. The implemented solver is a numerical
+approximation, whose accuracy must be checked separately; the finite replay
+audit in `results/referee_root_replay_20260908.tsv` is not a uniform solver
+convergence theorem.
+
 **A7 (density plug-in).** The density estimators used at the median and the
 two MAD boundaries are uniformly consistent on fixed neighbourhoods of those
 points. For a kernel estimator, one sufficient route is local uniform

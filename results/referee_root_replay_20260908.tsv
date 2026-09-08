@@ -1,0 +1,19 @@
+n	replication	margin	root_seed	absolute_score_residual	sqrt_n_score_residual	root_difference_in_scale_units	passed	scope
+160	0	x	2026090701	1.5451706580904557e-11	1.9545034612908486e-10	1.8737356085272654e-11	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+160	0	y	2026090701	6.350495129758827e-12	8.032811551937772e-11	7.87670569214939e-12	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+160	1	x	2026090701	1.8824553027485537e-12	2.381138540058902e-11	2.1827224918535703e-12	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+160	1	y	2026090701	5.785377732436814e-12	7.317988303568213e-11	7.175708077553e-12	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+160	2	x	2026090701	8.177925003849395e-12	1.0344347818482141e-10	9.550750814058171e-12	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+160	2	y	2026090701	2.589395364793745e-12	3.275354846172325e-11	3.11490894811952e-12	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+640	0	x	2026090701	1.6363703447819235e-11	4.1397259080527245e-10	2.006266161670101e-11	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+640	0	y	2026090701	1.7696449861048792e-11	4.4768870447907536e-10	2.165514733205659e-11	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+640	1	x	2026090701	8.509765114794731e-12	2.1528192092636466e-10	1.0349041033073914e-11	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+640	1	y	2026090701	1.5707343758997182e-11	3.973678581572961e-10	1.9147926489604177e-11	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+640	2	x	2026090701	1.2920897685120281e-11	3.2687572879181753e-10	1.5741394085810627e-11	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+640	2	y	2026090701	9.081078944372933e-12	2.297351446081278e-10	1.1028090845941552e-11	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+2560	0	x	2026090701	1.9138395035422916e-11	9.68334705151925e-10	2.3419694763100707e-11	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+2560	0	y	2026090701	8.126532780039497e-12	4.11173649039119e-10	9.831588852428174e-12	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+2560	1	x	2026090701	6.692087162196714e-12	3.385958037266284e-10	8.08475013346186e-12	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+2560	1	y	2026090701	2.702220391892496e-12	1.3672273885012933e-10	3.225125450244681e-12	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+2560	2	x	2026090701	5.3322745524608806e-12	2.697941231221022e-10	6.405781545774492e-12	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
+2560	2	y	2026090701	1.6291989979322353e-11	8.243167352207708e-10	1.992715632590612e-11	1	18 fixed regular fits; not an arbitrary-law convergence guarantee
