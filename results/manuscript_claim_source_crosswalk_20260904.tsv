@@ -14,4 +14,4 @@ manuscript_location	evidence_type	statement	source_file	source_metric	source_val
 5.2	grouped cross-validation	cross-sample-size MAE improvement	results/claim3_stricter_cv_summary_validation_20260824.tsv	mae_improvement_fraction	0.776007702561	holds out one entire sample size
 5.2	grouped cross-validation	held-conditioning-level MAE improvement	results/claim3_stricter_cv_summary_validation_20260824.tsv	mae_improvement_fraction	0.722038793128	holds out one n-by-bridge-probability level
 5.2	prospective family validation	hyperexponential-family MAE improvement	results/claim3_prospective_family_summary_validation_20260825.tsv	mae_improvement_fraction	0.475563084504	family selected before rejection simulation
-5.3	higher-order residual	smallest prospective old-family overprediction	results/claim3_prospective_family_validation_20260825.tsv	min predicted minus observed	0.0188535385937	all six residuals have the same positive sign
+5.3	unexplained family residual	smallest prospective old-family overprediction	results/claim3_prospective_family_validation_20260825.tsv	min predicted minus observed	0.0188535385937	all six residuals have the same positive sign

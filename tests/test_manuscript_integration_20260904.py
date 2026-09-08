@@ -35,7 +35,7 @@ def test_crosswalk_keeps_evidence_types_and_claim_sections_separate():
         "5.3",
     }
     assert len({row["evidence_type"] for row in rows}) >= 8
-    assert any(row["evidence_type"] == "higher-order residual" for row in rows)
+    assert any(row["evidence_type"] == "unexplained family residual" for row in rows)
 
 
 def test_generated_manuscript_tables_match_live_audits():

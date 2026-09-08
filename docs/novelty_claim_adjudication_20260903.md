@@ -12,7 +12,7 @@ diagnostics generally:
 2. finite-sample distortion caused by nonlocal reference switching in a
    studied near-degenerate construction; and
 3. \(I_n=\sqrt n\,\sigma_{\min}(J)\) as a dimensionless first-order organizer
-   of that transition, with higher-order family residuals left explicit.
+   of that transition, with unexplained family residuals left explicit.
 
 This judgment is stronger than saying that the three ideas are individually
 new. They are not. Generated-regressor influence corrections are established
@@ -187,5 +187,5 @@ three-claim paper unless Professor Hoorn requests it.
   functions: <https://doi.org/10.3982/ECTA9609>
 - Clark (1985), Huber M-estimator structure and uniqueness:
   <https://doi.org/10.1137/0906017>
-- Andrews and Mikusheva, identification failure and asymptotically singular
+- Forneron, identification failure and asymptotically singular
   Jacobians: <https://arxiv.org/abs/1907.13093>

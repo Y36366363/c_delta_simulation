@@ -230,7 +230,7 @@ def manuscript_claim_crosswalk() -> list[dict[str, str]]:
         ),
         item(
             "5.3",
-            "higher-order residual",
+            "unexplained family residual",
             "smallest prospective old-family overprediction",
             "claim3_prospective_family_validation_20260825.tsv",
             "min predicted minus observed",
@@ -278,7 +278,7 @@ def manuscript_integration_audit() -> list[dict[str, object]]:
         "Stavig's (1982)",
         "Shevlyakov and Vilchevski, 2002",
         "Hahn, J., and Ridder, G. (2013)",
-        "Andrews, D. W. K., and Mikusheva, A.",
+        "Forneron, J.-J.",
     )
     values = (
         "1.58\\times10^{-5}",
@@ -331,7 +331,7 @@ def manuscript_integration_audit() -> list[dict[str, object]]:
                 "Monte Carlo observation",
                 "paired mechanism intervention",
                 "prospective family validation",
-                "higher-order residual",
+                "unexplained family residual",
             },
             "theorem support, mechanism intervention, prediction, and limitation remain labelled",
         ),

@@ -127,7 +127,7 @@ machine-readable source is `results/section6_display_figure2_bridge_20260905.tsv
 
 ![Figure 2: conditioning bridge](../figures/manuscript_figure2_conditioning_bridge_20260905.png)
 
-### 6.5 Higher-order family residuals
+### 6.5 Family residuals unexplained by the index
 
 The matched-index panel of Figure 3 makes the limitation visible rather than
 burying it in a prediction score. At \(n=320\) and bridge probability .05, all
@@ -143,19 +143,57 @@ old-family predictions exceed the observed rates; the smallest overprediction
 is .0189. Hence the prospective evidence supports transport of a coarse
 first-order ordering while preserving a systematic family residual. Possible
 contributors include curvature, influence-tail behavior, and nonlocal
-switching geometry; this study does not identify which higher-order component
-is dominant.
+switching geometry. Equal index values do not equate the score covariance or
+target nuisance projection; this study does not identify a purely higher-order
+decomposition. See the refined scope statement in Section 5.3.
 
-**Figure 3. Higher-order residual.** Panel A uses the four 500-replication
+**Figure 3. Family residual unexplained by the index.** Panel A uses the four 500-replication
 matched-index confirmatory cells. Panel B compares predictions with observed
 rates for six 200-replication prospective hyperexponential cells; vertical
 whiskers are 95% Wilson intervals. This is fully recomputed
 studentized-permutation evidence only. The machine-readable source is
 `results/section6_display_figure3_residual_20260905.tsv`.
 
-![Figure 3: higher-order family residual](../figures/manuscript_figure3_family_residual_20260905.png)
+![Figure 3: family residual unexplained by the index](../figures/manuscript_figure3_family_residual_20260905.png)
 
-### 6.6 Reproducibility and interpretation
+### 6.6 Targeted nonzero-effect, active-nuisance follow-up
+
+The 2026-09-07 addition reuses the previously audited regular
+correlated-lognormal law (log-margin SD .60; latent correlation .40) at three
+prespecified sample sizes. Unlike the main calibration nulls, both reference
+coefficients and the indirect MAD path are nonzero. Independent analytic
+truncated moments and split quadrature give \(\rho_P=.193475119\). The old
+Gauss--Hermite benchmark remains stored but is not used as population truth
+for these confidence intervals.
+
+| n | Complete-IF coverage | 95% Wilson interval | Mean SE / empirical SD | Direct-only coverage | Oracle fixed-reference coverage |
+|---|---|---|---|---|---|
+| 160 | .8580 | [.8420, .8726] | .8397 | .8535 | .8485 |
+| 640 | .9115 | [.8983, .9232] | .8999 | .9110 | .9050 |
+| 2560 | .9270 | [.9148, .9376] | .9664 | .9265 | .9290 |
+
+Each row uses 2,000 paired IID samples and ordinary two-sided 95% Wald
+intervals; no fit failures occurred. These are coverage rates for a nonzero
+target, not null rejection rates or permutation evidence. The direct-only
+ablation uses the same estimated references but omits their IF terms; the
+oracle uses the true population references and is not a feasible procedure.
+The complete and direct-only asymptotic variances happen to be very close
+(2.930344 versus 2.935125), because nuisance variance and direct--nuisance
+covariance largely cancel in this law. The ablation does not establish that
+the nuisance path can generally be omitted.
+
+All complete-IF coverage intervals exclude .95. Increasing n improves
+coverage but does not establish finite-sample adequacy. Oracle undercoverage
+also rules out attributing the entire deficiency to reference estimation.
+The active-nuisance formula is numerically verified; the study is not evidence
+of uniformly reliable confidence intervals or a general correction. Full
+replication-level values, paired comparison MCSE, and source hashes are in
+`results/active_nuisance_summary_20260907.tsv`,
+`results/active_nuisance_paired_20260907.tsv`, and
+`results/active_nuisance_manifest_20260907.tsv`. The original Table 2 and four
+canonical evidence groups remain unchanged.
+
+### 6.7 Reproducibility and interpretation
 
 All root seeds, repetition counts, permutation counts, Wilson intervals, and
 source hashes remain in the display tables and manifest. The display builder

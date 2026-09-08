@@ -172,7 +172,7 @@ def supervisor_readiness_audit() -> list[dict[str, object]]:
             all(heading in combined for heading in headings),
             "ready",
             "all six planned main-text section headings are present",
-            "The manuscript has a coherent reportable backbone; consolidation is editorial.",
+            "A reportable backbone exists; active-nuisance calibration and independent mathematical review remain substantive boundaries.",
         ),
         _check(
             "primary_estimand_and_predecessor_are_separated",
@@ -198,7 +198,7 @@ def supervisor_readiness_audit() -> list[dict[str, object]]:
             len(proof_checks) == 5 and all(_passed(row["passed"]) for row in proof_checks),
             "ready_with_publication_review",
             "MAD convention, endpoint-density sign, and piecewise algebra checks pass",
-            "Only final journal-level measurability and citation editing remain.",
+            "Source-level checks are not independent peer review; full mathematical review remains.",
         ),
         _check(
             "claim1_regular_calibration_and_boundary_are_preserved",
@@ -225,7 +225,7 @@ def supervisor_readiness_audit() -> list[dict[str, object]]:
                 f"reduction={min(balance_reductions):.3f}; n=640 coupling effect "
                 f"increase={coupling_gradient:.3f}"
             ),
-            "Keep the exact two-mode proposition separate from finite-sample evidence.",
+            "Keep the imposed-offset identity separate from fitted-switching probabilities and finite-sample evidence.",
         ),
         _check(
             "claim3_first_order_transport_and_residual_are_both_visible",

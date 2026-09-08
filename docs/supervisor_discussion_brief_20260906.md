@@ -2,6 +2,12 @@
 
 Date: 2026-09-06
 
+> Follow-up qualification, 2026-09-07: this is the dated pre-meeting brief,
+> not an unconditional readiness certification. The active-nuisance study in
+> `docs/active_nuisance_validation_20260907.md` adds a nonzero-effect coverage
+> boundary and corrects the mechanism/residual language used below. The
+> complete theorem draft still needs independent mathematical review.
+
 This is an internal meeting brief rather than an email or submission draft. It
 summarizes the paper that now exists, the evidentiary status of each claim, and
 the decisions that still require discussion with Professor Hoorn.
@@ -59,7 +65,7 @@ Status: theorem-level under declared assumptions.
 
 Supporting evidence:
 
-- at \(n=640\), the dependent-normal weak-null rejection rate is .044 and the
+- at \(n=640\), the normal-margin shared-sign weak-null rejection rate is .044 and the
   independent-\(t_5\) rate is .059; both Wilson intervals contain .05;
 - their studentized standard deviations are .993 and 1.037;
 - the strong-skew rejection rate falls from .122 at \(n=640\) to .082 at
@@ -118,8 +124,9 @@ Supporting evidence:
 - four families with nearly matched \(I_n\approx.445\) have rejection rates
   from .232 to .356.
 
-Required wording: first-order organizer, not a universal cutoff. Higher-order
-family effects remain an explicit limitation.
+Required wording: first-order organizer, not a universal cutoff. Family
+residuals remain unexplained by the index; they are not proved purely higher
+order without also matching score covariance and target projection.
 
 ## 4. Defensible novelty statement
 

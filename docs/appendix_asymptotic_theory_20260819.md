@@ -704,6 +704,17 @@ references does not remove the strong-skew distortion in the independent
 lognormal--gamma experiment: that distortion is higher order in the skewed
 radius-correlation studentization rather than a first-order nuisance term.
 
+Independence is sufficient, not necessary for this cancellation. If
+\(X=SR_X\), \(Y=SR_Y\), where \(S\) is an independent symmetric sign and
+\(R_X,R_Y\) are independent positive radii, then at \(T_X=T_Y=0\),
+\(g_X=g_Y=h_X=h_Y=0\) and \(\rho_P=0\), so both coefficients also vanish.
+This is an algebraic statement; the theorem additionally requires the law's
+regularity assumptions. In particular the signed-lognormal center-density
+zero construction in Section 4 is not a regular-law application of this
+corollary. The normal-margin shared-sign calibration law is regular but has
+the same cancellation. Nonzero-effect skew validation is needed to exercise
+the complete nuisance path in confidence-interval simulations.
+
 ## A.9 Permutation statements
 
 ### Proposition A.1 (fixed-margin equivalence)
@@ -793,6 +804,13 @@ makes no claim when
 In that region, curvature and nonlocal median/MAD selection can be of the same
 order as the nominal first-order term.
 
+This is a local linear amplification rationale, not a uniform stochastic
+bound for arbitrary \(P_n\). The full first-order covariance also retains
+the score covariance \(\Omega\) and the target's nuisance projection;
+\(J\) or its smallest singular value alone does not specify that covariance.
+Family residuals unexplained by the scalar index therefore cannot, without
+additional matching, be attributed entirely to higher-order terms.
+
 ## A.12 Audited proof status
 
 The audit corrected the marginal moment requirement for general
@@ -814,7 +832,18 @@ maximum scaled error at contamination weight \(10^{-6}\) was
 \(1.58\times10^{-5}\). The fitted-reference and indirect MAD components were
 nonzero, confirming that the calculation exercises the complete nuisance
 path. The reproducible values are in
-`results/rho_p_population_if_validation_20260903.tsv`.
+`results/rho_p_population_if_validation_20260903.tsv`. That historical check
+used one fixed Gauss--Hermite discretization and did not independently bound
+integration error for the continuous law. The 2026-09-07 split-integration
+check refines the target to \(\rho_P=.193475119\), verifies nonzero reference
+and MAD contributions and joint variance, and gives a largest scaled
+contamination error of \(1.596\times10^{-5}\) at \(10^{-6}\).
+See `results/active_nuisance_population_20260907.tsv` and
+`results/active_nuisance_derivative_20260907.tsv`. The corresponding
+confidence-interval experiment undercovers at all three tested sample sizes;
+neither numerical derivative agreement nor software tests establish
+finite-sample adequacy. These automated/source-level audits are not a
+substitute for independent mathematical peer review.
 
 The 2026-08-20 completion maps every displayed A8 class to a precise
 VC-subgraph or finite-dimensional Lipschitz route, records the NumPy sample

@@ -532,7 +532,7 @@ def render_residual_figure(rows: list[dict[str, object]]) -> None:
         (80, 0.20): (5, 8),
         (320, 0.05): (5, 5),
         (320, 0.10): (5, -4),
-        (320, 0.20): (5, 4),
+        (320, 0.20): (5, -9),
     }
     for row in prospective:
         epsilon = float(row["epsilon"])
@@ -584,7 +584,7 @@ def render_residual_figure(rows: list[dict[str, object]]) -> None:
     ax.legend(handles=epsilon_handles + size_handles, frameon=False, fontsize=7.5, ncol=2, loc="upper left")
 
     figure.suptitle(
-        "Figure 3. Higher-order family residuals: fully recomputed studentized-permutation evidence only",
+        "Figure 3. Family residuals unexplained by the index: studentized-permutation evidence only",
         fontsize=10.5,
         y=1.04,
     )

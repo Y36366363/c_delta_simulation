@@ -11,4 +11,4 @@ reference_switching_distortion	exact_sign_balance_mechanism_intervention	0.47500
 conditioning_diagnostic	leave_one_family_out_mae_improvement	0.7468332342214623	greater_than	0.65	1	I_n transports coarse transition information across the four bridge families
 conditioning_diagnostic	stricter_grouped_cv_mae_improvement	0.7220387931281419	greater_than	0.65	1	the index retains signal under cross-size and held-conditioning-level checks
 conditioning_diagnostic	prospective_family_rank_order	-0.942857142857143	less_than	-0.8	1	larger I_n prospectively corresponds to lower rejection in a fifth family
-conditioning_diagnostic	prospective_family_systematic_residual	0.018853538593705886	greater_than	0.0	1	all prospective predictions are too high, preserving the higher-order family limitation
+conditioning_diagnostic	prospective_family_systematic_residual	0.018853538593705886	greater_than	0.0	1	all prospective predictions are too high; the residual is unexplained by I_n, not proved purely higher order

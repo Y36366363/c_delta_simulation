@@ -1,0 +1,5 @@
+check	observed	reference	error	passed	scope
+signed_lognormal_huber_slope	-0.6744907594835592	-0.6744907594748649	8.694267528142063e-12	1	tau=.10; population scale fixed at K; slope is not flat
+shared_sign_reference_coefficients_cancel	0.0	0.0	0.0	1	algebraic orthogonality is not exclusive to independence
+imposed_offset_profile_identity	-0.10671832556940657	-0.10671832556940662	5.551115123125783e-17	1	fixed offsets, not a fitted-reference selection probability
+binary_zero_reference_radius_variance	0.0	0.0	0.0	1	profile correlation undefined at this binary zero-reference boundary

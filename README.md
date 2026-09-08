@@ -31,7 +31,9 @@ The current theoretical and simulation work supports four main conclusions:
 
 1. **Regular settings can support reliable Wald inference.**
    Under a properly regular dependent weak-null design, frozen simulation cells
-   remain compatible with nominal rejection levels.
+   remain compatible with nominal rejection levels. This is not a blanket
+   finite-sample recommendation: the targeted nonzero-effect skew study still
+   undercovers even at `n=2560`.
 
 2. **Regularity does not guarantee fast finite-sample convergence.**
    Strongly skewed settings exhibit asymmetric studentized tails and slow
@@ -68,6 +70,7 @@ finite-dimensional calculations, and empirical simulation evidence.
 - [Archive and Section 3 readiness audit](docs/archive_and_section3_readiness_20260831.md)
 - [Paper-level claim ledger](docs/manuscript_claim_ledger_20260826.md)
 - [End-to-end pipeline audit](docs/end_to_end_pipeline_audit_20260822.md)
+- [Active-nuisance validation and claim refinement](docs/active_nuisance_validation_20260907.md)
 
 ## Reproducibility
 
@@ -90,6 +93,38 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+## Updates 09/07/2026
+
+- **The primary nonzero-effect nuisance path has now been tested directly** -
+  One existing correlated-lognormal law, three prespecified sample sizes, and
+  2,000 paired replications per size compare the public complete-IF procedure,
+  a direct-only SE ablation, and an oracle fixed-reference benchmark. Complete
+  95% Wald coverage is `.858/.9115/.927` at `n=160/640/2560`; all Wilson
+  intervals exclude `.95`. Oracle intervals also under-cover. This supports
+  a finite-sample convergence boundary, not a claim of adequate calibration
+  or general superiority. No new distribution grid or interval tuning was run.
+- **Independent integration tightened the numerical benchmark** - Analytic
+  truncated moments and knot-split quadrature give population
+  `rho_P=.193475119`, refining the old Gauss--Hermite approximation without
+  replacing its frozen source. The full reference and indirect MAD paths are
+  active; their variance and covariance contributions nearly cancel here.
+  Replication-level values, fixed seeds, paired MCSE, Wilson intervals, and
+  LF-normalized source hashes are retained in `results/active_nuisance_*`.
+- **Active manuscript claims are now more precise** - The severe signed-
+  lognormal example has a nonregular median, not a flat population Huber
+  equation. The binary identity is conditional on imposed offsets, not a
+  fitted-switching theorem. Family residuals are unexplained by `I_n`, not
+  proved entirely higher order; score covariance and target projection also
+  matter. The Forneron identification reference is correctly attributed.
+  Sections 3--6, Appendix A, the claim ledger, and Figure 3 wording are aligned.
+- **Validation and next step** - The test suite passes **253 tests**, including
+  eight new numerical, replay, provenance, and claim-boundary tests. The next
+  safe step is Discussion/limitations integration and independent proof
+  review, not an open-ended search for an interval that makes this table look
+  favorable. See `docs/active_nuisance_validation_20260907.md` and its
+  prespecified protocol. Application, local theory, and operational inference
+  scope remain supervisor decisions.
 
 ## Updates 09/06/2026
 

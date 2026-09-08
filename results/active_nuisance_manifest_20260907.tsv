@@ -1,0 +1,10 @@
+path	sha256_lf	python	numpy	scipy	rng	source_base_commit
+scripts/validate_active_nuisance_20260907.py	b0d370f6b059e1e9d164134bdaf10dacbaf3627bdb39cf51c89445f17a9d2922	3.12.3	1.26.4	1.16.3	PCG64; SeedSequence([root,n,rep])	f0c8e239af7f9d48439c57bbbb2b67c86fe1b3e0
+src/cdelta.py	32f0dd80097bb1a7c207b18edcb8b54069ea473291627e649a717705a23d5be7	3.12.3	1.26.4	1.16.3	PCG64; SeedSequence([root,n,rep])	f0c8e239af7f9d48439c57bbbb2b67c86fe1b3e0
+docs/active_nuisance_validation_protocol_20260907.md	dbdd01335e545e32eaa197ba77ad096c3db8d844c3a2e6c50b73c3fb96b2053d	3.12.3	1.26.4	1.16.3	PCG64; SeedSequence([root,n,rep])	f0c8e239af7f9d48439c57bbbb2b67c86fe1b3e0
+results/active_nuisance_derivative_20260907.tsv	52b5fd9728742222ab2379354804e1ebdc28ee1158d8b6055276dc00f0536802	3.12.3	1.26.4	1.16.3	PCG64; SeedSequence([root,n,rep])	f0c8e239af7f9d48439c57bbbb2b67c86fe1b3e0
+results/active_nuisance_mechanism_scope_20260907.tsv	9be5e07f672b7ed054a2921c483e2fb18a38c10dbf91c8147cdcacffeaaae9a6	3.12.3	1.26.4	1.16.3	PCG64; SeedSequence([root,n,rep])	f0c8e239af7f9d48439c57bbbb2b67c86fe1b3e0
+results/active_nuisance_paired_20260907.tsv	6e6040e59f906742093ee8daf0b86854fdf310d65501d28a2b8b179fe0db8fbc	3.12.3	1.26.4	1.16.3	PCG64; SeedSequence([root,n,rep])	f0c8e239af7f9d48439c57bbbb2b67c86fe1b3e0
+results/active_nuisance_population_20260907.tsv	2fb15d2ad111c0f6cc556c4ce1626e2ba3762a77e01bb32c538c630e6c2fc162	3.12.3	1.26.4	1.16.3	PCG64; SeedSequence([root,n,rep])	f0c8e239af7f9d48439c57bbbb2b67c86fe1b3e0
+results/active_nuisance_replications_20260907.tsv	329483b8184f37b5b49471ba9606b5a675f75f215b03f85bd85efac533eab558	3.12.3	1.26.4	1.16.3	PCG64; SeedSequence([root,n,rep])	f0c8e239af7f9d48439c57bbbb2b67c86fe1b3e0
+results/active_nuisance_summary_20260907.tsv	d7b85a68cd036e269de324c4aa7f730873147f403d89c5708b32c9ee7e6fd6da	3.12.3	1.26.4	1.16.3	PCG64; SeedSequence([root,n,rep])	f0c8e239af7f9d48439c57bbbb2b67c86fe1b3e0

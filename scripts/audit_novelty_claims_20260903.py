@@ -405,7 +405,7 @@ def novelty_evidence_audit() -> list[dict[str, object]]:
             "greater_than",
             0.0,
             minimum_overprediction > 0.0,
-            "all prospective predictions are too high, preserving the higher-order family limitation",
+            "all prospective predictions are too high; the residual is unexplained by I_n, not proved purely higher order",
         ),
     ]
 

@@ -52,8 +52,18 @@ and profile constructions.
 | Claim | Defensible manuscript statement | Mathematical status | Frozen evidence | Boundary |
 |---|---|---|---|---|
 | 1 | Under fixed regular IID laws satisfying the stated density, moment, nonsingularity, and empirical-process conditions, the plug-in estimator is asymptotically linear and the full-IF studentized Wald statistic is asymptotically standard normal. | Theorem A.1, Lemmas A.1--A.5, and Corollaries A.1--A.3. At global independence, marginal reference estimation is first-order orthogonal. | Regular dependent-normal calibration, independent t5 recovery, and strong-skew convergence diagnostics. The oracle-reference skew experiment agrees with the orthogonality corollary. | The result is pointwise, not uniform near degeneracy. Strong skew can converge slowly even when reference fitting is not the cause. It is not a weak-null conditional permutation theorem. |
-| 2 | Near-degenerate robust-reference fitting can create severe finite-sample distortion through nonlocal reference switching. | Mechanism proposition only for the idealized binary switching limit; the broad finite-sample statement is empirical. | Centre-gap versus diffuse controls, paired fixed-reference intervention, exact sign-balance intervention, and shared-sign coupling dose response. | Do not claim that every small density or every multimodal law fails. Do not present fixed reference or forced balance as a general correction. |
-| 3 | The dimensionless quantity \(I_n=\sqrt n\,\sigma_{\min}(J)\) is a natural first-order organizer of the transition because nuisance error is amplified at order \(1/I_n\). | First-order expansion plus Proposition A.3: the standardized \(J\), \(\sigma_{\min}(J)\), and \(I_n\) are invariant to shift and positive units. Predictive adequacy remains empirical. | Monotone conditioning bands, leave-one-family-out and cross-size prediction, stricter grouped validation, and the prospective hyperexponential family. | It is not a universal scalar law or calibrated cutoff. Systematic family residuals show that curvature, switching geometry, tail shape, and other higher-order terms remain. |
+| 2 | Near-degenerate robust-reference fitting can create severe finite-sample distortion through nonlocal reference switching. | An imposed-offset algebraic identity illustrates the geometry; the fitted-switching and finite-sample statements are empirical, not a selection-probability theorem. | Centre-gap versus diffuse controls, paired fixed-reference intervention, exact sign-balance intervention, and shared-sign coupling dose response. | The signed-lognormal example has a nonregular median, not a flat population Huber root. The binary zero-reference profile has zero variance. Neither fixed reference nor forced balance is a general correction. |
+| 3 | The dimensionless quantity \(I_n=\sqrt n\,\sigma_{\min}(J)\) supplies a local linear amplification rationale at scale \(1/I_n\). | First-order expansion plus positive-unit invariance under the declared equation normalization. Predictive adequacy remains empirical; this is not a uniform bound along arbitrary degenerating sequences. | Monotone conditioning bands, grouped prediction, and the prospective hyperexponential family. | Not a scalar law or calibrated cutoff. Family residuals are unexplained by the index; equal J does not match score covariance or target projection, so the residual is not proved entirely higher order. |
+
+**2026-09-07 active-nuisance qualification to Claim 1.** The existing regular
+correlated-lognormal law has an independently integrated target
+\(\rho_P=0.193475119\) and nonzero reference/MAD contributions. In 2,000
+replications per size, complete-IF 95% Wald coverage is .858, .9115, and .927
+at n=160,640,2560. All Wilson intervals exclude .95. An oracle fixed-reference
+estimator also undercovers. This validates an implementation/formula path and
+records a practical convergence boundary; it does not establish usable
+finite-sample coverage or superiority over the direct-only ablation. See
+`docs/active_nuisance_validation_20260907.md`.
 
 ## What is theorem, proposition, or observation
 
@@ -76,7 +86,9 @@ and profile constructions.
 2. Randomization inference is finite-sample valid under the declared group
    invariance, not merely under \(\rho_P=0\).
 3. In the two-radius binary construction, common reference modes induce
-   correlation \(+1\), and opposite modes induce correlation \(-1\).
+   correlation \(+1\), and opposite modes induce correlation \(-1\),
+   conditional on imposed nonzero offsets. It does not prove fitted selection
+   probabilities; at the binary zero-reference law the target is undefined.
 4. The standardized nuisance Jacobian and \(I_n\) are positively affine
    invariant. Also, \(\|J^{-1}\|_2=1/\sigma_{\min}(J)\) whenever \(J\) is
    nonsingular.
@@ -98,8 +110,10 @@ theorem over all regular or near-degenerate distributions.
 Claim 1 and Claim 2 are not two strengths of the same defect. Under global
 independence, reference fitting is first-order orthogonal, which explains why
 oracle population centres did not cure the strong-skew tail imbalance. Claim
-2 instead concerns a nonuniform sequence in which the nuisance map becomes
-poorly conditioned and sample fluctuations can select different modes.
+2 instead concerns nonlocal nuisance fitting. The severe unbridged
+signed-lognormal example already violates regular median identification at
+each positive radial spread; it is not itself a sequence of regular laws.
+Regular bridge laws provide the separate approach-to-degeneracy comparison.
 
 Claim 3 explains why this second transition is plausible at first order:
 the least identified standardized nuisance direction is of order
@@ -115,6 +129,9 @@ residual.
 - “There is a universal calibrated cutoff for \(I_n\).”
 - “Near-degenerate fitting always inflates size.”
 - “The Jacobian index fully explains family effects.”
+- “The unexplained family residual has been proved entirely higher order.”
+- “The severe signed-lognormal construction has a flat population Huber root.”
+- “The current nonzero-effect study establishes nominal 95% Wald coverage.”
 - “Fixing the centre, forcing sign balance, or switching to bootstrap is an
   established general remedy.”
 - “Six buildings are enough for a conventional cluster asymptotic argument.”

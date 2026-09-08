@@ -3,7 +3,7 @@
 ## Regularity, Reference Instability, and Nuisance Conditioning
 
 Working manuscript draft, Sections 3--5  
-Date: 2026-09-04
+Date: 2026-09-04; mechanism and scope review: 2026-09-07
 
 > Editorial note: this text continues
 > `manuscript_draft_sections_1_2_20260830.md`. It integrates only frozen theory
@@ -170,8 +170,10 @@ Three corollaries clarify its scope. First, at \(H_0:\rho_P=0\), the gradient
 coefficients on \(q_a\) and \(q_b\) vanish. The first-order null test therefore
 does not require the general-confidence-interval fourth-moment condition.
 Second, if \(X\) and \(Y\) are independent, the coefficients multiplying both
-marginal reference influences cancel exactly. This orthogonality is specific
-to global independence, not every dependent weak null. Third, the theorem
+marginal reference influences cancel exactly. Independence is sufficient,
+not necessary: cancellation also occurs in the symmetric shared-sign radial
+weak-null calibration design used here. It does not hold at every dependent
+weak null or at a general nonzero profile correlation. Third, the theorem
 does not cover sequences satisfying
 \(\sqrt n\,\sigma_{\min}\{J(P_n)\}=O(1)\); Sections 4 and 5 study that boundary.
 
@@ -179,15 +181,20 @@ does not cover sequences satisfying
 
 The analytic expression was checked directly for the primary estimand, not
 only for the secondary \(C\) scale. In one fixed regular correlated-lognormal
-law, distribution-level contamination derivatives were evaluated along four
-directions. At contamination weight \(10^{-6}\), the largest scaled difference
+law, a fixed Gauss--Hermite discretization was used to evaluate contamination
+derivatives along four directions. At contamination weight \(10^{-6}\), the largest scaled difference
 between the analytic complete influence and the finite-difference derivative
 was \(1.58\times10^{-5}\). The largest fitted-reference component was 0.314
 and the largest indirect MAD component was 0.0587, so the check exercises the
-nuisance path rather than relying on independence orthogonality.
+nuisance path rather than relying on independence orthogonality. This is a
+within-quadrature derivative check, not by itself a bound on integration error.
+The 2026-09-07 independent split-integration check and active-nuisance coverage
+study are reported in `docs/active_nuisance_validation_20260907.md`; the old
+numerical source is retained for provenance, not treated as exact population
+truth.
 
 The theorem-aligned simulations are deliberately limited. At \(n=640\), a
-dependent-normal profile weak null rejected in 0.044 of 1,000 repetitions and
+normal-margin shared-sign profile weak null rejected in 0.044 of 1,000 repetitions and
 an independent \(t_5\) null rejected in 0.059; both Wilson intervals contain
 0.05, and their studentized standard deviations were 0.993 and 1.037. In the
 strong-skew stress design, rejection decreased from 0.122 at \(n=640\) to
@@ -212,21 +219,40 @@ normal variables independent of \(S\). At the symmetry reference zero,
 population profile correlation is zero. The common sign does not itself
 create radial concordance at that fixed reference.
 
-When \(\tau\) is small, however, each marginal law concentrates near two
-separated modes. The central Huber reference equation is nearly flat or
-nonunique in the limiting construction. A small sample excess of positive or
-negative signs can move the selected empirical reference toward a mode. Since
-the same \(S_i\) enters both margins, the reference movements tend to align.
-They change many fitted radii simultaneously and can manufacture strong
-profile correlation even though the fixed-reference radial target remains
-zero.
+For every \(\tau>0\), this marginal law has \(m=T=0\), raw MAD \(d=1\),
+and \(f(0)=0\). Its median is uniquely defined but nonregular: it fails the
+positive-center-density assumption in Theorem 1. For the declared defaults,
+the population Huber equation is not nearly flat at its reference. In fact,
+
+\[
+A=\Phi\{\log(ck)/\tau\},\qquad
+\partial_T E\psi_c((X-T)/k)=-A/k,
+\]
+
+which is approximately \(-0.6745\) at \(\tau=0.10\). The instability must
+therefore be described at the level of the complete fitted nuisance system,
+not attributed to a weak population Huber root alone.
+
+When the outer modes are concentrated, IID sign-count fluctuations can move
+the sample median and its associated MAD nonlocally; the resulting fitted
+scale changes the empirical Huber solution. Since the same \(S_i\) enters
+both margins, their fitted-reference movements tend to align. They change
+many radii simultaneously and can manufacture strong profile correlation
+although the population fixed-reference radial target remains zero. At the
+symmetric population law \(B=0\); this finite-sample propagation is not a
+nonzero first-order MAD-to-Huber derivative at that law. The interventions
+below support this nonlocal mechanism, not a regular IF expansion there.
 
 The limiting geometry can be seen without asymptotics. If observations occupy
 two radius levels, choosing the same reference mode in both margins makes the
 two fitted binary profiles perfectly correlated; choosing opposite modes
-makes them perfectly anticorrelated. Thus a nonlocal nuisance selection can
-have an \(O(1)\) effect on \(\widehat\rho_P\), outside a local influence
-expansion around one regular root.
+makes them perfectly anticorrelated. This identity is conditional on imposed
+nonzero reference offsets, not a theorem that the fitted algorithm selects
+these offsets with any specified probability. At the exact symmetric binary
+law with zero reference, the radii are constant and \(\rho_P\) is undefined.
+The continuous positive-\(\tau\) construction supplies the nondegenerate
+profile-null example; the binary geometry supplies only an algebraic
+illustration of the potentially \(O(1)\) target response.
 
 ### 4.2 Paired mechanism interventions
 
@@ -261,8 +287,9 @@ provides the predicted mechanism gradient.
 
 ### 4.3 Scope of the failure claim
 
-The exact two-mode result is a proposition about an idealized limiting
-geometry. The rejection rates and interventions are empirical evidence for a
+The exact two-mode result is an imposed-reference algebraic identity about
+idealized geometry, not a fitted-switching probability theorem. The rejection
+rates and interventions are empirical evidence for a
 continuous finite-sample construction. Together they establish that unstable
 reference fitting **can cause** severe spurious profile correlation and
 inferential distortion. They do not establish that every multimodal law,
@@ -296,7 +323,7 @@ The first-order nuisance expansion is schematically
 \]
 
 Because \(\|J^{-1}\|_2=1/\sigma_{\min}(J)\), sampling noise in the least
-identified standardized direction is amplified at order
+identified standardized direction has a local linear amplification scale
 
 \[
 \frac{1}{\sqrt n\,\sigma_{\min}(J)}.
@@ -312,7 +339,10 @@ The standardized construction matters. If \(W^*=a+bW\) with \(b>0\), then
 the transformed median, MAD, and Huber reference change location and units,
 but \(J^*=J\). Consequently \(I_n\) is dimensionless and positively affine
 invariant. The corresponding statement would not hold for the unscaled
-Jacobian.
+Jacobian. It does not make the index invariant to arbitrary rescaling of
+the estimating equations; their stated normalization must remain fixed.
+Nor is this linear amplification argument a uniform error bound along an
+arbitrary degenerating sequence.
 
 ### 5.2 What the index explains
 
@@ -336,11 +366,16 @@ not an exact response curve.
 
 Every prospective hyperexponential prediction exceeded the observed rejection
 rate, with absolute errors from 0.019 to 0.112. Earlier matched-J comparisons
-also retained family-specific rejection differences. Thus two laws with
-similar first-order conditioning can differ through curvature of the nuisance
-map, the width and distance of competing root regions, tail behavior, and the
-interaction between switching and studentization. These are plausible
-higher-order explanations, not established decompositions of the residual.
+also retained family-specific rejection differences. These are family
+residuals unexplained by \(I_n\), not proof that all remaining differences
+are higher order. Even equal \(J\) need not imply an equal first-order
+stochastic law: with score covariance \(\Omega=\operatorname{Var}\{g(Z)\}\),
+the local nuisance covariance is \(n^{-1}J^{-1}\Omega J^{-\top}\), and its
+effect on the target also depends on the target's nuisance projection. Both
+must be considered before claiming a matched complete first-order experiment.
+Curvature, the distance of competing fitted-reference regions, tail behavior,
+and nonlocal switching/studentization are additional plausible contributors,
+not an established higher-order decomposition of the residual.
 
 Accordingly, \(I_n\) is a **first-order organizer, not a universal cutoff**.
 The current results do not calibrate a threshold, prove necessity or
@@ -368,7 +403,7 @@ the procedure uses a **robust reference, not a globally robust correlation**.
 
 ## References introduced in Sections 3--5
 
-- Andrews, D. W. K., and Mikusheva, A. *Detecting Identification Failure in
+- Forneron, J.-J. *Detecting Identification Failure in
   Moment Condition Models*. <https://arxiv.org/abs/1907.13093>
 - Clark, D. I. (1985). *The Mathematical Structure of Huber's M-Estimator*.
   <https://doi.org/10.1137/0906017>
