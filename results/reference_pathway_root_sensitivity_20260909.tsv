@@ -1,0 +1,3 @@
+tau	n	replication	original_root_gap	estimate_difference	relative_stage_aware_se_difference	stage_aware_rejection_changed	direct_rejection_changed	scope
+0.1	640	70	1.410854281002949e-05	-4.5724812113012714e-07	-3.022980213540638e-05	0	0	diagnostic only; original repetition retained
+0.1	640	1622	1.790506487899142e-06	-4.681388717578394e-07	-1.3976990263397937e-05	0	0	diagnostic only; original repetition retained

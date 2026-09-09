@@ -1,0 +1,3 @@
+tau	population_median	population_raw_mad	population_scale	population_reference	population_rho	population_C	population_huber_active_probability	population_huber_slope	numerical_huber_slope	slope_error	radial_variance	median_center_density
+0.1	0.0	1.0	1.4826	0.0	0.0	1.0	0.9999999999974346	-0.6744907594748649	-0.6744907594835592	8.694267528142063e-12	0.010151172942587754	0.0
+0.4	0.0	1.0	1.4826	0.0	0.0	1.0	0.9577793435852491	-0.6460133168658094	-0.646013316857319	8.490430580820885e-12	0.20361689334414693	0.0

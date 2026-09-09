@@ -1,4 +1,4 @@
-# Trustworthy Inference for Robust-Reference Divergence Profiles
+# Robust-reference profile correlation: pointwise inference and finite-sample limits
 
 ## Regularity, Reference Instability, and Nuisance Conditioning
 
@@ -241,7 +241,14 @@ many radii simultaneously and can manufacture strong profile correlation
 although the population fixed-reference radial target remains zero. At the
 symmetric population law \(B=0\); this finite-sample propagation is not a
 nonzero first-order MAD-to-Huber derivative at that law. The interventions
-below support this nonlocal mechanism, not a regular IF expansion there.
+below support reference involvement, not a regular IF expansion there or
+unique attribution to MAD estimation. A direct shared-sign path also remains
+when the population scale is fixed: in the all-active Huber regime the fitted
+reference equals the sample mean, and the two sample means inherit correlated
+sign-count noise. The staged follow-up in Section 4.3 separates this path from
+the additional fitted median/MAD amplification. The population target,
+nonregular-median result, and finite-sample covariance identities are proved
+in `docs/shared_sign_model_result_20260909.md`.
 
 The limiting geometry can be seen without asymptotics. If observations occupy
 two radius levels, choosing the same reference mode in both margins makes the
@@ -285,7 +292,25 @@ not be pointwise monotone because effect size, switching probability, and
 studentization all contribute, but the monotone centre/effect dose response
 provides the predicted mechanism gradient.
 
-### 4.3 Scope of the failure claim
+### 4.3 Separating reference-fitting pathways
+
+A prespecified four-stage comparison uses the same samples with (i) the true
+reference fixed, (ii) the true scale fixed and location fitted, (iii) the true
+median fixed and MAD/location fitted, and (iv) the complete fit. At
+\(\tau=.10,n=640\), mean fitted correlations are -.0006, .1117, .1117, and
+.6306, respectively, across 2,000 replications. Stages (ii) and (iii) have
+all observations inside the Huber linear region in the realized severe cells
+and give the sample means; full fitting adds a substantial amplification.
+At n=80 their corresponding means are .0006, .3804, .3804, and .8207.
+
+Stage-aware and direct-only studentizers give different rejection frequencies
+(Section 6.7). These empirical contrasts distinguish profile distortion from
+its studentized rejection behavior. The construction fails the regular
+median assumption; neither the full-fit Wald calculation nor these stage
+comparisons extend Theorem 1 to this law. The conditional fourth-root
+rate-balance heuristic is not a proved local-to-degeneracy theorem.
+
+### 4.4 Scope of the failure claim
 
 The exact two-mode result is an imposed-reference algebraic identity about
 idealized geometry, not a fitted-switching probability theorem. The rejection
@@ -329,7 +354,8 @@ identified standardized direction has a local linear amplification scale
 \frac{1}{\sqrt n\,\sigma_{\min}(J)}.
 \]
 
-This motivates
+This motivates the effective local conditioning index, with the declared
+parameter coordinates, raw-MAD units, and estimating-equation normalization,
 
 \[
 I_n=\sqrt n\,\sigma_{\min}(J).

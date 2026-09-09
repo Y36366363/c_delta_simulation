@@ -96,6 +96,14 @@ propagation through the sample scale. At population symmetry, the first-order
 MAD coupling vanishes; nonlocal propagation must not be equated with that
 first-order derivative.
 
+The four-stage follow-up qualifies the attribution: correlated location
+errors and positive fitted-profile bias already occur with the population
+scale fixed. In the realized concentrated-mode samples that stage is exactly
+the sample-mean fit. Estimating the full median/MAD system adds substantial
+amplification in those cells, but is not the sole source of distortion.
+Stage-aware and direct-only studentization must be reported separately;
+rejection behavior cannot be inferred from mean fitted correlation alone.
+
 Fixing references and enforcing exact sign balance are interventions on the
 construction, not universally available remedies. The binary imposed-offset
 identity explains how aligned reference shifts can create correlation, but

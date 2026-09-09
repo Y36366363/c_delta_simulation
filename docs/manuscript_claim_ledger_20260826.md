@@ -67,6 +67,26 @@ finite-sample coverage or superiority over the direct-only ablation. See
 
 ## What is theorem, proposition, or observation
 
+**2026-09-09 supervisor-directed qualification.** The main contribution is
+pointwise regular inference with a worked finite-sample failure, not a broad
+safe-use rule. In four existing shared-sign cells, fixed-population-scale
+Huber fitting already links reference errors and biases the fitted profile
+correlation; complete median/MAD fitting substantially amplifies the severe
+cells. Thus Claim 2 must not name median/MAD as the exclusive cause. The short
+model result proves m=T=0, raw MAD=1, independent true profiles (rho_P=0, C=1),
+and sample-median root-n failure despite a nonzero Huber slope. This identifies
+a failed sufficient assumption, not impossibility of alternative target
+asymptotics. Its fourth-root boundary remains a conditional heuristic.
+
+For Claim 3, the standardized full Jacobian is singular at every positive
+tau in this unbridged family; I_n=0 cannot distinguish its severe and diffuse
+cells. Positive-density bridge ordering is separate empirical evidence, not
+a universal characterization. Re-pairing leaves all marginal references
+unchanged; only joint moments and studentization change. The permutation
+track supplies empirical null rejection, not established weak-null Type I
+error. See `docs/reference_pathway_results_20260909.md` for stage-aware and
+direct-only rejection, paired Monte Carlo uncertainty, and numerical flags.
+
 ### Theorem-level results under declared assumptions
 
 1. The median, MAD, and MAD-scaled Huber functionals have the displayed

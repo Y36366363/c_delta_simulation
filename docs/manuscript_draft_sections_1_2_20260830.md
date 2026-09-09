@@ -1,4 +1,4 @@
-# Trustworthy Inference for Robust-Reference Divergence Profiles
+# Robust-reference profile correlation: pointwise inference and finite-sample limits
 
 ## Regularity, Reference Instability, and Nuisance Conditioning
 
@@ -124,7 +124,7 @@ construction. These examples establish that near-degenerate reference fitting
 do not imply that every multimodal distribution fails or that the distortion
 must always have the same sign.
 
-Third, we study the dimensionless nuisance-conditioning quantity
+Third, we study the effective local nuisance-conditioning index
 
 \[
 I_n=\sqrt n\,\sigma_{\min}(J),

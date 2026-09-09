@@ -13,7 +13,7 @@ behavior can be misleading.
 | Secondary scale | The historical \(C\) scale, reported with profile coefficients of variation when used |
 | Current stage | Active manuscript development and reproducibility audit |
 | Role | Independent research project and implementation |
-| Main methods | Influence-function inference, permutation procedures, bootstrap analysis, simulation studies, and conditioning diagnostics |
+| Main methods | Complete influence-function inference, model-specific failure analysis, paired simulations, and local conditioning diagnostics; permutation/resampling studies are supporting historical evidence |
 
 This repository began as a finite-sample simulation study of the
 correlation-of-divergency coefficient, `c_delta`. It now supports a separate
@@ -73,6 +73,8 @@ finite-dimensional calculations, and empirical simulation evidence.
 - [Active-nuisance validation and claim refinement](docs/active_nuisance_validation_20260907.md)
 - [Working Discussion, Section 8](docs/manuscript_draft_section_8_20260908.md)
 - [High-standard referee review and open issues](docs/referee_readiness_review_20260908.md)
+- [Supervisor-directed four-stage reference-pathway results](docs/reference_pathway_results_20260909.md)
+- [Short shared-sign model result and bounded rate heuristic](docs/shared_sign_model_result_20260909.md)
 
 ## Reproducibility
 
@@ -95,6 +97,46 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+## Updates 09/09/2026
+
+- **Supervisor-directed scope now leads the manuscript** - The working title
+  is *Robust-reference profile correlation: pointwise inference and
+  finite-sample limits*. The core is the fixed-regular-IID full-IF theorem and
+  a worked failure example, not a general safe-use rule. Hoorn is rewriting
+  the Introduction. A short genuine paired-IID application is optional; no
+  clustered extension, broad family grid, new resampling method, or universal
+  cutoff is added.
+- **Four stages distinguish two reference-error pathways** - A protocol
+  recorded before simulation uses four existing cells and 2,000 paired samples
+  per cell (8,000 datasets; 32,000 stage records). At `tau=.10,n=640`, mean
+  profile correlation is `-.0006/.1117/.1117/.6306` when fixing the true
+  reference, fixing true scale, fixing true median, and fitting everything.
+  Fixed-scale reference errors already align; full median/MAD fitting adds
+  substantial amplification. Corresponding stage-aware empirical null
+  rejection is `.0525/.0330/.0330/.5510`; direct-only values are reported
+  separately, so small rejection is not confused with small profile bias.
+- **Short model result makes the assumption failure precise** - Population
+  median and Huber location are zero, raw MAD is one, true profiles are
+  independent, `rho_P=0`, and `C=1`. The sample median is not root-n regular
+  although the population Huber slope is nonzero. The full standardized
+  Jacobian is singular throughout the unbridged family, so `I_n=0` cannot
+  distinguish its severe and diffuse cells. The `n^(-1/4)` boundary is a
+  conditional rate heuristic, not a new limit theorem.
+- **Inference labels and numerical caveats are explicit** - Re-pairing leaves
+  medians, MADs, and Huber references unchanged; only joint moments and the
+  studentizer change. Permutation remains supporting empirical stress
+  evidence. There were no invalid stage returns but two full-fit numerical
+  root flags; bracketed recomputation changed neither rejection decision.
+  The public fitting algorithm and original frozen results were not changed.
+  The September 7--8 skew coverage study was not rerun or tuned.
+- **Reproducible reporting** - Replication records, source hashes, Wilson
+  intervals, reference RMSEs/correlations, and paired-comparison MCSE are linked
+  from `docs/reference_pathway_results_20260909.md`. New regression checks
+  cover the stage IFs, sample covariance algebra, root replay, permutation
+  invariance, and stored-result accounting. The full suite passes **269 tests**.
+  A post-run protocol correction withdraws an overly strong empirical-root
+  uniqueness assertion; population uniqueness is not an all-sample guarantee.
 
 ## Updates 09/08/2026
 

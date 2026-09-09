@@ -1,4 +1,4 @@
-# Trustworthy Inference for Robust-Reference Divergence Profiles
+# Robust-reference profile correlation: pointwise inference and finite-sample limits
 
 ## 6. Simulation design and consolidated evidence
 
@@ -20,10 +20,14 @@ as interchangeable.
    complete influence-function standard error from Theorem 1. It is a
    finite-sample check consistent with a pointwise asymptotic theorem; it does
    not establish uniform finite-sample validity.
-2. The **fully recomputed studentized-permutation track** refits every
-   robust-reference quantity within each permutation. It is empirical
+2. The **fully recomputed studentized-permutation track** recomputes the joint
+   profile moments and studentizer within each permutation. Re-pairing leaves
+   the marginal samples, medians, MADs, and Huber references unchanged. It is empirical
    finite-sample evidence. Its randomization exactness requires the declared
    group-invariance null, and it is not a weak-null permutation theorem.
+   Its displayed weak-null rejection frequencies are empirical stress results,
+   not validated weak-null Type I error rates. Larger comparisons may be moved
+   to the supplement without changing their evidentiary status.
 3. The **mechanism track** uses paired finite-sample Wald contrasts under the
    separated-mode construction. It is deliberately outside the regular
    calibration argument: fixing a reference or forcing sign balance is an
@@ -193,7 +197,41 @@ replication-level values, paired comparison MCSE, and source hashes are in
 `results/active_nuisance_manifest_20260907.tsv`. The original Table 2 and four
 canonical evidence groups remain unchanged.
 
-### 6.7 Reproducibility and interpretation
+### 6.7 Supervisor-directed four-stage reference comparison
+
+This bounded follow-up reuses only \(\tau\in\{.10,.40\}\) and
+\(n\in\{80,640\}\), with 2,000 paired replications per cell. Its protocol
+was recorded before simulation. The four stages fix the population reference,
+fix the population scale while fitting location, fix the population median
+while fitting MAD/location, and fit the complete nuisance system.
+
+| tau | n | Mean rho, fixed scale / full fit | Stage-aware rejection, fixed scale / full fit | Direct-only rejection, fixed scale / full fit |
+|---|---:|---:|---:|---:|
+| .10 | 80 | .3804 / .8207 | .2235 / .7550 | .6785 / .9035 |
+| .10 | 640 | .1117 / .6306 | .0330 / .5510 | .4875 / .8270 |
+| .40 | 80 | .0616 / .0693 | .0490 / .0430 | .1605 / .1780 |
+| .40 | 640 | .0102 / .0101 | .0505 / .0505 | .0785 / .0770 |
+
+The true-median stage matches the fixed-scale stage in both realized severe
+cells, where all Huber scores are linear. At tau=.10, fixing the reference
+itself gives rejection .0720 and .0525; its reference RMSE is zero and
+reference correlation is undefined, not zero. At n=640, fixed-scale fitting
+has X-reference RMSE .0401 and cross-margin reference correlation .9899,
+versus .2790 and .9867 under full fitting. Thus correlated reference noise
+exists without estimated MAD, while full fitting adds substantial distortion.
+Low stage-aware rejection does not imply negligible fitted-profile bias.
+
+These are nonregular-model empirical stress comparisons, not new calibration
+claims or recommended corrections. The full report includes all four stages,
+both reference RMSEs, Monte Carlo uncertainty, and paired contrasts. No invalid
+returns occurred. Two full-fit roots exceeded the declared replay tolerance;
+independent bracketed-root recomputation changed neither rejection decision.
+Primary results retain the unchanged public implementation. See
+`docs/reference_pathway_results_20260909.md` and
+`results/reference_pathway_manifest_20260909.tsv` for the independent source
+manifest; the old display sources and their hashes remain frozen.
+
+### 6.8 Reproducibility and interpretation
 
 All root seeds, repetition counts, permutation counts, Wilson intervals, and
 source hashes remain in the display tables and manifest. The display builder

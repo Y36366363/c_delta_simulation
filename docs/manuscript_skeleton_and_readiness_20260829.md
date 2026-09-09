@@ -2,7 +2,7 @@
 
 Date: 2026-08-29
 
-Readiness and scope revision: 2026-09-08. This map is current working guidance,
+Readiness and scope revision: 2026-09-09. This map is current working guidance,
 not an independent peer-review certification. See
 `docs/referee_readiness_review_20260908.md` for unresolved submission issues.
 
@@ -10,13 +10,35 @@ not an independent peer-review certification. See
 
 ### Working title
 
-**Trustworthy Inference for Robust-Reference Divergence Profiles**
-
-Possible subtitle: **Regularity, Reference Instability, and Nuisance
-Conditioning**
+**Robust-reference profile correlation: pointwise inference and finite-sample
+limits**
 
 The title is provisional. It deliberately leads with inference rather than a
 new coefficient name.
+
+### Supervisor-directed completion scope (2026-09-09)
+
+The main paper is pointwise regular-IID inference plus a worked finite-sample
+failure example. Hoorn is rewriting the Introduction; existing local text is
+provisional support, not a competing replacement. The nonzero regular skew
+study and its tail diagnosis are complete (September 7--8). The four-stage
+reference-pathway check and short shared-sign model result are now recorded
+in `docs/reference_pathway_results_20260909.md` and
+`docs/shared_sign_model_result_20260909.md`.
+
+The pathway result supports both correlated fixed-scale location errors and
+additional full median/MAD amplification, not exclusive median/MAD causation.
+Permutation findings remain supporting empirical stress comparisons; re-pairing
+does not change marginal reference fits. The effective local conditioning
+index retains its declared equation normalization and is not a pass/fail rule.
+
+Next work is proof/code/Monte Carlo reconciliation and final integration,
+including choosing which larger permutation panels belong in the supplement.
+A short application is optional only if genuine paired-IID sampling and the
+scientific profile question can be checked promptly. No application is better
+than unsupported clustering assumptions. No broad family search, new
+resampling method, universal threshold, clustered-data theory, or full
+local-to-degeneracy theorem is commissioned by this completion scope.
 
 ### One-sentence contribution
 
