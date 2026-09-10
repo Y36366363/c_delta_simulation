@@ -3,13 +3,20 @@
 ## 6. Simulation design and consolidated evidence
 
 Working manuscript draft, Section 6
-Date: 2026-09-05
+Date: 2026-09-05; source reconciliation: 2026-09-10
 
 > Editorial note: this section only consolidates the fixed-seed, claim-directed
-> results that were frozen before manuscript integration. It introduces no new
+> results, with the bounded September 7 and 9 follow-ups identified separately.
+> It introduces no new
 > data-generating family, distribution grid, or anomaly search. The display
 > manifest `results/section6_display_manifest_20260905.tsv` records the exact
 > source file and normalized SHA-256 hash for every display input.
+
+> Placement note (2026-09-10): Figures 2--3 and the detailed permutation
+> comparisons are candidates for Supplement S2, pending supervisor agreement.
+> They retain their current identifiers here until that decision; no approved
+> move or new weak-null theorem is implied. The September 7 and 9 additions
+> have separate manifests, not entries in the September 5 frozen manifest.
 
 ### 6.1 Two inference tracks and one mechanism track
 

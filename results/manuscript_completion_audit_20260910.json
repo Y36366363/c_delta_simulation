@@ -1,0 +1,1167 @@
+{
+  "date": "2026-09-10",
+  "new_simulation_cells": 0,
+  "scope": "internal reconciliation; not independent mathematical peer review or clean-environment reproduction",
+  "display_number_checks": 95,
+  "checks": [
+    {
+      "check": "wald:0:0",
+      "passed": true,
+      "displayed": "160",
+      "source_value": 160.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:0:1",
+      "passed": true,
+      "displayed": "1000",
+      "source_value": 1000.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:0:2",
+      "passed": true,
+      "displayed": ".052",
+      "source_value": 0.052,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:0:3",
+      "passed": true,
+      "displayed": ".007",
+      "source_value": 0.007021111023192838,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:0:4",
+      "passed": true,
+      "displayed": ".040",
+      "source_value": 0.03987303628377742,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:0:5",
+      "passed": true,
+      "displayed": ".068",
+      "source_value": 0.06755573931927998,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:0:6",
+      "passed": true,
+      "displayed": "1.011",
+      "source_value": 1.0105369210582222,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:1:0",
+      "passed": true,
+      "displayed": "640",
+      "source_value": 640.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:1:1",
+      "passed": true,
+      "displayed": "1000",
+      "source_value": 1000.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:1:2",
+      "passed": true,
+      "displayed": ".044",
+      "source_value": 0.044,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:1:3",
+      "passed": true,
+      "displayed": ".006",
+      "source_value": 0.006485676526007136,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:1:4",
+      "passed": true,
+      "displayed": ".033",
+      "source_value": 0.0329382145884185,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:1:5",
+      "passed": true,
+      "displayed": ".059",
+      "source_value": 0.058551789150407776,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:1:6",
+      "passed": true,
+      "displayed": ".993",
+      "source_value": 0.9931410480745032,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:2:0",
+      "passed": true,
+      "displayed": "320",
+      "source_value": 320.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:2:1",
+      "passed": true,
+      "displayed": "1000",
+      "source_value": 1000.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:2:2",
+      "passed": true,
+      "displayed": ".075",
+      "source_value": 0.075,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:2:3",
+      "passed": true,
+      "displayed": ".008",
+      "source_value": 0.008329165624478841,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:2:4",
+      "passed": true,
+      "displayed": ".060",
+      "source_value": 0.06025180497346736,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:2:5",
+      "passed": true,
+      "displayed": ".093",
+      "source_value": 0.0930009397392545,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:2:6",
+      "passed": true,
+      "displayed": "1.068",
+      "source_value": 1.068248609081747,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:3:0",
+      "passed": true,
+      "displayed": "640",
+      "source_value": 640.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:3:1",
+      "passed": true,
+      "displayed": "1000",
+      "source_value": 1000.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:3:2",
+      "passed": true,
+      "displayed": ".059",
+      "source_value": 0.059,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:3:3",
+      "passed": true,
+      "displayed": ".007",
+      "source_value": 0.007451107300260815,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:3:4",
+      "passed": true,
+      "displayed": ".046",
+      "source_value": 0.04601429821280047,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:3:5",
+      "passed": true,
+      "displayed": ".075",
+      "source_value": 0.07536090277145915,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:3:6",
+      "passed": true,
+      "displayed": "1.037",
+      "source_value": 1.0366194488362448,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:4:0",
+      "passed": true,
+      "displayed": "640",
+      "source_value": 640.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:4:1",
+      "passed": true,
+      "displayed": "1000",
+      "source_value": 1000.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:4:2",
+      "passed": true,
+      "displayed": ".122",
+      "source_value": 0.122,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:4:3",
+      "passed": true,
+      "displayed": ".010",
+      "source_value": 0.010349685985574635,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:4:4",
+      "passed": true,
+      "displayed": ".103",
+      "source_value": 0.10314874471332984,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:4:5",
+      "passed": true,
+      "displayed": ".144",
+      "source_value": 0.14374428470174982,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:4:6",
+      "passed": true,
+      "displayed": "1.280",
+      "source_value": 1.2801616134539202,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:5:0",
+      "passed": true,
+      "displayed": "2560",
+      "source_value": 2560.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:5:1",
+      "passed": true,
+      "displayed": "1000",
+      "source_value": 1000.0,
+      "rounding_tolerance": 0.0,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:5:2",
+      "passed": true,
+      "displayed": ".082",
+      "source_value": 0.082,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:5:3",
+      "passed": true,
+      "displayed": ".009",
+      "source_value": 0.008676174272108648,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:5:4",
+      "passed": true,
+      "displayed": ".067",
+      "source_value": 0.06655195342021952,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:5:5",
+      "passed": true,
+      "displayed": ".101",
+      "source_value": 0.10064721667370458,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "wald:5:6",
+      "passed": true,
+      "displayed": "1.136",
+      "source_value": 1.135607136183505,
+      "rounding_tolerance": 0.0005000000999999999,
+      "source": "section6_display_table2_wald_20260905.tsv"
+    },
+    {
+      "check": "active:160:0",
+      "passed": true,
+      "displayed": "160",
+      "source_value": 160.0,
+      "rounding_tolerance": 0.0,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:160:1",
+      "passed": true,
+      "displayed": ".8580",
+      "source_value": 0.858,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:160:2",
+      "passed": true,
+      "displayed": ".8420",
+      "source_value": 0.8420154493218232,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:160:3",
+      "passed": true,
+      "displayed": ".8726",
+      "source_value": 0.8726119448247996,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:160:4",
+      "passed": true,
+      "displayed": ".8397",
+      "source_value": 0.8396998738239717,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:160:5",
+      "passed": true,
+      "displayed": ".8535",
+      "source_value": 0.8535,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:160:6",
+      "passed": true,
+      "displayed": ".8485",
+      "source_value": 0.8485,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:640:0",
+      "passed": true,
+      "displayed": "640",
+      "source_value": 640.0,
+      "rounding_tolerance": 0.0,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:640:1",
+      "passed": true,
+      "displayed": ".9115",
+      "source_value": 0.9115,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:640:2",
+      "passed": true,
+      "displayed": ".8983",
+      "source_value": 0.8982505492332389,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:640:3",
+      "passed": true,
+      "displayed": ".9232",
+      "source_value": 0.9231717208542898,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:640:4",
+      "passed": true,
+      "displayed": ".8999",
+      "source_value": 0.8999001283634827,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:640:5",
+      "passed": true,
+      "displayed": ".9110",
+      "source_value": 0.911,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:640:6",
+      "passed": true,
+      "displayed": ".9050",
+      "source_value": 0.905,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:2560:0",
+      "passed": true,
+      "displayed": "2560",
+      "source_value": 2560.0,
+      "rounding_tolerance": 0.0,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:2560:1",
+      "passed": true,
+      "displayed": ".9270",
+      "source_value": 0.927,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:2560:2",
+      "passed": true,
+      "displayed": ".9148",
+      "source_value": 0.9147622011152128,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:2560:3",
+      "passed": true,
+      "displayed": ".9376",
+      "source_value": 0.9376006405065973,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:2560:4",
+      "passed": true,
+      "displayed": ".9664",
+      "source_value": 0.9664056171169936,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:2560:5",
+      "passed": true,
+      "displayed": ".9265",
+      "source_value": 0.9265,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "active:2560:6",
+      "passed": true,
+      "displayed": ".9290",
+      "source_value": 0.929,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "active_nuisance_summary_20260907.tsv"
+    },
+    {
+      "check": "pathway:0.1:80:0",
+      "passed": true,
+      "displayed": ".10",
+      "source_value": 0.1,
+      "rounding_tolerance": 0.005000001,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:80:1",
+      "passed": true,
+      "displayed": "80",
+      "source_value": 80.0,
+      "rounding_tolerance": 0.0,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:80:2",
+      "passed": true,
+      "displayed": ".3804",
+      "source_value": 0.38042079064920825,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:80:3",
+      "passed": true,
+      "displayed": ".8207",
+      "source_value": 0.8206743815357221,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:80:4",
+      "passed": true,
+      "displayed": ".2235",
+      "source_value": 0.2235,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:80:5",
+      "passed": true,
+      "displayed": ".7550",
+      "source_value": 0.755,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:80:6",
+      "passed": true,
+      "displayed": ".6785",
+      "source_value": 0.6785,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:80:7",
+      "passed": true,
+      "displayed": ".9035",
+      "source_value": 0.9035,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:640:0",
+      "passed": true,
+      "displayed": ".10",
+      "source_value": 0.1,
+      "rounding_tolerance": 0.005000001,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:640:1",
+      "passed": true,
+      "displayed": "640",
+      "source_value": 640.0,
+      "rounding_tolerance": 0.0,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:640:2",
+      "passed": true,
+      "displayed": ".1117",
+      "source_value": 0.1116500363585304,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:640:3",
+      "passed": true,
+      "displayed": ".6306",
+      "source_value": 0.6305943846508535,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:640:4",
+      "passed": true,
+      "displayed": ".0330",
+      "source_value": 0.033,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:640:5",
+      "passed": true,
+      "displayed": ".5510",
+      "source_value": 0.551,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:640:6",
+      "passed": true,
+      "displayed": ".4875",
+      "source_value": 0.4875,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.1:640:7",
+      "passed": true,
+      "displayed": ".8270",
+      "source_value": 0.827,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:80:0",
+      "passed": true,
+      "displayed": ".40",
+      "source_value": 0.4,
+      "rounding_tolerance": 0.005000001,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:80:1",
+      "passed": true,
+      "displayed": "80",
+      "source_value": 80.0,
+      "rounding_tolerance": 0.0,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:80:2",
+      "passed": true,
+      "displayed": ".0616",
+      "source_value": 0.061604452809332515,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:80:3",
+      "passed": true,
+      "displayed": ".0693",
+      "source_value": 0.069342467798723,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:80:4",
+      "passed": true,
+      "displayed": ".0490",
+      "source_value": 0.049,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:80:5",
+      "passed": true,
+      "displayed": ".0430",
+      "source_value": 0.043,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:80:6",
+      "passed": true,
+      "displayed": ".1605",
+      "source_value": 0.1605,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:80:7",
+      "passed": true,
+      "displayed": ".1780",
+      "source_value": 0.178,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:640:0",
+      "passed": true,
+      "displayed": ".40",
+      "source_value": 0.4,
+      "rounding_tolerance": 0.005000001,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:640:1",
+      "passed": true,
+      "displayed": "640",
+      "source_value": 640.0,
+      "rounding_tolerance": 0.0,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:640:2",
+      "passed": true,
+      "displayed": ".0102",
+      "source_value": 0.010229350462949302,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:640:3",
+      "passed": true,
+      "displayed": ".0101",
+      "source_value": 0.010089244242994672,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:640:4",
+      "passed": true,
+      "displayed": ".0505",
+      "source_value": 0.0505,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:640:5",
+      "passed": true,
+      "displayed": ".0505",
+      "source_value": 0.0505,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:640:6",
+      "passed": true,
+      "displayed": ".0785",
+      "source_value": 0.0785,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "pathway:0.4:640:7",
+      "passed": true,
+      "displayed": ".0770",
+      "source_value": 0.077,
+      "rounding_tolerance": 5.0000009999999996e-05,
+      "source": "reference_pathway_summary_20260909.tsv"
+    },
+    {
+      "check": "MC:0.1:80:population_reference:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:80:population_reference:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:80:population_scale:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:80:population_scale:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:80:population_median:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:80:population_median:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:80:full_fit:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:80:full_fit:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:640:population_reference:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:640:population_reference:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:640:population_scale:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:640:population_scale:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:640:population_median:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:640:population_median:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:640:full_fit:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.1:640:full_fit:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:80:population_reference:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:80:population_reference:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:80:population_scale:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:80:population_scale:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:80:population_median:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:80:population_median:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:80:full_fit:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:80:full_fit:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:640:population_reference:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:640:population_reference:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:640:population_scale:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:640:population_scale:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:640:population_median:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:640:population_median:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:640:full_fit:stage_aware",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "MC:0.4:640:full_fit:direct_only",
+      "passed": true,
+      "detail": "count, Wilson interval and binomial Monte Carlo SE"
+    },
+    {
+      "check": "reduced_C_proof",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "paired_six_dimensional_stack",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "empirical_not_population_L2_under_weak_moments",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "coefficient_and_weight_localization",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "unstudentized_ranking_boundary",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "section2_unchanged_margins",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "formula_command_repaired",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "unbridged_zero_index_disclosed",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "placement_not_approval",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "application_is_not_assumed_IID",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "review_is_not_independent_certification",
+      "passed": true,
+      "detail": "source wording safeguard, not a proof certificate"
+    },
+    {
+      "check": "display_tables_rebuild_exactly_from_frozen_sources",
+      "passed": true,
+      "detail": "five display artifacts match reporting-script reconstruction"
+    },
+    {
+      "check": "table2_is_exclusively_theorem_aligned_wald",
+      "passed": true,
+      "detail": "6 selected regular-IID rows"
+    },
+    {
+      "check": "figure1_is_explicit_noncalibration_mechanism_evidence",
+      "passed": true,
+      "detail": "22 intervention rows; no permutation rows"
+    },
+    {
+      "check": "figure2_is_exclusively_empirical_permutation_bridge_evidence",
+      "passed": true,
+      "detail": "24 bridge cells with explicit permutation boundary"
+    },
+    {
+      "check": "figure3_is_exclusively_empirical_permutation_residual_evidence",
+      "passed": true,
+      "detail": "10 matched-index plus prospective residual cells"
+    },
+    {
+      "check": "display_source_manifest_is_current_and_complete",
+      "passed": true,
+      "detail": "7 source entries; all source files present"
+    },
+    {
+      "check": "section6_states_track_and_claim_boundaries",
+      "passed": true,
+      "detail": "required track labels and claim boundaries are present"
+    },
+    {
+      "check": "section6_never_mixes_wald_and_permutation_in_one_display",
+      "passed": true,
+      "detail": "explicit display-separation statement present"
+    },
+    {
+      "check": "display_builder_does_not_introduce_simulation_or_grid_search",
+      "passed": true,
+      "detail": "reporting script only reads frozen tables and renders displays"
+    },
+    {
+      "check": "all_rendered_figure_formats_are_present_and_nonempty",
+      "passed": true,
+      "detail": "manuscript_figure1_reference_switching_20260905.png,manuscript_figure1_reference_switching_20260905.pdf,manuscript_figure2_conditioning_bridge_20260905.png,manuscript_figure2_conditioning_bridge_20260905.pdf,manuscript_figure3_family_residual_20260905.png,manuscript_figure3_family_residual_20260905.pdf"
+    },
+    {
+      "check": "hash:scripts/validate_active_nuisance_20260907.py",
+      "passed": true,
+      "detail": "active_nuisance_manifest_20260907.tsv"
+    },
+    {
+      "check": "hash:src/cdelta.py",
+      "passed": true,
+      "detail": "active_nuisance_manifest_20260907.tsv"
+    },
+    {
+      "check": "hash:docs/active_nuisance_validation_protocol_20260907.md",
+      "passed": true,
+      "detail": "active_nuisance_manifest_20260907.tsv"
+    },
+    {
+      "check": "hash:results/active_nuisance_derivative_20260907.tsv",
+      "passed": true,
+      "detail": "active_nuisance_manifest_20260907.tsv"
+    },
+    {
+      "check": "hash:results/active_nuisance_mechanism_scope_20260907.tsv",
+      "passed": true,
+      "detail": "active_nuisance_manifest_20260907.tsv"
+    },
+    {
+      "check": "hash:results/active_nuisance_paired_20260907.tsv",
+      "passed": true,
+      "detail": "active_nuisance_manifest_20260907.tsv"
+    },
+    {
+      "check": "hash:results/active_nuisance_population_20260907.tsv",
+      "passed": true,
+      "detail": "active_nuisance_manifest_20260907.tsv"
+    },
+    {
+      "check": "hash:results/active_nuisance_replications_20260907.tsv",
+      "passed": true,
+      "detail": "active_nuisance_manifest_20260907.tsv"
+    },
+    {
+      "check": "hash:results/active_nuisance_summary_20260907.tsv",
+      "passed": true,
+      "detail": "active_nuisance_manifest_20260907.tsv"
+    },
+    {
+      "check": "hash:scripts/audit_referee_readiness_20260908.py",
+      "passed": true,
+      "detail": "referee_diagnostics_manifest_20260908.tsv"
+    },
+    {
+      "check": "hash:src/cdelta.py",
+      "passed": true,
+      "detail": "referee_diagnostics_manifest_20260908.tsv"
+    },
+    {
+      "check": "hash:results/active_nuisance_replications_20260907.tsv",
+      "passed": true,
+      "detail": "referee_diagnostics_manifest_20260908.tsv"
+    },
+    {
+      "check": "hash:results/active_nuisance_population_20260907.tsv",
+      "passed": true,
+      "detail": "referee_diagnostics_manifest_20260908.tsv"
+    },
+    {
+      "check": "hash:results/referee_coverage_diagnostics_20260908.tsv",
+      "passed": true,
+      "detail": "referee_diagnostics_manifest_20260908.tsv"
+    },
+    {
+      "check": "hash:results/referee_root_replay_20260908.tsv",
+      "passed": true,
+      "detail": "referee_diagnostics_manifest_20260908.tsv"
+    },
+    {
+      "check": "hash:scripts/run_reference_pathway_20260909.py",
+      "passed": true,
+      "detail": "reference_pathway_manifest_20260909.tsv"
+    },
+    {
+      "check": "hash:src/cdelta.py",
+      "passed": true,
+      "detail": "reference_pathway_manifest_20260909.tsv"
+    },
+    {
+      "check": "hash:scripts/validate_active_nuisance_20260907.py",
+      "passed": true,
+      "detail": "reference_pathway_manifest_20260909.tsv"
+    },
+    {
+      "check": "hash:docs/reference_pathway_protocol_20260909.md",
+      "passed": true,
+      "detail": "reference_pathway_manifest_20260909.tsv"
+    },
+    {
+      "check": "hash:results/reference_pathway_replications_20260909.tsv",
+      "passed": true,
+      "detail": "reference_pathway_manifest_20260909.tsv"
+    },
+    {
+      "check": "hash:results/reference_pathway_summary_20260909.tsv",
+      "passed": true,
+      "detail": "reference_pathway_manifest_20260909.tsv"
+    },
+    {
+      "check": "hash:results/reference_pathway_paired_20260909.tsv",
+      "passed": true,
+      "detail": "reference_pathway_manifest_20260909.tsv"
+    },
+    {
+      "check": "hash:results/reference_pathway_model_checks_20260909.tsv",
+      "passed": true,
+      "detail": "reference_pathway_manifest_20260909.tsv"
+    },
+    {
+      "check": "hash:results/reference_pathway_root_sensitivity_20260909.tsv",
+      "passed": true,
+      "detail": "reference_pathway_manifest_20260909.tsv"
+    }
+  ],
+  "all_passed": true,
+  "source_hashes_lf": {
+    "docs/manuscript_draft_section_6_20260905.md": "d0bdfb3d0ac042d180d032b75226db68d8a5334421a76431b307bf35a33149b2",
+    "docs/appendix_asymptotic_theory_20260819.md": "7a2f461bc2772b4432d493f8a091d97c11f478a0a0ebffb81a99e4f94f284467",
+    "docs/manuscript_draft_sections_1_2_20260830.md": "38f3e08a744c38ba353bf5e5c5f6f53ad83d2762441c36676de1cb2e886bedf6",
+    "docs/manuscript_draft_sections_3_5_20260904.md": "f8f38c9b49fb0f5fc334f6fd5be798fa017697a8b7fc7588e972985abee750cb",
+    "docs/manuscript_draft_section_8_20260908.md": "e7d4207cfad7dfd24259e9e0309ac6c24e9a5adeb8a4811aa4ee1d4ab61a4d2f",
+    "docs/manuscript_completion_review_20260910.md": "2e6c99997f299918e3ea4afa0c07f1edaa0801f17d22151e86f6211afcd266f2",
+    "docs/manuscript_review_frontmatter_20260910.md": "4f47f70e7d010ed08fb989c7f5e7a47f2a065f7793d2baff57996c5382f5cf6e",
+    "scripts/audit_manuscript_completion_20260910.py": "02c8b294b8ea288da3d102382ce1f6860068a6383f6ac08c399519f3586f2e11",
+    "results/active_nuisance_manifest_20260907.tsv": "2be3a4dd4eea2286094fc16d7a1ac42dd2510dd23acbc683d85f916587a812c0",
+    "results/referee_diagnostics_manifest_20260908.tsv": "5288fc22f7ced46ff713e806feea3fdb9464bec4db7ea5aee95110eab8641482",
+    "results/reference_pathway_manifest_20260909.tsv": "ba73a3297710e23d817e20d67d946c7f3fd789c3d76b31de5d640479329dbdb3"
+  }
+}

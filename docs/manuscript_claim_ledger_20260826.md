@@ -67,6 +67,19 @@ finite-sample coverage or superiority over the direct-only ablation. See
 
 ## What is theorem, proposition, or observation
 
+**2026-09-10 completion reconciliation.** The existing chapters and proof
+draft are sufficient for an integrated first working manuscript, not a
+submission-readiness certificate. The Appendix proof now distinguishes the
+reduced three moments for C from the general five moments for rho_P, states
+the paired six-dimensional nuisance stack, and separates empirical-norm
+weak-null variance control from population L2 claims under stronger moments.
+An automated audit compares the actual Section 6 displayed numbers and
+Monte Carlo uncertainty against their stored sources. Full mathematical
+peer review, clean-environment reproduction, final references and author
+approval remain open. The S2 permutation allocation is proposed, not approved;
+no real dataset has yet passed the paired-IID application gate. See
+`docs/manuscript_completion_review_20260910.md`.
+
 **2026-09-09 supervisor-directed qualification.** The main contribution is
 pointwise regular inference with a worked finite-sample failure, not a broad
 safe-use rule. In four existing shared-sign cells, fixed-population-scale

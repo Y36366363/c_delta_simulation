@@ -172,11 +172,13 @@ failure, and an informative but incomplete conditioning diagnostic. Numerical
 audits, source hashes, and unit tests improve reproducibility; they are not
 independent mathematical peer review and do not prove finite-sample validity.
 
-The next scientific decision is whether the paper is primarily an analysis of
-reliability and failure, or must additionally deliver a practically calibrated
-inferential procedure. If a stronger theoretical bridge is desired, one
-carefully chosen local-to-degeneracy result would address an identified gap
-more directly than a larger distribution catalogue. Application selection,
+Following the supervisor's September 9 response, the present paper is an
+analysis of pointwise inference and finite-sample limits; a generally
+calibrated practical procedure is not a completion requirement. A stronger
+local-to-degeneracy theorem would be a separately agreed extension, not the
+next default experiment. Remaining decisions concern manuscript integration,
+supplement placement, and an optional defensible paired-data illustration.
+Application selection,
 clustered or multivariate extensions, a weak-null permutation theorem, and an
 operational diagnostic each introduce separate obligations and are not
 silently incorporated into the current claims.

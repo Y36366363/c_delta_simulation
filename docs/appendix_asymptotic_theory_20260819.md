@@ -1,7 +1,7 @@
 # Appendix: asymptotic theory for robust paired-salience concordance
 
 Date: 2026-08-19
-Audit revision: 2026-08-21
+Audit revision: 2026-09-10 (internal proof-to-manuscript reconciliation)
 
 ## A.1 Scope and notation
 
@@ -201,8 +201,13 @@ For a pathwise statement, let \(\mathcal T\) consist of signed tangent
 measures \(h\) with total mass zero, the weighted variation required by the
 relevant moment assumption, and marginal cdf perturbations continuous at
 \(m\) and \(m\pm d\). This excludes an atom inserted exactly at a quantile
-boundary, where a convention-dependent one-sided derivative can occur. The
-continuous iid empirical-process tangent is covered.
+boundary, where a convention-dependent one-sided derivative can occur.
+These pathwise calculations are not justified by assuming convergence of
+empirical laws in weighted total variation. The IID argument below uses
+quantile/Bahadur expansions and paired finite-dimensional Z-estimation with
+the stated empirical-process controls. A standalone joint Hadamard theorem
+for a fully specified normed distribution domain remains a separate
+proof-presentation review item; it is not inferred from the tangent notation.
 
 ## A.3 Marginal nuisance derivative
 
@@ -256,7 +261,8 @@ Expansion of the two moving boundaries gives
 The denominator is positive by A2. The quantile Hadamard-differentiability
 theorem makes these expansions uniform on the declared tangent set. ∎
 
-For the contamination tangent \(h=\Delta_z-P\),
+For the contamination tangent \(h=\Delta_z-P\), at \(P_W\)-almost every
+\(z\) away from the median and MAD boundaries,
 
 \[
 IF_m(z)=\frac{1/2-1(z\le m)}{f(m)}
@@ -517,21 +523,34 @@ where \(V_\rho=E(IF_\rho^2)\) and \(V_C=E(IF_C^2)\).
 
 #### Proof
 
-Lemmas A.1–A.2 and the VC quantile expansions give the stacked nuisance
-representation
+Lemmas A.1–A.2 and the VC quantile expansions give, for a generic margin,
+the nuisance representation
 
 \[
 \sqrt n(\widehat\theta-\theta)
 =-J_0^{-1}\frac1{\sqrt n}\sum_{i=1}^n g(W_i;\theta)+o_P(1).
 \]
 
-Lemma A.3 removes the empirical-process remainder created by replacing
-\(\theta\) with \(\widehat\theta\) in the five moment functions. The ordinary
-population Taylor terms in that substitution are exactly the nuisance terms
-displayed in Section A.4. Hence the five moments have the complete joint
-asymptotic linear representation \(n^{-1/2}\sum_i IF_M(Z_i)+o_P(1)\).
+For the paired problem stack both margins into
+\(\theta_{XY}=(m_X,d_X,T_X,m_Y,d_Y,T_Y)^\top\), with score
+\(g_{XY}(Z_i)=(g_X(X_i)^\top,g_Y(Y_i)^\top)^\top\). Here \(g_X,g_Y\)
+denote three-component estimating scores, not the scalar sign expectations
+in Section A.4. The derivative is block diagonal
+\(\operatorname{diag}(J_{0X},J_{0Y})\), but the score covariance need not be:
+the independent summands are intact pairs \(Z_i\), never separate margins.
 
-Under A4, both finite-dimensional maps from the moment vector to \(C\) and
+For general \(\rho_P\), apply Lemma A.3 under A5-\(\rho\) to the full
+five-moment vector \(M_\rho=(\nu,\mu_a,\mu_b,q_a,q_b)^\top\).
+For \(C\), use only the reduced three-moment vector
+\(M_C=(\nu,\mu_a,\mu_b)^\top\) and the reduced A8 class under A5-C.
+No root-n expansion of \(q_a,q_b\) is needed or asserted under A5-C.
+The ordinary population Taylor terms are precisely the nuisance terms in
+Section A.4, so each applicable moment vector has its joint asymptotic linear
+representation. For the reduced class, the same Lipschitz bounds in Lemma A.3
+use square-integrable envelopes supplied by A5-C; no fourth marginal moment
+is imported from the general-correlation branch.
+
+Under A4, the respective finite-dimensional maps from these moment vectors to \(C\) and
 \(\rho_P\) are continuously differentiable near the population moments. The
 multivariate delta method gives the two influence functions. A5-C places
 \(IF_C\) in \(L_2(P)\); A5-\(\rho\) places \(IF_\rho\) in \(L_2(P)\). The iid
@@ -575,6 +594,15 @@ The remaining moment terms are continuous in the nuisance parameters and are
 dominated by the A8 envelopes. A5-C or A5-\(\rho\), as appropriate, makes the
 squared influence envelope uniformly integrable. Truncation followed by
 dominated convergence gives the displayed \(L_2(P)\) result. ∎
+
+For clarity, localization includes the finitely many fitted scalar
+coefficients, not just the reference coordinates. Their consistency puts
+them in deterministic bounded neighbourhoods with probability tending to
+one. Weighted discontinuous terms, such as a moving sign times a radius,
+are dominated in squared norm by a constant times \(1+Y^2\); convergence of
+the sign outside a null boundary and dominated convergence handle the weight.
+The squared-class GC condition then handles reuse of the fitting observations;
+an independent evaluation sample is not assumed.
 
 ### Lemma A.5 (in-sample empirical second moment)
 
@@ -688,6 +716,15 @@ The same argument applies to \(b\) and the cross terms. Thus fourth marginal
 moments are required for the general-\(\rho_P\) confidence theorem, but not
 for the first-order test of \(H_0:\rho_P=0\).
 
+This last argument is in the empirical \(P_n\) norm. It does not claim
+population \(L_2(P)\) consistency of an unrestricted plug-in influence with a
+nonzero fitted coefficient on \(a^2\) when \(E(a^4)=\infty\). For fitted
+radii use \(|X_i-\widehat T_X|\le a_i+|\widehat T_X-T_X|\); the maximum
+bound and denominator consistency are unchanged. Obtain the null numerator's
+root-n expansion from \(M_C\), then divide by the consistent positive profile
+standard deviations. This avoids applying a five-dimensional root-n delta
+method under the relaxed moments.
+
 ### Corollary A.3 (reference orthogonality under independence)
 
 Suppose in addition that \(X\) and \(Y\) are independent and
@@ -735,9 +772,13 @@ permutation \(\pi\),
 C_\pi=1+\rho_\pi CV_n(a)CV_n(b).
 \]
 
-The CV factors are positive and fixed over the orbit. Thus \(C_\pi\) and
-\(\rho_\pi\) have identical ranks and corresponding permutation p-values when
-centred at \(1\) and \(0\), respectively.
+The CV factors use variance divisor n and are positive and fixed over the
+orbit. Thus \(C_\pi\) and \(\rho_\pi\) have identical unstudentized ranks and
+corresponding permutation p-values when centred at \(1\) and \(0\),
+respectively, using the same one-sided or absolute-deviation ordering. This
+does not equate p-values obtained from different orbit-specific studentizers.
+Re-pairing does not change marginal median/MAD/Huber reference fits; joint
+profile moments and the studentized statistic are the recomputed quantities.
 
 ### Proposition A.2 (finite-sample randomization validity)
 
@@ -863,7 +904,8 @@ convention-equivalence argument is needed to invoke their weak Bahadur
 theorem. It also independently confirmed the asymmetric endpoint-density sign
 by a distribution-level contamination derivative.
 
-Final placement is now fixed. The main manuscript Appendix A retains the
+The current working placement proposal, pending supervisor confirmation,
+is that the main manuscript Appendix A retains the
 assumptions, nuisance and moment derivatives, concise empirical-process
 verification, main theorem, studentization, and nonuniformity boundary. The
 full class-by-class entropy ledger, squared-class preservation details, and

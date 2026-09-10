@@ -75,6 +75,8 @@ finite-dimensional calculations, and empirical simulation evidence.
 - [High-standard referee review and open issues](docs/referee_readiness_review_20260908.md)
 - [Supervisor-directed four-stage reference-pathway results](docs/reference_pathway_results_20260909.md)
 - [Short shared-sign model result and bounded rate heuristic](docs/shared_sign_model_result_20260909.md)
+- [First-draft reading entry and provisional abstract](docs/manuscript_review_frontmatter_20260910.md)
+- [Completion review, proof/evidence reconciliation and placement decisions](docs/manuscript_completion_review_20260910.md)
 
 ## Reproducibility
 
@@ -97,6 +99,39 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+## Updates 09/10/2026
+
+- **Ready for a first integrated working draft, not yet certified for
+  submission** - Existing Sections 1--6, Discussion, Appendix A and the short
+  shared-sign result now have an ordered reading entry and provisional English
+  abstract. Hoorn's revised Introduction remains the author-integration input;
+  no competing full rewrite or new simulation grid was added.
+- **Proof-to-text reconciliation corrected specific issues** - The secondary
+  C proof now uses its reduced three-moment vector under A5-C rather than
+  borrowing the general-rho five-moment CLT. The paired six-dimensional score
+  stack and its cross-margin covariance are explicit. Weak-null empirical-norm
+  control is distinguished from population L2 with infinite fourth moments.
+  A missing LaTeX command slash and stale re-pairing wording were corrected.
+- **Displayed numbers are checked against sources** - A read-only audit
+  compares 95 numeric entries in the actual Section 6 tables, recomputes
+  pathway Wilson intervals and Monte Carlo SE, checks frozen display
+  reconstruction and source hashes. No prior simulation records or estimator
+  algorithms were changed. Audit output and exact check scope are in
+  `results/manuscript_completion_audit_20260910.json`: **172 checks pass**.
+  The full regression suite passes **276 tests**, including a deliberate
+  optimistic-coverage edit that the new table audit correctly rejects.
+- **Supplement and application choices stay explicit** - Detailed permutation
+  Figures 2--3 and their supporting statements are proposed for Supplement S2,
+  pending supervisor confirmation; no physical move or renumbering has been
+  made. A real application is optional and must first pass a documented
+  scientific-pairing/IID-design gate. No dataset has passed that gate yet.
+- **Remaining obligations are substantive but bounded** - Independent proof
+  review, numerical-root/software obligations, clean-environment reproduction,
+  final bibliography and author review remain open. Historical external-source
+  matching is not independent mathematical peer review. A universal cutoff,
+  new resampling method or broad degeneracy theory is not a drafting
+  prerequisite.
 
 ## Updates 09/09/2026
 

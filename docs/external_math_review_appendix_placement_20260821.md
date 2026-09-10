@@ -2,6 +2,12 @@
 
 Date: 2026-08-21
 
+> Status clarification, 2026-09-10: this is a historical external-source
+> matching audit, not independent mathematical peer review. Its placement
+> language records a working editorial proposal, not supervisor approval.
+> Current obligations and proposed allocation are in
+> `docs/manuscript_completion_review_20260910.md`.
+
 ## Verdict
 
 The regular-iid theorem remains defensible after external source matching,

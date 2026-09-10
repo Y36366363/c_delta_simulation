@@ -235,7 +235,7 @@ q_b=E_P\{b_P(Y)^2\},\qquad
 and let
 
 \[
-v_a=q_a-\mu_a^2,qquad v_b=q_b-\mu_b^2.
+v_a=q_a-\mu_a^2,\qquad v_b=q_b-\mu_b^2.
 \]
 
 Whenever \(v_a>0\) and \(v_b>0\), the primary estimand is
@@ -409,8 +409,11 @@ This algebraic ordering is not itself an inference theorem. Exact
 randomization validity requires the conditional joint law of the labels to be
 invariant under the declared permutation group. The weak null
 \(\rho_P=0\), equivalently \(C=1\), does not generally imply that invariance.
-Moreover, when the reference is recomputed after relabelling, the statistic
-and its studentizer must be treated as complete orbit-specific quantities.
+Re-pairing leaves each marginal sample, its median and MAD, and its Huber
+reference unchanged. The orbit-specific quantities that must be recomputed
+are the joint profile moments and the studentizer. The unstudentized ranking
+identity does not establish equality of separately studentized permutation
+p-values.
 Section 3 therefore uses full influence-function Wald inference for the
 regular IID weak null; later permutation results are labelled according to
 their empirical or group-invariance status.

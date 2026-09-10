@@ -2,7 +2,7 @@
 
 Date: 2026-08-29
 
-Readiness and scope revision: 2026-09-09. This map is current working guidance,
+Readiness and scope revision: 2026-09-10. This map is current working guidance,
 not an independent peer-review certification. See
 `docs/referee_readiness_review_20260908.md` for unresolved submission issues.
 
@@ -148,7 +148,8 @@ Introduce the separated-mode weak-null family. Its unbridged signed-lognormal
 median is nonregular at every positive radial spread; its population Huber
 score at the declared MAD scale is not flat. Explain the nonlocal empirical
 median/MAD-to-reference pathway without treating it as a regular first-order
-scale derivative at symmetry.
+scale derivative at symmetry. Also explain the direct fixed-scale location
+path and the additional amplification separated by the four-stage check.
 
 The evidence sequence should be causal rather than catalogued:
 
@@ -257,16 +258,17 @@ Primary sources: `results/canonical_evidence_20260819.tsv` and
 Status: not yet frozen for the paper.
 
 The existing building simulations are useful design stress tests but are not
-automatically a real-data application. Before submission, decide with
-Professor Hoorn whether the paper needs:
+automatically a real-data application. The latest supervisor direction permits
+either:
 
 - one genuine paired dataset illustrating profile construction and the
   diagnostic;
-- a clearly labelled synthetic illustration; or
 - no application, with the paper positioned as a methodological theory and
   simulation article.
 
-This is the largest remaining presentation decision. It should not be filled
+The application is optional, not a prerequisite to an integrated first draft.
+Existing synthetic experiments must not be presented as a real application.
+This decision should not be filled
 with a convenient dataset whose scientific pairing or sampling design is
 unclear.
 
@@ -302,6 +304,13 @@ population-SE diagnostic; neither is a new inferential recommendation.
    prediction error.
 6. **Optional Table 3:** practical interpretation and assumptions for the
    diagnostic, only if an applied illustration is included.
+
+These are legacy display identifiers, not a finalized main-text allocation.
+The current proposal keeps the regular Wald, active-nuisance coverage, and
+four-stage mechanism displays central, and moves detailed permutation
+Figures 2--3 to Supplement S2 while retaining a bounded Section 5 summary.
+See `docs/manuscript_completion_review_20260910.md`; professor approval and
+final numbering remain pending.
 
 The four historical canonical panels remain frozen evidence, but their final
 manuscript display may be reorganized so that Wald and permutation tracks are
@@ -367,9 +376,15 @@ integrated regularity--switching--conditioning argument for Sections 3--5 is
 in `docs/manuscript_draft_sections_3_5_20260904.md`, and the frozen displays
 and Section 6 text are in `docs/manuscript_draft_section_6_20260905.md`.
 Section 8 is drafted in `docs/manuscript_draft_section_8_20260908.md`.
-Next prepare independent mathematical review and a clean reproduction recipe.
-Section 7 remains open. The scientific decisions for Professor Hoorn include
-whether a genuine application, stronger local theory, or practically calibrated
-intervals are essential to the intended paper. Promoting
+The material is sufficient to assemble an integrated first draft now; it is
+not submission-ready merely because the tests pass. Use
+`docs/manuscript_review_frontmatter_20260910.md` as the provisional reading
+entry and abstract, and `docs/manuscript_completion_review_20260910.md` as the
+proof/evidence and supervisor-decision checklist. Independent mathematical
+review and a clean reproduction recipe remain open. Section 7 is optional.
+The current supervisor decisions are placement, integration of Hoorn's
+Introduction, and whether a defensible application is available. Stronger
+local theory or practically calibrated intervals are separate projects, not
+assumed prerequisites to this first draft. Promoting
 \(I_n\) from a population explanation to an operational warning rule would be
 a separate theoretical decision and is not assumed by the current draft.

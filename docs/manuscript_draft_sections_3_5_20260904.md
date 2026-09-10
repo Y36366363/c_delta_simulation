@@ -390,6 +390,12 @@ not an exact response curve.
 
 ### 5.3 What the index does not explain
 
+In the unbridged shared-sign signed-lognormal construction of Section 4,
+the full standardized J is singular for every positive tau, including both
+the severe and diffuse controls. Thus I_n=0 throughout that construction;
+the index does not explain its tau-specific severity. The bridge panels vary
+positive central density and constitute a separate empirical comparison.
+
 Every prospective hyperexponential prediction exceeded the observed rejection
 rate, with absolute errors from 0.019 to 0.112. Earlier matched-J comparisons
 also retained family-specific rejection differences. These are family
