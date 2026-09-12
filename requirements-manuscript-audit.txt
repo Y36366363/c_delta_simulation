@@ -1,0 +1,7 @@
+# Bounded numerical and source audit environment; not every historical script.
+# Exercised with CPython 3.12.3; see the dated interface report.
+numpy==1.26.4
+scipy==1.16.3
+pytest==7.4.4
+# Imported by the historical display/provenance audit even without rendering.
+matplotlib==3.9.2

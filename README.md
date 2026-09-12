@@ -65,6 +65,10 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [Current manuscript-interface resolution and bounded reproduction](docs/manuscript_interface_resolution_20260912.md)
+- [September 11 intermediate evidence manuscript with S1--S3](docs/manuscript_integrated_20260911.md)
+- [September 11 intermediate combined PDF](output/pdf/rho_p_integrated_20260911.pdf)
+- [Interface closure and claim/proof/source crosswalk](docs/manuscript_interface_crosswalk_20260911.md)
 - [Manuscript skeleton and readiness audit](docs/manuscript_skeleton_and_readiness_20260829.md)
 - [Draft manuscript Sections 1–2](docs/manuscript_draft_sections_1_2_20260830.md)
 - [Archive and Section 3 readiness audit](docs/archive_and_section3_readiness_20260831.md)
@@ -89,8 +93,10 @@ python3 -m pytest -q
 Individual simulations and audits are available in [`scripts/`](scripts/).
 The repository is currently research code rather than a packaged software
 release. The primary \(\rho_P\) inference API is now public in `src/cdelta.py`;
-a consolidated dependency specification remains part of the software-readiness
-work.
+a consolidated dependency specification for all historical runners remains
+part of the software-readiness work. The bounded manuscript audit has its own
+tested [package lock](requirements-manuscript-audit-lock.txt) and
+[repeatable commands](docs/manuscript_interface_resolution_20260912.md).
 
 ## Detailed Research Log
 
@@ -99,6 +105,53 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+## Updates 09/12/2026
+
+- **User-approved minimal LaTeX is the editing base.** Literature distinctions,
+  an elementary random-bandwidth KDE proof and a conditional numerical-root
+  bound were added locally, preserving the original preamble, theorem and
+  all 19 tables. Manuscript artifacts are delivered outside this repository.
+- **Final-LaTeX and bounded numerical checks now run in an isolated environment
+  and source snapshot.** The actual manuscript's 1,047 table cells match their
+  sources; 41 existing datasets reproduce 137 method/stage rows and 193
+  decisions. Bracketed-root/full-IF comparisons change no checked decision.
+  Seventeen targeted tests pass; no new simulation cells were added. See the
+  [interface report](docs/manuscript_interface_resolution_20260912.md) for
+  scope, provenance, warnings and remaining independent-review obligations.
+
+## Updates 09/11/2026
+
+- **Actual supplements are now connected to one author draft** - The new
+  integrated Markdown manuscript and combined PDF supply S1's paired
+  Bahadur/Z proof and local class verification, S2's existing permutation
+  figures and full bridge/family panels, and S3's designs, seeds, studentizers,
+  result tables and diagnostics. Historical chapter drafts, frozen results,
+  source manifests and the public estimator remain unchanged. Hoorn's
+  Introduction is still awaited; the existing provisional text is retained.
+- **Previously missing interfaces are documented** - The score vector and
+  marginal/paired covariance, raw-MAD error coordinates, radius variances,
+  exact DGMs, default Gaussian KDE, solver tolerances and stage-specific
+  influences are explicit. The original preprint's planned normalization
+  change is not represented as an already verified public revision.
+- **Supporting C uses the original replication values** - One existing
+  tau=.10,n=640 cell was deterministically replayed at stored references to
+  recover both marginal CVs, without refitting. All 8,000 stage records from
+  2,000 stored seeds agree (maximum rho gap 1.56e-15; C gap zero). Mean C is
+  not reconstructed by multiplying mean rho and mean CVs. There are no new
+  Monte Carlo cells and no new reference fits.
+- **Provenance review qualifies the old family confirmation** - The bridge
+  pilot and larger matched-index confirmation share cell seeds and RNG
+  consumption; the first 150 draws overlap. S2 now describes a larger-run
+  confirmation rather than an entirely independent repetition. The old
+  rates and hashes are retained, and this does not affect the September 9
+  pathway study.
+- **Validation remains scoped** - The new audit checks 19 actual table/ledger
+  blocks; the historical audit still passes 172 checks covering 95 displayed
+  numbers. The full suite passes 280 tests. Independent mathematical review,
+  a general solver-to-theorem guarantee, clean-environment reproduction and
+  final author decisions remain open. The interface crosswalk distinguishes
+  assembled proof material from independently certified results.
 
 ## Updates 09/10/2026
 
