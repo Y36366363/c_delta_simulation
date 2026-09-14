@@ -106,6 +106,22 @@ decisions, simulation audits, and manuscript-readiness checks.
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
 
+## Updates 09/14/2026
+
+- **Internal proof and root-condition review.** The [targeted review](docs/proof_solver_review_20260914.md)
+  makes moving-boundary domination, random-coefficient localization and the
+  weak-null empirical-norm argument explicit, with an analytic independent-t3
+  scope example. This is not independent mathematical peer review.
+- **A diagnostic residual-checked solver, not a new default.** Under the
+  [internal protocol](docs/proof_solver_protocol_20260914.md), a separate
+  bisection prototype accepts only after an exact rational score check on
+  represented inputs against 1/(10^8 n). All 82 margins of the same 41 existing
+  datasets pass; full-IF recomputation changes no checked decision. Twenty-seven
+  new deterministic tests and 14 existing API/pathway tests pass. The finite-machine failure guard is distinguished
+  from the ideal-arithmetic R5 argument. Public algorithms, frozen results and
+  manuscripts are unchanged; no new simulation cells were added. See the
+  [complete numerical audit](results/proof_solver_audit_20260914.json).
+
 ## Updates 09/12/2026
 
 - **User-approved minimal LaTeX is the editing base.** Literature distinctions,
