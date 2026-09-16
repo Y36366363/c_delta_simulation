@@ -72,6 +72,14 @@ def test_stored_completion_audit_is_current():
     assert stored == build_audit()
 
 
+def test_original_scientific_checks_preserved_across_source_version_update():
+    old = json.loads((ROOT / 'results/manuscript_completion_audit_20260910.json').read_text())
+    current = build_audit()
+    cleaned = [{k:v for k,v in row.items() if k not in {'version','verified_path'}}
+               for row in current['checks']]
+    assert cleaned == old['checks']
+
+
 def test_draft_entry_preserves_open_application_and_review_decisions():
     entry = (ROOT / "docs/manuscript_review_frontmatter_20260910.md").read_text()
     review = (ROOT / "docs/manuscript_completion_review_20260910.md").read_text()

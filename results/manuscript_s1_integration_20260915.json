@@ -1,0 +1,20 @@
+{
+  "base_tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260914/main.tex",
+  "final_tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260915/main.tex",
+  "pdf_pages": 36,
+  "preamble_preserved_except_date": true,
+  "main_theorem_preserved": true,
+  "original_introduction_preserved": true,
+  "tabular_bodies_preserved": 19,
+  "latex_errors_warnings": 0,
+  "tests_passed": 327,
+  "test_warnings": 14,
+  "test_warning_type": "dependency deprecations",
+  "visual_review": "All-page contact sheets and enlarged pages 18,20,21,22; no evident clipping or overlap",
+  "new_simulation_cells": 0,
+  "artifacts": {
+    "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260914/main.tex": "9d277922bbcba4be2ee3b24c58c806d97fd4213da3d92d034a2f69ae163370cb",
+    "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260915/main.tex": "a06e21586559869113815a61b7009f715dbe9eac6a1451410dd35248d6b43011",
+    "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260915/rho_p_minimal_preview_20260915.pdf": "3bc39ffbc79e40e4bc3d990b8bb44a9d62128b2dd290dfe763c2a83f483ee334"
+  }
+}

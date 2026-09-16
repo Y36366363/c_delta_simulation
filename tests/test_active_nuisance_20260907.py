@@ -1,3 +1,4 @@
+from scripts.verify_frozen_sources import frozen_source_check
 """Numerical correctness and provenance, not assertions of desired coverage."""
 
 import csv
@@ -114,17 +115,11 @@ def test_frozen_summaries_reconstruct_and_keep_failures_and_paired_uncertainty()
         assert row["maximum_estimate_difference"] < 1e-12
 
 
-def test_source_and_output_manifest_hashes_are_current():
+def test_source_and_output_manifest_hashes_match_declared_versions():
     rows = read("active_nuisance_manifest_20260907.tsv")
     assert len(rows) >= 9
     for row in rows:
-        data = (
-            (ROOT / row["path"])
-            .read_bytes()
-            .replace(b"\r\n", b"\n")
-            .replace(b"\r", b"\n")
-        )
-        assert hashlib.sha256(data).hexdigest() == row["sha256_lf"]
+        assert frozen_source_check(row["path"], row["sha256_lf"])["passed"]
 
 
 def test_active_manuscript_preserves_refined_claim_boundaries():

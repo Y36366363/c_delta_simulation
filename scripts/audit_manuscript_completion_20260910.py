@@ -16,12 +16,13 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from scripts.audit_section6_displays_20260905 import section6_display_audit
+from scripts.verify_frozen_sources import frozen_source_check
 from scripts.freeze_canonical_evidence_20260819 import normalized_text_sha256
 from scripts.validate_active_nuisance_20260907 import wilson
 
 SECTION6 = "docs/manuscript_draft_section_6_20260905.md"
 APPENDIX = "docs/appendix_asymptotic_theory_20260819.md"
-OUTPUT = "results/manuscript_completion_audit_20260910.json"
+OUTPUT = "results/manuscript_completion_audit_20260915.json"
 NUMBER = re.compile(r"[-+]?(?:\d+\.\d*|\.\d+|\d+)(?:[eE][-+]?\d+)?")
 
 
@@ -215,8 +216,7 @@ def build_audit():
             checks.append(
                 {
                     "check": "hash:" + row["path"],
-                    "passed": normalized_text_sha256(ROOT / row["path"])
-                    == row["sha256_lf"],
+                    **frozen_source_check(row["path"], row["sha256_lf"]),
                     "detail": manifest,
                 }
             )
@@ -229,10 +229,14 @@ def build_audit():
         "docs/manuscript_completion_review_20260910.md",
         "docs/manuscript_review_frontmatter_20260910.md",
         "scripts/audit_manuscript_completion_20260910.py",
+        "scripts/verify_frozen_sources.py",
+        "archive/source_snapshots/cdelta_20260914.py",
+        "src/cdelta.py",
     ]
     paths += ["results/" + name for name in manifests]
     return {
-        "date": "2026-09-10",
+        "date": "2026-09-15",
+        "audit_definition_date": "2026-09-10",
         "new_simulation_cells": 0,
         "scope": "internal reconciliation; not independent mathematical peer review or clean-environment reproduction",
         "display_number_checks": len(display_checks()),

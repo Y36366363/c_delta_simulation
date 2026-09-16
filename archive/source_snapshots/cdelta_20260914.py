@@ -9,7 +9,6 @@ methodological manuscript.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from fractions import Fraction
 from itertools import permutations
 from math import comb
 from statistics import NormalDist
@@ -701,62 +700,6 @@ def _influence_density_values(
     return outputs[0], outputs[1], outputs[2]
 
 
-def _huber_exact_score(values, location, scale, c=1.345):
-    """Real-arithmetic empirical score for these exact represented floats."""
-    t, s, clip = map(Fraction.from_float, map(float, (location, scale, c)))
-    total = Fraction(0)
-    for w in values:
-        u = (Fraction.from_float(float(w)) - t) / s
-        total += min(clip, max(-clip, u))
-    return total / len(values)
-
-
-def _huber_score_checked_root(values, scale, *, c=1.345, max_iterations=512):
-    """Bisection accepted only after an exact |score| <= 1/(10^8 n) check.
-
-    The iteration cap is a failure guard. Failure does not relax the threshold.
-    Root existence on [min(values), max(values)] follows from score signs;
-    uniqueness and a positive active fraction are not guaranteed.
-    """
-    w = np.asarray(values, dtype=float)
-    if w.ndim != 1 or w.size < 2 or not np.all(np.isfinite(w)):
-        raise ValueError('finite one-dimensional sample of length >= 2 required')
-    if not np.isfinite(scale) or scale <= 0 or not np.isfinite(c) or c <= 0:
-        raise ValueError('finite positive scale and c required')
-    if not isinstance(max_iterations, int) or max_iterations < 1:
-        raise ValueError('positive integer iteration budget required')
-    tolerance = Fraction(1, 10**8 * w.size)
-    lo, hi = float(w.min()), float(w.max())
-    exact_checks = 0
-    for iteration in range(1, max_iterations + 1):
-        t = lo / 2 + hi / 2
-        # Subtraction can overflow for extreme but finite opposite endpoints.
-        # Clipping infinite residuals is defined; a NaN score is not accepted.
-        with np.errstate(over='ignore'):
-            q = float(np.mean(np.clip((w - t) / scale, -c, c)))
-        if not np.isfinite(q):
-            raise FloatingPointError('nonfinite numerical score')
-        if abs(q) <= 2 * float(tolerance):
-            exact = _huber_exact_score(w, t, scale, c)
-            exact_checks += 1
-            if abs(exact) <= tolerance:
-                return {'location': t, 'score_float': q,
-                        'score_exact_float': float(exact),
-                        'score_exact_numerator': str(exact.numerator),
-                        'score_exact_denominator': str(exact.denominator),
-                        'tolerance': float(tolerance), 'iterations': iteration,
-                        'exact_checks': exact_checks, 'exact_residual_passed': True}
-            q = float(exact)
-        if t == lo or t == hi:
-            raise FloatingPointError('floating-point bracket exhausted before residual acceptance')
-        if q > 0:
-            lo = t
-        else:
-            hi = t
-    raise RuntimeError('iteration budget exhausted before residual acceptance')
-
-
-
 def _huber_location_influence(
     values: Array,
     *,
@@ -765,9 +708,6 @@ def _huber_location_influence(
     analytic_density: Callable[[float], float] | None,
     density_folds: int,
     density_seed: int,
-    reference_solver: str = "legacy",
-    solver_max_iterations: int = 512,
-    solver_diagnostics: dict | None = None,
 ) -> tuple[float, float, Array]:
     """Fit the Huber centre and return its plug-in influence values.
 
@@ -781,27 +721,17 @@ def _huber_location_influence(
     if scale <= 0.0:
         raise ValueError("Huber influence is undetermined for zero MAD")
 
-    if reference_solver == "score_checked":
-        diagnostics = _huber_score_checked_root(
-            values, scale, c=huber_c, max_iterations=solver_max_iterations
+    location = median
+    for _ in range(100):
+        residual = (values - location) / scale
+        weights = np.minimum(
+            1.0, huber_c / np.maximum(np.abs(residual), 1e-15)
         )
-        location = diagnostics["location"]
-        if solver_diagnostics is not None:
-            solver_diagnostics.update(diagnostics)
-    elif reference_solver == "legacy":
-        location = median
-        for _ in range(100):
-            residual = (values - location) / scale
-            weights = np.minimum(
-                1.0, huber_c / np.maximum(np.abs(residual), 1e-15)
-            )
-            updated = float(np.sum(weights * values) / np.sum(weights))
-            if abs(updated - location) < 1e-10 * max(1.0, scale):
-                location = updated
-                break
+        updated = float(np.sum(weights * values) / np.sum(weights))
+        if abs(updated - location) < 1e-10 * max(1.0, scale):
             location = updated
-    else:
-        raise ValueError("reference_solver must be 'legacy' or 'score_checked'")
+            break
+        location = updated
 
     density_median, density_upper, density_lower = _influence_density_values(
         values,
@@ -848,9 +778,7 @@ def huber_profile_correlation_inference(
     density_seed: int = 2026081401,
     small_sample_correction: str = "sample",
     effective_parameters: int = 6,
-    reference_solver: str = "legacy",
-    solver_max_iterations: int = 512,
-) -> dict[str, object]:
+) -> dict[str, float | Array | dict[str, float]]:
     """Estimate and test robust-reference profile correlation ``rho_P``.
 
     The estimand is ``Corr(|X - T_X|, |Y - T_Y|)``, where each marginal
@@ -864,15 +792,6 @@ def huber_profile_correlation_inference(
     guarantee near weakly identified or multimodal reference fits.  The robust
     references limit marginal location influence; they do not make ``rho_P`` a
     globally robust correlation coefficient.
-
-    ``reference_solver="legacy"`` preserves the historical 100-update fit and
-    its return fields. Opt into ``"score_checked"`` to require an exact
-    represented-input score residual <= 1/(10**8 * n) for each margin. That
-    mode returns ``solver_diagnostics`` and recomputes the complete IF at the
-    accepted locations. ``solver_max_iterations`` is its positive integer
-    search budget; exhaustion or inadequate floating-point resolution raises
-    instead of falling back. The residual check is not a calibration or
-    regularity certificate, nor a universal finite-machine asymptotic theorem.
     """
     x_arr = _as_1d(x, "x")
     y_arr = _as_1d(y, "y")
@@ -895,16 +814,6 @@ def huber_profile_correlation_inference(
     if small_sample_correction == "hc1" and effective_parameters >= x_arr.size:
         raise ValueError("effective_parameters must be between 1 and n - 1")
 
-    if reference_solver not in {"legacy", "score_checked"}:
-        raise ValueError("reference_solver must be 'legacy' or 'score_checked'")
-    if reference_solver == "score_checked" and (
-        isinstance(solver_max_iterations, bool)
-        or not isinstance(solver_max_iterations, int)
-        or solver_max_iterations < 1
-    ):
-        raise ValueError("solver_max_iterations must be a positive integer")
-    diagnostics_x, diagnostics_y = {}, {}
-
     tx, scale_x, location_if_x = _huber_location_influence(
         x_arr,
         huber_c=huber_c,
@@ -912,9 +821,6 @@ def huber_profile_correlation_inference(
         analytic_density=analytic_density_x,
         density_folds=density_folds,
         density_seed=density_seed,
-        reference_solver=reference_solver,
-        solver_max_iterations=solver_max_iterations,
-        solver_diagnostics=diagnostics_x,
     )
     ty, scale_y, location_if_y = _huber_location_influence(
         y_arr,
@@ -923,9 +829,6 @@ def huber_profile_correlation_inference(
         analytic_density=analytic_density_y,
         density_folds=density_folds,
         density_seed=density_seed + 1,
-        reference_solver=reference_solver,
-        solver_max_iterations=solver_max_iterations,
-        solver_diagnostics=diagnostics_y,
     )
 
     profile_x = np.abs(x_arr - tx)
@@ -1015,7 +918,7 @@ def huber_profile_correlation_inference(
         p_value = 2.0 * (1.0 - normal.cdf(abs(z_statistic)))
     z_critical = normal.inv_cdf(1.0 - alpha / 2.0)
 
-    result = {
+    return {
         "estimate": float(estimate),
         "standard_error": standard_error,
         "normal": {
@@ -1034,12 +937,6 @@ def huber_profile_correlation_inference(
         "reference_scale_y": float(scale_y),
         "variance_correction_factor": float(correction_factor),
     }
-    if reference_solver == "score_checked":
-        result["solver_diagnostics"] = {
-            "mode": reference_solver, "max_iterations": solver_max_iterations,
-            "x": diagnostics_x, "y": diagnostics_y,
-        }
-    return result
 
 
 def huber_cdelta_influence_inference(

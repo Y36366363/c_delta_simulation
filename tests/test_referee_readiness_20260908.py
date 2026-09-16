@@ -1,3 +1,4 @@
+from scripts.verify_frozen_sources import frozen_source_check
 import csv
 from pathlib import Path
 
@@ -77,7 +78,7 @@ def test_root_replays_are_fixed_regular_samples_not_a_new_grid():
 
 def test_referee_diagnostic_manifest_is_current():
     for row in read("referee_diagnostics_manifest_20260908.tsv"):
-        assert normalized_text_sha256(ROOT / row["path"]) == row["sha256_lf"]
+        assert frozen_source_check(row["path"], row["sha256_lf"])["passed"]
 
 
 def test_discussion_separates_infeasible_diagnosis_from_validated_methods():

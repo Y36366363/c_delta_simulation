@@ -1,3 +1,4 @@
+from scripts.verify_frozen_sources import frozen_source_check
 import csv
 from pathlib import Path
 
@@ -190,7 +191,7 @@ def test_flagged_roots_are_disclosed_and_primary_results_are_not_replaced():
 
 def test_pathway_manifest_and_bounded_model_text():
     for row in read("manifest"):
-        assert normalized_text_sha256(ROOT / row["path"]) == row["sha256_lf"]
+        assert frozen_source_check(row["path"], row["sha256_lf"])["passed"]
     text = (ROOT / "docs/shared_sign_model_result_20260909.md").read_text()
     assert "conditional rate-balance heuristic" in text
     assert "sample covariance" in text

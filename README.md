@@ -65,6 +65,7 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [S1 proof integration and optional residual-checked API](docs/score_checked_integration_20260915.md)
 - [Current manuscript-interface resolution and bounded reproduction](docs/manuscript_interface_resolution_20260912.md)
 - [September 11 intermediate evidence manuscript with S1--S3](docs/manuscript_integrated_20260911.md)
 - [September 11 intermediate combined PDF](output/pdf/rho_p_integrated_20260911.pdf)
@@ -105,6 +106,21 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+## Updates 09/15/2026
+
+- **Proof clarifications integrated into S1.** The author LaTeX adds explicit
+  moving-boundary control, coefficient localization, weak-null empirical-norm
+  reasoning and the residual-rule argument. Independent proof review remains open.
+- **Optional public solver mode.** `reference_solver="score_checked"` checks the
+  n-dependent score residual and recomputes the complete IF. Default arithmetic
+  and return fields remain unchanged. All 41 existing datasets match the archived
+  default exactly; all 82 optional marginal fits pass. No checked decision changes.
+- **Version-aware provenance and completed validation.** The original source is
+  archived under its unchanged manifest hash. All 327 tests pass; the actual
+  manuscript's 19 tables / 1,047 cells pass audit. The local 36-page PDF compiles
+  without warnings. No new simulation cells were added. See the
+  [integration report](docs/score_checked_integration_20260915.md).
 
 ## Updates 09/14/2026
 
