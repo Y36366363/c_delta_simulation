@@ -65,6 +65,7 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [Current manuscript review and complete reproduction of two core studies](docs/manuscript_review_20260916.md)
 - [S1 proof integration and optional residual-checked API](docs/score_checked_integration_20260915.md)
 - [Current manuscript-interface resolution and bounded reproduction](docs/manuscript_interface_resolution_20260912.md)
 - [September 11 intermediate evidence manuscript with S1--S3](docs/manuscript_integrated_20260911.md)
@@ -106,6 +107,20 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+## Updates 09/16/2026
+
+- **Two core studies fully reproduced.** Original skew and four-stage pathway
+  studies reproduce all 14,000 existing datasets / 50,000 method-stage records,
+  plus their listed summaries, paired contrasts and root checks. Eight tables
+  contain 1,017,136 checked fields; maximum scaled discrepancy is 5.58e-16.
+  Historical sources run in an isolated snapshot; frozen results remain intact.
+- **Review without forced manuscript changes.** The September 15 working paper
+  remains unchanged. Pareto's formula comparison still needs full text; Hoorn's
+  Introduction, author placement decisions and independent proof review remain
+  open. Seventeen targeted tests pass. This is not full historical-project
+  reproduction and adds no new simulation cells. See the
+  [review and scope record](docs/manuscript_review_20260916.md).
 
 ## Updates 09/15/2026
 
