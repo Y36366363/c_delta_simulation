@@ -1,0 +1,48 @@
+{
+  "date": "2026-09-18",
+  "base_git_commit": "27a128fb06d94304ae09561ef833de301450d58b",
+  "manuscript": {
+    "tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260918/main.tex",
+    "tex_sha256": "9a496b97b225fc5f9b5f80ba9b4e833f78c2e5179127a90ed3af52178a7ab179",
+    "pdf": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260918/rho_p_minimal_preview_20260918.pdf",
+    "pdf_sha256": "bbfcb243d3be4d769622f2d8ca31d76b337b80fa1bf84b77d57dc45a7edfd7b5",
+    "pages": 37,
+    "overleaf_zip": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260918/rho_p_minimal_20260918.zip",
+    "overleaf_zip_sha256": "c43d700ddf8ce1c2e5a1f3ac6394bb935b352ab4c018ce91ea7d7ec19831a075",
+    "preserved": [
+      "preamble apart from date",
+      "Introduction",
+      "main theorem",
+      "S1",
+      "all 19 tabular data bodies"
+    ],
+    "final_latex_warnings": 0,
+    "visual_checks": "37-page contact sheets and enlarged pages 4,5,35,36"
+  },
+  "proof_review_package": {
+    "directory": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_independent_review_20260918",
+    "zip": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_independent_review_20260918.zip",
+    "sha256": "61e83cdfc7eb81a87fa71422b25ac79901bc3ed41364174e6c9ad332e562ed82",
+    "manifest_sha256": "ab944a6fecfc3d371850036bbb51314b9e8298d23d781a16fb40c7501ca8c73e",
+    "files": 26,
+    "zip_integrity_passed": true,
+    "status": "prepared; independent review not performed; not sent"
+  },
+  "verification": {
+    "tables": 19,
+    "cells": 1047,
+    "targeted_tests_passed": 32,
+    "full_suite_rerun": false,
+    "historical_comparison_rows": 109,
+    "historical_comparison_fields": 2165,
+    "max_scaled_numeric_gap": 0,
+    "original_tsv_hashes_unchanged": 286,
+    "new_simulation_cells": 0
+  },
+  "reports": {
+    "core_reproduction_20260916.json": "f6fe709b381aedaa60865c4cb320c8220cb12e78128aa59c23c3a035a5f87e82",
+    "retained_history_reproduction_20260918.json": "8479c49a8c6c63b5eab91bdaa0da0e90de65c01cf0d3c0b15a628971c3b1aed1",
+    "pareto_formula_check_20260918.json": "39dbea7678b96e7d97895ed36156f5799b6de81f111a62f7ff94cb3fe8b34e52",
+    "manuscript_latex_audit_20260918.json": "9db18aaf5d66db5ce9f595ad72a021f6941b65d8c1caf3e8497f289af6594426"
+  }
+}

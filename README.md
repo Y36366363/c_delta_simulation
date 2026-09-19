@@ -65,6 +65,7 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [Retained-evidence reproduction, Pareto formula comparison and independent review package](docs/manuscript_update_20260918.md)
 - [Current manuscript review and complete reproduction of two core studies](docs/manuscript_review_20260916.md)
 - [S1 proof integration and optional residual-checked API](docs/score_checked_integration_20260915.md)
 - [Current manuscript-interface resolution and bounded reproduction](docs/manuscript_interface_resolution_20260912.md)
@@ -107,6 +108,23 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+## Updates 09/18/2026
+
+- **Retained historical evidence reproduced.** Six regular-null cells and all
+  34 retained S2 cells reproduce at their original settings, including bootstrap
+  RNG consumption; quadrature, derivatives and post hoc diagnostics also match.
+  The 12,800 dataset executions include 600 overlapping pilot samples. All
+  2,165 compared fields agree, and 286 original TSV hashes remain unchanged.
+- **Full-text literature interface closed.** Pareto (2024) is a signed
+  opposing-regression-line coefficient, not marginal radius correlation.
+  Its worked example reproduces. A bounded Section 2 comparison and completed
+  S3 reproduction record are integrated into the minimally edited author draft.
+- **Independent review package prepared.** English questions, source map,
+  blank response template and versioned proof/code evidence are ready for an
+  external reviewer; independent review itself remains open. The 37-page PDF
+  compiles cleanly; all 19 tables / 1,047 cells and 32 targeted tests pass.
+  See the [update record](docs/manuscript_update_20260918.md).
 
 ## Updates 09/16/2026
 

@@ -1,0 +1,78 @@
+{
+  "tables_checked": 19,
+  "cells_checked": 1047,
+  "all_passed": true,
+  "scope": "table bodies, table identities, citation and reference keys; not all prose numbers",
+  "tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260918/main.tex",
+  "sha256": "9a496b97b225fc5f9b5f80ba9b4e833f78c2e5179127a90ed3af52178a7ab179",
+  "historical_checks": 172,
+  "bounded_stored_reference_replay": {
+    "existing_datasets_replayed": 2000,
+    "stored_stage_records_checked": 8000,
+    "max_absolute_replay_gaps": {
+      "rho": 1.5543122344752192e-15,
+      "C": 0.0,
+      "identity": 7.771561172376096e-16
+    },
+    "secondary_summaries": {
+      "population_reference": {
+        "C": {
+          "mean": 0.9999942134785408,
+          "mcse": 8.68425212800664e-06
+        },
+        "CV_X": {
+          "mean": 0.10010810331995575,
+          "mcse": 6.350673992501873e-05
+        },
+        "CV_Y": {
+          "mean": 0.10017242622330144,
+          "mcse": 6.197467956757605e-05
+        }
+      },
+      "population_scale": {
+        "C": {
+          "mean": 1.0015725136102585,
+          "mcse": 5.1009724859251336e-05
+        },
+        "CV_X": {
+          "mean": 0.10735104588986061,
+          "mcse": 0.00022323624872959012
+        },
+        "CV_Y": {
+          "mean": 0.10740696755403903,
+          "mcse": 0.00022318553697478312
+        }
+      },
+      "population_median": {
+        "C": {
+          "mean": 1.0015725136102585,
+          "mcse": 5.100972485925138e-05
+        },
+        "CV_X": {
+          "mean": 0.10735104588986061,
+          "mcse": 0.00022323624872959012
+        },
+        "CV_Y": {
+          "mean": 0.10740696755403903,
+          "mcse": 0.00022318553697478312
+        }
+      },
+      "full_fit": {
+        "C": {
+          "mean": 1.0795502662541667,
+          "mcse": 0.0019633487498712148
+        },
+        "CV_X": {
+          "mean": 0.26554605567937656,
+          "mcse": 0.003199823170670406
+        },
+        "CV_Y": {
+          "mean": 0.2650437750799981,
+          "mcse": 0.0032035582504640102
+        }
+      }
+    },
+    "new_simulation_cells": 0,
+    "new_reference_fits": 0
+  }
+}

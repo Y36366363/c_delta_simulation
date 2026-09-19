@@ -1,0 +1,49 @@
+{
+  "source_pdf_sha256": "1b42651e78c758492e62dce19a93b1f4120ead6035bdaf697829de376abbda03",
+  "source_pages": "5853-5855, 5862",
+  "paper_table1": {
+    "x": [
+      1.0,
+      3.0,
+      4.0,
+      6.0,
+      6.5
+    ],
+    "y": [
+      1,
+      4,
+      2,
+      9,
+      6
+    ],
+    "best_slope": 1.5,
+    "intercept": -0.5,
+    "counter_intercept": 8.5,
+    "SAE_positive": 7.25,
+    "SAE_negative": 23.25,
+    "q": 0.3118279569892473,
+    "r_prime": 0.6881720430107527
+  },
+  "exact_separating_example": {
+    "x": [
+      -3.0,
+      -1.0,
+      0.0,
+      1.0,
+      3.0
+    ],
+    "y": [
+      3.0,
+      1.0,
+      -0.0,
+      -1.0,
+      -3.0
+    ],
+    "pareto_r_prime": -1,
+    "profile_correlation": 1,
+    "reference_x": 0,
+    "reference_y": 0
+  },
+  "scope": "deterministic formula checks; not an implementation or simulation comparison; endpoint example is outside positive-IF-variance Wald conditions",
+  "all_passed": true
+}
