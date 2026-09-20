@@ -65,6 +65,8 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [September 20 completion decisions, moderate benchmark and solver policy](docs/completion_decisions_20260920.md)
+- [Focused target table and literature checks](docs/target_literature_review_20260920.md)
 - [Retained-evidence reproduction, Pareto formula comparison and independent review package](docs/manuscript_update_20260918.md)
 - [Current manuscript review and complete reproduction of two core studies](docs/manuscript_review_20260916.md)
 - [S1 proof integration and optional residual-checked API](docs/score_checked_integration_20260915.md)
@@ -108,6 +110,26 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+## Updates 09/20/2026
+
+- **One prespecified active-nuisance regular check.** A moderate lognormal pair
+  (log SD .3, latent correlation .4) was fixed before outcomes, with 2,000
+  replications at n=160/640/2560. Complete coverage is .9045/.9355/.9365;
+  all Wilson intervals exclude .95. This did not deliver a calibrated positive
+  benchmark, and no search for a favorable replacement was made.
+- **Full prospective solver comparison.** On all 6,000 datasets, 12,000 checked
+  marginal residuals pass; legacy and checked modes change no coverage decisions.
+  Maximum estimate discrepancy is 6.15e-10 checked-SE units. Future analyses
+  should explicitly request `reference_solver="score_checked"` and retain failures;
+  the default stays legacy pending a deliberate versioned release decision.
+  Neither this comparison nor successful return proves fixed-precision R5.
+- **Bounded completion materials.** Two population-only clipping alternatives
+  show that the reference-profile target changes. A corrected target table and
+  verified literature connections are ready as short English LaTeX blocks.
+  Fifteen focused tests and the full new-record audit pass. The September 18
+  working paper remains unchanged; actual external proof review remains open.
+  See the [decision and results record](docs/completion_decisions_20260920.md).
 
 ## Updates 09/18/2026
 

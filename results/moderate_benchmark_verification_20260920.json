@@ -1,0 +1,48 @@
+{
+  "all_passed": true,
+  "method_rows": 18000,
+  "solver_rows": 6000,
+  "exact_marginal_residuals": 12000,
+  "derivative_checks": [
+    {
+      "probabilities": [
+        0.99,
+        0.99
+      ],
+      "analytic": 10.513480139608102,
+      "finite_difference": 10.51333858012593,
+      "scaled_error": 1.2295108034701463e-05
+    },
+    {
+      "probabilities": [
+        0.99,
+        0.6
+      ],
+      "analytic": -4.581608935836372,
+      "finite_difference": -4.58157453039898,
+      "scaled_error": 6.1640716481438224e-06
+    },
+    {
+      "probabilities": [
+        0.55,
+        0.45
+      ],
+      "analytic": 0.8883055109526307,
+      "finite_difference": 0.8883049703867218,
+      "scaled_error": 2.8627036550903184e-07
+    },
+    {
+      "probabilities": [
+        0.01,
+        0.99
+      ],
+      "analytic": 3.5936738804035184,
+      "finite_difference": 3.5936380908263565,
+      "scaled_error": 7.791057461558046e-06
+    }
+  ],
+  "normal_mad_factor": 1.482602218505602,
+  "normal_huber_efficiency": 0.9500002597028676,
+  "source_sha256": "f36a7415efbb43aa0646af17819058376a9abdea9a63989294a7e597e45c309b",
+  "note": "Post-run deterministic validation, not a new design or independent proof review"
+}

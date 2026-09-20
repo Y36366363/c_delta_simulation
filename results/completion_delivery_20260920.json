@@ -1,0 +1,81 @@
+{
+  "date": "2026-09-20",
+  "base_git_commit": "a149241",
+  "canonical_manuscript_unchanged": true,
+  "canonical_tex_sha256": "9a496b97b225fc5f9b5f80ba9b4e833f78c2e5179127a90ed3af52178a7ab179",
+  "canonical_pdf_sha256": "bbfcb243d3be4d769622f2d8ca31d76b337b80fa1bf84b77d57dc45a7edfd7b5",
+  "review_package_unchanged": true,
+  "independent_mathematical_review": "outstanding; no reviewer contacted",
+  "proposed_blocks": {
+    "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/revision_options_20260920/main.tex": "c0db0b8d033ce28209e76c30fd804aa538818c45dbb30f415a4f198f859b7fa0",
+    "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/revision_options_20260920/revision_options_20260920.pdf": "a97b515c0ba1616d20326ff2ee47ba16b9d24d52da4e4b62239cabec0c36c582",
+    "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/revision_options_20260920/revision_options_20260920_latex.zip": "b2169b55d7b88ad91e254c19580cddb12c0cd60de8ef61d722125523d0cadea6",
+    "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/revision_options_20260920/README.txt": "452c31bc46fb3d9514a96da7570d08d4c0ed7681892f57e5ad13c285fda983e0"
+  },
+  "pdf_pages": 3,
+  "latex_warnings": 0,
+  "visual_review": "All three final pages inspected at 1500-pixel rendering; no clipping or overlap",
+  "bounded_study": {
+    "datasets": 6000,
+    "method_rows": 18000,
+    "solver_comparisons": 6000,
+    "exact_marginal_residual_checks": 12000,
+    "positive_calibration_benchmark_achieved": false,
+    "full_coverage": [
+      0.9045,
+      0.9355,
+      0.9365
+    ],
+    "full_wilson_intervals_exclude_nominal": true
+  },
+  "focused_tests_passed": 15,
+  "full_suite_rerun": false,
+  "production_estimator_changed": false,
+  "api_default_changed": false,
+  "evidence_sha256": {
+    "results/moderate_benchmark_audit_20260920.json": "ea860ed9ea93a7f7fd693c5706313361698147b1260a10fe9ebe6e78c37cdd85",
+    "results/moderate_benchmark_constant_sensitivity_20260920.tsv": "7560139662a01ef81b308c9ce581181f774e1ce0fbb37b99ca4a0eed33775a8c",
+    "results/moderate_benchmark_paired_20260920.tsv": "fe0ed0be563893372451f2dbe140cc21dd154bdbad2ae181fdfd5caa086f9647",
+    "results/moderate_benchmark_population_20260920.tsv": "46323e93949c3e902fc682354f21f1a283fde29231a173e04676a938873242fe",
+    "results/moderate_benchmark_replications_20260920.tsv": "f40cda47a9c8ad1f4e979e3960d9b9fcd0531fd88613c40a5d5c0bce5c936ec6",
+    "results/moderate_benchmark_solver_20260920.tsv": "e9c680af9d5401b22f1319945a13142248acd6d8f92b030fce2896a864c28b78",
+    "results/moderate_benchmark_summary_20260920.tsv": "e1930bcc21b0bfa9b11859082e70c8abe1354cec035b81ab1b21fce9a5910e6a",
+    "results/moderate_benchmark_verification_20260920.json": "6bfbf41e0450a242241ec08b2fe09a1909e1fecd6965bc3a9ced55038b24e1cd"
+  },
+  "notes": "No favorable-law search, no push, no reviewer contact. Proposed LaTeX artifacts remain outside the research repository.",
+  "line_ending_normalization": {
+    "reason": "Git normalizes generated CRLF to LF. Only these new TSVs were normalized; parsed cells verified identical before/after. Historical files untouched.",
+    "files": {
+      "results/moderate_benchmark_constant_sensitivity_20260920.tsv": {
+        "raw_generated_sha256": "971251b29c068823b2729df51142fdb385137db78a92908c0d39cea4fc712b8a",
+        "git_lf_sha256": "7560139662a01ef81b308c9ce581181f774e1ce0fbb37b99ca4a0eed33775a8c",
+        "tabular_content_identical": true
+      },
+      "results/moderate_benchmark_paired_20260920.tsv": {
+        "raw_generated_sha256": "114e985e8b34dfc140559c73a25ff6adafa58b88d25f641eceb97bc631921a2d",
+        "git_lf_sha256": "fe0ed0be563893372451f2dbe140cc21dd154bdbad2ae181fdfd5caa086f9647",
+        "tabular_content_identical": true
+      },
+      "results/moderate_benchmark_population_20260920.tsv": {
+        "raw_generated_sha256": "8cd9e7c04ff0d5719b02f28d694ee3c11d5477136f158e7203cafc423ad0329f",
+        "git_lf_sha256": "46323e93949c3e902fc682354f21f1a283fde29231a173e04676a938873242fe",
+        "tabular_content_identical": true
+      },
+      "results/moderate_benchmark_replications_20260920.tsv": {
+        "raw_generated_sha256": "81552eca52286344558e0291aa1c690b0fc81e1fe69e45cb173bbc6c9b446557",
+        "git_lf_sha256": "f40cda47a9c8ad1f4e979e3960d9b9fcd0531fd88613c40a5d5c0bce5c936ec6",
+        "tabular_content_identical": true
+      },
+      "results/moderate_benchmark_solver_20260920.tsv": {
+        "raw_generated_sha256": "bc18e86a645b0f1140cc701a4fef0430231d16a0265a1dc056a89e98d36bc68d",
+        "git_lf_sha256": "e9c680af9d5401b22f1319945a13142248acd6d8f92b030fce2896a864c28b78",
+        "tabular_content_identical": true
+      },
+      "results/moderate_benchmark_summary_20260920.tsv": {
+        "raw_generated_sha256": "2afd7a28ce8389ef27b5c51a0524940edde3402846bdad7575f0a530fba4ac7e",
+        "git_lf_sha256": "e1930bcc21b0bfa9b11859082e70c8abe1354cec035b81ab1b21fce9a5910e6a",
+        "tabular_content_identical": true
+      }
+    }
+  }
+}
