@@ -1,0 +1,57 @@
+{
+  "date": "2026-09-21",
+  "base_git_commit": "768ecfacd5668f38586c1a236b8cf0ed9356d1b3",
+  "manuscript": {
+    "tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260921/main.tex",
+    "tex_sha256": "76bc77b4956b713a74b73e7a3191574cb3a7bc36d0cf1e89011bd22dd5ba8206",
+    "pdf": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260921/rho_p_minimal_preview_20260921.pdf",
+    "pdf_sha256": "d1a711a6c56a6eb7788156070d144e589a4c03972b458e94753003f33cfd2f6d",
+    "pages": 40,
+    "overleaf_zip": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260921/rho_p_minimal_20260921_overleaf.zip",
+    "overleaf_zip_sha256": "1fb0fadd2e24ed369f54011200fff4467b439db59439d0b9f5c19cca07852cd6",
+    "final_latex_warnings": 0,
+    "all_page_visual_inspection": true,
+    "enlarged_visual_pages": [
+      5,
+      37,
+      38
+    ],
+    "zip_integrity_passed": true,
+    "extracted_zip_compile_passed": true,
+    "preserved_blocks": [
+      "Introduction",
+      "Complete IF and theorem",
+      "Appendix A and B",
+      "S1.1--S1.6",
+      "S2"
+    ],
+    "historical_table_blocks_unchanged": 19
+  },
+  "prior_manuscript_and_review_package_preserved": true,
+  "validation": {
+    "historical_provenance_checks": 172,
+    "numerical_tables": 21,
+    "table_cells": 1182,
+    "new_table_cells": 135,
+    "focused_tests_passed": 21,
+    "full_suite_rerun": false,
+    "replay_datasets": 6000,
+    "replay_method_records": 18000,
+    "replay_solver_records": 6000,
+    "replay_tables": 6,
+    "new_design_cells": 0
+  },
+  "reports_sha256": {
+    "results/manuscript_latex_audit_20260921.json": "a26364093392b3df8e7bfad750e406e8c57eb76a4bdbe53720cf80f70f1c8d5a",
+    "results/moderate_reproduction_20260921.json": "cfb8467e5e5b2f3b6f9b7078e2919ae0fcda62871e0f8505ede8f362067013c2"
+  },
+  "open_obligations": [
+    "Independent mathematical review",
+    "Hoorn Introduction and final scope/placement",
+    "Author affiliations, venue, availability and AI assistance disclosure",
+    "Fixed-machine solver has no universal asymptotic-success guarantee"
+  ],
+  "email": "Draft in conversation only; not saved or sent",
+  "push_performed": false,
+  "scope": "Integrated local author revision and original-seed reproduction. Additional moderate-skew results still under-cover; no calibrated positive example claimed."
+}

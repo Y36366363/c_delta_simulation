@@ -65,6 +65,7 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [September 21 integrated author draft and additional-study reproduction](docs/manuscript_update_20260921.md)
 - [September 20 completion decisions, moderate benchmark and solver policy](docs/completion_decisions_20260920.md)
 - [Focused target table and literature checks](docs/target_literature_review_20260920.md)
 - [Retained-evidence reproduction, Pareto formula comparison and independent review package](docs/manuscript_update_20260918.md)
@@ -110,6 +111,24 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+
+## Updates 09/21/2026
+
+- **Integrated author draft.** Local changes to the September 18 LaTeX add
+  the focused target comparison, estimand-constant explanation, solver policy
+  and S3.10 with the September 20 results. The Introduction, theorem, proof
+  blocks and all 19 historical table bodies remain unchanged. The draft status
+  now correctly records completed reproduction of the retained evidence.
+- **Additional-study reproduction.** All six tables from the 6,000-dataset
+  moderate-skew study reproduce exactly from an isolated source snapshot and
+  recorded isolated environment, including 18,000 method and 6,000 solver rows.
+  No new design cells or favorable-outcome search. Undercoverage remains.
+- **Checks.** Twenty-one numerical tables / 1,182 cells reconcile; 21 focused
+  tests pass. The 40-page PDF compiles without final warnings. LaTeX/PDF and
+  the Overleaf package remain outside the research repository; the email is
+  delivered in the conversation. External mathematical review remains open.
+  See the [integration and delivery record](docs/manuscript_update_20260921.md).
 
 ## Updates 09/20/2026
 
