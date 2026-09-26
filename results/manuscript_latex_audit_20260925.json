@@ -1,0 +1,95 @@
+{
+  "all_passed": true,
+  "historical_tables_checked": 19,
+  "historical_cells_checked": 1047,
+  "new_tables_checked": 2,
+  "new_cells_checked": 135,
+  "numerical_tables_total": 21,
+  "preserved_blocks": [
+    "Introduction",
+    "Complete IF and theorem",
+    "Appendix A and B",
+    "S2"
+  ],
+  "scope": "All21 numerical tables and selected new prose/qualifications; exact reviewed proof edits; not independent mathematical peer review.",
+  "reviewed_local_proof_edits": 3,
+  "all_21_table_blocks_preserved": true,
+  "tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20260925/main.tex",
+  "tex_sha256": "91436e229bc18b403325ecfc568842da09933f4fbf62be6ff3799d49ca421408",
+  "audit_source_sha256": "2c3197d428c4d20cb8e5e406fd0e7198b05d94eccc699f692054edf5faafea65",
+  "historical_checks": 172,
+  "bounded_stored_reference_replay": {
+    "existing_datasets_replayed": 2000,
+    "stored_stage_records_checked": 8000,
+    "max_absolute_replay_gaps": {
+      "rho": 8.881784197001252e-16,
+      "C": 0.0,
+      "identity": 7.771561172376096e-16
+    },
+    "secondary_summaries": {
+      "population_reference": {
+        "C": {
+          "mean": 0.9999942134785408,
+          "mcse": 8.68425212800664e-06
+        },
+        "CV_X": {
+          "mean": 0.10010810331995575,
+          "mcse": 6.350673992501873e-05
+        },
+        "CV_Y": {
+          "mean": 0.10017242622330144,
+          "mcse": 6.197467956757605e-05
+        }
+      },
+      "population_scale": {
+        "C": {
+          "mean": 1.0015725136102585,
+          "mcse": 5.1009724859251336e-05
+        },
+        "CV_X": {
+          "mean": 0.10735104588986061,
+          "mcse": 0.00022323624872959012
+        },
+        "CV_Y": {
+          "mean": 0.10740696755403903,
+          "mcse": 0.00022318553697478312
+        }
+      },
+      "population_median": {
+        "C": {
+          "mean": 1.0015725136102585,
+          "mcse": 5.100972485925138e-05
+        },
+        "CV_X": {
+          "mean": 0.10735104588986061,
+          "mcse": 0.00022323624872959012
+        },
+        "CV_Y": {
+          "mean": 0.10740696755403903,
+          "mcse": 0.00022318553697478312
+        }
+      },
+      "full_fit": {
+        "C": {
+          "mean": 1.0795502662541667,
+          "mcse": 0.0019633487498712148
+        },
+        "CV_X": {
+          "mean": 0.26554605567937656,
+          "mcse": 0.003199823170670406
+        },
+        "CV_Y": {
+          "mean": 0.2650437750799981,
+          "mcse": 0.0032035582504640102
+        }
+      }
+    },
+    "new_simulation_cells": 0,
+    "new_reference_fits": 0
+  },
+  "new_report_sha256": {
+    "environment_reproduction_20260925.json": "83fc64502f348b83c36abb7983b4e66bc9aa4a488d1bc042f45dc0544d96d355",
+    "record_identity_audit_20260925.json": "d5d5f4c2a158f96dc35bc2c51623669795d5d3229d01254b612e9c38d29f4157",
+    "target_comparison_20260925.json": "4398a992667936225dad24f049f6b245987dddfece30aaa434766795ee598b0f"
+  }
+}

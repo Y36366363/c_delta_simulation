@@ -1,5 +1,11 @@
 # Integrated author draft and complete replay of the additional study
 
+> **September 25 provenance correction:** this dated note originally overstated
+> dependency-environment isolation. The recorded source-snapshot replay and
+> numeric agreement remain valid, but the execution report records
+> `isolated_venv=false`. See [the dated correction and verified rerun](review_and_positioning_20260925.md).
+> Original result/audit files are preserved; no mathematical certification is implied.
+
 Date: 2026-09-21. The user requested an integrated LaTeX/PDF and a short
 supervisor email. Initial Git state was clean at 768ecfa, main equal to
 origin/main. No push, external message or production-method change is made.

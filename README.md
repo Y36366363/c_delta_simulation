@@ -40,8 +40,8 @@ The current theoretical and simulation work supports four main conclusions:
    convergence even at comparatively large sample sizes.
 
 3. **Unstable reference fitting can create severe finite-sample distortion.**
-   Controlled counterfactual experiments show that coupled switching of fitted
-   robust references can produce misleading profile correlation behavior.
+   Shared sign imbalance can couple fitted location errors even with population
+   scale fixed; full median/MAD fitting can amplify this mechanism.
 
 4. **Conditioning diagnostics organize—but do not fully determine—severity.**
    The standardized nuisance-Jacobian index helps order instability across
@@ -65,6 +65,7 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [September 25 focused review, target positioning and environment correction](docs/review_and_positioning_20260925.md)
 - [September 21 integrated author draft and additional-study reproduction](docs/manuscript_update_20260921.md)
 - [September 20 completion decisions, moderate benchmark and solver policy](docs/completion_decisions_20260920.md)
 - [Focused target table and literature checks](docs/target_literature_review_20260920.md)
@@ -113,6 +114,35 @@ decisions, simulation audits, and manuscript-readiness checks.
 <summary><strong>Expand dated research updates</strong></summary>
 
 
+## Updates 09/25/2026
+
+- **Closer antecedents and target comparison.** Explicitly acknowledge existing
+  magnitude correlation and compare the recent linear Lancaster target. A
+  deterministic Gaussian formula/quadrature check separates targets without
+  adding a simulation grid or claiming a generally superior coefficient.
+- **Proof and finite-sample qualifications.** S1.3 now retains exact equality
+  pieces in sign classes; S1.5 cites uniform-in-bandwidth theory with its
+  assumptions distinguished. The odd-median <= convention explains a small
+  finite-sample IF/SE reflection discrepancy; no default was changed.
+- **Environment correction.** September 18--21 reports record source isolation
+  and matching scientific-library versions, but not package isolation. Earlier
+  prose overstated that latter claim. Historical reports remain unchanged;
+  a fresh verified-environment replay records exact discrete fields and small
+  floating differences under the existing tolerance, not bitwise equality.
+- **Audit strengthening.** Exact scheduled method/solver joins, seed/truth checks
+  and counterfactual corruptions close a row-identity gap. The original test
+  plan is now explicitly historical; the active plan concerns manuscript and
+  reproducibility obligations. Independent mathematical review remains open.
+  See the [review and correction record](docs/review_and_positioning_20260925.md).
+- **Completed verification.** The full suite passed 379 tests; all 18
+  version-specific manuscript tests also passed when given matching sources.
+  The 40-page author revision preserves all 21 numerical tables / 1,182 cells.
+  The verified environment replays 6,000 distinct original datasets; maximum
+  scaled numerical difference is 6.67e-16 (rounded upward), with exact coverage
+  decisions and no changed calibration conclusion. All 292 existing TSVs remain
+  unchanged; zero new design cells were introduced.
+
+
 ## Updates 09/21/2026
 
 - **Integrated author draft.** Local changes to the September 18 LaTeX add
@@ -121,8 +151,9 @@ decisions, simulation audits, and manuscript-readiness checks.
   blocks and all 19 historical table bodies remain unchanged. The draft status
   now correctly records completed reproduction of the retained evidence.
 - **Additional-study reproduction.** All six tables from the 6,000-dataset
-  moderate-skew study reproduce exactly from an isolated source snapshot and
-  recorded isolated environment, including 18,000 method and 6,000 solver rows.
+  moderate-skew study reproduce exactly from an isolated source snapshot with
+  recorded scientific-library versions, including 18,000 method and 6,000 solver
+  rows. The earlier claim of package isolation is corrected in the September 25 entry.
   No new design cells or favorable-outcome search. Undercoverage remains.
 - **Checks.** Twenty-one numerical tables / 1,182 cells reconcile; 21 focused
   tests pass. The 40-page PDF compiles without final warnings. LaTeX/PDF and

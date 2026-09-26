@@ -1,0 +1,106 @@
+{
+  "datasets": 6000,
+  "method_rows": 18000,
+  "solver_rows": 6000,
+  "method_counts": {
+    "complete_kde": 6000,
+    "direct_only_ablation": 6000,
+    "oracle_fixed_reference": 6000
+  },
+  "exact_marginal_residuals": 12000,
+  "scheduled_keys_and_cross_table_joins_passed": true,
+  "root_seed": 2026092001,
+  "truth": 0.1625386847281758,
+  "affine_checks": [
+    {
+      "n": 95,
+      "transformation": "positive",
+      "equality_counts": {
+        "x": {
+          "median": 1,
+          "mad_boundary": 1
+        },
+        "y": {
+          "median": 1,
+          "mad_boundary": 1
+        }
+      },
+      "estimate_gap": 1.1102230246251565e-16,
+      "standard_error_gap": 1.3877787807814457e-16,
+      "max_if_gap": 1.0658141036401503e-14,
+      "max_equality_prediction_error": 1.0658141036401503e-14
+    },
+    {
+      "n": 95,
+      "transformation": "reflected_x",
+      "equality_counts": {
+        "x": {
+          "median": 1,
+          "mad_boundary": 1
+        },
+        "y": {
+          "median": 1,
+          "mad_boundary": 1
+        }
+      },
+      "estimate_gap": 1.1102230246251565e-16,
+      "standard_error_gap": 9.54801870900468e-09,
+      "max_if_gap": 0.0023499038918187104,
+      "max_equality_prediction_error": 1.056569247240638e-14
+    },
+    {
+      "n": 96,
+      "transformation": "positive",
+      "equality_counts": {
+        "x": {
+          "median": 0,
+          "mad_boundary": 0
+        },
+        "y": {
+          "median": 0,
+          "mad_boundary": 0
+        }
+      },
+      "estimate_gap": 1.3877787807814457e-16,
+      "standard_error_gap": -1.6653345369377348e-16,
+      "max_if_gap": 1.0658141036401503e-14,
+      "max_equality_prediction_error": 1.0658141036401503e-14
+    },
+    {
+      "n": 96,
+      "transformation": "reflected_x",
+      "equality_counts": {
+        "x": {
+          "median": 0,
+          "mad_boundary": 0
+        },
+        "y": {
+          "median": 0,
+          "mad_boundary": 0
+        }
+      },
+      "estimate_gap": -3.3306690738754696e-16,
+      "standard_error_gap": 0.0,
+      "max_if_gap": 1.0658141036401503e-14,
+      "max_equality_prediction_error": 1.0658141036401503e-14
+    }
+  ],
+  "all_passed": true,
+  "source_sha256": {
+    "results/moderate_benchmark_replications_20260920.tsv": "f40cda47a9c8ad1f4e979e3960d9b9fcd0531fd88613c40a5d5c0bce5c936ec6",
+    "results/moderate_benchmark_solver_20260920.tsv": "e9c680af9d5401b22f1319945a13142248acd6d8f92b030fce2896a864c28b78",
+    "results/moderate_benchmark_population_20260920.tsv": "46323e93949c3e902fc682354f21f1a283fde29231a173e04676a938873242fe",
+    "results/moderate_benchmark_summary_20260920.tsv": "e1930bcc21b0bfa9b11859082e70c8abe1354cec035b81ab1b21fce9a5910e6a",
+    "results/moderate_benchmark_paired_20260920.tsv": "fe0ed0be563893372451f2dbe140cc21dd154bdbad2ae181fdfd5caa086f9647",
+    "results/moderate_benchmark_constant_sensitivity_20260920.tsv": "7560139662a01ef81b308c9ce581181f774e1ce0fbb37b99ca4a0eed33775a8c",
+    "scripts/audit_record_identity_20260925.py": "4de6209720b7bbd66e6fd57bda24e7cd1b6ab10dbb731b5b8e606413ad517e17",
+    "tests/test_record_identity_20260925.py": "3c4627e1c96e8bb2c74013759c113136d5a3da4a4c8a48d42ac736d04870a3b6",
+    "src/cdelta.py": "e552d5d3a47e7b28eb57803b07d4ff053ccc49f1dd8e2be6e9b9b0f1bd958064",
+    "scripts/run_moderate_benchmark_20260920.py": "2aaded80f61a80daef6d419f5a83d84485f076997f10630d3a0fefcf5f6435fa",
+    "docs/moderate_benchmark_protocol_20260920.md": "d96380919f1d29453b0fda24efa631a7d1eddcdfda1bfed25e217b6add7225aa"
+  },
+  "frozen_evidence_unchanged": true,
+  "new_simulation_cells": 0,
+  "note": "Supplementary record-identity and deterministic API audit; not mathematical peer review or calibration evidence.",
+  "affine_scope": "Median/MAD/Huber references and rho obey the checked affine laws. Under reflection the <= plug-in median equality creates the explicitly predicted finite-sample full-IF/SE difference for the odd sample. MAD absolute-deviation equality membership is invariant. No API convention is changed."
+}

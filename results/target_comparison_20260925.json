@@ -1,0 +1,137 @@
+{
+  "all_passed": true,
+  "date": "2026-09-25",
+  "check_type": "deterministic population identities and target separation",
+  "monte_carlo_datasets": 0,
+  "new_simulation_cells": 0,
+  "absolute_tolerance": 2e-11,
+  "model": {
+    "law": "Centered bivariate normal with unit marginal variances",
+    "raw_correlations": [
+      -0.8,
+      -0.4,
+      0.0,
+      0.4,
+      0.8
+    ],
+    "population_robust_references": [
+      0.0,
+      0.0
+    ],
+    "reason_for_references": "Unique Huber roots are zero by marginal symmetry",
+    "nuisance_contribution": "Target reference derivatives vanish by joint central symmetry; this is not an active-nuisance validation."
+  },
+  "derivation": {
+    "absolute_product": "Integrate 2*x*phi(x)*E[abs(Y)|X=x] from zero to infinity, where Y|X=x is N(r*x,1-r^2).",
+    "profile_correlation": "(E[abs(X*Y)]-2/pi)/(1-2/pi), compared with (sqrt(1-r^2)+r*asin(r)-1)/(pi/2-1).",
+    "squared_correlation": "Integrate x^2*E[Y^2|X=x]; E[X^2]=1 and Var(X^2)=2 give Corr(X^2,Y^2)=r^2.",
+    "linear_lancaster": "max(abs(r), r^2)=abs(r) for abs(r)<=1",
+    "rank_gaussian_lancaster": "Phi^{-1}(F_X(X))=X and Phi^{-1}(F_Y(Y))=Y under standard normal margins; hence the same abs(r)."
+  },
+  "sources": [
+    {
+      "authors": "Afuecheta, E.; Nadarajah, S.; Chan, S.",
+      "year": 2023,
+      "title": "Folded Bivariate Distributions as Models for Magnitude Correlation",
+      "journal": "REVSTAT--Statistical Journal",
+      "volume_issue_pages": "21(1), 21-38",
+      "doi": "10.57805/revstat.v21i1.395",
+      "url": "https://revstat.ine.pt/index.php/REVSTAT/article/view/395",
+      "relevance": "Page 22 defines Corr(abs(X),abs(Y)); page 24 equation (2.1) gives the folded density. The Gaussian expression in this audit is independently checked by conditional integration, not attributed to this paper as a new identity."
+    },
+    {
+      "authors": "Holzmann, H.; Klar, B.",
+      "year": 2025,
+      "title": "Lancaster correlation",
+      "journal": "Scandinavian Journal of Statistics",
+      "volume_issue_pages": "52(1), 145-169",
+      "doi": "10.1111/sjos.12733",
+      "url": "https://publikationen.bibliothek.kit.edu/1000172416/153641019",
+      "relevance": "Linear and rank-Gaussian Lancaster targets differ from correlation of unsigned marginal reference distances."
+    }
+  ],
+  "rows": [
+    {
+      "raw_gaussian_correlation": -0.8,
+      "pearson": -0.8,
+      "rho_profile_formula": 0.5988759183520835,
+      "rho_profile_quadrature": 0.598875918352084,
+      "absolute_product_moment_quadrature": 0.8542394399019354,
+      "absolute_product_quadrature_error_estimate": 1.212979126430343e-14,
+      "rho_formula_quadrature_absolute_gap": 4.440892098500626e-16,
+      "squared_variable_correlation": 0.6400000000000001,
+      "squared_variable_correlation_quadrature": 0.6400000000000001,
+      "squared_product_quadrature_error_estimate": 8.565372987371068e-14,
+      "linear_lancaster": 0.8,
+      "rank_gaussian_lancaster": 0.8
+    },
+    {
+      "raw_gaussian_correlation": -0.4,
+      "pearson": -0.4,
+      "rho_profile_formula": 0.14212053163284047,
+      "rho_profile_quadrature": 0.14212053163284052,
+      "absolute_product_moment_quadrature": 0.6882635635035633,
+      "absolute_product_quadrature_error_estimate": 3.065652126504023e-14,
+      "rho_formula_quadrature_absolute_gap": 5.551115123125783e-17,
+      "squared_variable_correlation": 0.16000000000000003,
+      "squared_variable_correlation_quadrature": 0.16000000000000025,
+      "squared_product_quadrature_error_estimate": 3.093539167722658e-14,
+      "linear_lancaster": 0.4,
+      "rank_gaussian_lancaster": 0.4
+    },
+    {
+      "raw_gaussian_correlation": 0.0,
+      "pearson": 0.0,
+      "rho_profile_formula": 0.0,
+      "rho_profile_quadrature": 0.0,
+      "absolute_product_moment_quadrature": 0.6366197723675814,
+      "absolute_product_quadrature_error_estimate": 7.046494792454115e-15,
+      "rho_formula_quadrature_absolute_gap": 0.0,
+      "squared_variable_correlation": 0.0,
+      "squared_variable_correlation_quadrature": 1.1102230246251565e-16,
+      "squared_product_quadrature_error_estimate": 1.4547520854449013e-14,
+      "linear_lancaster": 0.0,
+      "rank_gaussian_lancaster": 0.0
+    },
+    {
+      "raw_gaussian_correlation": 0.4,
+      "pearson": 0.4,
+      "rho_profile_formula": 0.14212053163284047,
+      "rho_profile_quadrature": 0.14212053163284052,
+      "absolute_product_moment_quadrature": 0.6882635635035633,
+      "absolute_product_quadrature_error_estimate": 3.065652126504023e-14,
+      "rho_formula_quadrature_absolute_gap": 5.551115123125783e-17,
+      "squared_variable_correlation": 0.16000000000000003,
+      "squared_variable_correlation_quadrature": 0.16000000000000025,
+      "squared_product_quadrature_error_estimate": 3.093539167722658e-14,
+      "linear_lancaster": 0.4,
+      "rank_gaussian_lancaster": 0.4
+    },
+    {
+      "raw_gaussian_correlation": 0.8,
+      "pearson": 0.8,
+      "rho_profile_formula": 0.5988759183520835,
+      "rho_profile_quadrature": 0.598875918352084,
+      "absolute_product_moment_quadrature": 0.8542394399019354,
+      "absolute_product_quadrature_error_estimate": 1.212979126430343e-14,
+      "rho_formula_quadrature_absolute_gap": 4.440892098500626e-16,
+      "squared_variable_correlation": 0.6400000000000001,
+      "squared_variable_correlation_quadrature": 0.6400000000000001,
+      "squared_product_quadrature_error_estimate": 8.565372987371068e-14,
+      "linear_lancaster": 0.8,
+      "rank_gaussian_lancaster": 0.8
+    }
+  ],
+  "maximum_formula_quadrature_absolute_gap": 4.440892098500626e-16,
+  "scope": [
+    "No confidence intervals, rejection rates or calibration claims.",
+    "No finite-sample reference-estimation comparison.",
+    "No evidence that one target or test is generally superior.",
+    "A formula check is not independent mathematical peer review."
+  ],
+  "environment": {
+    "python": "3.12.3",
+    "scipy": "1.16.3"
+  },
+  "source_sha256": "cd4337014cc53423b99371405e1ee52f1c9a6c46a88f741a8cea3e45c65dacfb"
+}

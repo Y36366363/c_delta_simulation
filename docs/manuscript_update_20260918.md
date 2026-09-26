@@ -1,5 +1,11 @@
 # Retained-evidence reproduction, Pareto comparison and review package
 
+> **September 25 provenance correction:** this dated note originally overstated
+> dependency-environment isolation. The recorded source-snapshot replay and
+> numeric agreement remain valid, but the execution report records
+> `isolated_venv=false`. See [the dated correction and verified rerun](review_and_positioning_20260925.md).
+> Original result/audit files are preserved; no mathematical certification is implied.
+
 Date: 2026-09-18. Authorized manuscript-completion update. No new simulation
 designs, changed frozen results, default-method changes or push.
 
