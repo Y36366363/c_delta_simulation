@@ -65,6 +65,10 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [September 26 publication assessment and local completion ledger](docs/submission_readiness_20260926.md)
+- [Closest-prior overlap and bounded novelty review](docs/novelty_overlap_review_20260926.md)
+- [Adversarial internal proof review and local repairs](docs/proof_adversarial_review_20260926.md)
+- [Retained-evidence interfaces and targeted checks](docs/evidence_adversarial_review_20260926.md)
 - [September 25 focused review, target positioning and environment correction](docs/review_and_positioning_20260925.md)
 - [September 21 integrated author draft and additional-study reproduction](docs/manuscript_update_20260921.md)
 - [September 20 completion decisions, moderate benchmark and solver policy](docs/completion_decisions_20260920.md)
@@ -112,6 +116,37 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+
+## Updates 09/26/2026 (UTC review date)
+
+- **Narrower and more explicit contribution.** Centered Frechet correlation
+  already covers correlating distances from fitted centers. The new author
+  revision acknowledges Fout--Fosdick alongside magnitude correlation and
+  distinguishes the specific median--MAD--Huber inference chain from standard
+  multistep theory. Segers is credited for estimated-center absolute-moment
+  expansions. This is a bounded prior-work review, not a priority proof.
+- **Local proof repairs.** State limiting Gaussian covariance separately from
+  convergence of actual error covariance; control the entire weak-null
+  unrestricted IF through Hhat + rhohat Khat; separate L2 component envelopes
+  from L1 squared-class envelopes; align midpoint and KDE arguments with local
+  density assumptions. These are internally reviewed repairs, not external
+  mathematical certification.
+- **Targeted retained-evidence checks.** Recalculate 34 conditioning indices
+  from the symmetric bridge model. Replay 4,000 original severe samples at
+  stored references, checking 16,000 marginal fits and the linear-location
+  mechanism. Cross-check paired IF decomposition and 16 existing-seed orbit
+  datasets. No new design cells or changed scientific outcomes.
+- **Author-source reconciliation.** All 21 numerical tables / 1,182 cells are
+  unchanged and source-reconciled; 172 historical checks pass. Clarify inactive
+  population reference coefficients in all three older null models, finite-B
+  permutation randomness and the scope of prospective Wilson intervals.
+- **Delivery and stopping point.** The 41-page PDF and Overleaf source remain
+  outside the repository, with the previous version preserved. The full suite
+  passed 384 tests; another 18 version-specific checks passed with their
+  matching sources (402 distinct repository tests). The independent-review
+  handoff is updated with a blank response form. Hoorn's structure feedback,
+  external mathematical review and author/venue decisions remain open.
 
 
 ## Updates 09/25/2026
