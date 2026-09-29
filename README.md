@@ -78,7 +78,6 @@ finite-dimensional calculations, and empirical simulation evidence.
 - [S1 proof integration and optional residual-checked API](docs/score_checked_integration_20260915.md)
 - [Current manuscript-interface resolution and bounded reproduction](docs/manuscript_interface_resolution_20260912.md)
 - [September 11 intermediate evidence manuscript with S1--S3](docs/manuscript_integrated_20260911.md)
-- [September 11 intermediate combined PDF](output/pdf/rho_p_integrated_20260911.pdf)
 - [Interface closure and claim/proof/source crosswalk](docs/manuscript_interface_crosswalk_20260911.md)
 - [Manuscript skeleton and readiness audit](docs/manuscript_skeleton_and_readiness_20260829.md)
 - [Draft manuscript Sections 1–2](docs/manuscript_draft_sections_1_2_20260830.md)
@@ -116,6 +115,15 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+
+## Updates 09/29/2026
+
+- Removed six tracked generated PDFs (three manuscript figures, an early
+  integrated draft and two consultation documents) at the author's request.
+  Verified copies remain outside the repository. Future PDFs are ignored.
+  Figure checks retain the PNG assets and source-table reconciliation; PDF
+  export is optional. Historical commits are unchanged.
 
 
 ## Updates 09/26/2026 (UTC review date)

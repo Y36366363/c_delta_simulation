@@ -67,9 +67,26 @@ def test_paired_covariance_is_not_removed_by_block_diagonal_derivative():
     assert not np.isclose(projected_variance, np.trace(covariance))
 
 
-def test_stored_completion_audit_is_current():
+def _assert_pdf_retention_policy_change(old_checks, current_checks):
+    # September 29: retain frozen reports; only the asset-format policy changed.
+    old_key = "all_rendered_figure_formats_are_present_and_nonempty"
+    new_key = "retained_png_figures_are_present_and_nonempty"
+    old_asset = [r for r in old_checks if r["check"] == old_key]
+    new_asset = [r for r in current_checks if r["check"] == new_key]
+    assert len(old_asset) == len(new_asset) == 1
+    assert old_asset[0]["passed"] and new_asset[0]["passed"]
+    expected_pngs = [name for name in old_asset[0]["detail"].split(",") if name.endswith(".png")]
+    assert new_asset[0]["detail"].split(",") == expected_pngs
+    assert [r for r in old_checks if r["check"] != old_key] == [
+        r for r in current_checks if r["check"] != new_key
+    ]
+
+
+def test_stored_completion_audit_preserved_except_pdf_retention_policy():
     stored = json.loads((ROOT / OUTPUT).read_text())
-    assert stored == build_audit()
+    current = build_audit()
+    _assert_pdf_retention_policy_change(stored.pop("checks"), current.pop("checks"))
+    assert stored == current
 
 
 def test_original_scientific_checks_preserved_across_source_version_update():
@@ -77,7 +94,7 @@ def test_original_scientific_checks_preserved_across_source_version_update():
     current = build_audit()
     cleaned = [{k:v for k,v in row.items() if k not in {'version','verified_path'}}
                for row in current['checks']]
-    assert cleaned == old['checks']
+    _assert_pdf_retention_policy_change(old['checks'], cleaned)
 
 
 def test_draft_entry_preserves_open_application_and_review_decisions():

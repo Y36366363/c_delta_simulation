@@ -4,3 +4,6 @@ __pycache__/
 .pytest_cache/
 .venv/
 venv/
+
+# Generated PDFs are private author artifacts; keep outside this repository.
+*.[pP][dD][fF]

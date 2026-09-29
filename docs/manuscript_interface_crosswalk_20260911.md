@@ -9,8 +9,8 @@ The current editable reading source is
 [the integrated manuscript](manuscript_integrated_20260911.md), with actual
 [S1](supplement_S1_20260911.md), [S2](supplement_S2_20260911.md),
 [S3](supplement_S3_20260911.md), and [references](manuscript_references_20260911.md).
-[The combined PDF](../output/pdf/rho_p_integrated_20260911.pdf) contains all of
-them. The original Downloads PDF and the historical dated chapter drafts,
+The original combined PDF contained all of them. It was removed from the
+repository on September 29, 2026; a verified author copy is kept outside it. The original Downloads PDF and the historical dated chapter drafts,
 simulation results, manifests, public algorithm and constants are unchanged.
 The new manuscript is the maintained integrated version of the text; older
 chapter files remain historical source documents, not parallel current drafts.

@@ -84,13 +84,11 @@ def section6_display_audit() -> list[dict[str, object]]:
         for name in expected
     )
 
+    # PDF exports are optional private author artifacts (September 29 policy).
     figure_paths = [
         FIGURES_DIR / "manuscript_figure1_reference_switching_20260905.png",
-        FIGURES_DIR / "manuscript_figure1_reference_switching_20260905.pdf",
         FIGURES_DIR / "manuscript_figure2_conditioning_bridge_20260905.png",
-        FIGURES_DIR / "manuscript_figure2_conditioning_bridge_20260905.pdf",
         FIGURES_DIR / "manuscript_figure3_family_residual_20260905.png",
-        FIGURES_DIR / "manuscript_figure3_family_residual_20260905.pdf",
     ]
     source_files_current = all(
         (PROJECT_ROOT / row["source_file"]).exists() for row in manifest
@@ -166,7 +164,7 @@ def section6_display_audit() -> list[dict[str, object]]:
             "reporting script only reads frozen tables and renders displays",
         ),
         _check(
-            "all_rendered_figure_formats_are_present_and_nonempty",
+            "retained_png_figures_are_present_and_nonempty",
             all(path.exists() and path.stat().st_size > 10_000 for path in figure_paths),
             ",".join(path.name for path in figure_paths),
         ),

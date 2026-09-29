@@ -60,7 +60,7 @@ def test_figure_assets_and_section6_draft_are_present():
         "manuscript_figure2_conditioning_bridge_20260905",
         "manuscript_figure3_family_residual_20260905",
     ):
-        for extension in ("png", "pdf"):
+        for extension in ("png",):
             path = PROJECT_ROOT / "figures" / f"{stem}.{extension}"
             assert path.exists()
             assert path.stat().st_size > 10_000
