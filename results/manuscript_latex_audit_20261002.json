@@ -1,0 +1,24 @@
+{
+  "numerical_tables": 21,
+  "numerical_cells": 1182,
+  "numerical_blocks_byte_identical": true,
+  "all_passed": true,
+  "tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20261002/main.tex",
+  "tex_sha256": "4ef70ad6645d17f7ffbbccc3d42a305aa72c0a05da4a2b320856b3c425413493",
+  "prior_tex_sha256": "10d3927774a78c82065a1b01b162ddbc8db3a6d7734cb4b3b58292d23fc38726",
+  "reviewed_changes": 9,
+  "key_counts": {
+    "labels": 30,
+    "bibliography_keys": 25,
+    "used_citation_keys": 25,
+    "referenced_labels": 13
+  },
+  "preserved_blocks": [
+    "Sections3--7",
+    "Appendices and S1--S3"
+  ],
+  "historical_checks": 172,
+  "new_design_cells": 0,
+  "scope": "Private-source attribution and text revision; numerical evidence unchanged; no independent mathematical review",
+  "audit_source_sha256": "760ebc0eff4a6567d016a3208f74bf55d7a6e7e7450d93135551de4b0db01a0d"
+}

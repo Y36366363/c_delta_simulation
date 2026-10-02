@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-02",
+  "base_git_commit": "75919261973100f3443b7720c69239f1a6cc5a0b",
+  "manuscript": {
+    "tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20261002/main.tex",
+    "tex_sha256": "4ef70ad6645d17f7ffbbccc3d42a305aa72c0a05da4a2b320856b3c425413493",
+    "pdf": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20261002/rho_p_minimal_preview_20261002.pdf",
+    "pdf_sha256": "9b146bf917cea32006457599cbd920d37893fead0f67660416feeab7b17cc5ed",
+    "overleaf_zip": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20261002/rho_p_minimal_20261002_overleaf.zip",
+    "overleaf_zip_sha256": "3d98fff09b355bc67d200b2fd51544fb9867f69fc5e6197cb2a3be58a4515dcc",
+    "pages": 42,
+    "final_latex_warnings": 0,
+    "all_pages_visual_review": true,
+    "enlarged_review_pages": [
+      4
+    ],
+    "extracted_zip_compile_and_text_match": true
+  },
+  "validation": {
+    "report": "results/manuscript_latex_audit_20261002.json",
+    "report_sha256": "ba2997ffbc58b5b9a98f0ecaea5fa6686737486872e96a55fe6755dd55b53e71",
+    "numerical_tables": 21,
+    "numerical_cells": 1182,
+    "historical_checks": 172,
+    "new_design_cells": 0,
+    "python": "3.12.3",
+    "executable": "/opt/anaconda3/bin/python3",
+    "isolated_reproduction_claimed": false,
+    "full_test_suite_rerun": false
+  },
+  "source": "User-supplied October1 personal communication; public preprint update not verified or claimed",
+  "previous_author_version_preserved": true,
+  "review_package_note": "September26 proof-review package remains an earlier source snapshot; its line map is not the October2 line map.",
+  "push_performed": false
+}

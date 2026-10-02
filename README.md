@@ -65,6 +65,7 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [October 2 integration of the privately communicated all-to-all definition](docs/hoorn_definition_integration_20261002.md)
 - [September 26 publication assessment and local completion ledger](docs/submission_readiness_20260926.md)
 - [Closest-prior overlap and bounded novelty review](docs/novelty_overlap_review_20260926.md)
 - [Adversarial internal proof review and local repairs](docs/proof_adversarial_review_20260926.md)
@@ -115,6 +116,17 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+
+## Updates 10/02/2026
+
+- Connected the privately communicated Hoorn--Ho Pearson all-to-all profile
+  definition to the robust-reference manuscript. Explicitly separate the
+  profile construction from normalization and from the secondary C scale.
+- Preserved all 21 numerical tables / 1,182 cells and the scientific proofs;
+  172 historical checks pass. No new design cells. The 42-page author PDF and
+  verified Overleaf ZIP remain outside the repository. Broader supervisor
+  feedback and independent mathematical review remain outstanding.
 
 
 ## Updates 09/29/2026
