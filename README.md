@@ -27,26 +27,33 @@ the conditions under which their inferential behavior is reliable or unstable.
 
 ## Current Evidence
 
-The current theoretical and simulation work supports four main conclusions:
+The current theoretical and simulation work supports four bounded conclusions:
 
-1. **Regular settings can support reliable Wald inference.**
-   Under a properly regular dependent weak-null design, frozen simulation cells
-   remain compatible with nominal rejection levels. This is not a blanket
-   finite-sample recommendation: the targeted nonzero-effect skew study still
-   undercovers even at `n=2560`.
+1. **Pointwise inference for the specified reference chain.**
+   At a fixed regular IID paired law, the complete median/MAD/Huber and
+   profile-moment expansion supports a consistent paired studentizer. A
+   separate reduced-moment weak-null result uses empirical-norm control.
+   These are asymptotic statements, not finite-sample calibration guarantees.
 
-2. **Regularity does not guarantee fast finite-sample convergence.**
-   Strongly skewed settings exhibit asymmetric studentized tails and slow
-   convergence even at comparatively large sample sizes.
+2. **Correlated location errors and additional full-chain amplification.**
+   The shared-sign counterexample has zero population profile correlation.
+   Correlated fitted-location errors can appear even with population scale
+   fixed; full median/MAD/Huber fitting can amplify the distortion. The
+   stage-2-to-stage-4 contrast does not separately identify a MAD effect.
 
-3. **Unstable reference fitting can create severe finite-sample distortion.**
-   Shared sign imbalance can couple fitted location errors even with population
-   scale fixed; full median/MAD fitting can amplify this mechanism.
+3. **Persistent undercoverage in the examined regular skew studies.**
+   Some regular null cells are compatible with nominal rejection, but have
+   population nuisance cancellation. Both nonzero skew studies have active
+   reference coefficients, near-cancellation in total variance, and
+   persistent undercoverage over the examined sample sizes. They do not
+   establish a mathematical convergence rate or successful practical
+   calibration with materially active nuisance variance.
 
-4. **Conditioning diagnostics organize—but do not fully determine—severity.**
-   The standardized nuisance-Jacobian index helps order instability across
-   several families, but it is not presented as a universal cutoff or complete
-   explanation.
+4. **Supplementary diagnostics have limited explanatory scope.**
+   The standardized nuisance-Jacobian index organizes some bridge behavior;
+   it is not a universal cutoff. Permutation results remain supporting
+   empirical evidence, without a proved conditional weak-null limit for
+   this generated-profile statistic.
 
 These statements deliberately separate theorem-level results, exact
 finite-dimensional calculations, and empirical simulation evidence.
@@ -65,6 +72,9 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [October 2 supervisor-directed six-section reconstruction](docs/hoorn_restructure_20261002.md)
+- [Scale-coordinate and proof-structure response](docs/hoorn_math_response_20261002.md)
+- [Retained and selected evidence reconciliation](docs/hoorn_evidence_response_20261002.md)
 - [October 2 integration of the privately communicated all-to-all definition](docs/hoorn_definition_integration_20261002.md)
 - [September 26 publication assessment and local completion ledger](docs/submission_readiness_20260926.md)
 - [Closest-prior overlap and bounded novelty review](docs/novelty_overlap_review_20260926.md)
@@ -116,6 +126,27 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
+
+
+## Updates 10/02/2026 — supervisor-directed reconstruction
+
+- Adopted Hoorn's title and abstract, and rebuilt the author manuscript into
+  six main sections. The main text is seven pages; the complete author PDF
+  includes S1–S4 and references. Conditions/proofs, target comparisons,
+  conditioning/permutation, and full simulation records are supplementary.
+- Checked the suspected scale factor against derivatives, implementation,
+  stage-specific formulas, and deterministic contamination differentiation.
+  The factor k is required for raw-MAD influence; both raw/scaled coordinate
+  forms are now explicit. No estimator or historical numerical result changed.
+- Separated the conditional R1–R6 theorem, construction-specific class lemma
+  and estimator corollary, plus a reduced-moment weak-null corollary. This is
+  a more explicit proof architecture, not independent mathematical approval.
+- Reconciled all 21 retained tables plus two selected main displays; preserve
+  the active-nuisance evidence gap and use “additional full-chain amplification”
+  and “persistent undercoverage over the examined sample sizes.” No new
+  simulation cells. LaTeX/PDF/Overleaf artifacts remain outside the repository.
+- The received structural guidance is implemented; independent mathematical
+  review and author/venue decisions remain open. No automatic push.
 
 
 ## Updates 10/02/2026

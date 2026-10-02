@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-02",
+  "purpose": "Supervisor-directed six-section manuscript reconstruction",
+  "baseline_git_head": "f694b1efda4122d2155c695ba7d7516ae12277a9",
+  "baseline_tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_minimal_20261002/main.tex",
+  "baseline_tex_sha256": "4ef70ad6645d17f7ffbbccc3d42a305aa72c0a05da4a2b320856b3c425413493",
+  "manuscript": {
+    "tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_hoorn_restructured_20261002/main.tex",
+    "tex_sha256": "a04efba49a0693c5b260733f78bd6ae0eef81b65fb1d0a116efcf042edf7fefc",
+    "pdf": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_hoorn_restructured_20261002/rho_p_hoorn_restructured_20261002.pdf",
+    "pdf_sha256": "f858717d1d1ce165c81eda79cf50a2749ba520c83a441fc34abcdb2e7cde9631",
+    "pages": 41,
+    "main_text_pages": 7,
+    "main_sections": 6,
+    "supplement_sections": 4,
+    "zip": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_hoorn_restructured_20261002/rho_p_hoorn_restructured_20261002_overleaf.zip",
+    "zip_sha256": "30275fe5f02161f69989f3d6d09b66769979c9476863f5d86c568ffbef631125",
+    "zip_members": [
+      "main.tex",
+      "README.txt"
+    ]
+  },
+  "validation": {
+    "native_editor_compile": "success",
+    "pdf_latex_compile": "success",
+    "final_build_warnings": [],
+    "all_pages_rendered_and_visually_checked": 41,
+    "main_formula_and_table_pages_inspected_separately": [
+      3,
+      4,
+      6,
+      7,
+      36
+    ],
+    "zip_extracted_recompile": "success",
+    "zip_recompile_text_identical": true,
+    "zip_verification_directory": "/private/tmp/hoorn_overleaf_verify_20261002_i25gxniz",
+    "table_audit": "results/manuscript_restructure_audit_20261002.json",
+    "table_audit_sha256": "db9fd20e8bd3ade43d67284b4a5a265df4c2e5f048a34cac5814bcf95649d4e9",
+    "tables_checked": 23,
+    "cells_checked": 1270,
+    "historical_checks": 172,
+    "new_simulation_cells": 0,
+    "factor_k_check": "results/huber_scale_coordinates_20261002.json",
+    "factor_k_check_sha256": "be2eb5281f1a24eb9c7c8677f3d3d0a234a32e4e61b138b315cc92dbf5fcac54",
+    "full_test_suite_rerun": false,
+    "new_dependency_isolated_reproduction": false,
+    "independent_mathematical_review": false
+  },
+  "scientific_scope": {
+    "raw_mad_k_factor": "Retained; raw/scaled coordinate relation clarified, no production defect found.",
+    "R6": "Conditional theorem, local-class verification lemma, specified-estimator corollary; weak-null corollary proved by reduced empirical norm.",
+    "stage_contrast": "additional full-chain amplification; no separately identified MAD effect",
+    "skew": "persistent undercoverage over examined sample sizes; not a mathematical convergence-rate claim",
+    "evidence_gap": "No materially active-nuisance nonzero-effect study with demonstrated good finite-sample calibration."
+  },
+  "preservation": {
+    "baseline_author_files_preserved": true,
+    "frozen_scientific_results_unchanged": true,
+    "production_algorithm_unchanged": true,
+    "generated_pdfs_added_to_repository": false,
+    "push_performed": false
+  }
+}

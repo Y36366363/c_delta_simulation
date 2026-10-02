@@ -1,0 +1,99 @@
+{
+  "all_passed": true,
+  "new_simulation_cells": 0,
+  "law": "log W ~ Normal(0, 0.6^2), the existing September 7 marginal",
+  "parameters": {
+    "sigma": 0.6,
+    "k": 1.4826,
+    "c": 1.345
+  },
+  "population": {
+    "median": 1.0,
+    "raw_mad": 0.387121537597268,
+    "scale": 0.5739463916417095,
+    "huber_location": 1.0798088609617673,
+    "A": 0.8229760645580049,
+    "B": -0.17141146941370808
+  },
+  "score_derivatives": {
+    "step": 1e-06,
+    "raw_d_analytic": 0.4427846367773824,
+    "raw_d_central_difference": 0.4427846367061061,
+    "T_analytic": -1.433890127271249,
+    "T_central_difference": -1.433890126981141,
+    "wrong_raw_d_derivative_if_treated_as_s": 0.298654145944545
+  },
+  "contamination_directions": [
+    {
+      "point": 0.3,
+      "epsilon": 1e-07,
+      "median_if": -0.7519884823893,
+      "raw_mad_if": 0.18965512861622782,
+      "if_with_k": -0.8794422939242038,
+      "if_without_k": -0.8985058792411915,
+      "contamination_finite_difference": -0.8794423900226889,
+      "correct_absolute_error": 9.609848505842677e-08,
+      "missing_k_absolute_error": 0.01906348921850265
+    },
+    {
+      "point": 0.8,
+      "epsilon": 1e-07,
+      "median_if": -0.7519884823893,
+      "raw_mad_if": -0.6501288089504372,
+      "if_with_k": -0.5407558420024154,
+      "if_without_k": -0.4754067733698587,
+      "contamination_finite_difference": -0.5407558445469363,
+      "correct_absolute_error": 2.544520816272211e-09,
+      "missing_k_absolute_error": 0.06534907117707756
+    },
+    {
+      "point": 1.3,
+      "epsilon": 1e-07,
+      "median_if": 0.7519884823893,
+      "raw_mad_if": -0.18965512861622782,
+      "if_with_k": 0.20898931056046116,
+      "if_without_k": 0.22805289587744887,
+      "contamination_finite_difference": 0.20898932362456435,
+      "correct_absolute_error": 1.3064103188131782e-08,
+      "missing_k_absolute_error": 0.01906357225288452
+    },
+    {
+      "point": 3.0,
+      "epsilon": 1e-07,
+      "median_if": 0.7519884823893,
+      "raw_mad_if": 0.6501288089504372,
+      "if_with_k": 1.1387672022242343,
+      "if_without_k": 1.0734181335916775,
+      "contamination_finite_difference": 1.1387674159202277,
+      "correct_absolute_error": 2.1369599334519762e-07,
+      "missing_k_absolute_error": 0.0653492823285502
+    }
+  ],
+  "max_correct_if_error": 2.1369599334519762e-07,
+  "min_missing_k_if_error": 0.01906348921850265,
+  "coordinate_identities": {
+    "raw_mad_d": "IF_T = (s/A) psi - (k B/A) IF_d",
+    "scaled_mad_s": "IF_T = (s/A) psi - (B/A) IF_s; IF_s = k IF_d",
+    "J0_huber_row": [
+      "0",
+      "-B/d",
+      "-A/(k*d)"
+    ],
+    "standardized_J_huber_row": [
+      "0",
+      "-B",
+      "-A/k"
+    ]
+  },
+  "environment": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "scipy": "1.16.3",
+    "prefix": "/opt/anaconda3",
+    "base_prefix": "/opt/anaconda3",
+    "isolated_venv": false,
+    "note": "Recorded runtime only; no new dependency-isolated reproduction is claimed."
+  },
+  "script_sha256": "41173ee709d6b9151d7fdf47459543281b4ccec5aa52df5aeed77b04034efedb",
+  "scope": "Deterministic numerical differentiation and an explicit no-k negative comparator. Not simulation, independent mathematical peer review, or a proof of regular inference."
+}
