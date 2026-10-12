@@ -127,6 +127,19 @@ decisions, simulation audits, and manuscript-readiness checks.
 <details>
 <summary><strong>Expand dated research updates</strong></summary>
 
+## Updates 10/12/2026 — internal proof-dependency review
+
+- Saved an [internal proof dependency and boundary note](docs/proof_dependency_review_20261012.md)
+  separating current regular inference, a candidate fixed-tau shared-sign
+  point-estimator limit, and frozen finite-sample evidence. Included an
+  explicit random-index substitution lemma, its checked reference, and the
+  separate role of empirical moving-window bounds.
+- Re-read the existing n=80/640 pathway summaries to distinguish large
+  finite-sample scale errors from eventual pointwise limits. No new rate,
+  nonregular full-IF Wald validity, or independent mathematical certification
+  is claimed. Manuscript, algorithms, and frozen results remain unchanged;
+  no new simulation cells or certificate replays were run.
+
 
 ## Updates 10/02/2026 — supervisor-directed reconstruction
 
