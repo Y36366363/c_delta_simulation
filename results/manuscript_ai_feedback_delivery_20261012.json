@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-12",
+  "purpose": "Selective refinement after user-supplied AI feedback",
+  "baseline": {
+    "tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_revision_20261012/main.tex",
+    "sha256": "6ddf40f1e370358dec3d66fb53b6de58a35d07004b81e874987fc3dfd96f4e4e"
+  },
+  "artifacts": {
+    "main.tex": {
+      "path": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_refinement_20261012/main.tex",
+      "sha256": "46518a9df841a4db74855ba7c6ec503251d8ded3c42688d426223b2a380b5c4a"
+    },
+    "rho_p_review_refinement_20261012.pdf": {
+      "path": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_refinement_20261012/rho_p_review_refinement_20261012.pdf",
+      "sha256": "a6c8b18a7474933991daefc9e24cb97e371e85cf0aa7ae6cca826115a9d06c18"
+    },
+    "rho_p_review_refinement_20261012_overleaf.zip": {
+      "path": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_refinement_20261012/rho_p_review_refinement_20261012_overleaf.zip",
+      "sha256": "61f4d5128bfb57055e70ce7da9f6d55620114b2f4cf01c674adca187c5081f7e"
+    },
+    "INDEPENDENT_REVIEW.md": {
+      "path": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_refinement_20261012/INDEPENDENT_REVIEW.md",
+      "sha256": "09553128e65ed134c7feeb4962641b75a3e677b48f54fd3c975753a176b5c5e1"
+    },
+    "CANDIDATE_FIXED_TAU_REVIEW_NOTE.md": {
+      "path": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_refinement_20261012/CANDIDATE_FIXED_TAU_REVIEW_NOTE.md",
+      "sha256": "c5a9a38c881eb21d164ad4140bfe8f36aba5b49220b3532f793ea682d3dffa1a"
+    }
+  },
+  "validation": {
+    "native_compile": "success",
+    "pdf_pages": 44,
+    "main_text_pages": 8,
+    "latex_warnings": 0,
+    "overfull_boxes": 0,
+    "visual_review": "All-page contact review before final condensation; final S1/S2 boundary pages 20-21 and detailed pages 18/42 reinspected; abstract and comparison-table detail checked",
+    "table_audit": "results/manuscript_ai_feedback_audit_20261012.json",
+    "table_audit_sha256": "dd334b9c499f73453d87855d0d1996606a7f61398d483646c117feb8b3b9e8fa",
+    "tables": 23,
+    "cells": 1270,
+    "historical_checks": 172,
+    "audit_runtime": "/opt/anaconda3/bin/python",
+    "new_dependency_isolated_reproduction": false,
+    "independent_mathematical_review": false,
+    "zip_verified": true
+  },
+  "decisions": {
+    "typo_allegation_confirmed": false,
+    "broken_qualitative_row_confirmed": false,
+    "qualitative_table_readability_improved": true,
+    "exact_requested_scope_preserved": true,
+    "candidate_promoted": false,
+    "new_monte_carlo": false,
+    "production_changes": false,
+    "certificates_replayed": false,
+    "prior_author_source_preserved": true,
+    "push_performed": false
+  }
+}

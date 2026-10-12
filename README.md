@@ -72,6 +72,7 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [October 12 selective refinement after external AI feedback](docs/manuscript_ai_feedback_20261012.md)
 - [October 12 revision after simulated questioning](docs/manuscript_mock_review_update_20261012.md)
 - [Proof dependencies, candidate fixed-tau scope and review boundaries](docs/proof_dependency_review_20261012.md)
 - [October 2 supervisor-directed six-section reconstruction](docs/hoorn_restructure_20261002.md)
@@ -131,6 +132,11 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 ## Updates 10/12/2026 — internal proof-dependency review
 
+- Further [refined the author draft after external AI feedback](docs/manuscript_ai_feedback_20261012.md):
+  clarified the abstract and calibration scope, made the local slope bound
+  explicit, improved the qualitative comparison table, and moved software
+  chronology to S3. Neither the alleged author-name typo nor a broken table
+  row was found. No candidate result was promoted or simulation added.
 - Subsequently incorporated the supported clarifications in a new outside-repository
   [author revision](docs/manuscript_mock_review_update_20261012.md), preserving
   six main sections and all numerical table bodies. Added an explicit
