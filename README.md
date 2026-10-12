@@ -72,6 +72,8 @@ finite-dimensional calculations, and empirical simulation evidence.
 
 ## Key Research Documents
 
+- [October 12 revision after simulated questioning](docs/manuscript_mock_review_update_20261012.md)
+- [Proof dependencies, candidate fixed-tau scope and review boundaries](docs/proof_dependency_review_20261012.md)
 - [October 2 supervisor-directed six-section reconstruction](docs/hoorn_restructure_20261002.md)
 - [Scale-coordinate and proof-structure response](docs/hoorn_math_response_20261002.md)
 - [Retained and selected evidence reconciliation](docs/hoorn_evidence_response_20261002.md)
@@ -129,6 +131,11 @@ decisions, simulation audits, and manuscript-readiness checks.
 
 ## Updates 10/12/2026 — internal proof-dependency review
 
+- Subsequently incorporated the supported clarifications in a new outside-repository
+  [author revision](docs/manuscript_mock_review_update_20261012.md), preserving
+  six main sections and all numerical table bodies. Added an explicit
+  random-index lemma and paired covariance details; clarified studentizer and
+  numerical-certificate scope. The candidate fixed-tau CLT remains separate.
 - Saved an [internal proof dependency and boundary note](docs/proof_dependency_review_20261012.md)
   separating current regular inference, a candidate fixed-tau shared-sign
   point-estimator limit, and frozen finite-sample evidence. Included an
@@ -137,7 +144,8 @@ decisions, simulation audits, and manuscript-readiness checks.
 - Re-read the existing n=80/640 pathway summaries to distinguish large
   finite-sample scale errors from eventual pointwise limits. No new rate,
   nonregular full-IF Wald validity, or independent mathematical certification
-  is claimed. Manuscript, algorithms, and frozen results remain unchanged;
+  is claimed. The initial note made no manuscript edits; the subsequent
+  revision is linked above. Algorithms and frozen results remain unchanged;
   no new simulation cells or certificate replays were run.
 
 

@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-12",
+  "purpose": "Supported proof and reporting clarifications after simulated questioning",
+  "baseline": {
+    "tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_hoorn_restructured_20261002/main.tex",
+    "tex_sha256": "23de45f25619bc96d0abbbe9cb5c3d49cef06ef892548111b2932bb6dd7f45da"
+  },
+  "artifacts": {
+    "main.tex": {
+      "path": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_revision_20261012/main.tex",
+      "sha256": "6ddf40f1e370358dec3d66fb53b6de58a35d07004b81e874987fc3dfd96f4e4e"
+    },
+    "rho_p_review_revision_20261012.pdf": {
+      "path": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_revision_20261012/rho_p_review_revision_20261012.pdf",
+      "sha256": "abfea18717b83f082a5df018005b5fa571eb1df54677bca20d0ae713b81a668a"
+    },
+    "rho_p_review_revision_20261012_overleaf.zip": {
+      "path": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_revision_20261012/rho_p_review_revision_20261012_overleaf.zip",
+      "sha256": "22e449ccc3139ea23a3875dcda70769d2d10563cb538c70f45b7f540402b3eb3"
+    },
+    "INDEPENDENT_REVIEW.md": {
+      "path": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_revision_20261012/INDEPENDENT_REVIEW.md",
+      "sha256": "56d12e997510b85b5b6dcdb6a0303c2b6a424303c92d2ff24773b3c861402b97"
+    },
+    "CANDIDATE_FIXED_TAU_REVIEW_NOTE.md": {
+      "path": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_revision_20261012/CANDIDATE_FIXED_TAU_REVIEW_NOTE.md",
+      "sha256": "c5a9a38c881eb21d164ad4140bfe8f36aba5b49220b3532f793ea682d3dffa1a"
+    }
+  },
+  "validation": {
+    "native_compiler": "success",
+    "pdf_pages": 43,
+    "main_text_pages": 8,
+    "six_section_structure_preserved": true,
+    "latex_warnings": 0,
+    "overfull_boxes": 0,
+    "contact_sheet_pages_inspected": 43,
+    "detailed_visual_checks": [
+      "page 6 staged table",
+      "page 13 random-index lemma"
+    ],
+    "table_audit": "results/manuscript_mock_review_audit_20261012.json",
+    "table_audit_sha256": "7c99f1c7d2820e962ad4289796f67055637807256c82d42111637597ce8e8353",
+    "tables_checked": 23,
+    "cells_checked": 1270,
+    "historical_checks": 172,
+    "build": "Existing local pdfLaTeX; TEXINPUTS includes existing TeX Live 2025 microtype directory; no installation",
+    "audit_python": "/opt/anaconda3/bin/python",
+    "new_isolated_reproduction": false,
+    "independent_mathematical_review": false
+  },
+  "scope": {
+    "candidate_clt_promoted": false,
+    "new_simulation_cells": 0,
+    "certificate_replay": false,
+    "production_code_changed": false,
+    "frozen_tables_changed": false,
+    "prior_author_source_preserved": true,
+    "email_sent": false,
+    "push_performed": false
+  }
+}

@@ -1,7 +1,10 @@
 # Proof dependencies and review boundaries — 12 October 2026
 
 Internal review note. This records the current discussion, not independent
-mathematical certification. The October 2 manuscript is unchanged. No new
+mathematical certification. The initial note left the October 2 manuscript
+unchanged. A subsequent October 12 revision integrates selected proof and
+reporting clarifications; see manuscript_mock_review_update_20261012.md.
+No new
 simulation cells, root replays, algorithm changes, or frozen-result changes
 accompany this note. The fixed-tau argument below is a candidate supplement,
 not an established result of the current manuscript.
@@ -207,3 +210,58 @@ statement. No certificate replay has been run in this update.
 - Do not infer finite-sample performance from an O_P bound or weak limit.
 - Do not label an unproved limit a numerical observation.
 - Decide manuscript placement with Hoorn; no restructuring is enacted here.
+
+## Follow-up corrections and disposition in the revised draft
+
+The October 12 manuscript preserves the six-section structure and strengthens
+the regular proof exposition and reporting boundaries. It does not promote
+the candidate fixed-tau CLT to a manuscript theorem. The independent-review
+guide prioritizes the formal regular results; the candidate remains separate.
+
+### Location and correlation expansions are different
+
+The expression (k/A) G_n psi_c(W/k) is the leading term for sqrt(n) T_hat,
+not sqrt(n) rho_hat. The latter requires profile-oracle equivalence and the
+separate radius-correlation CLT. If that proof is completed, the constant SE
+1/sqrt(n) is sufficient for pointwise calibration in this fixed model family.
+It needs no nontrivial variance-estimator consistency theorem. A fitted
+oracle-form plug-in SE would require its own explicit consistency argument.
+The target is identically zero in this family; this is not a general
+confidence-interval theorem for unknown nonzero correlations.
+
+### Shared signs induce dependent fitted reference errors
+
+Put R=exp(tau U), A=P(R<ck), and L(r)=(k/A) psi_c(r/k). Under the candidate
+location expansions, the two reference influences are S L(R_X) and
+S L(R_Y). Their limiting covariance is (E L(R))^2 > 0, while each limiting
+variance is E L(R)^2. Independent radii do not imply asymptotically independent
+fitted locations. Oracle equivalence uses root-n marginal rates and zero
+target derivatives, not independence of the fitted references: their product
+is still O_P(n^-1). The empirical-process class is indexed by intact pairs.
+
+### Root accuracy at a fixed tau
+
+For this model, p_tau=P(|W|<ck/2)>0 at each fixed tau>0. On s_hat>3k/4
+and |t|<ck/8, all observations with |W|<ck/2 are active at t. Thus the
+LLN bounds the empirical active fraction uniformly below on this local
+segment by p_tau/2 with probability tending to one. Together with scale
+consistency this gives s_hat/alpha=O_P(1) for consistent computed/exact
+roots on the segment. No lower bound on f(0) is required here. This is a
+fixed-law argument, not uniform in tau or a stored numerical certificate.
+
+The statement must continue to assume exact or sufficiently accurate
+consistent empirical roots. Finite residual records do not by themselves
+establish every root-location error or solver success for arbitrarily large n.
+
+### Simulation procedures and audit boundary
+
+The pathway code uses the two-sided cutoff 1.959963984540054. Full fitting
+uses the regular-form full-IF SE; direct-only uses the empirical direct IF
+at the same fitted references. The population-reference oracle is a separate
+stage. No frozen table reports the candidate constant-SE 1/sqrt(n) procedure.
+These procedures must not be relabelled to match a new theorem.
+
+Pathway records contain active fractions at returned locations, but these
+are not segmentwise lower-bound certificates. The September 20 12,000-fit
+residual log does not store such segmentwise bounds. No new certificate
+replay or simulation was run for this revision.

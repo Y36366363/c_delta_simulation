@@ -1,0 +1,115 @@
+{
+  "tables_checked": 23,
+  "cells_checked": 1270,
+  "historical_tables": 21,
+  "historical_cells": 1182,
+  "selected_main_tables": 2,
+  "selected_main_cells": 88,
+  "historical_rows_identical_except_declared_ledger_relocations": true,
+  "data_table_bodies_identical": 20,
+  "declared_ledger_relocations": {
+    "W": [
+      "Main Table 1; S3.1",
+      "Table~\\ref{tab:regular}; S3.1"
+    ],
+    "PS": [
+      "Main Tables 3--4; S3.2--3",
+      "Tables~\\ref{tab:stages}--\\ref{tab:references}; S3.2--3"
+    ],
+    "AS": [
+      "Main Table 2; S3.5--6",
+      "Table~\\ref{tab:coverage}; S3.5--6"
+    ]
+  },
+  "all_passed": true,
+  "key_counts": {
+    "labels": 38,
+    "bibliography_keys": 25,
+    "used_citation_keys": 25,
+    "referenced_labels": 23
+  },
+  "main_sections": 6,
+  "historical_checks": 172,
+  "tex": "/Users/jialiangyao/.codex/visualizations/2026/09/11/01a08f53-8ee3-7dc0-87fd-0a3628d3098f/rho_p_review_revision_20261012/main.tex",
+  "tex_sha256": "6ddf40f1e370358dec3d66fb53b6de58a35d07004b81e874987fc3dfd96f4e4e",
+  "prior_tex_sha256": "4ef70ad6645d17f7ffbbccc3d42a305aa72c0a05da4a2b320856b3c425413493",
+  "audit_source_sha256": "aef065a0c7df1dc1c60777d9bbf11bd1edff6cbabfac2208bca9546b81659345",
+  "selected_source_sha256": {
+    "reference_pathway_summary_20260909.tsv": "c52f7dd201492ba788d388283d37a81cda9a6783316713201257b71191bfa7a6",
+    "claim1_wald_validation_20260823.tsv": "bb354a084624eead8e70a0bc3afdfd76ed8da74e417835eea43a29cbf290cb2a",
+    "active_nuisance_summary_20260907.tsv": "1d3ae0ccd1685c5aea3001a26fa7ad913cdb8b1493e348c69329c770a7dc2d3d",
+    "moderate_benchmark_summary_20260920.tsv": "e1930bcc21b0bfa9b11859082e70c8abe1354cec035b81ab1b21fce9a5910e6a"
+  },
+  "moderate_frozen_files_checked": 8,
+  "bounded_stored_reference_replay": {
+    "existing_datasets_replayed": 2000,
+    "stored_stage_records_checked": 8000,
+    "max_absolute_replay_gaps": {
+      "rho": 1.5543122344752192e-15,
+      "C": 0.0,
+      "identity": 7.771561172376096e-16
+    },
+    "secondary_summaries": {
+      "population_reference": {
+        "C": {
+          "mean": 0.9999942134785408,
+          "mcse": 8.68425212800664e-06
+        },
+        "CV_X": {
+          "mean": 0.10010810331995575,
+          "mcse": 6.350673992501873e-05
+        },
+        "CV_Y": {
+          "mean": 0.10017242622330144,
+          "mcse": 6.197467956757605e-05
+        }
+      },
+      "population_scale": {
+        "C": {
+          "mean": 1.0015725136102585,
+          "mcse": 5.1009724859251336e-05
+        },
+        "CV_X": {
+          "mean": 0.10735104588986061,
+          "mcse": 0.00022323624872959012
+        },
+        "CV_Y": {
+          "mean": 0.10740696755403903,
+          "mcse": 0.00022318553697478312
+        }
+      },
+      "population_median": {
+        "C": {
+          "mean": 1.0015725136102585,
+          "mcse": 5.100972485925138e-05
+        },
+        "CV_X": {
+          "mean": 0.10735104588986061,
+          "mcse": 0.00022323624872959012
+        },
+        "CV_Y": {
+          "mean": 0.10740696755403903,
+          "mcse": 0.00022318553697478312
+        }
+      },
+      "full_fit": {
+        "C": {
+          "mean": 1.0795502662541667,
+          "mcse": 0.0019633487498712148
+        },
+        "CV_X": {
+          "mean": 0.26554605567937656,
+          "mcse": 0.003199823170670406
+        },
+        "CV_Y": {
+          "mean": 0.2650437750799981,
+          "mcse": 0.0032035582504640102
+        }
+      }
+    },
+    "new_simulation_cells": 0,
+    "new_reference_fits": 0
+  },
+  "new_design_cells": 0,
+  "scope": "All retained and selected table rows, relocation inventory, references and source provenance; not mathematical proof, literature completeness or every prose number."
+}
