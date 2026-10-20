@@ -25,3 +25,9 @@ venv/
 **/rho_p*.zip
 *.eml
 *.msg
+
+# Standalone correspondence drafts (including historical naming conventions).
+**/EMAIL_DRAFT*
+**/email_draft*
+**/email_reply_*
+**/email_update_*
