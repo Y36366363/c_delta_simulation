@@ -7,3 +7,21 @@ venv/
 
 # Generated PDFs are private author artifacts; keep outside this repository.
 *.[pP][dD][fF]
+
+# Private correspondence and working-paper sources stay local.
+/private/
+/docs/*hoorn*
+/docs/email_*
+/docs/feedback_response_plan.md
+/docs/manuscript_draft*
+/docs/manuscript_integrated*
+/docs/manuscript_review_frontmatter*
+/docs/manuscript_references*
+/docs/supplement_S*
+# Future author packages / correspondence: use private/ whenever possible.
+/rho_p_*/
+**/rho_p*.tex
+**/rho_p*.docx
+**/rho_p*.zip
+*.eml
+*.msg

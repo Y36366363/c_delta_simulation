@@ -67,18 +67,26 @@ finite-dimensional calculations, and empirical simulation evidence.
 | [`tests/`](tests/) | Regression, mathematical-consistency, and pipeline tests |
 | [`results/`](results/) | Stored simulation outputs and reporting tables |
 | [`figures/`](figures/) | Generated figures used in analysis and reporting |
-| [`docs/`](docs/) | Manuscript drafts, claim ledgers, audits, and research decisions |
+| [`docs/`](docs/) | Public research notes, audits, and research decisions |
 | [`TEST_PLAN.md`](TEST_PLAN.md) | Testing strategy and planned validation |
+
+## Local-only author materials
+
+Supervisor correspondence and working-paper sources are kept locally and are
+excluded from Git. Store future private emails and author packages in `private/`;
+the existing local draft paths are also ignored. Generated PDFs remain ignored.
+This repository distributes research code and simulation evidence, not the
+working paper or private correspondence.
+
+Historical manuscript-rendering scripts and document-specific tests require
+these local-only inputs and cannot all run from a public clone alone. Their
+presence in the repository does not publish the associated author materials.
 
 ## Key Research Documents
 
 - [October 12 selective refinement after external AI feedback](docs/manuscript_ai_feedback_20261012.md)
 - [October 12 revision after simulated questioning](docs/manuscript_mock_review_update_20261012.md)
 - [Proof dependencies, candidate fixed-tau scope and review boundaries](docs/proof_dependency_review_20261012.md)
-- [October 2 supervisor-directed six-section reconstruction](docs/hoorn_restructure_20261002.md)
-- [Scale-coordinate and proof-structure response](docs/hoorn_math_response_20261002.md)
-- [Retained and selected evidence reconciliation](docs/hoorn_evidence_response_20261002.md)
-- [October 2 integration of the privately communicated all-to-all definition](docs/hoorn_definition_integration_20261002.md)
 - [September 26 publication assessment and local completion ledger](docs/submission_readiness_20260926.md)
 - [Closest-prior overlap and bounded novelty review](docs/novelty_overlap_review_20260926.md)
 - [Adversarial internal proof review and local repairs](docs/proof_adversarial_review_20260926.md)
@@ -91,19 +99,15 @@ finite-dimensional calculations, and empirical simulation evidence.
 - [Current manuscript review and complete reproduction of two core studies](docs/manuscript_review_20260916.md)
 - [S1 proof integration and optional residual-checked API](docs/score_checked_integration_20260915.md)
 - [Current manuscript-interface resolution and bounded reproduction](docs/manuscript_interface_resolution_20260912.md)
-- [September 11 intermediate evidence manuscript with S1--S3](docs/manuscript_integrated_20260911.md)
 - [Interface closure and claim/proof/source crosswalk](docs/manuscript_interface_crosswalk_20260911.md)
 - [Manuscript skeleton and readiness audit](docs/manuscript_skeleton_and_readiness_20260829.md)
-- [Draft manuscript Sections 1–2](docs/manuscript_draft_sections_1_2_20260830.md)
 - [Archive and Section 3 readiness audit](docs/archive_and_section3_readiness_20260831.md)
 - [Paper-level claim ledger](docs/manuscript_claim_ledger_20260826.md)
 - [End-to-end pipeline audit](docs/end_to_end_pipeline_audit_20260822.md)
 - [Active-nuisance validation and claim refinement](docs/active_nuisance_validation_20260907.md)
-- [Working Discussion, Section 8](docs/manuscript_draft_section_8_20260908.md)
 - [High-standard referee review and open issues](docs/referee_readiness_review_20260908.md)
 - [Supervisor-directed four-stage reference-pathway results](docs/reference_pathway_results_20260909.md)
 - [Short shared-sign model result and bounded rate heuristic](docs/shared_sign_model_result_20260909.md)
-- [First-draft reading entry and provisional abstract](docs/manuscript_review_frontmatter_20260910.md)
 - [Completion review, proof/evidence reconciliation and placement decisions](docs/manuscript_completion_review_20260910.md)
 
 ## Reproducibility
@@ -154,26 +158,6 @@ decisions, simulation audits, and manuscript-readiness checks.
   revision is linked above. Algorithms and frozen results remain unchanged;
   no new simulation cells or certificate replays were run.
 
-
-## Updates 10/02/2026 — supervisor-directed reconstruction
-
-- Adopted Hoorn's title and abstract, and rebuilt the author manuscript into
-  six main sections. The main text is seven pages; the complete author PDF
-  includes S1–S4 and references. Conditions/proofs, target comparisons,
-  conditioning/permutation, and full simulation records are supplementary.
-- Checked the suspected scale factor against derivatives, implementation,
-  stage-specific formulas, and deterministic contamination differentiation.
-  The factor k is required for raw-MAD influence; both raw/scaled coordinate
-  forms are now explicit. No estimator or historical numerical result changed.
-- Separated the conditional R1–R6 theorem, construction-specific class lemma
-  and estimator corollary, plus a reduced-moment weak-null corollary. This is
-  a more explicit proof architecture, not independent mathematical approval.
-- Reconciled all 21 retained tables plus two selected main displays; preserve
-  the active-nuisance evidence gap and use “additional full-chain amplification”
-  and “persistent undercoverage over the examined sample sizes.” No new
-  simulation cells. LaTeX/PDF/Overleaf artifacts remain outside the repository.
-- The received structural guidance is implemented; independent mathematical
-  review and author/venue decisions remain open. No automatic push.
 
 
 ## Updates 10/02/2026
@@ -572,7 +556,7 @@ decisions, simulation audits, and manuscript-readiness checks.
   fixed-source result tables, records source hashes and Monte Carlo
   uncertainty, and writes a display manifest. The Section 6 audit rebuilds all
   five display tables and verifies that the Wald and permutation tracks never
-  share a main display. See `docs/manuscript_draft_section_6_20260905.md` and
+  share a main display. See a local-only author document and
   `results/section6_display_manifest_20260905.tsv`.
 
 ## Updates 09/04/2026
@@ -589,7 +573,7 @@ decisions, simulation audits, and manuscript-readiness checks.
   preserves their evidence types. The primary-\(\rho_P\) derivative audit now
   has an explicit Appendix A interface, and Sections 1--2 incorporate the
   Stavig and MAD/median-correlation priority boundaries. No new distribution
-  grid was run. See `docs/manuscript_draft_sections_3_5_20260904.md` and
+  grid was run. See a local-only author document and
   `results/manuscript_claim_source_crosswalk_20260904.tsv`.
 
 ## Updates 09/03/2026
@@ -688,7 +672,7 @@ decisions, simulation audits, and manuscript-readiness checks.
   distinguishes a weak profile-covariance null from independence and label
   exchangeability, separates Wald theory from permutation evidence, and keeps
   \(I_n\) explanatory rather than presenting it as a universal cutoff. See
-  `docs/manuscript_draft_sections_1_2_20260830.md`.
+  a local-only author document.
 
 ## Updates 08/29/2026
 
@@ -1349,10 +1333,7 @@ decisions, simulation audits, and manuscript-readiness checks.
 - **Design-respecting inference confirmed** - Reanalysis of the existing
   18,000-dataset conditional-null experiment gave unrestricted rejection
   `.442-.520`, versus `.047-.048` after within-building permutation.
-- **Teacher-response package** - See the copyable LaTeX text in
-  `docs/cdelta_response_hoorn_20260807.tex` and the proposed reply in
-  `docs/email_reply_prof_hoorn_20260807.md`. The final PDF is intentionally
-  left for the author's established R/LaTeX rendering workflow.
+
 
 ## Updates 08/06/2026
 
@@ -1868,8 +1849,6 @@ simulation or theoretical revision.
   Professor Hoorn's latest points: the old unnormalized permutation mean issue,
   permutation statistics by extreme-index overlap layer, and independent-null
   calibration with chance overlap.
-- **Response plan** — Added `docs/feedback_response_plan.md` to track which
-  simulation claims need correction before the next report.
 - **Feedback check results** — Added `docs/feedback_checks_summary.md` and
   `results/feedback_checks_20260713.tsv`; the historical check exposed the
   missing `1 / n` normalization, and overlap-layer diagnostics support treating
@@ -2006,7 +1985,6 @@ variants, weighting schemes, and machine-learning examples.
 - `docs/near_zero_divergence_notation.md`: notation and reporting note for
   vanishing empirical divergence.
 - `docs/large_scale_simulation_summary.md`: larger-n result interpretation.
-- `docs/feedback_response_plan.md`: checklist for the July 13 feedback.
 - `docs/feedback_checks_summary.md`: results of the July 13 feedback checks.
 - `docs/high_replication_checks_summary.md`: higher-replication validation
   summary with Wilson intervals.
@@ -2027,11 +2005,7 @@ variants, weighting schemes, and machine-learning examples.
   functional-delta derivation, sandwich variance, and interval validation.
 - `docs/studentization_refinement_and_theorem_20260806.md`: distribution-level
   validation, studentization refinements, and formal first-order theorem.
-- `docs/cdelta_response_hoorn_20260807.tex`: copyable LaTeX text for the
-  technical response to Professor Hoorn; generate the final PDF through the
-  author's established R workflow rather than treating a locally compiled PDF
-  as the deliverable.
-- `docs/email_reply_prof_hoorn_20260807.md`: proposed concise email reply.
+
 - `docs/building_target_separation_20260808.md`: two-seed target-separation,
   building-permutation, and CV-weighting findings.
 - `docs/node_dyad_mixture_transition_20260808.md`: current framework, mixture
